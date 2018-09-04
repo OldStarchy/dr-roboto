@@ -1,7 +1,7 @@
-Crafting = {}
+local Crafting = {}
+local Recipies = require 'Recipies'
 
 Crafting.buildCraftGraph = function(item, amount)
-
 end
 
 Crafting.craft = function(item, amount)
@@ -17,3 +17,9 @@ Crafting.craftFromGraph = function(graph)
 	--foreach leaf node in items
 	obtain(node.item, node.amount)
 end
+
+if (Debug ~= nil) then
+	print('Debug')
+end
+
+return Crafting

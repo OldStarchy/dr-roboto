@@ -1,9 +1,6 @@
-require("Inventory")
-require("ItemStorage")
-
 function obtain(item, amount)
 	if (amount < 0) then
-		error("Call to obtain with negative amount")
+		error('Call to obtain with negative amount')
 	end
 
 	local existing = 0
