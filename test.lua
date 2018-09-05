@@ -1,3 +1,6 @@
+--Manually call bootstrap.lua for when its run on PC
+dofile 'bootstrap.lua'
+
 require 'Core'
 local col = require 'TextColors'
 
@@ -194,8 +197,17 @@ function runTests(logLevel)
 	end
 end
 
-require 'tests/ClassTest'
-require 'tests/RecipeTest'
+local testFiles = fs.list('tests')
+
+for _, v in ipairs(testFiles) do
+	if (v:sub(-(#'.lua')) == '.lua') then
+		v = v:sub(1, -5)
+	end
+
+	if (v:sub(-(#'Test')) == 'Test') then
+		dofile('tests/' .. v .. '.lua')
+	end
+end
 
 print('Running startup tests...')
 print()
