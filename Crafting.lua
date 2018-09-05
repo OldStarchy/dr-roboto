@@ -2,6 +2,7 @@ local Crafting = {}
 local Recipies = require 'Recipies'
 
 Crafting.buildCraftGraph = function(item, amount)
+	local recipie = Recipies[item]
 end
 
 Crafting.craft = function(item, amount)
