@@ -1,0 +1,8 @@
+{
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"lua.format.singleQuote": true,
+	"files.associations": {
+		"startup": "lua"
+	},
+}

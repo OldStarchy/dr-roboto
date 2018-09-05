@@ -1,0 +1,13 @@
+if (_G.require == nil) then
+	--Running in ComputerCraft
+
+	_G.require = function(module)
+		if (fs.exists(module)) then
+			return dofile(module)
+		else
+			return dofile(module .. '.lua')
+		end
+	end
+end
+
+dofile 'test.lua'
