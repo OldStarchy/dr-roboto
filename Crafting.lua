@@ -1,8 +1,8 @@
 local Crafting = {}
-local Recipies = require 'Recipies'
+local Recipes = require 'Recipes'
 
 Crafting.buildCraftGraph = function(item, amount)
-	local recipie = Recipies[item]
+	local recipie = Recipes[item]
 end
 
 Crafting.craft = function(item, amount)
