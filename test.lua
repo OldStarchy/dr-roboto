@@ -63,7 +63,7 @@ local tests = {}
 
 	Tests are not guarenteed to execute in the same order they are written. This is due to the way lua tables work.
 
-	To fit in the standard ComputerCraft window, test names should be 37 or less characters and (fully concatenated) namespaces should be 39 characters or less
+	To fit in the standard ComputerCraft window, test names should be 37 or less characters and (fully concatenated) namespaces should be 37 characters or less
 
 	test(namespace: string, name: string, tester: function) prepares a test for execution
 	test(namespace: string, tests: table) prepares a testing table for execution
@@ -122,26 +122,52 @@ function runTests(logLevel)
 			lastNamespace = v.namespace
 		end
 
-		local success, errors = doTest(v.name, v.tester)
-		if (success) then
-			testPass = testPass + 1
-		end
-
-		if (logLevel > LOG_ALL or (success == false and logLevel > LOG_SOME)) then
+		if (logLevel > LOG_ALL) then
 			loggedAny = true
 			if (#v.name > 37) then
 				io.write(string.sub(v.name, 1, 37) .. ':')
 			else
 				io.write(v.name .. string.rep(' ', 37 - #v.name) .. ':')
 			end
+		end
 
+		local oldwrite = io.write
+		local oldprint = print
+		local printlines = {}
+
+		io.write = function(...)
+			table.insert(printlines, {'write', {...}})
+		end
+		print = function(...)
+			table.insert(printlines, {'print', {...}})
+		end
+
+		local success, errors = doTest(v.name, v.tester)
+
+		io.write = oldwrite
+		print = oldprint
+
+		if (success) then
+			testPass = testPass + 1
+		end
+
+		if (logLevel > LOG_ALL) then
 			if (success) then
 				col.print(col.green, 'O\n')
 			else
 				col.print(col.red, 'X\n')
-				for _, v in ipairs(errors) do
-					print(' ' .. v)
+			end
+
+			for i = 1, #printlines do
+				if (printlines[i][1] == 'write') then
+					io.write(unpack(printlines[i][2]))
+				else
+					print(unpack(printlines[i][2]))
 				end
+			end
+
+			for _, v in ipairs(errors) do
+				col.print(col.red, ' ' .. v)
 			end
 		end
 	end
@@ -157,4 +183,4 @@ end
 require 'tests/ClassTest'
 print('Running startup tests...')
 print()
-runTests(1)
+runTests(2)

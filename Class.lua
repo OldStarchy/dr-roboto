@@ -1,9 +1,9 @@
-
 local CreateClass = function(parent)
 	local class = {}
 	local classType = {
 		__index = {
-			new = function(self, ...)
+			new = function(...)
+				local args = {...}
 				local object = setmetatable({}, class)
 
 				if (class.constructor ~= nil) then
