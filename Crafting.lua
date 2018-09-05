@@ -1,5 +1,4 @@
 local Crafting = {}
-local Recipes = require 'Recipes'
 
 Crafting.buildCraftGraph = function(item, amount)
 	local recipie = Recipes[item]

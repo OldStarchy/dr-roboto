@@ -195,6 +195,8 @@ function runTests(logLevel)
 end
 
 require 'tests/ClassTest'
+require 'tests/RecipeTest'
+
 print('Running startup tests...')
 print()
 runTests(2)

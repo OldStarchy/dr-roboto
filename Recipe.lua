@@ -16,6 +16,4 @@ function Recipie.find(name)
 	return recipes[name]
 end
 
-require 'Recipes'
-
 return Recipie
