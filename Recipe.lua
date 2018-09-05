@@ -1,5 +1,3 @@
-local recipes = {}
-
 local Recipie = Class()
 
 function Recipie.constructor(self, name, grid, produces)
@@ -7,13 +5,8 @@ function Recipie.constructor(self, name, grid, produces)
 	self.grid = grid
 	self.produces = produces
 
-	-- self.items = items
-
-	recipes[name] = self
-end
-
-function Recipie.find(name)
-	return recipes[name]
+	--TODO: Tally total items required
+	-- self.items =
 end
 
 return Recipie
