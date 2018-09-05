@@ -8,14 +8,21 @@ local function createTestParams()
 				return
 			end
 
-			error('Assert == failed', 2)
+			error('Assert ==', 2)
 		end,
 		assertNotEqual = function(a, b)
 			if (a ~= b) then
 				return
 			end
 
-			error('Assert ~= failed', 2)
+			error('Assert ~=', 2)
+		end,
+		assertThrows = function(method)
+			local success = pcall(method)
+
+			if (success) then
+				error('Assert throws')
+			end
 		end
 	}
 end

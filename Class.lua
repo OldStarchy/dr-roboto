@@ -4,7 +4,7 @@ local CreateClass = function(parent)
 		__index = {
 			new = function(...)
 				local args = {...}
-				local object = setmetatable({}, class)
+				local object = setmetatable({}, {__index = class})
 
 				if (class.constructor ~= nil) then
 					class.constructor(object, ...)
