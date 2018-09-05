@@ -125,5 +125,7 @@ test(
 			end
 		}
 		--TODO: static methods
+		--TODO: type checking
+		--TODO: inheritance
 	}
 )
