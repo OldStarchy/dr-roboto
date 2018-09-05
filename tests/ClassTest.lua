@@ -124,5 +124,6 @@ test(
 				t.assertEqual(cValue, tmpTable)
 			end
 		}
+		--TODO: static methods
 	}
 )

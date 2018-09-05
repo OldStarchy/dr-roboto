@@ -1,3 +1,5 @@
+local recipes = {}
+
 local Recipie = Class()
 
 function Recipie.constructor(self, name, grid, produces)
@@ -7,5 +9,13 @@ function Recipie.constructor(self, name, grid, produces)
 
 	-- self.items = items
 
-	recipies[name] = self
+	recipes[name] = self
 end
+
+function Recipie.find(name)
+	return recipes[name]
+end
+
+require 'Recipes'
+
+return Recipie
