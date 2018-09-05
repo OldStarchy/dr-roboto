@@ -115,13 +115,15 @@ function runTests(logLevel)
 	local lastNamespace = ''
 	local loggedAny = false
 	for _, v in ipairs(tests) do
+		-- Print out tne namespace if its different to the last test
 		if (lastNamespace ~= v.namespace and v.namespace ~= nil) then
-			if (logLevel > LOG_SOME) then
+			if (logLevel > LOG_ALL) then
 				col.print(col.blue .. '[' .. v.namespace .. ']\n')
 			end
 			lastNamespace = v.namespace
 		end
 
+		-- Print out the test name
 		if (logLevel > LOG_ALL) then
 			loggedAny = true
 			if (#v.name > 37) then
@@ -131,6 +133,7 @@ function runTests(logLevel)
 			end
 		end
 
+		-- Start buffering calls to io.write and print (so they dont interfere with the nice formatting)
 		local oldwrite = io.write
 		local oldprint = print
 		local printlines = {}
@@ -142,8 +145,10 @@ function runTests(logLevel)
 			table.insert(printlines, {'print', {...}})
 		end
 
+		-- Actually run the test
 		local success, errors = doTest(v.name, v.tester)
 
+		-- Restore printing functions
 		io.write = oldwrite
 		print = oldprint
 
@@ -158,6 +163,7 @@ function runTests(logLevel)
 				col.print(col.red, 'X\n')
 			end
 
+			-- Print all the buffered calls to io.write and print
 			for i = 1, #printlines do
 				if (printlines[i][1] == 'write') then
 					io.write(unpack(printlines[i][2]))
@@ -166,6 +172,7 @@ function runTests(logLevel)
 				end
 			end
 
+			-- Print any errors
 			for _, v in ipairs(errors) do
 				col.print(col.red, ' ' .. v)
 			end
