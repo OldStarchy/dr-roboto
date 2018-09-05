@@ -1,4 +1,5 @@
 require 'Core'
+local col = require 'TextColors'
 
 local function createTestParams()
 	return {
@@ -62,7 +63,7 @@ local tests = {}
 
 	Tests are not guarenteed to execute in the same order they are written. This is due to the way lua tables work.
 
-	To fit in the standard ComputerCraft window, test names should be 35 or less characters and (fully concatenated) namespaces should be 39 characters or less
+	To fit in the standard ComputerCraft window, test names should be 37 or less characters and (fully concatenated) namespaces should be 39 characters or less
 
 	test(namespace: string, name: string, tester: function) prepares a test for execution
 	test(namespace: string, tests: table) prepares a testing table for execution
@@ -116,7 +117,7 @@ function runTests(logLevel)
 	for _, v in ipairs(tests) do
 		if (lastNamespace ~= v.namespace and v.namespace ~= nil) then
 			if (logLevel > LOG_SOME) then
-				print('[' .. v.namespace .. ']')
+				col.print(col.blue .. '[' .. v.namespace .. ']\n')
 			end
 			lastNamespace = v.namespace
 		end
@@ -128,16 +129,16 @@ function runTests(logLevel)
 
 		if (logLevel > LOG_ALL or (success == false and logLevel > LOG_SOME)) then
 			loggedAny = true
-			if (#v.name > 35) then
-				io.write(string.sub(v.name, 1, 35) .. ':')
+			if (#v.name > 37) then
+				io.write(string.sub(v.name, 1, 37) .. ':')
 			else
-				io.write(v.name .. string.rep(' ', 35 - #v.name) .. ':')
+				io.write(v.name .. string.rep(' ', 37 - #v.name) .. ':')
 			end
 
 			if (success) then
-				print('OK ')
+				col.print(col.green, 'O\n')
 			else
-				print('ERR')
+				col.print(col.red, 'X\n')
 				for _, v in ipairs(errors) do
 					print(' ' .. v)
 				end
