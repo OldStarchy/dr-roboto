@@ -22,6 +22,7 @@ end
 local testCount = 0
 local testPass = 0
 
+-- TODO: allow namespacing / grouping tests
 function test(name, tester)
 	if (type(name) == 'table') then
 		for i, v in pairs(name) do
