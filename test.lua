@@ -12,15 +12,11 @@ local function createTestParams()
 		assertNotEqual = function(a, b)
 			if (a ~= b) then
 				return
-		end
+			end
 
 			error('Assert Not Equal failed', 2)
 		end
 	}
-end
-
-local function errorHandler(err)
-	print(err)
 end
 
 local testCount = 0
@@ -28,21 +24,24 @@ local testPass = 0
 
 function test(name, tester)
 	if (type(name) == 'table') then
-		for i,v in pairs(name) do
-			test(i,v)
+		for i, v in pairs(name) do
+			test(i, v)
 		end
 		return
 	end
 
-	print('Running test "' .. name .. '" ...')
+	io.write('Running test "' .. name .. '" ... ')
 
 	local testParams = createTestParams()
+	local errors = {}
 	local success, result =
 		xpcall(
 		function()
 			tester(testParams)
 		end,
-		errorHandler
+		function(err)
+			table.insert(errors, err)
+		end
 	)
 
 	if (success) then
@@ -50,6 +49,11 @@ function test(name, tester)
 		testPass = testPass + 1
 	else
 		print('Test failed.')
+		print()
+		for _, v in ipairs(errors) do
+			print(v)
+		end
+		print()
 	end
 	testCount = testCount + 1
 end
