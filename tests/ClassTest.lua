@@ -7,7 +7,7 @@ test(
 
 				local constructorCalled = false
 
-				A.constructor = function()
+				function A:constructor()
 					constructorCalled = true
 				end
 
@@ -25,7 +25,7 @@ test(
 
 				local selfValue = nil
 
-				A.constructor = function(self)
+				function A:constructor()
 					selfValue = self
 				end
 
@@ -41,7 +41,7 @@ test(
 				local bValue = nil
 				local cValue = nil
 
-				A.constructor = function(self, a, b, c)
+				function A:constructor(a, b, c)
 					aValue = a
 					bValue = b
 					cValue = c
@@ -64,7 +64,7 @@ test(
 
 				local methodCalled = false
 
-				A.method = function()
+				function A.method()
 					methodCalled = true
 				end
 
@@ -89,7 +89,7 @@ test(
 
 				local selfValue = nil
 
-				A.method = function(self)
+				function A:method()
 					selfValue = self
 				end
 
@@ -106,7 +106,7 @@ test(
 				local bValue = nil
 				local cValue = nil
 
-				A.method = function(self, a, b, c)
+				function A:method(a, b, c)
 					aValue = a
 					bValue = b
 					cValue = c
@@ -123,9 +123,89 @@ test(
 				t.assertEqual(bValue, 'blah')
 				t.assertEqual(cValue, tmpTable)
 			end
-		}
+		},
 		--TODO: static methods
 		--TODO: type checking
-		--TODO: inheritance
+		['Inheritance'] = {
+			['Parent Constructor'] = function(t)
+				local A = Class()
+
+				local constructorCalled = false
+				function A:constructor()
+					constructorCalled = true
+				end
+
+				local B = Class(A)
+
+				local object = B.new()
+
+				assertEqual(constructorCalled, true)
+			end,
+			['Super Constructor'] = function(t)
+				local A = Class()
+
+				local constructorCalled = false
+				function A:constructor()
+					constructorCalled = true
+				end
+
+				local B = Class(A)
+				function B:constructor()
+					self.super.constructor(self)
+				end
+
+				local object = B.new()
+
+				assertEqual(constructorCalled, true)
+			end,
+			['Object Method'] = function(t)
+				local A = Class()
+
+				local methodCalled = false
+				function A:method()
+					methodCalled = true
+				end
+
+				local B = Class(A)
+
+				local object = B.new()
+				object:method()
+
+				assertEqual(methodCalled, true)
+			end,
+			['Object Method'] = function(t)
+				local A = Class()
+
+				local methodCalled = false
+				function A:method()
+					methodCalled = true
+				end
+
+				local B = Class(A)
+
+				function B:method()
+					self.super.method(self)
+				end
+
+				local object = B.new()
+				object:method()
+
+				assertEqual(methodCalled, true)
+			end,
+			['Static Method'] = function(t)
+				local A = Class()
+
+				local methodCalled = false
+				function A.method()
+					methodCalled = true
+				end
+
+				local B = Class(A)
+
+				B.method()
+
+				assertEqual(methodCalled, true)
+			end
+		}
 	}
 )
