@@ -124,11 +124,14 @@ function runTests(logLevel)
 
 	local lastNamespace = ''
 	local loggedAny = false
+	local printedNamespace = false
 	for _, v in ipairs(tests) do
 		-- Print out tne namespace if its different to the last test
 		if (lastNamespace ~= v.namespace and v.namespace ~= nil) then
+			printedNamespace = false
 			if (logLevel > LOG_ALL) then
 				col.print(col.blue .. '[' .. v.namespace .. ']\n')
+				printedNamespace = true
 			end
 			lastNamespace = v.namespace
 		end
@@ -166,25 +169,41 @@ function runTests(logLevel)
 			testPass = testPass + 1
 		end
 
-		if (logLevel > LOG_ALL) then
-			if (success) then
-				col.print(col.green, 'O\n')
-			else
-				col.print(col.red, 'X\n')
-			end
+		if (logLevel > LOG_SOME) then
+			if (logLevel <= LOG_ALL and not success) then
+				if (not printedNamespace) then
+					col.print(col.blue .. '[' .. v.namespace .. ']\n')
+					printedNamespace = true
+				end
 
-			-- Print all the buffered calls to io.write and print
-			for i = 1, #printlines do
-				if (printlines[i][1] == 'write') then
-					io.write(unpack(printlines[i][2]))
+				loggedAny = true
+
+				if (#v.name > 37) then
+					io.write(string.sub(v.name, 1, 37) .. ':')
 				else
-					print(unpack(printlines[i][2]))
+					io.write(v.name .. string.rep(' ', 37 - #v.name) .. ':')
 				end
 			end
+			if (logLevel > LOG_ALL or not success) then
+				if (success) then
+					col.print(col.green, 'O\n')
+				else
+					col.print(col.red, 'X\n')
+				end
 
-			-- Print any errors
-			for _, v in ipairs(errors) do
-				col.print(col.red, ' ' .. v)
+				-- Print all the buffered calls to io.write and print
+				for i = 1, #printlines do
+					if (printlines[i][1] == 'write') then
+						io.write(unpack(printlines[i][2]))
+					else
+						print(unpack(printlines[i][2]))
+					end
+				end
+
+				-- Print any errors
+				for _, v in ipairs(errors) do
+					col.print(col.red, ' ' .. v .. '\n')
+				end
 			end
 		end
 	end
@@ -211,4 +230,4 @@ end
 
 print('Running startup tests...')
 print()
-runTests(2)
+runTests(1)
