@@ -8,6 +8,13 @@ local function createTestParams()
 			end
 
 			error('Assert Equal failed', 2)
+		end,
+		assertNotEqual = function(a, b)
+			if (a ~= b) then
+				return
+		end
+
+			error('Assert Not Equal failed', 2)
 		end
 	}
 end
