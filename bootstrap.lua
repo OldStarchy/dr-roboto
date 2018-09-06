@@ -53,14 +53,31 @@ end
 if (_G.fs == nil) then
 	_G.fs = {
 		list = function(directory)
-			local i, t, popen = 0, {}, io.popen
-			local pfile = popen('ls -a "' .. directory .. '"')
-			for filename in pfile:lines() do
-				i = i + 1
-				t[i] = filename
+			local try1, result =
+				pcall(
+				function()
+					local dirs = {}
+
+					require 'lfs'
+					for d in lfs.dir(directory) do
+						table.insert(dirs, d)
+					end
+					return dirs
+				end
+			)
+
+			if (try1) then
+				return result
+			else
+				local i, t, popen = 0, {}, io.popen
+				local pfile = popen('ls -a "' .. directory .. '"')
+				for filename in pfile:lines() do
+					i = i + 1
+					t[i] = filename
+				end
+				pfile:close()
+				return t
 			end
-			pfile:close()
-			return t
 		end
 	}
 end
