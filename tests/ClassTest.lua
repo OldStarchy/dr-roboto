@@ -216,6 +216,8 @@ test(
 					super = self.super
 				end
 
+				local object = B.new()
+
 				t.assertEqual(super, A)
 			end,
 			['Super in parent'] = function(t)
