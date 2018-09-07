@@ -126,8 +126,8 @@ test(
 		},
 		--TODO: static methods
 		--TODO: type checking
-		['Inheritance'] = {
-			['Parent Constructor'] = function(t)
+		['Inherited'] = {
+			['Default Constructor'] = function(t)
 				local A = Class()
 
 				local constructorCalled = false
@@ -139,9 +139,9 @@ test(
 
 				local object = B.new()
 
-				assertEqual(constructorCalled, true)
+				t.assertEqual(constructorCalled, true)
 			end,
-			['Super Constructor'] = function(t)
+			['Explicit Super Constructor'] = function(t)
 				local A = Class()
 
 				local constructorCalled = false
@@ -156,7 +156,7 @@ test(
 
 				local object = B.new()
 
-				assertEqual(constructorCalled, true)
+				t.assertEqual(constructorCalled, true)
 			end,
 			['Object Method'] = function(t)
 				local A = Class()
@@ -171,9 +171,9 @@ test(
 				local object = B.new()
 				object:method()
 
-				assertEqual(methodCalled, true)
+				t.assertEqual(methodCalled, true)
 			end,
-			['Object Method'] = function(t)
+			['Object Super Method'] = function(t)
 				local A = Class()
 
 				local methodCalled = false
@@ -190,7 +190,7 @@ test(
 				local object = B.new()
 				object:method()
 
-				assertEqual(methodCalled, true)
+				t.assertEqual(methodCalled, true)
 			end,
 			['Static Method'] = function(t)
 				local A = Class()
@@ -204,7 +204,37 @@ test(
 
 				B.method()
 
-				assertEqual(methodCalled, true)
+				t.assertEqual(methodCalled, true)
+			end,
+			['Super is parent'] = function(t)
+				local A = Class()
+				local B = Class(A)
+
+				local super = nil
+
+				function B:constructor()
+					super = self.super
+				end
+
+				t.assertEqual(super, A)
+			end,
+			['Super in parent'] = function(t)
+				local A = Class()
+
+				local methodCalled = false
+				local super = nil
+
+				function A:method()
+					methodCalled = true
+					super = self.super
+				end
+
+				local B = Class(A)
+
+				B.method()
+
+				t.assertEqual(methodCalled, true)
+				t.assertEqual(super, nil)
 			end
 		}
 	}
