@@ -1,21 +1,16 @@
 local TreeFarmSkill = Class(Skill)
 
-function TreeFarmSkill:plantTree() -- Requires saplings
-end
-
-function TreeFarmSkill:harvestTree()
-end
-
-function TreeFarmSkill:hasTreeGrown()
-end
-
-function TreeFarmSkill:decideNextAction()
+function TreeFarmSkill:performNextAction()
 	if (logCount >= requiredLogCount) then
 		return self:finishTask()
 	else
-		-- go to each tree
-		if (self:hasTreeGrown()) then
-			self:harvestTree()
+		for _, v in ipairs(self.currentFarm) do
+			--go to tree
+			if (self:hasTreeGrown()) then
+				Lumberjack.harvestTree()
+				Lumberjack.plantTree()
+			--move tree to end of queue for harvesting oldest first?
+			end
 		end
 	end
 end
