@@ -231,7 +231,7 @@ test(
 
 				local B = Class(A)
 
-				B.method()
+				B:method()
 
 				t.assertEqual(methodCalled, true)
 				t.assertEqual(super, nil)
