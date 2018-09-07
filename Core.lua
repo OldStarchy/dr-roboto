@@ -1,6 +1,10 @@
 Class = require 'Class'
+
 Recipe = require 'Recipe'
 RecipeBook = require 'RecipeBook'
-Crafting = require 'Crafting'
-Obtain = require 'Obtain'
 StandardRecipes = require 'StandardRecipes'
+
+Task = require 'Task'
+GatherTask = require 'GatherTask'
+
+Crafting = require 'Crafting'
