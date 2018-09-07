@@ -6,19 +6,19 @@ local col = require 'TextColors'
 
 local function createTestParams()
 	return {
-		assertEqual = function(a, b)
-			if (a == b) then
+		assertEqual = function(result, expected)
+			if (result == expected) then
 				return
 			end
 
-			error('Assert ==', 2)
+			error('Assert ==,\nExpected "' .. tostring(expected) .. '"\n but got "' .. tostring(result) .. '"', 2)
 		end,
-		assertNotEqual = function(a, b)
-			if (a ~= b) then
+		assertNotEqual = function(result, unexpected)
+			if (result ~= unexpected) then
 				return
 			end
 
-			error('Assert ~=', 2)
+			error('Assert ~=,\nGot "' .. tostring(result) .. '"', 2)
 		end,
 		assertThrows = function(method)
 			local success = pcall(method)
