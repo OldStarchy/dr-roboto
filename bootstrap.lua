@@ -51,33 +51,20 @@ if (_G.require == nil) then
 end
 
 if (_G.fs == nil) then
+	require 'lfs'
 	_G.fs = {
 		list = function(directory)
-			local try1, result =
-				pcall(
-				function()
-					local dirs = {}
+			local dirs = {}
 
-					require 'lfs'
-					for d in lfs.dir(directory) do
-						table.insert(dirs, d)
-					end
-					return dirs
-				end
-			)
-
-			if (try1) then
-				return result
-			else
-				local i, t, popen = 0, {}, io.popen
-				local pfile = popen('ls -a "' .. directory .. '"')
-				for filename in pfile:lines() do
-					i = i + 1
-					t[i] = filename
-				end
-				pfile:close()
-				return t
+			for d in lfs.dir(directory) do
+				table.insert(dirs, d)
 			end
+
+			return dirs
+		end,
+		isDir = function(directory)
+			local files = fs.list(directory)
+			return #files > 0
 		end
 	}
 end

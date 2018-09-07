@@ -216,16 +216,36 @@ function runTests(logLevel)
 	end
 end
 
-local testFiles = fs.list('tests')
+--[[
+	Searches through all folders for any files ending with "Test.lua" and returns their full paths.
+]]
+local function findTests(directory)
+	local results = {}
 
-for _, v in ipairs(testFiles) do
-	if (v:sub(-(#'.lua')) == '.lua') then
-		v = v:sub(1, -5)
+	local dirsToCheck = {directory}
+
+	while (#dirsToCheck > 0) do
+		local currentDirectory = table.remove(dirsToCheck)
+		local files = fs.list(currentDirectory)
+
+		for _, file in ipairs(files) do
+			if (fs.isDir(file)) then
+				if (file ~= '.' and file ~= '..') then
+					table.insert(dirsToCheck, currentDirectory .. '/' .. file)
+				end
+			elseif (file:sub(-(#'Test.lua')) == 'Test.lua') then
+				table.insert(results, currentDirectory .. '/' .. file)
+			end
+		end
 	end
 
-	if (v:sub(-(#'Test')) == 'Test') then
-		dofile('tests/' .. v .. '.lua')
-	end
+	return results
+end
+
+local testFiles = findTests('.')
+
+for _, file in ipairs(testFiles) do
+	dofile(file)
 end
 
 print('Running startup tests...')
