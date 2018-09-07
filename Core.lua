@@ -6,5 +6,9 @@ StandardRecipes = require 'Crafting/StandardRecipes'
 
 Crafting = require 'Crafting/Crafting'
 
-Task = require 'Task'
-GatherTask = require 'GatherTask'
+ItemStorage = require 'Inventory/ItemStorage'
+
+Skill = require 'Skills/Skill'
+GatherSkill = require 'Skills/GatherSkill'
+
+SkillSet = require 'Skills/SkillSet'
