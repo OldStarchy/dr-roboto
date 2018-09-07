@@ -2,7 +2,7 @@
 dofile 'bootstrap.lua'
 
 require 'Core'
-local col = require 'TextColors'
+local col = require 'Util/TextColors'
 
 local function createTestParams()
 	return {
