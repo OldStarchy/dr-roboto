@@ -1,0 +1,2425 @@
+{
+	"turtle.craft(number: quantity)": {
+		"prefix": "turtle.craft",
+		"body": [
+			"turtle.craft(${1:number: quantity})"
+		],
+		"description": "Craft items using ingredients anywhere in the turtle's inventory and place results in the active slot. If a quantity is specified, it will craft only up to that many items, otherwise, it will craft as many of the items as possible.. returns: boolean: success"
+	},
+	"turtle.forward()": {
+		"prefix": "turtle.forward",
+		"body": [
+			"turtle.forward()"
+		],
+		"description": "Try to move the turtle forward. returns: boolean: success"
+	},
+	"turtle.back()": {
+		"prefix": "turtle.back",
+		"body": [
+			"turtle.back()"
+		],
+		"description": "Try to move the turtle backward. returns: boolean: success"
+	},
+	"turtle.up()": {
+		"prefix": "turtle.up",
+		"body": [
+			"turtle.up()"
+		],
+		"description": "Try to move the turtle up. returns: boolean: success"
+	},
+	"turtle.down()": {
+		"prefix": "turtle.down",
+		"body": [
+			"turtle.down()"
+		],
+		"description": "Try to move the turtle down. returns: boolean: success"
+	},
+	"turtle.turnLeft()": {
+		"prefix": "turtle.turnLeft",
+		"body": [
+			"turtle.turnLeft()"
+		],
+		"description": "Turn the turtle left. returns: boolean: success"
+	},
+	"turtle.turnRight()": {
+		"prefix": "turtle.turnRight",
+		"body": [
+			"turtle.turnRight()"
+		],
+		"description": "Turn the turtle right. returns: boolean: success"
+	},
+	"turtle.select(number: slotNum)": {
+		"prefix": "turtle.select",
+		"body": [
+			"turtle.select(${1:number: slotNum})"
+		],
+		"description": "Make the turtle select slot <code>slotNum</code> (1 is top left, 16 (9 in 1.33 and earlier) is bottom right). returns: boolean: success"
+	},
+	"turtle.getSelectedSlot()": {
+		"prefix": "turtle.getSelectedSlot",
+		"body": [
+			"turtle.getSelectedSlot()"
+		],
+		"description": "Indicates the currently selected inventory slot. returns: number: slot"
+	},
+	"turtle.getItemCount(number: slotNum)": {
+		"prefix": "turtle.getItemCount",
+		"body": [
+			"turtle.getItemCount(${1:number: slotNum})"
+		],
+		"description": "Counts how many items are in the currently selected slot or, if specified, <code>slotNum</code> slot. returns: number: count"
+	},
+	"turtle.getItemSpace(number: slotNum)": {
+		"prefix": "turtle.getItemSpace",
+		"body": [
+			"turtle.getItemSpace(${1:number: slotNum})"
+		],
+		"description": "Counts how many remaining items you need to fill the stack in the currently selected slot or, if specified, <code>slotNum</code> slot. returns: number: count"
+	},
+	"turtle.getItemDetail(number: slotNum)": {
+		"prefix": "turtle.getItemDetail",
+		"body": [
+			"turtle.getItemDetail(${1:number: slotNum})"
+		],
+		"description": "Returns the ID string, count and damage values of currently selected slot or, if specified, <code>slotNum</code> slot. returns: table: data"
+	},
+	"turtle.equipLeft()": {
+		"prefix": "turtle.equipLeft",
+		"body": [
+			"turtle.equipLeft()"
+		],
+		"description": "Attempts to equip an item in the current slot to the turtle's left side, switching the previously equipped item back into the inventory. returns: boolean: success"
+	},
+	"turtle.equipRight()": {
+		"prefix": "turtle.equipRight",
+		"body": [
+			"turtle.equipRight()"
+		],
+		"description": "Attempts to equip an item in the current slot to the turtle's right side, switching the previously equipped item back into the inventory. returns: boolean: success"
+	},
+	"turtle.attack()": {
+		"prefix": "turtle.attack",
+		"body": [
+			"turtle.attack()"
+		],
+		"description": "Attacks in front of the turtle.. returns: boolean: success"
+	},
+	"turtle.attackUp()": {
+		"prefix": "turtle.attackUp",
+		"body": [
+			"turtle.attackUp()"
+		],
+		"description": "Attacks above the turtle.. returns: boolean: success"
+	},
+	"turtle.attackDown()": {
+		"prefix": "turtle.attackDown",
+		"body": [
+			"turtle.attackDown()"
+		],
+		"description": "Attacks under the turtle.. returns: boolean: success"
+	},
+	"turtle.dig()": {
+		"prefix": "turtle.dig",
+		"body": [
+			"turtle.dig()"
+		],
+		"description": "Breaks the block in front. With hoe: tills the dirt in front of it.. returns: boolean: success"
+	},
+	"turtle.digUp()": {
+		"prefix": "turtle.digUp",
+		"body": [
+			"turtle.digUp()"
+		],
+		"description": "Breaks the block above.. returns: boolean: success"
+	},
+	"turtle.digDown()": {
+		"prefix": "turtle.digDown",
+		"body": [
+			"turtle.digDown()"
+		],
+		"description": "Breaks the block below. With hoe: tills the dirt beneath the space below it.. returns: boolean: success"
+	},
+	"turtle.place(string: signText)": {
+		"prefix": "turtle.place",
+		"body": [
+			"turtle.place(${1:string: signText})"
+		],
+		"description": "Places a block of the selected slot in front. Engrave <code>signText</code> on signs if provided. Collects <a >water or <a >lava if the currently selected slot is an empty bucket.. returns: boolean: success"
+	},
+	"turtle.placeUp()": {
+		"prefix": "turtle.placeUp",
+		"body": [
+			"turtle.placeUp()"
+		],
+		"description": "Places a block of the selected slot above. Collects water or lava if the currently selected slot is an empty bucket.. returns: boolean: success"
+	},
+	"turtle.placeDown()": {
+		"prefix": "turtle.placeDown",
+		"body": [
+			"turtle.placeDown()"
+		],
+		"description": "Places a block of the selected slot below. Collects water or lava if the currently selected slot is an empty bucket.. returns: boolean: success"
+	},
+	"turtle.detect()": {
+		"prefix": "turtle.detect",
+		"body": [
+			"turtle.detect()"
+		],
+		"description": "Detects if there is a block in front. Does not detect mobs.. returns: boolean: result"
+	},
+	"turtle.detectUp()": {
+		"prefix": "turtle.detectUp",
+		"body": [
+			"turtle.detectUp()"
+		],
+		"description": "Detects if there is a block above. returns: boolean: result"
+	},
+	"turtle.detectDown()": {
+		"prefix": "turtle.detectDown",
+		"body": [
+			"turtle.detectDown()"
+		],
+		"description": "Detects if there is a block below. returns: boolean: result"
+	},
+	"turtle.inspect()": {
+		"prefix": "turtle.inspect",
+		"body": [
+			"turtle.inspect()"
+		],
+		"description": "Returns the ID string and metadata of the block in front of the Turtle. returns: boolean: success, <a ><span >table: data/<a ><span >string: error message"
+	},
+	"turtle.inspectUp()": {
+		"prefix": "turtle.inspectUp",
+		"body": [
+			"turtle.inspectUp()"
+		],
+		"description": "Returns the ID string and metadata of the block above the Turtle. returns: boolean: success, <a ><span >table: data/<a ><span >string: error message"
+	},
+	"turtle.inspectDown()": {
+		"prefix": "turtle.inspectDown",
+		"body": [
+			"turtle.inspectDown()"
+		],
+		"description": "Returns the ID string and metadata of the block below the Turtle. returns: boolean: success, <a ><span >table: data/<a ><span >string: error message"
+	},
+	"turtle.compare()": {
+		"prefix": "turtle.compare",
+		"body": [
+			"turtle.compare()"
+		],
+		"description": "Detects if the block in front is the same as the one in the currently selected slot. returns: boolean: result"
+	},
+	"turtle.compareUp()": {
+		"prefix": "turtle.compareUp",
+		"body": [
+			"turtle.compareUp()"
+		],
+		"description": "Detects if the block above is the same as the one in the currently selected slot. returns: boolean: result"
+	},
+	"turtle.compareDown()": {
+		"prefix": "turtle.compareDown",
+		"body": [
+			"turtle.compareDown()"
+		],
+		"description": "Detects if the block below is the same as the one in the currently selected slot. returns: boolean: result"
+	},
+	"turtle.compareTo(number: slot)": {
+		"prefix": "turtle.compareTo",
+		"body": [
+			"turtle.compareTo(${1:number: slot})"
+		],
+		"description": "Compare the current selected slot and the given slot to see if the items are the same. Returns true if they are the same, false if not.. returns: boolean: result"
+	},
+	"turtle.drop(number: count)": {
+		"prefix": "turtle.drop",
+		"body": [
+			"turtle.drop(${1:number: count})"
+		],
+		"description": "Drops all items in the selected slot, or specified, drops <code>count</code> items.<br />&gt;= 1.4 only: If there is a inventory on the side (i.e in front of the turtle) it will try to place into the inventory, returning false if the inventory is full.. returns: boolean: success"
+	},
+	"turtle.dropUp(number: count)": {
+		"prefix": "turtle.dropUp",
+		"body": [
+			"turtle.dropUp(${1:number: count})"
+		],
+		"description": "Drops all items in the selected slot, or specified, drops <code>count</code> items.<br />&gt;= 1.4 only: If there is a inventory on the side (i.e above the turtle) it will try to place into the inventory, returning false if the inventory is full.. returns: boolean: success"
+	},
+	"turtle.dropDown(number: count)": {
+		"prefix": "turtle.dropDown",
+		"body": [
+			"turtle.dropDown(${1:number: count})"
+		],
+		"description": "Drops all items in the selected slot, or specified, drops <code>count</code> items.<br />&gt;= 1.4 only: If there is a inventory on the side (i.e below the turtle) it will try to place into the inventory, returning false if the inventory is full. If above a furnace, will place item in the top slot.. returns: boolean: success"
+	},
+	"turtle.suck(number: amount)": {
+		"prefix": "turtle.suck",
+		"body": [
+			"turtle.suck(${1:number: amount})"
+		],
+		"description": "Picks up an item stack of any number, from the ground or an inventory in front of the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false. <code>amount</code> parameter requires ComputerCraft 1.6 or later.. returns: boolean: success"
+	},
+	"turtle.suckUp(number: amount)": {
+		"prefix": "turtle.suckUp",
+		"body": [
+			"turtle.suckUp(${1:number: amount})"
+		],
+		"description": "Picks up an item stack of any number, from the ground or an inventory above the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false. <code>amount</code> parameter requires ComputerCraft 1.6 or later.. returns: boolean: success"
+	},
+	"turtle.suckDown(number: amount)": {
+		"prefix": "turtle.suckDown",
+		"body": [
+			"turtle.suckDown(${1:number: amount})"
+		],
+		"description": "Picks up an item stack of any number, from the ground or an inventory below the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false. <code>amount</code> parameter requires ComputerCraft 1.6 or later.. returns: boolean: success"
+	},
+	"turtle.refuel(number: quantity)": {
+		"prefix": "turtle.refuel",
+		"body": [
+			"turtle.refuel(${1:number: quantity})"
+		],
+		"description": "If the current selected slot contains a fuel item, it will consume it to give the turtle the ability to move.<br />Added in 1.4 and is only needed in needfuel mode. If the current slot doesn't contain a fuel item, it returns false. Fuel values for different items can be found at <a >Turtle.refuel#Fuel_Values. If a quantity is specified, it will refuel only up to that many items, otherwise, it will consume all the items in the slot.. returns: boolean: success"
+	},
+	"turtle.getFuelLevel()": {
+		"prefix": "turtle.getFuelLevel",
+		"body": [
+			"turtle.getFuelLevel()"
+		],
+		"description": "Returns the current fuel level of the turtle, this is the number of blocks the turtle can move.<br />If <code>turtleNeedFuel = 0</code> then it returns <code>\"unlimited\"</code>.. returns: number: fuel"
+	},
+	"turtle.getFuelLimit()": {
+		"prefix": "turtle.getFuelLimit",
+		"body": [
+			"turtle.getFuelLimit()"
+		],
+		"description": "Returns the maximum amount of fuel a turtle can store - by default, 20,000 for regular turtles, 100,000 for advanced.<br />If <code>turtleNeedFuel = 0</code> then it returns <code>\"unlimited\"</code>.. returns: number: fuel"
+	},
+	"turtle.transferTo(number: slot, <a ><span >number: quantity)": {
+		"prefix": "turtle.transferTo",
+		"body": [
+			"turtle.transferTo(${1:number: slot}, ${2:number: quantity})"
+		],
+		"description": "Transfers <code>quantity</code> items from the selected slot to <code>slot</code>. If <code>quantity</code> isn't specified, will attempt to transfer everything in the selected slot to <code>slot</code>.. returns: boolean: success"
+	},
+
+	"redstone.getBundledOutput()": {
+		"prefix": "redstone.getBundledOutput",
+		"body": [
+			"redstone.getBundledOutput($0)"
+		],
+		"description": ""
+	},
+	"redstone.getAnalogInput()": {
+		"prefix": "redstone.getAnalogInput",
+		"body": [
+			"redstone.getAnalogInput($0)"
+		],
+		"description": ""
+	},
+	"redstone.setOutput()": {
+		"prefix": "redstone.setOutput",
+		"body": [
+			"redstone.setOutput($0)"
+		],
+		"description": ""
+	},
+	"redstone.getAnalogOutput()": {
+		"prefix": "redstone.getAnalogOutput",
+		"body": [
+			"redstone.getAnalogOutput($0)"
+		],
+		"description": ""
+	},
+	"redstone.setAnalogueOutput()": {
+		"prefix": "redstone.setAnalogueOutput",
+		"body": [
+			"redstone.setAnalogueOutput($0)"
+		],
+		"description": ""
+	},
+	"redstone.setBundledOutput()": {
+		"prefix": "redstone.setBundledOutput",
+		"body": [
+			"redstone.setBundledOutput($0)"
+		],
+		"description": ""
+	},
+	"redstone.getOutput()": {
+		"prefix": "redstone.getOutput",
+		"body": [
+			"redstone.getOutput($0)"
+		],
+		"description": ""
+	},
+	"redstone.setAnalogOutput()": {
+		"prefix": "redstone.setAnalogOutput",
+		"body": [
+			"redstone.setAnalogOutput($0)"
+		],
+		"description": ""
+	},
+	"redstone.getAnalogueOutput()": {
+		"prefix": "redstone.getAnalogueOutput",
+		"body": [
+			"redstone.getAnalogueOutput($0)"
+		],
+		"description": ""
+	},
+	"redstone.getBundledInput()": {
+		"prefix": "redstone.getBundledInput",
+		"body": [
+			"redstone.getBundledInput($0)"
+		],
+		"description": ""
+	},
+	"redstone.getSides()": {
+		"prefix": "redstone.getSides",
+		"body": [
+			"redstone.getSides($0)"
+		],
+		"description": ""
+	},
+	"redstone.getAnalogueInput()": {
+		"prefix": "redstone.getAnalogueInput",
+		"body": [
+			"redstone.getAnalogueInput($0)"
+		],
+		"description": ""
+	},
+	"redstone.testBundledInput()": {
+		"prefix": "redstone.testBundledInput",
+		"body": [
+			"redstone.testBundledInput($0)"
+		],
+		"description": ""
+	},
+	"redstone.getInput()": {
+		"prefix": "redstone.getInput",
+		"body": [
+			"redstone.getInput($0)"
+		],
+		"description": ""
+	},
+	"gps.locate()": {
+		"prefix": "gps.locate",
+		"body": [
+			"gps.locate($0)"
+		],
+		"description": ""
+	},
+	"keys.getName()": {
+		"prefix": "keys.getName",
+		"body": [
+			"keys.getName($0)"
+		],
+		"description": ""
+	},
+	"printError()": {
+		"prefix": "printError",
+		"body": [
+			"printError($0)"
+		],
+		"description": ""
+	},
+	"assert()": {
+		"prefix": "assert",
+		"body": [
+			"assert($0)"
+		],
+		"description": ""
+	},
+	"peripheral.isPresent()": {
+		"prefix": "peripheral.isPresent",
+		"body": [
+			"peripheral.isPresent($0)"
+		],
+		"description": ""
+	},
+	"peripheral.getType()": {
+		"prefix": "peripheral.getType",
+		"body": [
+			"peripheral.getType($0)"
+		],
+		"description": ""
+	},
+	"peripheral.wrap()": {
+		"prefix": "peripheral.wrap",
+		"body": [
+			"peripheral.wrap($0)"
+		],
+		"description": ""
+	},
+	"peripheral.call()": {
+		"prefix": "peripheral.call",
+		"body": [
+			"peripheral.call($0)"
+		],
+		"description": ""
+	},
+	"peripheral.getMethods()": {
+		"prefix": "peripheral.getMethods",
+		"body": [
+			"peripheral.getMethods($0)"
+		],
+		"description": ""
+	},
+	"peripheral.find()": {
+		"prefix": "peripheral.find",
+		"body": [
+			"peripheral.find($0)"
+		],
+		"description": ""
+	},
+	"peripheral.getNames()": {
+		"prefix": "peripheral.getNames",
+		"body": [
+			"peripheral.getNames($0)"
+		],
+		"description": ""
+	},
+	"getfenv()": {
+		"prefix": "getfenv",
+		"body": [
+			"getfenv($0)"
+		],
+		"description": ""
+	},
+	"bit.bxor()": {
+		"prefix": "bit.bxor",
+		"body": [
+			"bit.bxor($0)"
+		],
+		"description": ""
+	},
+	"bit.bor()": {
+		"prefix": "bit.bor",
+		"body": [
+			"bit.bor($0)"
+		],
+		"description": ""
+	},
+	"bit.blshift()": {
+		"prefix": "bit.blshift",
+		"body": [
+			"bit.blshift($0)"
+		],
+		"description": ""
+	},
+	"bit.blogic_rshift()": {
+		"prefix": "bit.blogic_rshift",
+		"body": [
+			"bit.blogic_rshift($0)"
+		],
+		"description": ""
+	},
+	"bit.brshift()": {
+		"prefix": "bit.brshift",
+		"body": [
+			"bit.brshift($0)"
+		],
+		"description": ""
+	},
+	"bit.band()": {
+		"prefix": "bit.band",
+		"body": [
+			"bit.band($0)"
+		],
+		"description": ""
+	},
+	"bit.bnot()": {
+		"prefix": "bit.bnot",
+		"body": [
+			"bit.bnot($0)"
+		],
+		"description": ""
+	},
+	"disk.setLabel()": {
+		"prefix": "disk.setLabel",
+		"body": [
+			"disk.setLabel($0)"
+		],
+		"description": ""
+	},
+	"disk.getLabel()": {
+		"prefix": "disk.getLabel",
+		"body": [
+			"disk.getLabel($0)"
+		],
+		"description": ""
+	},
+	"disk.hasAudio()": {
+		"prefix": "disk.hasAudio",
+		"body": [
+			"disk.hasAudio($0)"
+		],
+		"description": ""
+	},
+	"disk.eject()": {
+		"prefix": "disk.eject",
+		"body": [
+			"disk.eject($0)"
+		],
+		"description": ""
+	},
+	"disk.hasData()": {
+		"prefix": "disk.hasData",
+		"body": [
+			"disk.hasData($0)"
+		],
+		"description": ""
+	},
+	"disk.playAudio()": {
+		"prefix": "disk.playAudio",
+		"body": [
+			"disk.playAudio($0)"
+		],
+		"description": ""
+	},
+	"disk.getAudioTitle()": {
+		"prefix": "disk.getAudioTitle",
+		"body": [
+			"disk.getAudioTitle($0)"
+		],
+		"description": ""
+	},
+	"disk.isPresent()": {
+		"prefix": "disk.isPresent",
+		"body": [
+			"disk.isPresent($0)"
+		],
+		"description": ""
+	},
+	"disk.getID()": {
+		"prefix": "disk.getID",
+		"body": [
+			"disk.getID($0)"
+		],
+		"description": ""
+	},
+	"disk.stopAudio()": {
+		"prefix": "disk.stopAudio",
+		"body": [
+			"disk.stopAudio($0)"
+		],
+		"description": ""
+	},
+	"disk.getMountPath()": {
+		"prefix": "disk.getMountPath",
+		"body": [
+			"disk.getMountPath($0)"
+		],
+		"description": ""
+	},
+	"tonumber()": {
+		"prefix": "tonumber",
+		"body": [
+			"tonumber($0)"
+		],
+		"description": ""
+	},
+	"loadstring()": {
+		"prefix": "loadstring",
+		"body": [
+			"loadstring($0)"
+		],
+		"description": ""
+	},
+	"error()": {
+		"prefix": "error",
+		"body": [
+			"error($0)"
+		],
+		"description": ""
+	},
+	"rawset()": {
+		"prefix": "rawset",
+		"body": [
+			"rawset($0)"
+		],
+		"description": ""
+	},
+	"type()": {
+		"prefix": "type",
+		"body": [
+			"type($0)"
+		],
+		"description": ""
+	},
+	"coroutine.status()": {
+		"prefix": "coroutine.status",
+		"body": [
+			"coroutine.status($0)"
+		],
+		"description": ""
+	},
+	"coroutine.resume()": {
+		"prefix": "coroutine.resume",
+		"body": [
+			"coroutine.resume($0)"
+		],
+		"description": ""
+	},
+	"coroutine.create()": {
+		"prefix": "coroutine.create",
+		"body": [
+			"coroutine.create($0)"
+		],
+		"description": ""
+	},
+	"coroutine.yield()": {
+		"prefix": "coroutine.yield",
+		"body": [
+			"coroutine.yield($0)"
+		],
+		"description": ""
+	},
+	"coroutine.wrap()": {
+		"prefix": "coroutine.wrap",
+		"body": [
+			"coroutine.wrap($0)"
+		],
+		"description": ""
+	},
+	"coroutine.running()": {
+		"prefix": "coroutine.running",
+		"body": [
+			"coroutine.running($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.inspectDown()": {
+		"prefix": "turtle.native.inspectDown",
+		"body": [
+			"turtle.native.inspectDown($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.getSelectedSlot()": {
+		"prefix": "turtle.native.getSelectedSlot",
+		"body": [
+			"turtle.native.getSelectedSlot($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.inspect()": {
+		"prefix": "turtle.native.inspect",
+		"body": [
+			"turtle.native.inspect($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.getFuelLimit()": {
+		"prefix": "turtle.native.getFuelLimit",
+		"body": [
+			"turtle.native.getFuelLimit($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.inspectUp()": {
+		"prefix": "turtle.native.inspectUp",
+		"body": [
+			"turtle.native.inspectUp($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.placeDown()": {
+		"prefix": "turtle.native.placeDown",
+		"body": [
+			"turtle.native.placeDown($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.back()": {
+		"prefix": "turtle.native.back",
+		"body": [
+			"turtle.native.back($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.suckUp()": {
+		"prefix": "turtle.native.suckUp",
+		"body": [
+			"turtle.native.suckUp($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.compareUp()": {
+		"prefix": "turtle.native.compareUp",
+		"body": [
+			"turtle.native.compareUp($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.compareTo()": {
+		"prefix": "turtle.native.compareTo",
+		"body": [
+			"turtle.native.compareTo($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.compareDown()": {
+		"prefix": "turtle.native.compareDown",
+		"body": [
+			"turtle.native.compareDown($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.attackDown()": {
+		"prefix": "turtle.native.attackDown",
+		"body": [
+			"turtle.native.attackDown($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.getItemSpace()": {
+		"prefix": "turtle.native.getItemSpace",
+		"body": [
+			"turtle.native.getItemSpace($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.placeUp()": {
+		"prefix": "turtle.native.placeUp",
+		"body": [
+			"turtle.native.placeUp($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.forward()": {
+		"prefix": "turtle.native.forward",
+		"body": [
+			"turtle.native.forward($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.suck()": {
+		"prefix": "turtle.native.suck",
+		"body": [
+			"turtle.native.suck($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.dig()": {
+		"prefix": "turtle.native.dig",
+		"body": [
+			"turtle.native.dig($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.equipLeft()": {
+		"prefix": "turtle.native.equipLeft",
+		"body": [
+			"turtle.native.equipLeft($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.suckDown()": {
+		"prefix": "turtle.native.suckDown",
+		"body": [
+			"turtle.native.suckDown($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.detect()": {
+		"prefix": "turtle.native.detect",
+		"body": [
+			"turtle.native.detect($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.refuel()": {
+		"prefix": "turtle.native.refuel",
+		"body": [
+			"turtle.native.refuel($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.getItemCount()": {
+		"prefix": "turtle.native.getItemCount",
+		"body": [
+			"turtle.native.getItemCount($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.equipRight()": {
+		"prefix": "turtle.native.equipRight",
+		"body": [
+			"turtle.native.equipRight($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.digUp()": {
+		"prefix": "turtle.native.digUp",
+		"body": [
+			"turtle.native.digUp($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.turnRight()": {
+		"prefix": "turtle.native.turnRight",
+		"body": [
+			"turtle.native.turnRight($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.dropDown()": {
+		"prefix": "turtle.native.dropDown",
+		"body": [
+			"turtle.native.dropDown($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.attackUp()": {
+		"prefix": "turtle.native.attackUp",
+		"body": [
+			"turtle.native.attackUp($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.getFuelLevel()": {
+		"prefix": "turtle.native.getFuelLevel",
+		"body": [
+			"turtle.native.getFuelLevel($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.detectUp()": {
+		"prefix": "turtle.native.detectUp",
+		"body": [
+			"turtle.native.detectUp($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.dropUp()": {
+		"prefix": "turtle.native.dropUp",
+		"body": [
+			"turtle.native.dropUp($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.attack()": {
+		"prefix": "turtle.native.attack",
+		"body": [
+			"turtle.native.attack($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.transferTo()": {
+		"prefix": "turtle.native.transferTo",
+		"body": [
+			"turtle.native.transferTo($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.compare()": {
+		"prefix": "turtle.native.compare",
+		"body": [
+			"turtle.native.compare($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.digDown()": {
+		"prefix": "turtle.native.digDown",
+		"body": [
+			"turtle.native.digDown($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.getItemDetail()": {
+		"prefix": "turtle.native.getItemDetail",
+		"body": [
+			"turtle.native.getItemDetail($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.down()": {
+		"prefix": "turtle.native.down",
+		"body": [
+			"turtle.native.down($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.select()": {
+		"prefix": "turtle.native.select",
+		"body": [
+			"turtle.native.select($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.place()": {
+		"prefix": "turtle.native.place",
+		"body": [
+			"turtle.native.place($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.up()": {
+		"prefix": "turtle.native.up",
+		"body": [
+			"turtle.native.up($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.turnLeft()": {
+		"prefix": "turtle.native.turnLeft",
+		"body": [
+			"turtle.native.turnLeft($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.detectDown()": {
+		"prefix": "turtle.native.detectDown",
+		"body": [
+			"turtle.native.detectDown($0)"
+		],
+		"description": ""
+	},
+	"turtle.native.drop()": {
+		"prefix": "turtle.native.drop",
+		"body": [
+			"turtle.native.drop($0)"
+		],
+		"description": ""
+	},
+	"tostring()": {
+		"prefix": "tostring",
+		"body": [
+			"tostring($0)"
+		],
+		"description": ""
+	},
+	"next()": {
+		"prefix": "next",
+		"body": [
+			"next($0)"
+		],
+		"description": ""
+	},
+	"unpack()": {
+		"prefix": "unpack",
+		"body": [
+			"unpack($0)"
+		],
+		"description": ""
+	},
+	"colours.combine()": {
+		"prefix": "colours.combine",
+		"body": [
+			"colours.combine($0)"
+		],
+		"description": ""
+	},
+	"colours.test()": {
+		"prefix": "colours.test",
+		"body": [
+			"colours.test($0)"
+		],
+		"description": ""
+	},
+	"colours.subtract()": {
+		"prefix": "colours.subtract",
+		"body": [
+			"colours.subtract($0)"
+		],
+		"description": ""
+	},
+	"pcall()": {
+		"prefix": "pcall",
+		"body": [
+			"pcall($0)"
+		],
+		"description": ""
+	},
+	"sleep()": {
+		"prefix": "sleep",
+		"body": [
+			"sleep($0)"
+		],
+		"description": ""
+	},
+	"loadfile()": {
+		"prefix": "loadfile",
+		"body": [
+			"loadfile($0)"
+		],
+		"description": ""
+	},
+	"math.deg()": {
+		"prefix": "math.deg",
+		"body": [
+			"math.deg($0)"
+		],
+		"description": ""
+	},
+	"math.fmod()": {
+		"prefix": "math.fmod",
+		"body": [
+			"math.fmod($0)"
+		],
+		"description": ""
+	},
+	"math.random()": {
+		"prefix": "math.random",
+		"body": [
+			"math.random($0)"
+		],
+		"description": ""
+	},
+	"math.asin()": {
+		"prefix": "math.asin",
+		"body": [
+			"math.asin($0)"
+		],
+		"description": ""
+	},
+	"math.max()": {
+		"prefix": "math.max",
+		"body": [
+			"math.max($0)"
+		],
+		"description": ""
+	},
+	"math.modf()": {
+		"prefix": "math.modf",
+		"body": [
+			"math.modf($0)"
+		],
+		"description": ""
+	},
+	"math.log10()": {
+		"prefix": "math.log10",
+		"body": [
+			"math.log10($0)"
+		],
+		"description": ""
+	},
+	"math.floor()": {
+		"prefix": "math.floor",
+		"body": [
+			"math.floor($0)"
+		],
+		"description": ""
+	},
+	"math.cosh()": {
+		"prefix": "math.cosh",
+		"body": [
+			"math.cosh($0)"
+		],
+		"description": ""
+	},
+	"math.ldexp()": {
+		"prefix": "math.ldexp",
+		"body": [
+			"math.ldexp($0)"
+		],
+		"description": ""
+	},
+	"math.log()": {
+		"prefix": "math.log",
+		"body": [
+			"math.log($0)"
+		],
+		"description": ""
+	},
+	"math.pow()": {
+		"prefix": "math.pow",
+		"body": [
+			"math.pow($0)"
+		],
+		"description": ""
+	},
+	"math.randomseed()": {
+		"prefix": "math.randomseed",
+		"body": [
+			"math.randomseed($0)"
+		],
+		"description": ""
+	},
+	"math.frexp()": {
+		"prefix": "math.frexp",
+		"body": [
+			"math.frexp($0)"
+		],
+		"description": ""
+	},
+	"math.abs()": {
+		"prefix": "math.abs",
+		"body": [
+			"math.abs($0)"
+		],
+		"description": ""
+	},
+	"math.tanh()": {
+		"prefix": "math.tanh",
+		"body": [
+			"math.tanh($0)"
+		],
+		"description": ""
+	},
+	"math.acos()": {
+		"prefix": "math.acos",
+		"body": [
+			"math.acos($0)"
+		],
+		"description": ""
+	},
+	"math.atan2()": {
+		"prefix": "math.atan2",
+		"body": [
+			"math.atan2($0)"
+		],
+		"description": ""
+	},
+	"math.tan()": {
+		"prefix": "math.tan",
+		"body": [
+			"math.tan($0)"
+		],
+		"description": ""
+	},
+	"math.min()": {
+		"prefix": "math.min",
+		"body": [
+			"math.min($0)"
+		],
+		"description": ""
+	},
+	"math.ceil()": {
+		"prefix": "math.ceil",
+		"body": [
+			"math.ceil($0)"
+		],
+		"description": ""
+	},
+	"math.sinh()": {
+		"prefix": "math.sinh",
+		"body": [
+			"math.sinh($0)"
+		],
+		"description": ""
+	},
+	"math.sqrt()": {
+		"prefix": "math.sqrt",
+		"body": [
+			"math.sqrt($0)"
+		],
+		"description": ""
+	},
+	"math.rad()": {
+		"prefix": "math.rad",
+		"body": [
+			"math.rad($0)"
+		],
+		"description": ""
+	},
+	"math.sin()": {
+		"prefix": "math.sin",
+		"body": [
+			"math.sin($0)"
+		],
+		"description": ""
+	},
+	"math.exp()": {
+		"prefix": "math.exp",
+		"body": [
+			"math.exp($0)"
+		],
+		"description": ""
+	},
+	"math.cos()": {
+		"prefix": "math.cos",
+		"body": [
+			"math.cos($0)"
+		],
+		"description": ""
+	},
+	"math.atan()": {
+		"prefix": "math.atan",
+		"body": [
+			"math.atan($0)"
+		],
+		"description": ""
+	},
+	"window.create()": {
+		"prefix": "window.create",
+		"body": [
+			"window.create($0)"
+		],
+		"description": ""
+	},
+	"load()": {
+		"prefix": "load",
+		"body": [
+			"load($0)"
+		],
+		"description": ""
+	},
+	"pairs()": {
+		"prefix": "pairs",
+		"body": [
+			"pairs($0)"
+		],
+		"description": ""
+	},
+	"fs.open()": {
+		"prefix": "fs.open",
+		"body": [
+			"fs.open($0)"
+		],
+		"description": ""
+	},
+	"fs.getName()": {
+		"prefix": "fs.getName",
+		"body": [
+			"fs.getName($0)"
+		],
+		"description": ""
+	},
+	"fs.combine()": {
+		"prefix": "fs.combine",
+		"body": [
+			"fs.combine($0)"
+		],
+		"description": ""
+	},
+	"fs.isReadOnly()": {
+		"prefix": "fs.isReadOnly",
+		"body": [
+			"fs.isReadOnly($0)"
+		],
+		"description": ""
+	},
+	"fs.move()": {
+		"prefix": "fs.move",
+		"body": [
+			"fs.move($0)"
+		],
+		"description": ""
+	},
+	"fs.copy()": {
+		"prefix": "fs.copy",
+		"body": [
+			"fs.copy($0)"
+		],
+		"description": ""
+	},
+	"fs.delete()": {
+		"prefix": "fs.delete",
+		"body": [
+			"fs.delete($0)"
+		],
+		"description": ""
+	},
+	"fs.isDir()": {
+		"prefix": "fs.isDir",
+		"body": [
+			"fs.isDir($0)"
+		],
+		"description": ""
+	},
+	"fs.getFreeSpace()": {
+		"prefix": "fs.getFreeSpace",
+		"body": [
+			"fs.getFreeSpace($0)"
+		],
+		"description": ""
+	},
+	"fs.complete()": {
+		"prefix": "fs.complete",
+		"body": [
+			"fs.complete($0)"
+		],
+		"description": ""
+	},
+	"fs.getDrive()": {
+		"prefix": "fs.getDrive",
+		"body": [
+			"fs.getDrive($0)"
+		],
+		"description": ""
+	},
+	"fs.getSize()": {
+		"prefix": "fs.getSize",
+		"body": [
+			"fs.getSize($0)"
+		],
+		"description": ""
+	},
+	"fs.list()": {
+		"prefix": "fs.list",
+		"body": [
+			"fs.list($0)"
+		],
+		"description": ""
+	},
+	"fs.exists()": {
+		"prefix": "fs.exists",
+		"body": [
+			"fs.exists($0)"
+		],
+		"description": ""
+	},
+	"fs.makeDir()": {
+		"prefix": "fs.makeDir",
+		"body": [
+			"fs.makeDir($0)"
+		],
+		"description": ""
+	},
+	"fs.find()": {
+		"prefix": "fs.find",
+		"body": [
+			"fs.find($0)"
+		],
+		"description": ""
+	},
+	"fs.getDir()": {
+		"prefix": "fs.getDir",
+		"body": [
+			"fs.getDir($0)"
+		],
+		"description": ""
+	},
+	"rawget()": {
+		"prefix": "rawget",
+		"body": [
+			"rawget($0)"
+		],
+		"description": ""
+	},
+	"read()": {
+		"prefix": "read",
+		"body": [
+			"read($0)"
+		],
+		"description": ""
+	},
+	"rednet.send()": {
+		"prefix": "rednet.send",
+		"body": [
+			"rednet.send($0)"
+		],
+		"description": ""
+	},
+	"rednet.lookup()": {
+		"prefix": "rednet.lookup",
+		"body": [
+			"rednet.lookup($0)"
+		],
+		"description": ""
+	},
+	"rednet.open()": {
+		"prefix": "rednet.open",
+		"body": [
+			"rednet.open($0)"
+		],
+		"description": ""
+	},
+	"rednet.broadcast()": {
+		"prefix": "rednet.broadcast",
+		"body": [
+			"rednet.broadcast($0)"
+		],
+		"description": ""
+	},
+	"rednet.host()": {
+		"prefix": "rednet.host",
+		"body": [
+			"rednet.host($0)"
+		],
+		"description": ""
+	},
+	"rednet.run()": {
+		"prefix": "rednet.run",
+		"body": [
+			"rednet.run($0)"
+		],
+		"description": ""
+	},
+	"rednet.close()": {
+		"prefix": "rednet.close",
+		"body": [
+			"rednet.close($0)"
+		],
+		"description": ""
+	},
+	"rednet.isOpen()": {
+		"prefix": "rednet.isOpen",
+		"body": [
+			"rednet.isOpen($0)"
+		],
+		"description": ""
+	},
+	"rednet.receive()": {
+		"prefix": "rednet.receive",
+		"body": [
+			"rednet.receive($0)"
+		],
+		"description": ""
+	},
+	"rednet.unhost()": {
+		"prefix": "rednet.unhost",
+		"body": [
+			"rednet.unhost($0)"
+		],
+		"description": ""
+	},
+	"ipairs()": {
+		"prefix": "ipairs",
+		"body": [
+			"ipairs($0)"
+		],
+		"description": ""
+	},
+	"xpcall()": {
+		"prefix": "xpcall",
+		"body": [
+			"xpcall($0)"
+		],
+		"description": ""
+	},
+	"os.shutdown()": {
+		"prefix": "os.shutdown",
+		"body": [
+			"os.shutdown($0)"
+		],
+		"description": ""
+	},
+	"os.pullEvent()": {
+		"prefix": "os.pullEvent",
+		"body": [
+			"os.pullEvent($0)"
+		],
+		"description": ""
+	},
+	"os.day()": {
+		"prefix": "os.day",
+		"body": [
+			"os.day($0)"
+		],
+		"description": ""
+	},
+	"os.sleep()": {
+		"prefix": "os.sleep",
+		"body": [
+			"os.sleep($0)"
+		],
+		"description": ""
+	},
+	"os.unloadAPI()": {
+		"prefix": "os.unloadAPI",
+		"body": [
+			"os.unloadAPI($0)"
+		],
+		"description": ""
+	},
+	"os.setAlarm()": {
+		"prefix": "os.setAlarm",
+		"body": [
+			"os.setAlarm($0)"
+		],
+		"description": ""
+	},
+	"os.loadAPI()": {
+		"prefix": "os.loadAPI",
+		"body": [
+			"os.loadAPI($0)"
+		],
+		"description": ""
+	},
+	"os.reboot()": {
+		"prefix": "os.reboot",
+		"body": [
+			"os.reboot($0)"
+		],
+		"description": ""
+	},
+	"os.pullEventRaw()": {
+		"prefix": "os.pullEventRaw",
+		"body": [
+			"os.pullEventRaw($0)"
+		],
+		"description": ""
+	},
+	"os.setComputerLabel()": {
+		"prefix": "os.setComputerLabel",
+		"body": [
+			"os.setComputerLabel($0)"
+		],
+		"description": ""
+	},
+	"os.computerLabel()": {
+		"prefix": "os.computerLabel",
+		"body": [
+			"os.computerLabel($0)"
+		],
+		"description": ""
+	},
+	"os.clock()": {
+		"prefix": "os.clock",
+		"body": [
+			"os.clock($0)"
+		],
+		"description": ""
+	},
+	"os.time()": {
+		"prefix": "os.time",
+		"body": [
+			"os.time($0)"
+		],
+		"description": ""
+	},
+	"os.getComputerLabel()": {
+		"prefix": "os.getComputerLabel",
+		"body": [
+			"os.getComputerLabel($0)"
+		],
+		"description": ""
+	},
+	"os.version()": {
+		"prefix": "os.version",
+		"body": [
+			"os.version($0)"
+		],
+		"description": ""
+	},
+	"os.cancelTimer()": {
+		"prefix": "os.cancelTimer",
+		"body": [
+			"os.cancelTimer($0)"
+		],
+		"description": ""
+	},
+	"os.startTimer()": {
+		"prefix": "os.startTimer",
+		"body": [
+			"os.startTimer($0)"
+		],
+		"description": ""
+	},
+	"os.run()": {
+		"prefix": "os.run",
+		"body": [
+			"os.run($0)"
+		],
+		"description": ""
+	},
+	"os.cancelAlarm()": {
+		"prefix": "os.cancelAlarm",
+		"body": [
+			"os.cancelAlarm($0)"
+		],
+		"description": ""
+	},
+	"os.queueEvent()": {
+		"prefix": "os.queueEvent",
+		"body": [
+			"os.queueEvent($0)"
+		],
+		"description": ""
+	},
+	"os.computerID()": {
+		"prefix": "os.computerID",
+		"body": [
+			"os.computerID($0)"
+		],
+		"description": ""
+	},
+	"os.getComputerID()": {
+		"prefix": "os.getComputerID",
+		"body": [
+			"os.getComputerID($0)"
+		],
+		"description": ""
+	},
+	"rawequal()": {
+		"prefix": "rawequal",
+		"body": [
+			"rawequal($0)"
+		],
+		"description": ""
+	},
+	"http.request()": {
+		"prefix": "http.request",
+		"body": [
+			"http.request($0)"
+		],
+		"description": ""
+	},
+	"http.get()": {
+		"prefix": "http.get",
+		"body": [
+			"http.get($0)"
+		],
+		"description": ""
+	},
+	"http.post()": {
+		"prefix": "http.post",
+		"body": [
+			"http.post($0)"
+		],
+		"description": ""
+	},
+	"http.checkURL()": {
+		"prefix": "http.checkURL",
+		"body": [
+			"http.checkURL($0)"
+		],
+		"description": ""
+	},
+	"setmetatable()": {
+		"prefix": "setmetatable",
+		"body": [
+			"setmetatable($0)"
+		],
+		"description": ""
+	},
+	"setfenv()": {
+		"prefix": "setfenv",
+		"body": [
+			"setfenv($0)"
+		],
+		"description": ""
+	},
+	"string.len()": {
+		"prefix": "string.len",
+		"body": [
+			"string.len($0)"
+		],
+		"description": ""
+	},
+	"string.find()": {
+		"prefix": "string.find",
+		"body": [
+			"string.find($0)"
+		],
+		"description": ""
+	},
+	"string.gmatch()": {
+		"prefix": "string.gmatch",
+		"body": [
+			"string.gmatch($0)"
+		],
+		"description": ""
+	},
+	"string.byte()": {
+		"prefix": "string.byte",
+		"body": [
+			"string.byte($0)"
+		],
+		"description": ""
+	},
+	"string.dump()": {
+		"prefix": "string.dump",
+		"body": [
+			"string.dump($0)"
+		],
+		"description": ""
+	},
+	"string.reverse()": {
+		"prefix": "string.reverse",
+		"body": [
+			"string.reverse($0)"
+		],
+		"description": ""
+	},
+	"string.upper()": {
+		"prefix": "string.upper",
+		"body": [
+			"string.upper($0)"
+		],
+		"description": ""
+	},
+	"string.format()": {
+		"prefix": "string.format",
+		"body": [
+			"string.format($0)"
+		],
+		"description": ""
+	},
+	"string.rep()": {
+		"prefix": "string.rep",
+		"body": [
+			"string.rep($0)"
+		],
+		"description": ""
+	},
+	"string.lower()": {
+		"prefix": "string.lower",
+		"body": [
+			"string.lower($0)"
+		],
+		"description": ""
+	},
+	"string.sub()": {
+		"prefix": "string.sub",
+		"body": [
+			"string.sub($0)"
+		],
+		"description": ""
+	},
+	"string.gsub()": {
+		"prefix": "string.gsub",
+		"body": [
+			"string.gsub($0)"
+		],
+		"description": ""
+	},
+	"string.match()": {
+		"prefix": "string.match",
+		"body": [
+			"string.match($0)"
+		],
+		"description": ""
+	},
+	"string.char()": {
+		"prefix": "string.char",
+		"body": [
+			"string.char($0)"
+		],
+		"description": ""
+	},
+	"write()": {
+		"prefix": "write",
+		"body": [
+			"write($0)"
+		],
+		"description": ""
+	},
+	"print()": {
+		"prefix": "print",
+		"body": [
+			"print($0)"
+		],
+		"description": ""
+	},
+	"help.completeTopic()": {
+		"prefix": "help.completeTopic",
+		"body": [
+			"help.completeTopic($0)"
+		],
+		"description": ""
+	},
+	"help.topics()": {
+		"prefix": "help.topics",
+		"body": [
+			"help.topics($0)"
+		],
+		"description": ""
+	},
+	"help.setPath()": {
+		"prefix": "help.setPath",
+		"body": [
+			"help.setPath($0)"
+		],
+		"description": ""
+	},
+	"help.lookup()": {
+		"prefix": "help.lookup",
+		"body": [
+			"help.lookup($0)"
+		],
+		"description": ""
+	},
+	"help.path()": {
+		"prefix": "help.path",
+		"body": [
+			"help.path($0)"
+		],
+		"description": ""
+	},
+	"io.input()": {
+		"prefix": "io.input",
+		"body": [
+			"io.input($0)"
+		],
+		"description": ""
+	},
+	"io.output()": {
+		"prefix": "io.output",
+		"body": [
+			"io.output($0)"
+		],
+		"description": ""
+	},
+	"io.type()": {
+		"prefix": "io.type",
+		"body": [
+			"io.type($0)"
+		],
+		"description": ""
+	},
+	"io.close()": {
+		"prefix": "io.close",
+		"body": [
+			"io.close($0)"
+		],
+		"description": ""
+	},
+	"io.write()": {
+		"prefix": "io.write",
+		"body": [
+			"io.write($0)"
+		],
+		"description": ""
+	},
+	"io.flush()": {
+		"prefix": "io.flush",
+		"body": [
+			"io.flush($0)"
+		],
+		"description": ""
+	},
+	"io.lines()": {
+		"prefix": "io.lines",
+		"body": [
+			"io.lines($0)"
+		],
+		"description": ""
+	},
+	"io.read()": {
+		"prefix": "io.read",
+		"body": [
+			"io.read($0)"
+		],
+		"description": ""
+	},
+	"io.open()": {
+		"prefix": "io.open",
+		"body": [
+			"io.open($0)"
+		],
+		"description": ""
+	},
+	"getmetatable()": {
+		"prefix": "getmetatable",
+		"body": [
+			"getmetatable($0)"
+		],
+		"description": ""
+	},
+	"table.sort()": {
+		"prefix": "table.sort",
+		"body": [
+			"table.sort($0)"
+		],
+		"description": ""
+	},
+	"table.pack()": {
+		"prefix": "table.pack",
+		"body": [
+			"table.pack($0)"
+		],
+		"description": ""
+	},
+	"table.foreachi()": {
+		"prefix": "table.foreachi",
+		"body": [
+			"table.foreachi($0)"
+		],
+		"description": ""
+	},
+	"table.foreach()": {
+		"prefix": "table.foreach",
+		"body": [
+			"table.foreach($0)"
+		],
+		"description": ""
+	},
+	"table.getn()": {
+		"prefix": "table.getn",
+		"body": [
+			"table.getn($0)"
+		],
+		"description": ""
+	},
+	"table.remove()": {
+		"prefix": "table.remove",
+		"body": [
+			"table.remove($0)"
+		],
+		"description": ""
+	},
+	"table.insert()": {
+		"prefix": "table.insert",
+		"body": [
+			"table.insert($0)"
+		],
+		"description": ""
+	},
+	"table.unpack()": {
+		"prefix": "table.unpack",
+		"body": [
+			"table.unpack($0)"
+		],
+		"description": ""
+	},
+	"table.maxn()": {
+		"prefix": "table.maxn",
+		"body": [
+			"table.maxn($0)"
+		],
+		"description": ""
+	},
+	"table.concat()": {
+		"prefix": "table.concat",
+		"body": [
+			"table.concat($0)"
+		],
+		"description": ""
+	},
+	"bit32.bxor()": {
+		"prefix": "bit32.bxor",
+		"body": [
+			"bit32.bxor($0)"
+		],
+		"description": ""
+	},
+	"bit32.bor()": {
+		"prefix": "bit32.bor",
+		"body": [
+			"bit32.bor($0)"
+		],
+		"description": ""
+	},
+	"bit32.lshift()": {
+		"prefix": "bit32.lshift",
+		"body": [
+			"bit32.lshift($0)"
+		],
+		"description": ""
+	},
+	"bit32.rshift()": {
+		"prefix": "bit32.rshift",
+		"body": [
+			"bit32.rshift($0)"
+		],
+		"description": ""
+	},
+	"bit32.arshift()": {
+		"prefix": "bit32.arshift",
+		"body": [
+			"bit32.arshift($0)"
+		],
+		"description": ""
+	},
+	"bit32.btest()": {
+		"prefix": "bit32.btest",
+		"body": [
+			"bit32.btest($0)"
+		],
+		"description": ""
+	},
+	"bit32.band()": {
+		"prefix": "bit32.band",
+		"body": [
+			"bit32.band($0)"
+		],
+		"description": ""
+	},
+	"bit32.bnot()": {
+		"prefix": "bit32.bnot",
+		"body": [
+			"bit32.bnot($0)"
+		],
+		"description": ""
+	},
+	"dofile()": {
+		"prefix": "dofile",
+		"body": [
+			"dofile($0)"
+		],
+		"description": ""
+	},
+	"parallel.waitForAll()": {
+		"prefix": "parallel.waitForAll",
+		"body": [
+			"parallel.waitForAll($0)"
+		],
+		"description": ""
+	},
+	"parallel.waitForAny()": {
+		"prefix": "parallel.waitForAny",
+		"body": [
+			"parallel.waitForAny($0)"
+		],
+		"description": ""
+	},
+	"settings.set()": {
+		"prefix": "settings.set",
+		"body": [
+			"settings.set($0)"
+		],
+		"description": ""
+	},
+	"settings.get()": {
+		"prefix": "settings.get",
+		"body": [
+			"settings.get($0)"
+		],
+		"description": ""
+	},
+	"settings.load()": {
+		"prefix": "settings.load",
+		"body": [
+			"settings.load($0)"
+		],
+		"description": ""
+	},
+	"settings.save()": {
+		"prefix": "settings.save",
+		"body": [
+			"settings.save($0)"
+		],
+		"description": ""
+	},
+	"settings.clear()": {
+		"prefix": "settings.clear",
+		"body": [
+			"settings.clear($0)"
+		],
+		"description": ""
+	},
+	"settings.unset()": {
+		"prefix": "settings.unset",
+		"body": [
+			"settings.unset($0)"
+		],
+		"description": ""
+	},
+	"settings.getNames()": {
+		"prefix": "settings.getNames",
+		"body": [
+			"settings.getNames($0)"
+		],
+		"description": ""
+	},
+	"textutils.slowWrite()": {
+		"prefix": "textutils.slowWrite",
+		"body": [
+			"textutils.slowWrite($0)"
+		],
+		"description": ""
+	},
+	"textutils.formatTime()": {
+		"prefix": "textutils.formatTime",
+		"body": [
+			"textutils.formatTime($0)"
+		],
+		"description": ""
+	},
+	"textutils.serialise()": {
+		"prefix": "textutils.serialise",
+		"body": [
+			"textutils.serialise($0)"
+		],
+		"description": ""
+	},
+	"textutils.urlEncode()": {
+		"prefix": "textutils.urlEncode",
+		"body": [
+			"textutils.urlEncode($0)"
+		],
+		"description": ""
+	},
+	"textutils.complete()": {
+		"prefix": "textutils.complete",
+		"body": [
+			"textutils.complete($0)"
+		],
+		"description": ""
+	},
+	"textutils.serialize()": {
+		"prefix": "textutils.serialize",
+		"body": [
+			"textutils.serialize($0)"
+		],
+		"description": ""
+	},
+	"textutils.serialiseJSON()": {
+		"prefix": "textutils.serialiseJSON",
+		"body": [
+			"textutils.serialiseJSON($0)"
+		],
+		"description": ""
+	},
+	"textutils.unserialize()": {
+		"prefix": "textutils.unserialize",
+		"body": [
+			"textutils.unserialize($0)"
+		],
+		"description": ""
+	},
+	"textutils.pagedTabulate()": {
+		"prefix": "textutils.pagedTabulate",
+		"body": [
+			"textutils.pagedTabulate($0)"
+		],
+		"description": ""
+	},
+	"textutils.tabulate()": {
+		"prefix": "textutils.tabulate",
+		"body": [
+			"textutils.tabulate($0)"
+		],
+		"description": ""
+	},
+	"textutils.slowPrint()": {
+		"prefix": "textutils.slowPrint",
+		"body": [
+			"textutils.slowPrint($0)"
+		],
+		"description": ""
+	},
+	"textutils.serializeJSON()": {
+		"prefix": "textutils.serializeJSON",
+		"body": [
+			"textutils.serializeJSON($0)"
+		],
+		"description": ""
+	},
+	"textutils.unserialise()": {
+		"prefix": "textutils.unserialise",
+		"body": [
+			"textutils.unserialise($0)"
+		],
+		"description": ""
+	},
+	"textutils.pagedPrint()": {
+		"prefix": "textutils.pagedPrint",
+		"body": [
+			"textutils.pagedPrint($0)"
+		],
+		"description": ""
+	},
+	"colors.combine()": {
+		"prefix": "colors.combine",
+		"body": [
+			"colors.combine($0)"
+		],
+		"description": ""
+	},
+	"colors.subtract()": {
+		"prefix": "colors.subtract",
+		"body": [
+			"colors.subtract($0)"
+		],
+		"description": ""
+	},
+	"colors.test()": {
+		"prefix": "colors.test",
+		"body": [
+			"colors.test($0)"
+		],
+		"description": ""
+	},
+	"term.setTextColor()": {
+		"prefix": "term.setTextColor",
+		"body": [
+			"term.setTextColor($0)"
+		],
+		"description": ""
+	},
+	"term.getTextColor()": {
+		"prefix": "term.getTextColor",
+		"body": [
+			"term.getTextColor($0)"
+		],
+		"description": ""
+	},
+	"term.setCursorBlink()": {
+		"prefix": "term.setCursorBlink",
+		"body": [
+			"term.setCursorBlink($0)"
+		],
+		"description": ""
+	},
+	"term.setCursorPos()": {
+		"prefix": "term.setCursorPos",
+		"body": [
+			"term.setCursorPos($0)"
+		],
+		"description": ""
+	},
+	"term.blit()": {
+		"prefix": "term.blit",
+		"body": [
+			"term.blit($0)"
+		],
+		"description": ""
+	},
+	"term.clear()": {
+		"prefix": "term.clear",
+		"body": [
+			"term.clear($0)"
+		],
+		"description": ""
+	},
+	"term.setBackgroundColour()": {
+		"prefix": "term.setBackgroundColour",
+		"body": [
+			"term.setBackgroundColour($0)"
+		],
+		"description": ""
+	},
+	"term.isColour()": {
+		"prefix": "term.isColour",
+		"body": [
+			"term.isColour($0)"
+		],
+		"description": ""
+	},
+	"term.getSize()": {
+		"prefix": "term.getSize",
+		"body": [
+			"term.getSize($0)"
+		],
+		"description": ""
+	},
+	"term.setTextColour()": {
+		"prefix": "term.setTextColour",
+		"body": [
+			"term.setTextColour($0)"
+		],
+		"description": ""
+	},
+	"term.native()": {
+		"prefix": "term.native",
+		"body": [
+			"term.native($0)"
+		],
+		"description": ""
+	},
+	"term.write()": {
+		"prefix": "term.write",
+		"body": [
+			"term.write($0)"
+		],
+		"description": ""
+	},
+	"term.clearLine()": {
+		"prefix": "term.clearLine",
+		"body": [
+			"term.clearLine($0)"
+		],
+		"description": ""
+	},
+	"term.getBackgroundColour()": {
+		"prefix": "term.getBackgroundColour",
+		"body": [
+			"term.getBackgroundColour($0)"
+		],
+		"description": ""
+	},
+	"term.getCursorPos()": {
+		"prefix": "term.getCursorPos",
+		"body": [
+			"term.getCursorPos($0)"
+		],
+		"description": ""
+	},
+	"term.setBackgroundColor()": {
+		"prefix": "term.setBackgroundColor",
+		"body": [
+			"term.setBackgroundColor($0)"
+		],
+		"description": ""
+	},
+	"term.getBackgroundColor()": {
+		"prefix": "term.getBackgroundColor",
+		"body": [
+			"term.getBackgroundColor($0)"
+		],
+		"description": ""
+	},
+	"term.isColor()": {
+		"prefix": "term.isColor",
+		"body": [
+			"term.isColor($0)"
+		],
+		"description": ""
+	},
+	"term.redirect()": {
+		"prefix": "term.redirect",
+		"body": [
+			"term.redirect($0)"
+		],
+		"description": ""
+	},
+	"term.getTextColour()": {
+		"prefix": "term.getTextColour",
+		"body": [
+			"term.getTextColour($0)"
+		],
+		"description": ""
+	},
+	"term.scroll()": {
+		"prefix": "term.scroll",
+		"body": [
+			"term.scroll($0)"
+		],
+		"description": ""
+	},
+	"term.current()": {
+		"prefix": "term.current",
+		"body": [
+			"term.current($0)"
+		],
+		"description": ""
+	},
+	"vector.new()": {
+		"prefix": "vector.new",
+		"body": [
+			"vector.new($0)"
+		],
+		"description": ""
+	},
+	"select()": {
+		"prefix": "select",
+		"body": [
+			"select($0)"
+		],
+		"description": ""
+	},
+	"paintutils.drawPixel()": {
+		"prefix": "paintutils.drawPixel",
+		"body": [
+			"paintutils.drawPixel($0)"
+		],
+		"description": ""
+	},
+	"paintutils.drawLine()": {
+		"prefix": "paintutils.drawLine",
+		"body": [
+			"paintutils.drawLine($0)"
+		],
+		"description": ""
+	},
+	"paintutils.drawImage()": {
+		"prefix": "paintutils.drawImage",
+		"body": [
+			"paintutils.drawImage($0)"
+		],
+		"description": ""
+	},
+	"paintutils.loadImage()": {
+		"prefix": "paintutils.loadImage",
+		"body": [
+			"paintutils.loadImage($0)"
+		],
+		"description": ""
+	},
+	"paintutils.drawBox()": {
+		"prefix": "paintutils.drawBox",
+		"body": [
+			"paintutils.drawBox($0)"
+		],
+		"description": ""
+	},
+	"paintutils.drawFilledBox()": {
+		"prefix": "paintutils.drawFilledBox",
+		"body": [
+			"paintutils.drawFilledBox($0)"
+		],
+		"description": ""
+	}
+}

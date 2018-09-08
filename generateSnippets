@@ -1,0 +1,62 @@
+local done = {}
+local results = {}
+
+local function iterateTable(tbl, prefix)
+	if (done[tbl]) then
+		return
+	end
+	done[tbl] = true
+	for i, v in pairs(tbl) do
+		if (type(v) == 'function') then
+			if (prefix) then
+				if (prefix ~= 'turtle') then
+					table.insert(results, prefix .. '.' .. i)
+				end
+			else
+				table.insert(results, i)
+			end
+		elseif (type(v) == 'table') then
+			if (prefix) then
+				iterateTable(v, prefix .. '.' .. i)
+			else
+				iterateTable(v, i)
+			end
+		end
+	end
+end
+
+local function iterateMetatables(tbl)
+	iterateTable(tbl)
+
+	pcall(
+		function()
+			while (tbl) do
+				tbl = getmetatbl(tbl).__index
+				iterateTable(tbl)
+			end
+		end
+	)
+end
+
+iterateMetatables(_G)
+
+f = fs.open('snippets.json', 'w')
+function writeSnippet(snippet)
+end
+f.write('{\n')
+for i = 1, #results do
+	local snippet = results[i]
+	f.write('\t"' .. snippet .. '()": {\n')
+	f.write('\t\t"prefix": "' .. snippet .. '",\n')
+	f.write('\t\t"body": [\n')
+	f.write('\t\t\t"' .. snippet .. '($0)"\n')
+	f.write('\t\t],\n')
+	f.write('\t\t"description": ""\n')
+	if (i == #results) then
+		f.write('\t}\n')
+	else
+		f.write('\t},\n')
+	end
+end
+f.write('}')
+f.close()
