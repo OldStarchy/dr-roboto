@@ -77,3 +77,22 @@ if (_G.fs == nil) then
 		end
 	}
 end
+
+function starts_with(str, start)
+	return str:sub(1, #start) == start
+end
+
+function ends_with(str, ending)
+	return ending == '' or str:sub(-(#ending)) == ending
+end
+
+--[[
+turtle.attackUp()
+
+turtle.craft(number: quantity)
+
+(returns:.*)\n(turtle\..*)\n(.*)
+"$2": {\n"prefix": "$2",\n"body": [\n\t"$2"\n],\n"description": "$3. $1"\n},\n\n
+
+
+]]
