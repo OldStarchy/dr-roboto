@@ -40,8 +40,10 @@ if (_G.require == nil) then
 
 		if (fs.exists(module)) then
 			_G.package.loaded[module] = dofile(module)
-		else
+		elseif (fs.exists(module .. '.lua')) then
 			_G.package.loaded[module] = dofile(module .. '.lua')
+		else
+			error('Could not load ' .. module)
 		end
 
 		currentlyLoading[module] = nil
