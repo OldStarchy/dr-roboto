@@ -23,7 +23,7 @@ function Lumberjack.harvestTree()
 
 	while (height > 0) do
 		turtle.down()
-		heght = height - 1
+		height = height - 1
 	end
 
 	turtle.back()
