@@ -77,11 +77,6 @@ end
 localArgs = {...}
 env = getfenv()
 if #localArgs > 0 then
-	for funcName, func in pairs(env) do
-		if funcName == localArgs[1] then
-			print(funcName)
-		end
-	end
 	if (type(env[localArgs[1]]) == 'function') then
 		local funcName = table.remove(localArgs, 1)
 		local oldDig = Nav.autoDig
