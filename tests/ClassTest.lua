@@ -151,7 +151,7 @@ test(
 
 				local B = Class(A)
 				function B:constructor()
-					self.super.constructor(self)
+					A.constructor(self)
 				end
 
 				local object = B.new()
@@ -184,7 +184,7 @@ test(
 				local B = Class(A)
 
 				function B:method()
-					self.super.method(self)
+					A.method(self)
 				end
 
 				local object = B.new()
@@ -205,89 +205,6 @@ test(
 				B.method()
 
 				t.assertEqual(methodCalled, true)
-			end,
-			['Super in parent'] = function(t)
-				local A = Class()
-
-				local methodCalled = false
-				local super = nil
-
-				function A:method()
-					methodCalled = true
-					super = self.super
-				end
-
-				local B = Class(A)
-
-				B:method()
-
-				t.assertEqual(methodCalled, true)
-				t.assertEqual(super, nil)
-			end,
-			['Super'] = function(t)
-				local A = Class()
-
-				function A:method()
-					t.assertEqual(self.super, nil)
-				end
-
-				local a = A.new()
-				a:method()
-			end,
-			['Super super'] = function(t)
-				local A = Class()
-				local B = Class(A)
-
-				function B:method()
-					t.assertEqual(self.super, A)
-					t.assertEqual(self.super.super, nil)
-				end
-
-				local b = B.new()
-				b:method()
-			end,
-			['Super super super'] = function(t)
-				local A = Class()
-				local B = Class(A)
-				local C = Class(B)
-
-				function C:method()
-					t.assertEqual(self.super, B)
-					t.assertEqual(self.super.super, A)
-					t.assertEqual(self.super.super.super, nil)
-				end
-
-				local c = C.new()
-				c:method()
-			end,
-			['Relative super'] = function(t)
-				local A = Class()
-
-				function A:method()
-					t.assertEqual(self.super, nil)
-				end
-
-				local B = Class(A)
-
-				local b = B.new()
-				b:method()
-			end,
-			['Method overridden'] = function(t)
-				local superCalled = false
-
-				local A = Class()
-				function A:method()
-					superCalled = true
-				end
-
-				local B = Class(A)
-				function B:method()
-				end
-
-				local b = B.new()
-				b:method()
-
-				t.assertEqual(superCalled, false)
 			end
 		}
 	}

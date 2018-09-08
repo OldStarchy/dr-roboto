@@ -15,12 +15,7 @@ local CreateClass = function(parent)
 						setmetatable(
 						{},
 						{
-							__index = function(object, key)
-								if (key == 'super') then
-									return parent
-								end
-								return class[key]
-							end
+							__index = class
 						}
 					)
 
