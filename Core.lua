@@ -11,7 +11,7 @@ Crafting = require 'Crafting/Crafting'
 ItemStorage = require 'Inventory/ItemStorage'
 
 Gps = require 'Navigation/Gps'
-Navigator = require 'Navigation/Navigator'
+Nav = (require 'Navigation/Navigator').new(turtle)
 Position = require 'Navigation/Position'
 
 Skill = require 'Skills/Skill'
