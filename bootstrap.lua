@@ -78,6 +78,34 @@ if (_G.fs == nil) then
 	}
 end
 
+function fs.listRecursive(directory)
+	local results = {}
+
+	local dirsToCheck = {directory}
+
+	while (#dirsToCheck > 0) do
+		local currentDirectory = table.remove(dirsToCheck)
+		local files = fs.list(currentDirectory)
+
+		for _, file in ipairs(files) do
+			if (fs.isDir(file)) then
+				if (file ~= '.' and file ~= '..') then
+					table.insert(dirsToCheck, currentDirectory .. '/' .. file)
+				end
+			else
+				table.insert(results, currentDirectory .. '/' .. file)
+			end
+		end
+	end
+
+	return results
+end
+
+function dofileSandbox(filename, env)
+	local status, result = assert(pcall(setfenv(assert(loadfile(filename)), env)))
+	return result
+end
+
 function starts_with(str, start)
 	return str:sub(1, #start) == start
 end
