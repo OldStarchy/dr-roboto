@@ -5,29 +5,81 @@ require 'Core'
 local col = require 'Util/TextColors'
 
 local function createTestParams()
-	return {
-		assertEqual = function(result, expected)
-			if (result == expected) then
-				return
-			end
-
-			error('Assert ==,\nExpected "' .. tostring(expected) .. '"\n but got "' .. tostring(result) .. '"', 2)
-		end,
-		assertNotEqual = function(result, unexpected)
-			if (result ~= unexpected) then
-				return
-			end
-
-			error('Assert ~=,\nGot "' .. tostring(result) .. '"', 2)
-		end,
-		assertThrows = function(method)
-			local success = pcall(method)
-
-			if (success) then
-				error('Assert throws')
-			end
+	local calls = {}
+	local t = {}
+	function t.assertEqual(result, expected)
+		if (result == expected) then
+			return
 		end
-	}
+
+		error('Assert ==,\nExpected "' .. tostring(expected) .. '"\n but got "' .. tostring(result) .. '"', 2)
+	end
+
+	function t.assertNotEqual(result, unexpected)
+		if (result ~= unexpected) then
+			return
+		end
+
+		error('Assert ~=,\nGot "' .. tostring(result) .. '"', 2)
+	end
+
+	function t.assertThrows(method)
+		local success = pcall(method)
+
+		if (success) then
+			error('Assert throws')
+		end
+	end
+
+	function t.assertCalled()
+		local id = {}
+
+		calls[id] = false
+
+		return function()
+			calls[id] = true
+		end
+	end
+
+	function t.assertCalledWith(...)
+		local id = {}
+		local expectedArgs = {...}
+
+		calls[id] = false
+
+		return function(...)
+			local args = {...}
+
+			if (#args ~= #expectedArgs) then
+				error('Incorrect call, got "' .. #args .. '" args but expected "' .. #expectedArgs .. '"')
+			end
+
+			for i = 1, #args do
+				if (args[i] ~= expectedArgs[i]) then
+					error(
+						'Incorrect call,\nExpected arg "' .. tostring(args[i]) .. '"\n but got arg "' .. tostring(expectedArgs[i]) .. '"',
+						2
+					)
+				end
+			end
+
+			calls[id] = true
+		end
+	end
+
+	function t.assertNotCalled()
+		return function()
+			error('Function should not have been called')
+		end
+	end
+
+	function t.finalize()
+		for _, call in pairs(calls) do
+			t.assertEqual(call, true)
+		end
+	end
+
+	return t
 end
 
 local function doTest(name, tester)
@@ -37,6 +89,7 @@ local function doTest(name, tester)
 		xpcall(
 		function()
 			tester(testParams)
+			testParams.finalize()
 		end,
 		function(err)
 			table.insert(errors, err)
