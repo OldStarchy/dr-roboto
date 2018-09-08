@@ -1,2 +1,4 @@
 --dofile 'bootstrap.lua'
 dofile 'test.lua'
+
+os.run(getfenv(), 'UserFunctions/UserFunctions.lua')

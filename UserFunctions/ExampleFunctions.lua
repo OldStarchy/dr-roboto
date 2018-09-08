@@ -1,0 +1,1 @@
+registerUserFunction(print, 'print', 'args...')
