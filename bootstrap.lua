@@ -65,8 +65,15 @@ if (_G.fs == nil) then
 			return dirs
 		end,
 		isDir = function(directory)
-			local files = fs.list(directory)
-			return #files > 0
+			local success, result =
+				pcall(
+				function()
+					local files = fs.list(directory)
+					return #files > 0
+				end
+			)
+
+			return success and result
 		end
 	}
 end
