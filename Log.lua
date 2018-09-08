@@ -6,7 +6,7 @@ Log.ERROR = 2
 
 function Log:constructor(name, level, output)
 	self.name = name
-	self.level = level
+	self.level = level or Log.INFO
 	self.output = output or print
 end
 
