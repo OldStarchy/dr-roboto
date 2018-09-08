@@ -1,3 +1,2 @@
-dofile 'bootstrap.lua'
-
+--dofile 'bootstrap.lua'
 dofile 'test.lua'
