@@ -1,72 +1,96 @@
-local Nav = Class()
+local Navigator = Class()
 
-function Nav:constructor(turtle)
-	local this = self
+--[[
+	A Location is an (x, y, z)
+	A Position is a Location with a facing direction
+]]
 
+--[[
+	A wrapper / extension to the movement functions defined for a turtle.
+	Initialized as "Nav" at the bottom of this file.
+]]
+function Navigator:constructor(turtle)
+	-- Public api stuff
+	-- Should the movement functions dig blocks that are in the way?
 	self.autoDig = true
+
+	-- Should the movement functions attack mobs that are in the way?
 	self.autoAttack = false
 
-	self.turtle = turtle
-	self.oldTurtle = {}
+	-- Should fuel automatically be consumed from the inventory if required?
+	-- TODO: autoFuel
+	self.autoFuel = true
 
-	local overrideFunctionsList = {
-		'forward',
-		'back',
-		'up',
-		'down',
-		'turnLeft',
-		'turnRight'
+
+	-- Private stuff
+	self._locationStack = {
+		Position.new()
 	}
 
-	for _, func in ipairs(overrideFunctionsList) do
-		self.oldTurtle[func] = self.turtle[func]
-		self.turtle[func] = function(...)
-			return this[func](this, unpack({...}))
-		end
-	end
+	self._location = Position.new()
+	self._turtle = turtle
+	self._oldTurtle = {}
 
-	local newFunctionsList = {
-		'setAutoDig',
-		'actuallyForward'
-	}
-
-	for _, func in ipairs(newFunctionsList) do
-		self.turtle[func] = function(...)
-			return this[func](this, unpack({...}))
-		end
-	end
+	self:_attach()
 end
 
-Nav.UNKNOWNJ_FAILURE = 0
+Navigator.UNKNOWN_FAILURE = 0
+Navigator.HIT_BLOCK = 1
+Navigator.HIT_MOB = 2
+Navigator.HIT_BEDROCK = 3
+Navigator.NO_FUEL = 4
 
-function Nav:move(direction, distance)
+
+-- Public
+
+--Saves the current location
+function Navigator:pushPosition()
+	table.insert(self._locationStack, self._location)
+end
+
+--Returns to the most previously saved location
+function Navigator:popPosition()
+	if (#self._locationStack > 0) then
+		local location = table.remove(self._locationStack, #self._locationStack)
+		return self:goto(location), location
+	end
+	return false
+end
+
+-- Moves the turtle
+-- direction can be 'up', 'down', 'forward', or 'back'
+function Navigator:move(direction, distance)
+	if (direction == 'back') then
+		return self:back(distance)
+	end
+
 	distance = type(distance) == 'number' and distance or 1
 
 	if (distance == 0) then
 		return true
 	end
 
-	if (turtle.getFuelLevel() == 0) then
-		return false, 4, 'There is a lack of fuel in the way'
+	if (self._turtle.getFuelLevel() == 0) then
+		return false, Navigator.NO_FUEL, 'There is a lack of fuel in the way'
 	end
 
 	local move, detect, dig, attack
 
 	if (direction == 'forward') then
-		move = self.oldTurtle.forward
-		detect = self.turtle.detect
-		dig = self.turtle.dig
-		attack = self.turtle.attack
+		move = function() return self:_forward() end
+		detect = self._turtle.detect
+		dig = self._turtle.dig
+		attack = self._turtle.attack
 	elseif (direction == 'up') then
-		move = self.oldTurtle.up
-		detect = self.turtle.detectUp
-		dig = self.turtle.digUp
-		attack = self.turtle.attackUp
+		move = function() return self:_up() end
+		detect = self._turtle.detectUp
+		dig = self._turtle.digUp
+		attack = self._turtle.attackUp
 	elseif (direction == 'down') then
-		move = self.oldTurtle.down
-		detect = self.turtle.detectDown
-		dig = self.turtle.digDown
-		attack = self.turtle.attackDown
+		move = function() return self:_down() end
+		detect = self._turtle.detectDown
+		dig = self._turtle.digDown
+		attack = self._turtle.attackDown
 	end
 
 	for i = 1, distance do
@@ -77,11 +101,11 @@ function Nav:move(direction, distance)
 						--TODO: autodig whitelist
 						if (not dig()) then
 							--bedrock
-							return false, 3, 'There is a bedrock in the way'
+							return false, Navigator.HIT_BEDROCK, 'There is a bedrock in the way'
 						end
 					end
 				else
-					return false, 1, 'There is a block in the way'
+					return false, Navigator.HIT_BLOCK, 'There is a block in the way'
 				end
 			end
 		else
@@ -93,7 +117,7 @@ function Nav:move(direction, distance)
 				while (attack()) do
 				end
 			else
-				return false, 2, 'There is a mob in the way'
+				return false, Navigator.HIT_MOB, 'There is a mob in the way'
 			end
 		end
 	end
@@ -101,20 +125,20 @@ function Nav:move(direction, distance)
 	return true
 end
 
-function Nav:forward(distance)
+function Navigator:forward(distance)
 	return self:move('forward', distance)
 end
-function Nav:up(distance)
+function Navigator:up(distance)
 	return self:move('up', distance)
 end
-function Nav:down(distance)
+function Navigator:down(distance)
 	return self:move('down', distance)
 end
-function Nav:back(distance)
+function Navigator:back(distance)
 	distance = ((type(distance) == 'number') and distance) or 1
 
 	for i = 1, distance do
-		if (not self.oldTurtle.back()) then
+		if (not self:_back()) then
 			return false, 0, "Couldn't move back and I don't know why"
 		end
 	end
@@ -122,31 +146,43 @@ function Nav:back(distance)
 	return true
 end
 
-function Nav:turnLeft(times)
+function Navigator:turn(direction)
+	direction = Position.wrapDirection(direction + 2) - 2
+
+	if (direction == 0) then
+		return true
+	elseif (direction > 0) then
+		return self:turnLeft(direction)
+	else
+		return self:turnRight(-direction)
+	end
+end
+
+function Navigator:turnLeft(times)
 	times = ((type(times) == 'number') and times) or 1
 
 	for i = 1, times do
-		self.oldTurtle.turnLeft()
+		self:_turnLeft()
 	end
 
 	return true
 end
 
-function Nav:turnRight(times)
+function Navigator:turnRight(times)
 	times = ((type(times) == 'number') and times) or 1
 
 	for i = 1, times do
-		self.oldTurtle.turnRight()
+		self:_turnRight()
 	end
 
 	return true
 end
 
-function Nav:setLocation(location)
-	self.location = location
+function Navigator:setPosition(location)
+	self._location = location
 end
 
-function Nav:orientFromGps(gps)
+function Navigator:orientFromGps(gps)
 	local location = gps.getLocation()
 
 	if (location == false) then
@@ -197,7 +233,7 @@ function Nav:orientFromGps(gps)
 
 	newLocation:setDirection(direction)
 
-	Nav:setPosition(newLocation)
+	self:setPosition(newLocation)
 
 	if (self:moveBack()) then
 		result = location
@@ -208,4 +244,191 @@ function Nav:orientFromGps(gps)
 	end
 end
 
-return Nav
+
+function Navigator:getX() return self.position.x end
+function Navigator:getY() return self.position.y end
+function Navigator:getZ() return self.position.z end
+function Navigator:getDirection() return self.position.direction end
+
+function Navigator:face( direction )
+  if type(direction) ~= 'number' then
+    error('Invalid argument passed to Nav:face')
+  end
+
+  return self:turn(self.position:getDirectionOffset(direction))
+end
+
+-- Go to absolute x coordinate
+function Navigator:gotoX(x)
+	local dir = self.position.direction
+	local delta = x - self.position.x
+
+	if (delta == 0) then
+		return true
+	end
+
+	if (delta > 0) then
+		self:face(Position.EAST)
+			return self:forward(delta)
+	else
+		self:face(Position.WEST)
+		return self:forward(-delta)
+	end
+end
+
+function Navigator:gotoY(y)
+	local delta = y - self.position.y
+
+	if (delta == 0) then
+		return true
+	end
+
+	if (delta > 0) then
+			return self:up(delta)
+	else
+		return self:down(-delta)
+	end
+end
+
+function Navigator:gotoZ(z)
+	local dir = self.position.direction
+	local delta = z - self.position.z
+
+	if (delta == 0) then
+		return true
+	end
+
+	if (delta > 0) then
+		self:face(Position.SOUTH)
+			return self:forward(delta)
+	else
+		self:face(Position.NORTH)
+		return self:forward(-delta)
+	end
+end
+
+--[[ usage:
+goto(y)
+goto(x, z)
+goto(x, y, z) 
+goto({x, y, z})
+goto({x = x, y = y, z = z})
+]]
+function Navigator:goto(x, y, z)
+	if type(z) == "nil" then
+		if type(y) == "nil" then
+			if type(x) == "nil" then
+				return false
+			else
+				if type(x) == "table" then
+					if #x < 3 then
+						return
+					else
+						x, y, z = x.x or x[1], x.y or x[2], x.z or x[3]
+					end
+				else
+					return self:gotoY(x)
+				end
+			end
+		else
+		--x and y but not z, so assume they meen x, z
+		z = y
+		y = self.position.y
+		end
+	end
+
+	self:gotoX(x)
+	self:gotoZ(z)
+	self:gotoY(y)
+	return x == self.position.x and y == self.position.y and z == self.position.z
+end
+
+-- PRIVATE
+
+function Navigator:_attach()
+	local this = self
+	local overrideFunctionsList = {
+		'forward',
+		'back',
+		'up',
+		'down',
+		'turnLeft',
+		'turnRight'
+	}
+
+	for _, func in ipairs(overrideFunctionsList) do
+		self._oldTurtle[func] = self._turtle[func]
+		self._turtle[func] = function(...)
+			return this[func](this, unpack({...}))
+		end
+	end
+
+	local newFunctionsList = {
+		'setAutoDig',
+		'actuallyForward'
+	}
+
+	for _, func in ipairs(newFunctionsList) do
+		self._turtle[func] = function(...)
+			return this[func](this, unpack({...}))
+		end
+	end
+end
+
+function Navigator:_forward()
+	local result = {self._oldTurtle.forward()}
+	if (result[1]) then
+		local offset = Position.offset[self.position.direction];
+		self.position:add(offset)
+	end
+
+	return unpack(result)
+end
+
+function Navigator:_back()
+	local result = {self._oldTurtle.back()}
+	if (result[1]) then
+		local offset = Position.offset[self.position.direction];
+		self.position:sub(offset)
+	end
+
+	return unpack(result)
+end
+
+function Navigator:_up()
+	local result = {self._oldTurtle.up()}
+
+	if (result[1]) then
+		self.position:add({y = 1})
+	end
+
+	return unpack(result)
+end
+
+function Navigator:_down()
+	local result = {self._oldTurtle.down()}
+
+	if (result[1]) then
+		self.position:add({y = -1})
+	end
+
+	return unpack(result)
+end
+
+function Navigator:_turnRight()
+	local result = {self._oldTurtle.turnRight()}
+
+	self.position:rotate(-1)
+
+	return unpack(result)
+end
+
+function Navigator:_turnLeft()
+	local result = {self._oldTurtle.turnLeft()}
+
+	self.position:rotate(1)
+
+	return unpack(result)
+end
+
+Nav = Navigator.new(turtle)
