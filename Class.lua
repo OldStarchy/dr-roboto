@@ -1,4 +1,4 @@
-local CreateClass = function(parent)
+function Class(parent)
 	local class = {}
 
 	function class.constructor(...)
@@ -33,5 +33,3 @@ local CreateClass = function(parent)
 	setmetatable(class, classType)
 	return class
 end
-
-return CreateClass

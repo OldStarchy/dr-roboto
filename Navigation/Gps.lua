@@ -1,4 +1,4 @@
-local Gps = {}
+Gps = {}
 
 function Gps.getPosition()
 	--Turtle api to get position
@@ -6,5 +6,3 @@ function Gps.getPosition()
 	-- Unknown direction
 	return Position.new(x, y, z, nil)
 end
-
-return Gps

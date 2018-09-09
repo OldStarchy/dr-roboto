@@ -1,4 +1,4 @@
-local RecipeBook = Class()
+RecipeBook = Class()
 
 function RecipeBook:constructor()
 	self.recipes = {}
@@ -23,5 +23,3 @@ function RecipeBook:findByName(name)
 
 	return recipes
 end
-
-return RecipeBook

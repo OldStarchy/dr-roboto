@@ -1,6 +1,6 @@
-local Recipie = Class()
+Recipe = Class()
 
-function Recipie.constructor(self, name, grid, produces)
+function Recipe.constructor(self, name, grid, produces)
 	self.name = name
 	self.grid = grid
 	self.produces = produces
@@ -8,5 +8,3 @@ function Recipie.constructor(self, name, grid, produces)
 	--TODO: Tally total items required
 	-- self.items =
 end
-
-return Recipie

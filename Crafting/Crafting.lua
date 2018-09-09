@@ -1,4 +1,4 @@
-local Crafting = {}
+Crafting = {}
 
 Crafting.buildCraftGraph = function(item, amount)
 	local recipie = Recipes[item]
@@ -21,5 +21,3 @@ end
 if (Debug ~= nil) then
 	print('Debug')
 end
-
-return Crafting

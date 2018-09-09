@@ -1,4 +1,4 @@
-local TreeFarmSkill = Class(Skill)
+TreeFarmSkill = Class(Skill)
 
 function TreeFarmSkill:performNextAction()
 	if (logCount >= requiredLogCount) then
@@ -24,5 +24,3 @@ function TreeFarmSkill:canHandleTask(task)
 
 	return false
 end
-
-return TreeFarmSkill

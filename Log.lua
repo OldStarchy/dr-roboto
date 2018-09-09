@@ -1,4 +1,4 @@
-local Log = Class()
+Log = Class()
 
 Log.INFO = 0
 Log.WARNING = 1
@@ -49,5 +49,3 @@ function Log:error(...)
 end
 
 Log.default = Log.new('', Log.INFO)
-
-return Log

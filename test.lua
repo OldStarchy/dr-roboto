@@ -279,15 +279,17 @@ local function findTests(directory)
 
 	while (#dirsToCheck > 0) do
 		local currentDirectory = table.remove(dirsToCheck)
-		local files = fs.list(currentDirectory)
+		if (fs.isDir(currentDirectory)) then
+			local files = fs.list(currentDirectory)
 
-		for _, file in ipairs(files) do
-			if (fs.isDir(file)) then
-				if (file ~= '.' and file ~= '..') then
-					table.insert(dirsToCheck, currentDirectory .. '/' .. file)
+			for _, file in ipairs(files) do
+				if (fs.isDir(file)) then
+					if (file ~= '.' and file ~= '..') then
+						table.insert(dirsToCheck, currentDirectory .. '/' .. file)
+					end
+				elseif (file:sub(-(#'Test.lua')) == 'Test.lua') then
+					table.insert(results, currentDirectory .. '/' .. file)
 				end
-			elseif (file:sub(-(#'Test.lua')) == 'Test.lua') then
-				table.insert(results, currentDirectory .. '/' .. file)
 			end
 		end
 	end

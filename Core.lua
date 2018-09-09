@@ -1,20 +1,20 @@
-Class = require 'Class'
+require 'Class'
 
-Log = require 'Log'
+require 'Log'
 
-Recipe = require 'Crafting/Recipe'
-RecipeBook = require 'Crafting/RecipeBook'
-StandardRecipes = require 'Crafting/StandardRecipes'
+require 'Crafting/Recipe'
+require 'Crafting/RecipeBook'
+require 'Crafting/StandardRecipes'
 
-Crafting = require 'Crafting/Crafting'
+require 'Crafting/Crafting'
 
-ItemStorage = require 'Inventory/ItemStorage'
+require 'Inventory/ItemStorage'
 
-Gps = require 'Navigation/Gps'
-Nav = (require 'Navigation/Navigator').new(turtle)
-Position = require 'Navigation/Position'
+require 'Navigation/Position'
+require 'Navigation/Gps'
+require 'Navigation/Navigator'
 
-Skill = require 'Skills/Skill'
-GatherSkill = require 'Skills/TreeFarmSkill'
+require 'Skills/Skill'
+require 'Skills/TreeFarmSkill'
 
-SkillSet = require 'Skills/SkillSet'
+require 'Skills/SkillSet'
