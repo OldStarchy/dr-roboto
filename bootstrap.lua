@@ -49,6 +49,27 @@ if (fs.listRecursive == nil) then
 	function ends_with(str, ending)
 		return ending == '' or str:sub(-(#ending)) == ending
 	end
+
+	function printStackTrace(maxDepth)
+		maxDepth = ((type(maxDepth) == 'number') and maxDepth) or 5
+		local stop = false
+		local i = 4
+		while not stop and i < (maxDepth + 4) do
+			xpcall(
+				function()
+					error('', i)
+				end,
+				function(err)
+					if (err == '') then
+						stop = true
+					else
+						print(err)
+					end
+				end
+			)
+			i = i + 1
+		end
+	end
 end
 
 --[[
