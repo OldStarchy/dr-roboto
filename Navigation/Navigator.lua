@@ -12,7 +12,7 @@ local Navigator = Class()
 function Navigator:constructor(turtle)
 	-- Public api stuff
 	-- Should the movement functions dig blocks that are in the way?
-	self.autoDig = true
+	self.autoDig = false
 
 	-- Should the movement functions attack mobs that are in the way?
 	self.autoAttack = false
@@ -27,7 +27,7 @@ function Navigator:constructor(turtle)
 		Position.new()
 	}
 
-	self._location = Position.new()
+	self._position = Position.new()
 	self._turtle = turtle
 	self._oldTurtle = {}
 
@@ -245,23 +245,23 @@ function Navigator:orientFromGps(gps)
 end
 
 
-function Navigator:getX() return self.position.x end
-function Navigator:getY() return self.position.y end
-function Navigator:getZ() return self.position.z end
-function Navigator:getDirection() return self.position.direction end
+function Navigator:getX() return self._position.x end
+function Navigator:getY() return self._position.y end
+function Navigator:getZ() return self._position.z end
+function Navigator:getDirection() return self._position.direction end
 
 function Navigator:face( direction )
   if type(direction) ~= 'number' then
     error('Invalid argument passed to Nav:face')
   end
 
-  return self:turn(self.position:getDirectionOffset(direction))
+  return self:turn(self._position:getDirectionOffset(direction))
 end
 
 -- Go to absolute x coordinate
 function Navigator:gotoX(x)
-	local dir = self.position.direction
-	local delta = x - self.position.x
+	local dir = self._position.direction
+	local delta = x - self._position.x
 
 	if (delta == 0) then
 		return true
@@ -277,7 +277,7 @@ function Navigator:gotoX(x)
 end
 
 function Navigator:gotoY(y)
-	local delta = y - self.position.y
+	local delta = y - self._position.y
 
 	if (delta == 0) then
 		return true
@@ -291,8 +291,8 @@ function Navigator:gotoY(y)
 end
 
 function Navigator:gotoZ(z)
-	local dir = self.position.direction
-	local delta = z - self.position.z
+	local dir = self._position.direction
+	local delta = z - self._position.z
 
 	if (delta == 0) then
 		return true
@@ -333,14 +333,14 @@ function Navigator:goto(x, y, z)
 		else
 		--x and y but not z, so assume they meen x, z
 		z = y
-		y = self.position.y
+		y = self._position.y
 		end
 	end
 
 	self:gotoX(x)
 	self:gotoZ(z)
 	self:gotoY(y)
-	return x == self.position.x and y == self.position.y and z == self.position.z
+	return x == self._position.x and y == self._position.y and z == self._position.z
 end
 
 -- PRIVATE
@@ -378,8 +378,8 @@ end
 function Navigator:_forward()
 	local result = {self._oldTurtle.forward()}
 	if (result[1]) then
-		local offset = Position.offset[self.position.direction];
-		self.position:add(offset)
+		local offset = Position.offsets[self._position.direction];
+		self._position:add(offset)
 	end
 
 	return unpack(result)
@@ -388,8 +388,8 @@ end
 function Navigator:_back()
 	local result = {self._oldTurtle.back()}
 	if (result[1]) then
-		local offset = Position.offset[self.position.direction];
-		self.position:sub(offset)
+		local offset = Position.offsets[self._position.direction];
+		self._position:sub(offset)
 	end
 
 	return unpack(result)
@@ -399,7 +399,7 @@ function Navigator:_up()
 	local result = {self._oldTurtle.up()}
 
 	if (result[1]) then
-		self.position:add({y = 1})
+		self._position:add({y = 1})
 	end
 
 	return unpack(result)
@@ -409,7 +409,7 @@ function Navigator:_down()
 	local result = {self._oldTurtle.down()}
 
 	if (result[1]) then
-		self.position:add({y = -1})
+		self._position:add({y = -1})
 	end
 
 	return unpack(result)
@@ -418,7 +418,7 @@ end
 function Navigator:_turnRight()
 	local result = {self._oldTurtle.turnRight()}
 
-	self.position:rotate(-1)
+	self._position:rotate(-1)
 
 	return unpack(result)
 end
@@ -426,7 +426,7 @@ end
 function Navigator:_turnLeft()
 	local result = {self._oldTurtle.turnLeft()}
 
-	self.position:rotate(1)
+	self._position:rotate(1)
 
 	return unpack(result)
 end

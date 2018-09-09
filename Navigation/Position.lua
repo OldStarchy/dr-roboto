@@ -24,6 +24,9 @@ function Position:constructor(x, y, z, direction)
 end
 
 function Position:rotate(direction)
+	if (self.direction == nil) then
+		return
+	end
 	self.direction = Position.wrapDirection(self.direction + direction)
 end
 
@@ -38,7 +41,7 @@ function Position:add(deltas)
 		self.z = self.z + deltas.z
 	end
 
-	if (type(deltas.direction)) then
+	if (type(deltas.direction) == 'number') then
 		self:rotate(direction)
 	end
 end
@@ -54,11 +57,14 @@ function Position:sub(deltas)
 		self.z = self.z - deltas.z
 	end
 
-	if (type(deltas.direction)) then
+	if (type(deltas.direction) == 'number') then
 		self:rotate(-direction)
 	end
 end
 
 function Position:getDirectionOffset(direction)
+	if (self.direction == nil) then
+		return 0
+	end
 	return Position.wrapDirection(direction - self.direction)
 end
