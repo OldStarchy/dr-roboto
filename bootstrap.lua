@@ -1,5 +1,8 @@
 if (_G.fs == nil) then
 	dofile '_polyfills/fs.lua'
+	if (_G.turtle == nil) then
+		dofile '_polyfills/turtle.lua'
+	end
 end
 
 if (os.loadAPI == nil) then
