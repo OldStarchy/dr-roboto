@@ -1,6 +1,6 @@
 Recipe = Class()
 
-function Recipe.constructor(self, name, grid, produces)
+function Recipe:constructor(name, grid, produces)
 	self.name = name
 	self.grid = grid
 	self.produces = produces
