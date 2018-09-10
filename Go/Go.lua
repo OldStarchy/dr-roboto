@@ -165,6 +165,7 @@ end
 function Go:printSourceMap(action)
 	local i = 0
 	local width = term.getSize()
+	local blankLine = string.rep(' ', width)
 
 	local lines = 0
 	local printedPointer = false
@@ -177,7 +178,7 @@ function Go:printSourceMap(action)
 				string.rep(' ', action.sourceMap.start - i) .. '^' .. string.rep(' ', width - (action.sourceMap.start - i) + 1)
 			)
 		else
-			print()
+			print(blankLine)
 		end
 		i = i + width
 	end
