@@ -135,7 +135,7 @@ _G.include = function(module, ...)
 
 	if (chunk ~= nil) then
 		setfenv(chunk, getfenv(2))
-		chunk(...)
+		return chunk(...)
 	else
 		error(err, 2)
 	end
