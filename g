@@ -1,4 +1,4 @@
-go = require 'Go/_main'
+go = include 'Go/_main'
 local fArgs = {...}
 
 -- seperatorCharacter is used as a marker to show where arguments were separated, this allows spaces in single quote strings, but only one space.
