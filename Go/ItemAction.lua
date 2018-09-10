@@ -5,6 +5,7 @@ function ItemAction.GetFactory(func)
 	end
 end
 function ItemAction:constructor(itemFunc)
+	Action.constructor(self)
 	self.itemFunc = itemFunc
 	self.amount = nil
 end

@@ -1,7 +1,7 @@
 go:alias({'f', 'forward', 'forwards'}, MoveAction.GetFactory(turtle.forward))
 go:alias({'b', 'back', 'backward', 'backwards'}, MoveAction.GetFactory(turtle.back))
-go:alias({'l', 'left'}, Action.GetFactory(turtle.turnLeft))
-go:alias({'r', 'right'}, Action.GetFactory(turtle.turnRight))
+go:alias({'l', 'left'}, FunctionAction.GetFactory(turtle.turnLeft))
+go:alias({'r', 'right'}, FunctionAction.GetFactory(turtle.turnRight))
 go:alias({'u', 'up'}, MoveAction.GetFactory(turtle.up))
 go:alias({'d', 'down'}, MoveAction.GetFactory(turtle.down))
 
@@ -9,9 +9,9 @@ go:alias({'D', 'dig'}, AttachmentAction.GetFactory(turtle.dig))
 go:alias({'D^', 'digUp'}, AttachmentAction.GetFactory(turtle.digUp))
 go:alias({'Dv', 'digDown'}, AttachmentAction.GetFactory(turtle.digDown))
 
-go:alias({'P', 'place'}, Action.GetFactory(turtle.place))
-go:alias({'P^', 'placeUp'}, Action.GetFactory(turtle.placeUp))
-go:alias({'Pv', 'placeDown'}, Action.GetFactory(turtle.placeDown))
+go:alias({'P', 'place'}, FunctionAction.GetFactory(turtle.place))
+go:alias({'P^', 'placeUp'}, FunctionAction.GetFactory(turtle.placeUp))
+go:alias({'Pv', 'placeDown'}, FunctionAction.GetFactory(turtle.placeDown))
 
 go:alias({'s', 'suck'}, ItemAction.GetFactory(turtle.suck))
 go:alias({'s^', 'suckUp'}, ItemAction.GetFactory(turtle.suckUp))
@@ -24,7 +24,7 @@ go:alias({'Sv', 'dropDown'}, ItemAction.GetFactory(turtle.dropDown))
 go:alias(
 	{'m', 'mood'},
 	function()
-		return {
+		local action = {
 			mode = false,
 			run = function(self, invoc)
 				if (self.mode == 'angry') then
@@ -53,13 +53,16 @@ go:alias(
 				return false
 			end
 		}
+		Action.constructor(action)
+		return action
 	end
 )
 
+-- Prints a string, but currently doesn't work well with the new running sourceMap printing
 go:alias(
 	{'L'},
 	function()
-		return {
+		local action = {
 			str = nil,
 			run = function(self, invoc)
 				local str =
@@ -84,13 +87,15 @@ go:alias(
 				return false
 			end
 		}
+		Action.constructor(action)
+		return action
 	end
 )
 
 go:alias(
 	{'w', 'wait'},
 	function()
-		return {
+		local action = {
 			time = 1,
 			run = function(self, invoc)
 				sleep(self.time)
@@ -105,13 +110,15 @@ go:alias(
 				return false
 			end
 		}
+		Action.constructor(action)
+		return action
 	end
 )
 
 go:alias(
 	{'#', 'select'},
 	function()
-		return {
+		local action = {
 			run = function(self, invoc)
 				local s = self.index
 
@@ -158,6 +165,8 @@ go:alias(
 				return false
 			end
 		}
+		Action.constructor(action)
+		return action
 	end
 )
 go:alias({'F', 'find'}, FindAction.GetFactory(turtle.inspect))
@@ -169,7 +178,7 @@ go:alias({'av', 'attackDown'}, AttachmentAction.GetFactory(turtle.attackDown))
 go:alias(
 	{'help'},
 	function()
-		return {
+		local action = {
 			run = function(self)
 				local helpText =
 					[[g is for go
@@ -219,5 +228,7 @@ go:alias(
 				return ActionResult.new(self, true)
 			end
 		}
+		Action.constructor(action)
+		return action
 	end
 )

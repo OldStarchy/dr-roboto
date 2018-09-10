@@ -4,34 +4,22 @@ Action.RETRY = 'retry'
 Action.IGNORE = 'ignore'
 Action.ABORT = 'abort'
 
-function Action.GetFactory(func)
-	return function()
-		return Action.new(
-			function(optional)
-				local success, m = func()
-				if not success and not optional then
-					while not success do
-						success, m = func()
-						sleep(0)
-					end
-					return success, m
-				end
-				return success, m
-			end
-		)
-	end
+function Action.GetFactory()
+	error('Do not use Action directly', 2)
 end
 
-function Action:constructor(func)
-	-- The function that this action object represents executing
-	self.func = func
-
+function Action:constructor()
 	self.times = 1
 	self.optional = false
 	self.type = 'abstract action'
 	self.invert = false
 	self.arguments = nil
 	self.count = 1
+	self.sourceMap = {
+		start = nil,
+		en = nil
+	}
+	self.owner = nil
 end
 
 function Action:innerFunction()
@@ -45,7 +33,7 @@ function Action:invoke(invoc)
 end
 
 function Action:call(invoc)
-	return ActionResult.new(self, self.func(invoc.optional))
+	error('Do not use Action directly', 4)
 end
 
 function Action:run(invoc)

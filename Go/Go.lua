@@ -39,20 +39,37 @@ function Go:alias(a, factory)
 	self.actions[a] = factory
 end
 
-function Go:addToken(t, isMod)
+function Go:addToken(t, isMod, start, ed)
+	if (type(start) ~= 'number') then
+		start = self.head - 1
+	end
+	if (type(ed) ~= 'number') then
+		ed = self.head - 1
+	end
+
 	if (type(t) == 'table' and not isMod) then
-		table.insert(self.tokens, t)
-		return
+		-- I don't think there was ever at table token anyway
+		error("Tokens can't be tables anymore")
 	end
 
 	if type(t) == 'function' and not isMod then
-		table.insert(self.tokens, t())
+		local action = t()
+		action.sourceMap.start = start
+		action.sourceMap.ed = ed
+		action.owner = self
+		table.insert(self.tokens, action)
 		return
 	end
 
 	if type(t) == 'string' and not isMod then
 		if t == '(' then
-			table.insert(self.tokens, t)
+			table.insert(
+				self.tokens,
+				{
+					start = start,
+					char = '('
+				}
+			)
 			self.parenthesesDepth = self.parenthesesDepth + 1
 			return
 		end
@@ -61,12 +78,16 @@ function Go:addToken(t, isMod)
 			self.parenthesesDepth = self.parenthesesDepth - 1
 			local i
 			for i = #self.tokens, 1, -1 do
-				if self.tokens[i] == '(' then
+				if self.tokens[i].char and self.tokens[i].char == '(' then
 					local seq = {}
 					while #self.tokens > i do
 						table.insert(seq, table.remove(self.tokens, i + 1))
 					end
+					local startTok = self.tokens[i]
 					self.tokens[i] = Sequence.new(seq)
+					self.tokens[i].owner = self
+					self.tokens[i].sourceMap.start = startTok.start
+					self.tokens[i].sourceMap.ed = ed
 					return
 				end
 			end
@@ -84,9 +105,12 @@ function Go:addToken(t, isMod)
 
 	if not self.tokens[#self.tokens]:mod(t) then
 		self:inputError('Invalid modifier')
+	else
+		self.tokens[#self.tokens].sourceMap.ed = ed
 	end
 end
 
+--Reads the next character, number, or string from the input
 function Go:take()
 	local char = self.inp:sub(self.head, self.head)
 	if (char == self.speratorCharacter) then
@@ -138,6 +162,29 @@ function Go:take()
 	return true
 end
 
+function Go:printSourceMap(action)
+	local i = 0
+	local width = term.getSize()
+
+	local lines = 0
+	local printedPointer = false
+	while (i < #self.inputClean) do
+		lines = lines + 1
+		print(self.inputClean:sub(i + 1, i + width))
+		if (not printedPointer and action.sourceMap.start - i < width) then
+			printedPointer = true
+			print(
+				string.rep(' ', action.sourceMap.start - i) .. '^' .. string.rep(' ', width - (action.sourceMap.start - i) + 1)
+			)
+		else
+			print()
+		end
+		i = i + width
+	end
+
+	local x, y = term.getCursorPos()
+	term.setCursorPos(1, y - (lines * 2))
+end
 function Go:saveCommandToHistory(input)
 	--TODO: save go commands to history
 end
@@ -145,6 +192,7 @@ end
 function Go:execute(input)
 	self:saveCommandToHistory(input)
 	self.inp = input
+	self.inputClean = input:gsub('%%', ' ')
 	self.lim = #input
 
 	--Collect all the actionKeys (f, forward, b, back etc) defined
@@ -173,9 +221,19 @@ function Go:execute(input)
 	local all = self.tokens
 	if (#all > 1) then
 		all = Sequence.new(all)
+		all.sourceMap.start = 1
+		all.sourceMap.ed = #self.inp
 	else
 		all = self.tokens[1]
 	end
 
+	all.owner = self
+
 	all:run(ActionInvocation.new())
+	if (#self.tokens > 1) then
+		for i = 1, math.ceil(#self.inputClean / term.getSize()) do
+			print()
+			print()
+		end
+	end
 end

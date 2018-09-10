@@ -12,6 +12,7 @@ include 'Go/ActionResult'
 
 --[[ Actions ]]
 include 'Go/Sequence'
+include 'Go/FunctionAction'
 include 'Go/MoveAction'
 include 'Go/FindAction'
 include 'Go/ItemAction'

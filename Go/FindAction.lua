@@ -5,6 +5,7 @@ function FindAction.GetFactory(func)
 	end
 end
 function FindAction:constructor(findFunc)
+	Action.constructor(self)
 	self.findFunc = findFunc
 	self.findstr = nil
 	self.metadata = nil

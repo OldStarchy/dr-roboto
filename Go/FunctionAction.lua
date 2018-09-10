@@ -1,7 +1,8 @@
-MoveAction = Class(FunctionAction)
-function MoveAction.GetFactory(func)
+FunctionAction = Class(Action)
+
+function FunctionAction.GetFactory(func)
 	return function()
-		return MoveAction.new(
+		return FunctionAction.new(
 			function(optional)
 				local success, m = func()
 				if not success and not optional then
@@ -9,38 +10,36 @@ function MoveAction.GetFactory(func)
 						success, m = func()
 						sleep(0)
 					end
+					return success, m
 				end
 				return success, m
 			end
 		)
 	end
 end
-function MoveAction:constructor(func)
-	FunctionAction.constructor(self, func)
-	self.autoDigAtack = false
+
+function FunctionAction:constructor(func)
+	Action.constructor(self)
+	-- The function that this action object represents executing
+	self.func = func
 end
 
-function MoveAction:run(invoc)
+function FunctionAction:singleInvoke()
+	return self.innerFunction(table.unpack(self.arguments)) or true
+end
+
+function FunctionAction:call(invoc)
+	return ActionResult.new(self, self.func(invoc.optional))
+end
+
+function FunctionAction:run(invoc)
 	local optional = invoc.optional or self.optional
 	local success
 	local i = 1
 	local r
 
 	while self.count == -1 or i <= self.count do
-		local autoDig = Nav.autoDig
-		local autoAttack = Nav.autoAttack
-
-		if (optional) then
-			Nav.autoDig = false
-		end
-		if (self.autoDigAttack) then
-			Nav.autoDig = true
-			Nav.autoAttack = true
-		end
 		r = self:call(ActionInvocation.new(optional, invoc.previousResult))
-		Nav.autoDig = autoDig
-		Nav.autoAttack = autoAttack
-
 		success = r.success ~= self.invert
 
 		if not success then
@@ -57,18 +56,4 @@ function MoveAction:run(invoc)
 	end
 
 	return ActionResult.new(self, true ~= self.invert, r.data)
-end
-function MoveAction:mod(mod)
-	if (FunctionAction.mod(self, mod)) then
-		return true
-	end
-
-	if type(mod) == 'string' then
-		if mod == '!' then
-			self.autoDigAttack = true
-			return true
-		end
-	end
-
-	return false
 end

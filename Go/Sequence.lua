@@ -5,6 +5,7 @@ function Sequence.GetFactory(actions)
 	end
 end
 function Sequence:constructor(actions)
+	Action.constructor(self)
 	self.count = 1
 	self.optional = false
 	self.retry = false
@@ -21,6 +22,7 @@ function Sequence:run(invoc)
 		r = invoc.previousResult
 
 		for _, v in ipairs(self.seq) do
+			self.owner:printSourceMap(v)
 			r = v:run(ActionInvocation.new(self.retry or self.optional, r))
 			success = r.success
 
