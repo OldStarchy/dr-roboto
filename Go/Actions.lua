@@ -22,7 +22,7 @@ go:alias({'S^', 'dropUp'}, ItemAction.GetFactory(turtle.dropUp))
 go:alias({'Sv', 'dropDown'}, ItemAction.GetFactory(turtle.dropDown))
 
 go:alias(
-	{'m'},
+	{'m', 'mood'},
 	function()
 		return {
 			mode = false,
@@ -178,6 +178,10 @@ go:alias(
 
   Use keywords
   ]]
+				-- And the winner for the most confusing variable name goes to
+				-- ...
+				-- ...
+				-- factionKeys!
 				for i, v in pairs(go.factionKeys) do
 					helpText = helpText .. '  ' .. table.concat(v, ', ') .. '\n'
 				end
