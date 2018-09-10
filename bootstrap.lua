@@ -73,6 +73,53 @@ if (fs.listRecursive == nil) then
 end
 
 --[[
+	Creates a new global environment that can be used to encapsulate global variables
+	Its not a real sandbox, but it works for what i'm using it for
+	Calling endlocal will restore the environment back to what it was, and return the sandboxed environment table
+]]
+_G.startlocal = function()
+	local oldenv = getfenv(2)
+	local env = {}
+	local isEnded = false
+	env._G = env
+	env.endlocal = function()
+		if (isEnded) then
+			return
+		end
+		isEnded = true
+		setfenv(2, oldenv)
+		return env
+	end
+	setfenv(2, setmetatable(env, {__index = _G}))
+end
+
+--Runs a file in the same environment (access to global variables) as the caller
+-- Similar to require i guess but it doesn't cache anything
+-- arguments are passed to the file
+_G.include = function(module, ...)
+	if (module:sub(-(#'.lua')) == '.lua') then
+		error('Do not include .lua in module names', 2)
+	end
+
+	local chunk, err
+
+	if (fs.exists(module)) then
+		chunk, err = loadfile(module)
+	elseif (fs.exists(module .. '.lua')) then
+		chunk, err = loadfile(module .. '.lua')
+	else
+		error('Could not find ' .. module)
+	end
+
+	if (chunk ~= nil) then
+		setfenv(chunk, getfenv(2))
+		chunk(...)
+	else
+		error(err, 2)
+	end
+end
+
+--[[
 turtle.attackUp()
 
 turtle.craft(number: quantity)
