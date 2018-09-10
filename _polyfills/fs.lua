@@ -10,17 +10,12 @@ _G.fs = {
 		return dirs
 	end,
 	isDir = function(directory)
-		local success, result =
-			pcall(
-			function()
-				local files = fs.list(directory)
-				return #files > 0
-			end
-		)
-
-		return success and result
+		return lfs.attributes(directory, 'mode') == 'directory'
 	end,
 	getName = function(directory)
 		return directory:sub(unpack({directory:find('[^/]+$')}))
+	end,
+	exists = function(directory)
+		return lfs.attributes(directory) ~= nil
 	end
 }
