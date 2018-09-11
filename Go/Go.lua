@@ -9,6 +9,8 @@ function Go:constructor()
 	self.inp = nil
 	self.lim = 0
 	self.speratorCharacter = '%'
+	self.silentMode = false
+	self.pauseOnNext = false
 end
 
 function Go:inputError(err, pos)
@@ -186,15 +188,40 @@ function Go:printSourceMap(action)
 	local x, y = term.getCursorPos()
 	term.setCursorPos(1, y - (lines * 2))
 end
+
+function Go:onBeforeRunAction(action)
+	if (not self.silentMode) then
+		self:printSourceMap(action)
+	end
+
+	if (self.pauseOnNext) then
+		local wait = true
+		while (wait) do
+			local e, key = os.pullEvent('key')
+
+			if (key == keys.enter) then
+				wait = false
+			elseif (key == keys.space) then
+				wait = false
+				self.pauseOnNext = false
+			end
+		end
+	end
+end
+
 function Go:saveCommandToHistory(input)
 	--TODO: save go commands to history
 end
 
-function Go:execute(input)
+function Go:execute(input, silentMode)
 	self:saveCommandToHistory(input)
 	self.inp = input
 	self.inputClean = input:gsub('%%', ' ')
 	self.lim = #input
+
+	if (type(silentMode) == 'boolean') then
+		self.silentMode = silentMode
+	end
 
 	--Collect all the actionKeys (f, forward, b, back etc) defined
 	for i, _ in pairs(self.actions) do
@@ -231,7 +258,8 @@ function Go:execute(input)
 	all.owner = self
 
 	all:run(ActionInvocation.new())
-	if (#self.tokens > 1) then
+
+	if (not self.silentMode and #self.tokens > 1) then
 		for i = 1, math.ceil(#self.inputClean / term.getSize()) do
 			print()
 			print()

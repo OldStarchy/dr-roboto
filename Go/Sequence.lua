@@ -22,7 +22,7 @@ function Sequence:run(invoc)
 		r = invoc.previousResult
 
 		for _, v in ipairs(self.seq) do
-			self.owner:printSourceMap(v)
+			self.owner:onBeforeRunAction(v)
 			r = v:run(ActionInvocation.new(self.retry or self.optional, r))
 			success = r.success
 

@@ -1,3 +1,11 @@
+go:alias(
+	{'debug', 'pause'},
+	FunctionAction.GetFactory(
+		function()
+			go.pauseOnNext = true
+		end
+	)
+)
 go:alias({'f', 'forward', 'forwards'}, MoveAction.GetFactory(turtle.forward))
 go:alias({'b', 'back', 'backward', 'backwards'}, MoveAction.GetFactory(turtle.back))
 go:alias({'l', 'left'}, FunctionAction.GetFactory(turtle.turnLeft))
@@ -197,7 +205,7 @@ go:alias(
 				helpText =
 					helpText ..
 					[[
-      
+
   and modifiers,
     ?   to continue on failure
     X   to repeat X times

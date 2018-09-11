@@ -5,6 +5,9 @@ function FunctionAction.GetFactory(func)
 		return FunctionAction.new(
 			function(optional)
 				local success, m = func()
+				if (success == nil) then
+					return true
+				end
 				if not success and not optional then
 					while not success do
 						success, m = func()
