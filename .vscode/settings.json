@@ -6,4 +6,5 @@
 		"startup": "lua"
 	},
 	"todo-tree.regex": "((//|#|<!--|;|/\\*|--|^)\\s*($TAGS)|^\\s*- \\[ \\])",
+	"editor.formatOnSave": true,
 }
