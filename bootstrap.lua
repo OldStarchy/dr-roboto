@@ -141,6 +141,11 @@ _G.include = function(module, ...)
 	end
 end
 
+if (sleep == nil) then
+	sleep = function()
+	end
+end
+
 --[[
 turtle.attackUp()
 
