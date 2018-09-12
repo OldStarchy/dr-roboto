@@ -1,11 +1,5 @@
 Recipe = Class()
 
---the number of items required in the recipe
-self.itemCount = 0
-
---a table of names of (ingredients or recepies) and their number quantity required
-self.items = {}
-
 --[[
 	name: name of the item that the recipe will produce.
 	grid: a list of recipes or ingredients in string form, the list forms a 3x3 grid, to be interpreted as:
@@ -31,7 +25,13 @@ function Recipe:constructor(name, grid, produces)
 	self.grid = grid
 	self.produces = produces
 
-	for item in ipairs(grid) do
+	--the number of items required in the recipe
+	self.itemCount = 0
+
+	--a table of names of (ingredients or recepies) and their number quantity required
+	self.items = {}
+
+	for _, item in ipairs(grid) do
 		self.itemCount = self.itemCount + 1
 
 		if (self.items[item] == nil) then
