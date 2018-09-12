@@ -42,7 +42,7 @@ function Position:add(deltas)
 	end
 
 	if (type(deltas.direction) == 'number') then
-		self:rotate(direction)
+		self:rotate(deltas.direction)
 	end
 end
 
@@ -58,7 +58,7 @@ function Position:sub(deltas)
 	end
 
 	if (type(deltas.direction) == 'number') then
-		self:rotate(-direction)
+		self:rotate(-deltas.direction)
 	end
 end
 
