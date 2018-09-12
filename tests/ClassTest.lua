@@ -15,6 +15,13 @@ test(
 
 				t.assertEqual(constructorCalled, true)
 			end,
+			['Get Type'] = function(t)
+				local A = Class()
+
+				local object = A.new()
+
+				t.assertEqual(object.getType(), A)
+			end,
 			['Missing'] = function(t)
 				local A = Class()
 

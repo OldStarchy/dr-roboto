@@ -1,6 +1,10 @@
 function Class(parent)
 	local class = {}
 
+	function class.getType()
+		return class
+	end
+
 	function class.constructor(...)
 		if (parent and parent.constructor) then
 			parent.constructor(...)
