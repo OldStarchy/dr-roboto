@@ -106,3 +106,69 @@ fastBob:refuel()
 fastBob:goFast()
 --> Going fast
 ```
+
+
+## Testing without ComputerCraft
+
+A few of the ComputerCraft specific apis have polyfills to provide compatibility with running on a native lua installation. The VSCode test task can be used to run the Dr. Robotos startup tests. Additionally, you can achieve a similar environment with the following
+
+```lua
+dofile 'bootstrap.lua'
+require 'Core'
+```
+
+After that you can run commands as you would through the Turtle's lua prompt.
+
+```lua
+go = require 'Go/_main'
+go:execute('udlr', true)
+```
+
+The mock `turtle` API just prints out function calls and stack traces, so the above outputs the following:
+
+```
+called turtle.getFuelLevel(     nil     )
+.\Navigation/Navigator.lua:73:
+-
+Go/MoveAction.lua:6:
+Go/FunctionAction.lua:35:
+Go/MoveAction.lua:40:
+Go/Sequence.lua:26:
+called turtle.up(       nil     )
+.\Navigation/Navigator.lua:399:
+-
+.\Navigation/Navigator.lua:97:
+-
+Go/MoveAction.lua:6:
+Go/FunctionAction.lua:35:
+Go/MoveAction.lua:40:
+called turtle.getFuelLevel(     nil     )
+.\Navigation/Navigator.lua:73:
+-
+Go/MoveAction.lua:6:
+Go/FunctionAction.lua:35:
+Go/MoveAction.lua:40:
+Go/Sequence.lua:26:
+called turtle.down(     nil     )
+.\Navigation/Navigator.lua:409:
+-
+.\Navigation/Navigator.lua:97:
+-
+Go/MoveAction.lua:6:
+Go/FunctionAction.lua:35:
+Go/MoveAction.lua:40:
+called turtle.turnLeft( nil     )
+.\Navigation/Navigator.lua:427:
+.\Navigation/Navigator.lua:165:
+-
+Go/FunctionAction.lua:7:
+Go/FunctionAction.lua:35:
+Go/FunctionAction.lua:45:
+called turtle.turnRight(        nil     )
+.\Navigation/Navigator.lua:419:
+.\Navigation/Navigator.lua:175:
+-
+Go/FunctionAction.lua:7:
+Go/FunctionAction.lua:35:
+Go/FunctionAction.lua:45:
+```
