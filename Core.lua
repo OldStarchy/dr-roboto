@@ -12,7 +12,7 @@ require 'Skills/SkillSet'
 require 'Skills/TreeFarmSkill'
 
 --Mods / APIs
-require 'Crafting/Crafting'
+require 'Crafting/Crafter'
 require 'Inventory/ItemStorage'
 require 'Navigation/Gps'
 require 'Navigation/Navigator'
