@@ -30,8 +30,7 @@ function Recipe:constructor(name, grid, produces)
 
 	--a table of names of (ingredients or recepies) and their number quantity required
 	self.items = {}
-
-	for _, item in ipairs(grid) do
+	for _, item in pairs(grid) do
 		self.itemCount = self.itemCount + 1
 
 		if (self.items[item] == nil) then

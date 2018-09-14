@@ -15,6 +15,48 @@ local function createTestParams()
 		error('Assert ==,\nExpected "' .. tostring(expected) .. '"\n but got "' .. tostring(result) .. '"', 2)
 	end
 
+	function t.assertTableEqual(result, expected, errorString)
+		if errorString == nil then
+			errorString = 'Assert ==,\nExpected "' .. tostring(expected) .. '"\n but got "' .. tostring(result) .. '"'
+		end
+
+		for k1, v1 in next, result do
+			if not expected[k1] then
+				error(errorString .. 'key ' .. tostring(k1) .. ' is not expected but present', 2)
+			end
+			if expected[k1] ~= v1 then
+				error(
+					errorString ..
+						' \nvalue for key ' ..
+							tostring(k1) ..
+								' differs from expected, expected "' .. tostring(expected[k1]) .. '"\n but got "' .. tostring(v1) .. '"',
+					2
+				)
+			end
+			if type(v1) == 'table' then
+				t.assertTableEqual(v1, expected[k1], errorString .. ' \nin inner table: ' .. tostring(k1))
+			end
+		end
+
+		for k2, v2 in next, expected do
+			if not result[k2] then
+				error(errorString .. 'key ' .. tostring(k2) .. ' is not present but expected', 2)
+			end
+			if result[k2] ~= v2 then
+				error(
+					errorString ..
+						' \nvalue for key ' ..
+							tostring(k2) ..
+								' differs from expected, expected "' .. tostring(result[k2]) .. '"\n but got "' .. tostring(v2) .. '"',
+					2
+				)
+			end
+			if type(v2) == 'table' then
+				t.assertTableEqual(v2, result[k2], errorString .. ' \nin inner table: ' .. tostring(k2))
+			end
+		end
+	end
+
 	function t.assertNotEqual(result, unexpected)
 		if (result ~= unexpected) then
 			return
