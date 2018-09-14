@@ -214,9 +214,11 @@ local function doTest(testObj, testContext)
 	local printlines = {}
 
 	io.write = function(...)
+		-- oldwrite(...)
 		table.insert(printlines, {'write', {...}})
 	end
 	print = function(...)
+		-- oldprint(...)
 		table.insert(printlines, {'print', {...}})
 	end
 

@@ -19,9 +19,18 @@ function Crafter:setRecipeBook(recipeBook)
 	self._book = recipeBook
 end
 
-function Crafter:getRawItems(itemName, amount)
+function Crafter:getRawItems(itemName, amount, checked)
 	if (type(itemName) ~= 'string') then
 		error('itemName must be string', 2)
+	end
+
+	if (checked == nil) then
+		checked = {}
+	end
+
+	if (checked[itemName] == true) then
+		-- Probably erroring isn't correct, since we can't tell if its a recursive error, or multiple items in a recipe need to craft this
+		error('Rechecking an item')
 	end
 
 	if (amount == nil) then
@@ -35,6 +44,8 @@ function Crafter:getRawItems(itemName, amount)
 	if (amount == 0) then
 		return {}
 	end
+
+	checked[itemName] = true
 
 	local recipes = self._book:findByName(itemName)
 
@@ -57,7 +68,7 @@ function Crafter:getRawItems(itemName, amount)
 	local recipe = recipes[1]
 
 	for item, count in pairs(recipe.items) do
-		local rawItems = self:getRawItems(item)
+		local rawItems = self:getRawItems(item, count * amount, checked)
 
 		for item2, count2 in pairs(rawItems) do
 			coreRequirements[item2] = coreRequirements[item2] + count2 * amount
