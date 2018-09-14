@@ -8,6 +8,7 @@ Recipe = Class()
 	  7,8,9
 	produces: the number of items the recipe will produce.
 ]]
+-- TODO: reorder to (name, produces, grid)
 function Recipe:constructor(name, grid, produces)
 	if not type(name) == 'string' then
 		error('Name must be of type string')
