@@ -17,42 +17,33 @@ local function createTestParams()
 
 	function t.assertTableEqual(result, expected, errorString)
 		if errorString == nil then
-			errorString = 'Assert ==,\nExpected "' .. tostring(expected) .. '"\n but got "' .. tostring(result) .. '"'
+			errorString = '\nAssert Table Equal,\n'
 		end
 
 		for k1, v1 in next, result do
 			if not expected[k1] then
-				error(errorString .. 'key ' .. tostring(k1) .. ' is not expected but present', 2)
+				error(errorString .. 'Unexpected key "' .. tostring(k1) .. '"', 2)
 			end
 			if expected[k1] ~= v1 then
 				error(
 					errorString ..
-						' \nvalue for key ' ..
-							tostring(k1) ..
-								' differs from expected, expected "' .. tostring(expected[k1]) .. '"\n but got "' .. tostring(v1) .. '"',
+						'Incorrect value for key "' ..
+							tostring(k1) .. '"\n expected "' .. tostring(expected[k1]) .. '"\n  but got "' .. tostring(v1) .. '"',
 					2
 				)
 			end
 			if type(v1) == 'table' then
-				t.assertTableEqual(v1, expected[k1], errorString .. ' \nin inner table: ' .. tostring(k1))
+				t.assertTableEqual(
+					v1,
+					expected[k1],
+					errorString .. ' \nIn inner table "' .. tostring(k1) .. '":\n ' .. tostring(k1):gsub('\n', '\n ')
+				)
 			end
 		end
 
 		for k2, v2 in next, expected do
 			if not result[k2] then
-				error(errorString .. 'key ' .. tostring(k2) .. ' is not present but expected', 2)
-			end
-			if result[k2] ~= v2 then
-				error(
-					errorString ..
-						' \nvalue for key ' ..
-							tostring(k2) ..
-								' differs from expected, expected "' .. tostring(result[k2]) .. '"\n but got "' .. tostring(v2) .. '"',
-					2
-				)
-			end
-			if type(v2) == 'table' then
-				t.assertTableEqual(v2, result[k2], errorString .. ' \nin inner table: ' .. tostring(k2))
+				error(errorString .. 'Missing key "' .. tostring(k2) .. '"', 2)
 			end
 		end
 	end
