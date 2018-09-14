@@ -444,7 +444,7 @@ else
 	local testsToDo = {}
 	for _, testName in ipairs(args) do
 		local pattern = string.gsub(testName, '%.', '%%.')
-		pattern = '^' .. string.gsub(pattern, '%*', '[^%.]*') .. '$'
+		pattern = '^' .. string.gsub(pattern, '%*', '.*') .. '$'
 		for _, testObj in ipairs(tests) do
 			if (string.match(testObj.fullName, pattern) ~= nil) then
 				table.insert(testsToDo, testObj)
