@@ -10,19 +10,19 @@ function os.run(_tEnv, _sPath, ...)
 		local ok, err =
 			pcall(
 			function()
-				fnFile(table.unpack(tArgs))
+				fnFile(unpack(tArgs))
 			end
 		)
 		if not ok then
 			if err and err ~= '' then
-				printError(err)
+				print(err)
 			end
 			return false
 		end
 		return true
 	end
 	if err and err ~= '' then
-		printError(err)
+		print(err)
 	end
 	return false
 end
@@ -31,7 +31,7 @@ local tAPIsLoading = {}
 function os.loadAPI(_sPath)
 	local sName = fs.getName(_sPath)
 	if tAPIsLoading[sName] == true then
-		printError('API ' .. sName .. ' is already being loaded')
+		print('API ' .. sName .. ' is already being loaded')
 		return false
 	end
 	tAPIsLoading[sName] = true
@@ -42,12 +42,12 @@ function os.loadAPI(_sPath)
 	if fnAPI then
 		local ok, err = pcall(fnAPI)
 		if not ok then
-			printError(err)
+			print(err)
 			tAPIsLoading[sName] = nil
 			return false
 		end
 	else
-		printError(err)
+		print(err)
 		tAPIsLoading[sName] = nil
 		return false
 	end
