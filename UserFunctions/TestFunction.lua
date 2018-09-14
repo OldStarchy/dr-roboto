@@ -1,1 +1,8 @@
-registerUserFunctionFromFile('test.lua', 'test', 'loglevelOrFilter', 'filter...')
+registerUserFunction(
+	function(...)
+		loadfile('test.lua')(...)
+	end,
+	'test',
+	'loglevelOrFilter',
+	'filter...'
+)
