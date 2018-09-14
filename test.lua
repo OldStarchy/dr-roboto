@@ -301,7 +301,6 @@ local testMeta = {
 		return rawget(test, key)
 	end
 }
-local tests = {}
 
 --[[
 	Prepares tests for execution.
@@ -334,17 +333,20 @@ local tests = {}
 	test(namespace: string, tests: table) prepares a testing table for execution
 	test(tests: table) prepares a testing table for execution
 ]]
-function test(namespace, name, tester)
+local function createTests(namespace, name, tester)
 	if (type(namespace) == 'table') then
-		test('', namespace)
-		return
+		return createTests('', namespace)
 	end
 
 	if (type(name) == 'table') then
+		local tests = {}
 		for i, v in pairs(name) do
-			test(namespace, i, v)
+			local result = createTests(namespace, i, v)
+			for _, k in pairs(result) do
+				table.insert(tests, k)
+			end
 		end
-		return
+		return tests
 	end
 
 	if (type(tester) == 'table') then
@@ -353,12 +355,10 @@ function test(namespace, name, tester)
 		else
 			namespace = namespace .. '.' .. name
 		end
-		test(namespace, tester)
-		return
+		return createTests(namespace, tester)
 	end
 
-	table.insert(
-		tests,
+	return {
 		setmetatable(
 			{
 				namespace = namespace,
@@ -367,10 +367,10 @@ function test(namespace, name, tester)
 			},
 			testMeta
 		)
-	)
+	}
 end
 
-function runTests(tests, logLevel)
+local function runTests(tests, logLevel)
 	if (logLevel == nil) then
 		logLevel = 0
 	end
@@ -429,17 +429,36 @@ local function findTests(directory)
 	return results
 end
 
-local testFiles = findTests('.')
-
-for _, file in ipairs(testFiles) do
-	dofile(file)
+local function loadAllTests()
+	local tests = {}
+	local env =
+		setmetatable(
+		{
+			test = function(...)
+				local testObjs = createTests(...)
+				for _, testObj in pairs(testObjs) do
+					table.insert(tests, testObj)
+				end
+			end
+		},
+		{__index = getfenv()}
+	)
+	local files = findTests('.')
+	for _, file in ipairs(files) do
+		pcall(
+			function()
+				dofileSandbox(file, env)
+			end
+		)
+	end
+	return tests
 end
 
 local args = {...}
 if (#args == 0) then
 	print('Running startup tests...')
 	print()
-	runTests(tests, 1)
+	runTests(loadAllTests(), 1)
 else
 	local testsToDo = {}
 	for _, testName in ipairs(args) do
