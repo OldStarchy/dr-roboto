@@ -285,7 +285,7 @@ local function doTest(testObj, testContext)
 		end
 	end
 
-	return success, errors
+	return success
 end
 
 local testMeta = {
@@ -386,7 +386,7 @@ function runTests(tests, logLevel)
 
 	for _, testObj in ipairs(tests) do
 		-- Actually run the test
-		local success, errors = doTest(testObj, testContext)
+		local success = doTest(testObj, testContext)
 
 		if (success) then
 			testPass = testPass + 1
