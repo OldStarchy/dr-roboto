@@ -17,7 +17,7 @@ test(
 			t.assertEqual(book:add(recipe1), true)
 			t.assertEqual(book:add(recipe2), false)
 
-			t.assertEqual(book:findByName('anotherthing'), nil)
+			t.assertEqual(#book:findByName('anotherthing'), 0)
 		end,
 		['find on empty'] = function(t)
 			local book = RecipeBook()
