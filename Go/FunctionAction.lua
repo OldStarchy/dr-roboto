@@ -2,7 +2,7 @@ FunctionAction = Class(Action)
 
 function FunctionAction.GetFactory(func)
 	return function()
-		return FunctionAction.new(
+		return FunctionAction(
 			function(optional)
 				local success, m = func()
 				if (success == nil) then
@@ -32,7 +32,7 @@ function FunctionAction:singleInvoke()
 end
 
 function FunctionAction:call(invoc)
-	return ActionResult.new(self, self.func(invoc.optional))
+	return ActionResult(self, self.func(invoc.optional))
 end
 
 function FunctionAction:run(invoc)
@@ -42,14 +42,14 @@ function FunctionAction:run(invoc)
 	local r
 
 	while self.count == -1 or i <= self.count do
-		r = self:call(ActionInvocation.new(optional, invoc.previousResult))
+		r = self:call(ActionInvocation(optional, invoc.previousResult))
 		success = r.success ~= self.invert
 
 		if not success then
 			if self.optional then
-				return ActionResult.new(self, true, r.data)
+				return ActionResult(self, true, r.data)
 			elseif optional then
-				return ActionResult.new(self, false, r.data)
+				return ActionResult(self, false, r.data)
 			else
 				i = i - 1
 			end
@@ -58,5 +58,5 @@ function FunctionAction:run(invoc)
 		i = i + 1
 	end
 
-	return ActionResult.new(self, true ~= self.invert, r.data)
+	return ActionResult(self, true ~= self.invert, r.data)
 end

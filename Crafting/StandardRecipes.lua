@@ -1,5 +1,5 @@
-standardRecipes = RecipeBook.new()
+standardRecipes = RecipeBook()
 
-standardRecipes:add(Recipe.new('plank', {'log'}, 4))
-standardRecipes:add(Recipe.new('stick', {'plank', nil, nil, 'plank'}, 4))
-standardRecipes:add(Recipe.new('torch', {'coal', nil, nil, 'stick'}, 4))
+standardRecipes:add(Recipe('plank', {'log'}, 4))
+standardRecipes:add(Recipe('stick', {'plank', nil, nil, 'plank'}, 4))
+standardRecipes:add(Recipe('torch', {'coal', nil, nil, 'stick'}, 4))

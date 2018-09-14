@@ -2,14 +2,14 @@
 Crafter = Class()
 
 function Crafter:constructor(turtle)
-	self._book = RecipeBook.new()
+	self._book = RecipeBook()
 
 	self._turtle = turtle
 end
 
 function Crafter:setRecipeBook(recipeBook)
 	if (recipeBook == nil) then
-		self._book = RecipeBook.new()
+		self._book = RecipeBook()
 	end
 
 	if (recipeBook.getType() ~= RecipeBook) then
@@ -69,4 +69,4 @@ function Crafter:craftFromGraph(graph)
 	obtain(node.item, node.amount)
 end
 
-Crafting = Crafter.new(turtle)
+Crafting = Crafter(turtle)

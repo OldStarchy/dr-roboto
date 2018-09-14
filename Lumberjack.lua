@@ -1,5 +1,5 @@
 local Lumberjack = {}
-local log = Log.new('lumberjack')
+local log = Log('lumberjack')
 
 local function collectLeaves()
 	for i = 1, 4 do

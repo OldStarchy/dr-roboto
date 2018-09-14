@@ -1,7 +1,7 @@
 AttachmentAction = Class(Action)
 function AttachmentAction.GetFactory(func)
 	return function()
-		return AttachmentAction.new(func)
+		return AttachmentAction(func)
 	end
 end
 function AttachmentAction:constructor(itemFunc)
@@ -9,5 +9,5 @@ function AttachmentAction:constructor(itemFunc)
 	self.itemFunc = itemFunc
 end
 function AttachmentAction:call(invoc)
-	return ActionResult.new(self, self.itemFunc())
+	return ActionResult(self, self.itemFunc())
 end

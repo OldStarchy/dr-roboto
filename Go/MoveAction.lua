@@ -1,7 +1,7 @@
 MoveAction = Class(FunctionAction)
 function MoveAction.GetFactory(func)
 	return function()
-		return MoveAction.new(
+		return MoveAction(
 			function(optional)
 				local success, m = func()
 				if not success and not optional then
@@ -37,7 +37,7 @@ function MoveAction:run(invoc)
 			Nav.autoDig = true
 			Nav.autoAttack = true
 		end
-		r = self:call(ActionInvocation.new(optional, invoc.previousResult))
+		r = self:call(ActionInvocation(optional, invoc.previousResult))
 		Nav.autoDig = autoDig
 		Nav.autoAttack = autoAttack
 
@@ -45,9 +45,9 @@ function MoveAction:run(invoc)
 
 		if not success then
 			if self.optional then
-				return ActionResult.new(self, true, r.data)
+				return ActionResult(self, true, r.data)
 			elseif optional then
-				return ActionResult.new(self, false, r.data)
+				return ActionResult(self, false, r.data)
 			else
 				i = i - 1
 			end
@@ -56,7 +56,7 @@ function MoveAction:run(invoc)
 		i = i + 1
 	end
 
-	return ActionResult.new(self, true ~= self.invert, r.data)
+	return ActionResult(self, true ~= self.invert, r.data)
 end
 function MoveAction:mod(mod)
 	if (FunctionAction.mod(self, mod)) then

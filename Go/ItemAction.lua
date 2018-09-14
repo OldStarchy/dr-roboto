@@ -1,7 +1,7 @@
 ItemAction = Class(Action)
 function ItemAction.GetFactory(func)
 	return function()
-		return ItemAction.new(func)
+		return ItemAction(func)
 	end
 end
 function ItemAction:constructor(itemFunc)
@@ -18,7 +18,7 @@ function ItemAction:call(invoc)
 		success = self.itemFunc()
 	end
 
-	return ActionResult.new(self, success)
+	return ActionResult(self, success)
 end
 function ItemAction:mod(mod)
 	if type(mod) == 'number' then

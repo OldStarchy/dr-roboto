@@ -21,7 +21,7 @@ include 'Go/AttachmentAction'
 --[[ Go ]]
 include 'Go/Go'
 
-go = Go.new()
+go = Go()
 include 'Go/Actions'
 -- 	end
 -- )

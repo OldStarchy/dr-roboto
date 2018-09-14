@@ -30,7 +30,7 @@ function Robot.GetFactory(name)
 	local index = 0
 	return function()
 		index = index + 1
-		return Robot.new(name .. ' ' .. index)
+		return Robot(name .. ' ' .. index)
 	end
 end
 
@@ -91,7 +91,7 @@ local bob1 = bobBotFactory()
 local bob2 = bobBotFactory()
 --> I am Bob 2 feel my wrath
 
-local fastBob = FastRobot.new('Fast Bob')
+local fastBob = FastRobot('Fast Bob')
 --> I am Fast Bob feel my wrath
 
 fastBob:goFast()

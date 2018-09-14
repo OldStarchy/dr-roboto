@@ -1,7 +1,7 @@
 Sequence = Class(Action)
 function Sequence.GetFactory(actions)
 	return function()
-		return Sequence.new(actions)
+		return Sequence(actions)
 	end
 end
 function Sequence:constructor(actions)
@@ -23,7 +23,7 @@ function Sequence:run(invoc)
 
 		for _, v in ipairs(self.seq) do
 			self.owner:onBeforeRunAction(v)
-			r = v:run(ActionInvocation.new(self.retry or self.optional, r))
+			r = v:run(ActionInvocation(self.retry or self.optional, r))
 			success = r.success
 
 			if not success then
@@ -31,11 +31,11 @@ function Sequence:run(invoc)
 					i = i - 1
 					break
 				elseif self.optional then
-					return ActionResult.new(self, true ~= self.invert, r)
+					return ActionResult(self, true ~= self.invert, r)
 				elseif optional then
-					return ActionResult.new(self, false ~= self.invert, r)
+					return ActionResult(self, false ~= self.invert, r)
 				else
-					return ActionResult.new(self, false ~= self.invert, r)
+					return ActionResult(self, false ~= self.invert, r)
 				end
 			end
 
@@ -46,7 +46,7 @@ function Sequence:run(invoc)
 		sleep(0)
 	end
 
-	return ActionResult.new(self, true ~= self.invert, r)
+	return ActionResult(self, true ~= self.invert, r)
 end
 
 function Sequence:mod(mod)

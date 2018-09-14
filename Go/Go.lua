@@ -86,7 +86,7 @@ function Go:addToken(t, isMod, start, ed)
 						table.insert(seq, table.remove(self.tokens, i + 1))
 					end
 					local startTok = self.tokens[i]
-					self.tokens[i] = Sequence.new(seq)
+					self.tokens[i] = Sequence(seq)
 					self.tokens[i].owner = self
 					self.tokens[i].sourceMap.start = startTok.start
 					self.tokens[i].sourceMap.ed = ed
@@ -248,7 +248,7 @@ function Go:execute(input, silentMode)
 
 	local all = self.tokens
 	if (#all > 1) then
-		all = Sequence.new(all)
+		all = Sequence(all)
 		all.sourceMap.start = 1
 		all.sourceMap.ed = #self.inp
 	else
@@ -257,7 +257,7 @@ function Go:execute(input, silentMode)
 
 	all.owner = self
 
-	all:run(ActionInvocation.new())
+	all:run(ActionInvocation())
 
 	if (not self.silentMode and #self.tokens > 1) then
 		for i = 1, math.ceil(#self.inputClean / term.getSize()) do

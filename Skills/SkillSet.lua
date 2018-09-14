@@ -1,7 +1,7 @@
 local SkillSet = Class()
 
 function SkillSet:constructor()
-	self:addSkill(DefaultSkill.new())
+	self:addSkill(DefaultSkill())
 end
 
 function SkillSet:getSkills()

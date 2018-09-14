@@ -48,4 +48,4 @@ function Log:error(...)
 	self:log(Log.ERROR, unpack({...}))
 end
 
-Log.default = Log.new('', Log.INFO)
+Log.default = Log('', Log.INFO)

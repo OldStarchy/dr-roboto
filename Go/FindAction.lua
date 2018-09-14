@@ -1,7 +1,7 @@
 FindAction = Class(Action)
 function FindAction.GetFactory(func)
 	return function()
-		return FindAction.new(func)
+		return FindAction(func)
 	end
 end
 function FindAction:constructor(findFunc)
@@ -16,26 +16,26 @@ function FindAction:call(invoc)
 	success, result = self.findFunc()
 
 	if not success then
-		return ActionResult.new(self, false)
+		return ActionResult(self, false)
 	end
 
 	if not self.findstr then
-		return ActionResult.new(self, true, result.name)
+		return ActionResult(self, true, result.name)
 	end
 
 	if not string.find(result.name, self.findstr, 1, true) then
-		return ActionResult.new(self, false, result.name)
+		return ActionResult(self, false, result.name)
 	end
 
 	if not self.metadata then
-		return ActionResult.new(self, true, result.name)
+		return ActionResult(self, true, result.name)
 	end
 
 	if result.metadata == self.metadata then
-		return ActionResult.new(self, true)
+		return ActionResult(self, true)
 	end
 
-	return ActionResult.new(self, false, result.metadata)
+	return ActionResult(self, false, result.metadata)
 end
 function FindAction:mod(mod)
 	if type(mod) == 'number' then

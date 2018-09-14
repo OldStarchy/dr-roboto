@@ -24,10 +24,10 @@ function Navigator:constructor(turtle)
 
 	-- Private stuff
 	self._locationStack = {
-		Position.new()
+		Position()
 	}
 
-	self._position = Position.new()
+	self._position = Position()
 	self._turtle = turtle
 	self._oldTurtle = {}
 
@@ -431,4 +431,4 @@ function Navigator:_turnLeft()
 	return unpack(result)
 end
 
-Nav = Navigator.new(turtle)
+Nav = Navigator(turtle)

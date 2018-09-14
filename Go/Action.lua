@@ -43,14 +43,14 @@ function Action:run(invoc)
 	local r
 
 	while self.count == -1 or i <= self.count do
-		r = self:call(ActionInvocation.new(optional, invoc.previousResult))
+		r = self:call(ActionInvocation(optional, invoc.previousResult))
 		success = r.success ~= self.invert
 
 		if not success then
 			if self.optional then
-				return ActionResult.new(self, true, r.data)
+				return ActionResult(self, true, r.data)
 			elseif optional then
-				return ActionResult.new(self, false, r.data)
+				return ActionResult(self, false, r.data)
 			else
 				i = i - 1
 			end
@@ -59,7 +59,7 @@ function Action:run(invoc)
 		i = i + 1
 	end
 
-	return ActionResult.new(self, true ~= self.invert, r.data)
+	return ActionResult(self, true ~= self.invert, r.data)
 end
 
 function Action:mod(mod)

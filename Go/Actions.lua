@@ -44,7 +44,7 @@ go:alias(
 				else
 					print("m requires modifiers, either '?' to disable autodig, or '!' to enable it")
 				end
-				return ActionResult.new(self, true)
+				return ActionResult(self, true)
 			end,
 			mod = function(self, mod)
 				if type(mod) == 'string' then
@@ -77,12 +77,12 @@ go:alias(
 					self.str or (type(invoc.previousResult.data) == 'string' and invoc.previousResult.data) or
 					invoc.previousResult.success
 				if not str then
-					return ActionResult.new(self, false)
+					return ActionResult(self, false)
 				end
 
 				print(str)
 
-				return ActionResult.new(self, true, str)
+				return ActionResult(self, true, str)
 			end,
 			mod = function(self, mod)
 				if type(mod) == 'table' then
@@ -107,7 +107,7 @@ go:alias(
 			time = 1,
 			run = function(self, invoc)
 				sleep(self.time)
-				return ActionResult.new(self, true, self.time)
+				return ActionResult(self, true, self.time)
 			end,
 			mod = function(self, m)
 				if type(m) == 'number' then
@@ -141,7 +141,7 @@ go:alias(
 				s = (s - 1) % 16 + 1
 
 				turtle.select(s)
-				return ActionResult.new(self, true, s)
+				return ActionResult(self, true, s)
 			end,
 			index = 1,
 			incremental = false,
@@ -233,7 +233,7 @@ go:alias(
 
   Speak to OldStarchy for bug reports and feature requests]]
 				textutils.pagedPrint(helpText)
-				return ActionResult.new(self, true)
+				return ActionResult(self, true)
 			end
 		}
 		Action.constructor(action)
