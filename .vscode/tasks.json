@@ -14,6 +14,9 @@
 				"focus": false,
 				"panel": "dedicated",
 				"showReuseMessage": false
+			},
+			"osx": {
+				"command": "/usr/local/opt/lua@5.1/bin/lua5.1 test.lua"
 			}
 		}
 	]

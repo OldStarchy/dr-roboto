@@ -110,6 +110,8 @@ fastBob:goFast()
 
 ## Testing without ComputerCraft
 
+Lua 5.1 is needed as this is what Lua version ComputerCraft will run within Minecraft.
+
 A few of the ComputerCraft specific apis have polyfills to provide compatibility with running on a native lua installation. The VSCode test task can be used to run the Dr. Robotos startup tests. Additionally, you can achieve a similar environment with the following
 
 ```lua
@@ -172,3 +174,12 @@ Go/FunctionAction.lua:7:
 Go/FunctionAction.lua:35:
 Go/FunctionAction.lua:45:
 ```
+
+
+
+# Mac Lua Install Instructions
+brew install lua51
+brew install luarocks
+luarocks --lua-dir=/usr/local/opt/lua@5.1 install luafilesystem
+
+#Windows Install Instructions
