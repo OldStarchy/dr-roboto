@@ -455,20 +455,27 @@ local function loadAllTests()
 end
 
 local args = {...}
+local loglevel = 2
+if (#args > 0) then
+	if (tonumber(args[1]) ~= nil) then
+		loglevel = tonumber(table.remove(args, 1))
+	end
+end
 if (#args == 0) then
 	print('Running startup tests...')
 	print()
-	runTests(loadAllTests(), 1)
+	runTests(loadAllTests(), loglevel)
 else
+	local allTests = loadAllTests()
 	local testsToDo = {}
 	for _, testName in ipairs(args) do
 		local pattern = string.gsub(testName, '%.', '%%.')
 		pattern = '^' .. string.gsub(pattern, '%*', '.*') .. '$'
-		for _, testObj in ipairs(tests) do
+		for _, testObj in ipairs(allTests) do
 			if (string.match(testObj.fullName, pattern) ~= nil) then
 				table.insert(testsToDo, testObj)
 			end
 		end
-		runTests(testsToDo, 2)
+		runTests(testsToDo, loglevel)
 	end
 end
