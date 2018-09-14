@@ -178,8 +178,12 @@ Go/FunctionAction.lua:45:
 
 
 # Mac Lua Install Instructions
+```
 brew install lua51
 brew install luarocks
 luarocks --lua-dir=/usr/local/opt/lua@5.1 install luafilesystem
+```
 
-#Windows Install Instructions
+Depending on your set up you may need to configure tasks.json with the correct lua 5.1 path. You may also need to configure luafilesystem (lfs) so that lua can find the file.
+
+#Windows Lua Install Instructions
