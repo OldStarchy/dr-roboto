@@ -11,21 +11,21 @@ test(
 					constructorCalled = true
 				end
 
-				local object = A.new()
+				local object = A()
 
 				t.assertEqual(constructorCalled, true)
 			end,
 			['Get Type'] = function(t)
 				local A = Class()
 
-				local object = A.new()
+				local object = A()
 
 				t.assertEqual(object.getType(), A)
 			end,
 			['Missing'] = function(t)
 				local A = Class()
 
-				local object = A.new()
+				local object = A()
 			end,
 			['Passes self'] = function(t)
 				local A = Class()
@@ -36,7 +36,7 @@ test(
 					selfValue = self
 				end
 
-				local object = A.new()
+				local object = A()
 
 				t.assertNotEqual(selfValue, nil)
 				t.assertEqual(selfValue, object)
@@ -55,7 +55,7 @@ test(
 				end
 
 				local tmpTable = {}
-				local object = A.new(5, 'blah', tmpTable)
+				local object = A(5, 'blah', tmpTable)
 
 				t.assertNotEqual(aValue, nil)
 				t.assertNotEqual(bValue, nil)
@@ -75,7 +75,7 @@ test(
 					methodCalled = true
 				end
 
-				local object = A.new()
+				local object = A()
 				object:method()
 
 				t.assertEqual(methodCalled, true)
@@ -83,7 +83,7 @@ test(
 			['Missing'] = function(t)
 				local A = Class()
 
-				local object = A.new()
+				local object = A()
 
 				t.assertThrows(
 					function()
@@ -100,7 +100,7 @@ test(
 					selfValue = self
 				end
 
-				local object = A.new()
+				local object = A()
 				object:method()
 
 				t.assertNotEqual(selfValue, nil)
@@ -120,7 +120,7 @@ test(
 				end
 
 				local tmpTable = {}
-				local object = A.new()
+				local object = A()
 				object:method(5, 'blah', tmpTable)
 
 				t.assertNotEqual(aValue, nil)
@@ -144,7 +144,7 @@ test(
 
 				local B = Class(A)
 
-				local object = B.new()
+				local object = B()
 
 				t.assertEqual(constructorCalled, true)
 			end,
@@ -161,7 +161,7 @@ test(
 					A.constructor(self)
 				end
 
-				local object = B.new()
+				local object = B()
 
 				t.assertEqual(constructorCalled, true)
 			end,
@@ -175,7 +175,7 @@ test(
 
 				local B = Class(A)
 
-				local object = B.new()
+				local object = B()
 				object:method()
 
 				t.assertEqual(methodCalled, true)
@@ -194,7 +194,7 @@ test(
 					A.method(self)
 				end
 
-				local object = B.new()
+				local object = B()
 				object:method()
 
 				t.assertEqual(methodCalled, true)
