@@ -1,3 +1,5 @@
+-- TODO: restructure test.lua and use the mock object defined there
+-- t.mock('turtle', true, 5) for equivalent behavior
 turtle =
 	setmetatable(
 	{},

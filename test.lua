@@ -4,6 +4,10 @@ dofile 'bootstrap.lua'
 require 'Core'
 local col = require 'Util/TextColors'
 
+local LOG_NONE = -1
+local LOG_SOME = 0
+local LOG_ALL = 1
+
 local function createTestParams()
 	local calls = {}
 	local t = {}
@@ -121,26 +125,182 @@ local function createTestParams()
 		end
 	end
 
+	-- Creates a dummy object that will will return a function every time it is indexed
+	-- The function will return the values supplied in retVals, or retVals if it is not a table
+	function t.mock(name, retVals, doPrint, stackLevels)
+		if (type(retVals) ~= 'table') then
+			retVals = {retVals}
+		end
+
+		if (doPrint == nil) then
+			doPrint = true
+		end
+
+		if (stackLevels == nil) then
+			stackLevels = 1
+		end
+
+		return t.mockCustom(
+			function(t, v)
+				return function(...)
+					if (doPrint) then
+						if (#{...} > 0) then
+							print('Mock ' .. name .. '.' .. v .. '(', unpack({...}), ')')
+						else
+							print('Mock ' .. name .. '.' .. v .. '()')
+						end
+					end
+
+					if (stackLevels > 0) then
+						printStackTrace(stackLevels, 2)
+					end
+
+					return unpack(retVal)
+				end
+			end
+		)
+	end
+
+	function t.mockCustom(index, newIndex)
+		local meta = {}
+
+		if (index ~= nil) then
+			meta.__index = index
+		end
+
+		if (newIndex ~= nil) then
+			meta.__newindex = newIndex
+		end
+
+		return setmetatable({}, meta)
+	end
+
 	return t
 end
 
-local function doTest(name, tester)
+local function doTest(testObj, testContext)
+	if (testContext == nil) then
+		testContext = {
+			logLevel = 2,
+			loggedAny = false,
+			lastNamespace = '',
+			printedNamespace = false
+		}
+	end
+
+	-- Print out tne namespace if its different to the last test
+	if (testContext.lastNamespace ~= testObj.namespace and testObj.namespace ~= nil) then
+		testContext.printedNamespace = false
+		if (testContext.logLevel > LOG_ALL) then
+			col.print(col.blue .. '[' .. testObj.namespace .. ']\n')
+			testContext.printedNamespace = true
+		end
+		testContext.lastNamespace = testObj.namespace
+	end
+
+	-- Print out the test name
+	if (testContext.logLevel > LOG_ALL) then
+		testContext.loggedAny = true
+		if (#testObj.name > 37) then
+			io.write(string.sub(testObj.name, 1, 37) .. ':')
+		else
+			io.write(testObj.name .. string.rep(' ', 37 - #testObj.name) .. ':')
+		end
+	end
+
 	local testParams = createTestParams()
 	local errors = {}
+
+	local testWrapper = function()
+		testObj.tester(testParams)
+		testParams.finalize()
+	end
+
+	local env = {}
+	env._G = env
+	setmetatable(env, {__index = _G})
+	setfenv(testWrapper, env)
+
+	-- Start buffering calls to io.write and print (so they dont interfere with the nice formatting)
+	local oldwrite = io.write
+	local oldprint = print
+	local printlines = {}
+
+	io.write = function(...)
+		table.insert(printlines, {'write', {...}})
+	end
+	print = function(...)
+		table.insert(printlines, {'print', {...}})
+	end
+
 	local success, result =
 		xpcall(
-		function()
-			tester(testParams)
-			testParams.finalize()
-		end,
+		testWrapper,
 		function(err)
 			table.insert(errors, err)
 		end
 	)
 
+	-- Restore printing functions
+	io.write = oldwrite
+	print = oldprint
+
+	--TODO: potentially check for changes to env to detect side-effects?
+
+	if (testContext.logLevel > LOG_SOME) then
+		if (testContext.logLevel <= LOG_ALL and not success) then
+			if (not testContext.printedNamespace) then
+				col.print(col.blue .. '[' .. testObj.namespace .. ']\n')
+				testContext.printedNamespace = true
+			end
+
+			testContext.loggedAny = true
+
+			if (#testObj.name > 37) then
+				io.write(string.sub(testObj.name, 1, 37) .. ':')
+			else
+				io.write(testObj.name .. string.rep(' ', 37 - #testObj.name) .. ':')
+			end
+		end
+		if (testContext.logLevel > LOG_ALL or not success) then
+			if (success) then
+				col.print(col.green, 'O\n')
+			else
+				col.print(col.red, 'X\n')
+			end
+
+			-- Print all the buffered calls to io.write and print
+			for i = 1, #printlines do
+				if (printlines[i][1] == 'write') then
+					io.write(unpack(printlines[i][2]))
+				else
+					print(unpack(printlines[i][2]))
+				end
+			end
+
+			-- Print any errors
+			for _, errMsg in ipairs(errors) do
+				col.print(col.red, ' ' .. errMsg .. '\n')
+			end
+		end
+	end
+
 	return success, errors
 end
 
+local testMeta = {
+	__index = function(test, key)
+		if (key == 'fullName') then
+			if (rawget(test, 'namespace') ~= nil) then
+				return rawget(test, 'namespace') .. '.' .. rawget(test, 'name')
+			else
+				return rawget(test, 'name')
+			end
+		end
+
+		return rawget(test, key)
+	end
+}
 local tests = {}
 
 --[[
@@ -199,114 +359,44 @@ function test(namespace, name, tester)
 
 	table.insert(
 		tests,
-		{
-			namespace = namespace,
-			name = name,
-			tester = tester
-		}
+		setmetatable(
+			{
+				namespace = namespace,
+				name = name,
+				tester = tester
+			},
+			testMeta
+		)
 	)
 end
 
-local LOG_NONE = -1
-local LOG_SOME = 0
-local LOG_ALL = 1
-function runTests(logLevel)
-	local testPass = 0
-
+function runTests(tests, logLevel)
 	if (logLevel == nil) then
 		logLevel = 0
 	end
 
-	local lastNamespace = ''
-	local loggedAny = false
-	local printedNamespace = false
-	for _, v in ipairs(tests) do
-		-- Print out tne namespace if its different to the last test
-		if (lastNamespace ~= v.namespace and v.namespace ~= nil) then
-			printedNamespace = false
-			if (logLevel > LOG_ALL) then
-				col.print(col.blue .. '[' .. v.namespace .. ']\n')
-				printedNamespace = true
-			end
-			lastNamespace = v.namespace
-		end
+	local testContext = {
+		logLevel = logLevel,
+		loggedAny = false,
+		lastNamespace = '',
+		printedNamespace = false
+	}
 
-		-- Print out the test name
-		if (logLevel > LOG_ALL) then
-			loggedAny = true
-			if (#v.name > 37) then
-				io.write(string.sub(v.name, 1, 37) .. ':')
-			else
-				io.write(v.name .. string.rep(' ', 37 - #v.name) .. ':')
-			end
-		end
+	local testPass = 0
 
-		-- Start buffering calls to io.write and print (so they dont interfere with the nice formatting)
-		local oldwrite = io.write
-		local oldprint = print
-		local printlines = {}
-
-		io.write = function(...)
-			table.insert(printlines, {'write', {...}})
-		end
-		print = function(...)
-			table.insert(printlines, {'print', {...}})
-		end
-
+	for _, testObj in ipairs(tests) do
 		-- Actually run the test
-		local success, errors = doTest(v.name, v.tester)
-
-		-- Restore printing functions
-		io.write = oldwrite
-		print = oldprint
+		local success, errors = doTest(testObj, testContext)
 
 		if (success) then
 			testPass = testPass + 1
 		end
-
-		if (logLevel > LOG_SOME) then
-			if (logLevel <= LOG_ALL and not success) then
-				if (not printedNamespace) then
-					col.print(col.blue .. '[' .. v.namespace .. ']\n')
-					printedNamespace = true
-				end
-
-				loggedAny = true
-
-				if (#v.name > 37) then
-					io.write(string.sub(v.name, 1, 37) .. ':')
-				else
-					io.write(v.name .. string.rep(' ', 37 - #v.name) .. ':')
-				end
-			end
-			if (logLevel > LOG_ALL or not success) then
-				if (success) then
-					col.print(col.green, 'O\n')
-				else
-					col.print(col.red, 'X\n')
-				end
-
-				-- Print all the buffered calls to io.write and print
-				for i = 1, #printlines do
-					if (printlines[i][1] == 'write') then
-						io.write(unpack(printlines[i][2]))
-					else
-						print(unpack(printlines[i][2]))
-					end
-				end
-
-				-- Print any errors
-				for _, v in ipairs(errors) do
-					col.print(col.red, ' ' .. v .. '\n')
-				end
-			end
-		end
 	end
 
-	if (logLevel > LOG_ALL or loggedAny) then
+	if (testContext.logLevel > LOG_ALL or testContext.loggedAny) then
 		print()
 	end
-	if (logLevel > LOG_SOME or testPass ~= #tests) then
+	if (testContext.logLevel > LOG_SOME or testPass ~= #tests) then
 		print(testPass .. ' out of ' .. #tests .. ' tests passed.')
 	end
 end
@@ -345,6 +435,21 @@ for _, file in ipairs(testFiles) do
 	dofile(file)
 end
 
-print('Running startup tests...')
-print()
-runTests(1)
+local args = {...}
+if (#args == 0) then
+	print('Running startup tests...')
+	print()
+	runTests(tests, 1)
+else
+	local testsToDo = {}
+	for _, testName in ipairs(args) do
+		local pattern = string.gsub(testName, '%.', '%%.')
+		pattern = '^' .. string.gsub(pattern, '%*', '[^%.]*') .. '$'
+		for _, testObj in ipairs(tests) do
+			if (string.match(testObj.fullName, pattern) ~= nil) then
+				table.insert(testsToDo, testObj)
+			end
+		end
+		runTests(testsToDo, 2)
+	end
+end
