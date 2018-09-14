@@ -6,7 +6,7 @@
 		{
 			"label": "test",
 			"type": "shell",
-			"command": "lua test.lua",
+			"command": "lua run test",
 			"group": "test",
 			"presentation": {
 				"echo": true,
@@ -16,7 +16,7 @@
 				"showReuseMessage": false
 			},
 			"osx": {
-				"command": "/usr/local/opt/lua@5.1/bin/lua5.1 test.lua"
+				"command": "/usr/local/opt/lua@5.1/bin/lua5.1 run test"
 			}
 		}
 	]

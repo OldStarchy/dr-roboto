@@ -1,4 +1,6 @@
---dofile 'bootstrap.lua'
+dofile 'bootstrap.lua'
+require 'Core'
+
 loadfile('test.lua')(1)
 
 include 'UserFunctions/_main'

@@ -1,7 +1,3 @@
---Manually call bootstrap.lua for when its run on PC
-dofile 'bootstrap.lua'
-
-require 'Core'
 local col = require 'Util/TextColors'
 
 local LOG_NONE = -1
