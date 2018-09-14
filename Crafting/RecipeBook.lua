@@ -5,7 +5,9 @@ function RecipeBook:constructor()
 end
 
 function RecipeBook:add(recipe)
-	--TODO: Check arg is actually a recipe
+	if (recipe.getType() ~= Recipe) then
+		error('Attempt to add a non recipe to a book', 2)
+	end
 
 	--TODO: Check recipe isn't already defined to make something else
 
