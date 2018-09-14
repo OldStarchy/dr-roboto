@@ -455,7 +455,7 @@ local function loadAllTests()
 end
 
 local args = {...}
-local loglevel = 2
+local loglevel = 1
 if (#args > 0) then
 	if (tonumber(args[1]) ~= nil) then
 		loglevel = tonumber(table.remove(args, 1))
