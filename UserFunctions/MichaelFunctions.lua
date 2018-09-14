@@ -1,5 +1,5 @@
 local function regMikeFunc(...)
-	registerUserFunctionFromFile('/MichaelStuff.lua', ...)
+	registerUserFunctionFromFile('MichaelStuff.lua', ...)
 end
 
 regMikeFunc('goToGround')
