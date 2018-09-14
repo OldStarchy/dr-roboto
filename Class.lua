@@ -29,17 +29,7 @@ function Class(parent)
 	end
 
 	local classType = {
-		__index = function(class, key)
-			if (key == 'new') then
-				return function(...)
-					print('WARING, use of .new() is deprecated and will be removed sometime soon')
-					printStackTrace(1, 2)
-					return new(nil, ...)
-				end
-			else
-				return rawget(class, key) or parent and parent[key]
-			end
-		end,
+		__index = parent,
 		__call = new
 	}
 	setmetatable(class, classType)
