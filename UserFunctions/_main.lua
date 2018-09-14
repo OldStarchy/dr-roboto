@@ -95,5 +95,9 @@ end
 
 function runUserFunction(name, ...)
 	local userFunctions = loadAllUserFunctions()
+	if (userFunctions[name] == nil) then
+		print('No function named ' .. name .. ' defined.')
+		return
+	end
 	return userFunctions[name].func(...)
 end
