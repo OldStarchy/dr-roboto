@@ -22,7 +22,7 @@ local function loadAllUserFunctions()
 	)
 	local files = fs.listRecursive('/UserFunctions')
 	for _, file in ipairs(files) do
-		if (not ends_with(file, 'UserFunctions.lua')) then
+		if (not ends_with(file, '_main.lua')) then
 			if (ends_with(file, '.lua')) then
 				pcall(
 					function()
