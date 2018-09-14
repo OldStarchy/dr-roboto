@@ -1,7 +1,7 @@
 RecipeBook = Class()
 
 function RecipeBook:constructor()
-	self.recipes = {}
+	self._recipes = {}
 end
 
 function RecipeBook:add(recipe)
@@ -9,22 +9,20 @@ function RecipeBook:add(recipe)
 		error('Attempt to add a non recipe to a book', 2)
 	end
 
-	--TODO: Check recipe isn't already defined to make something else
-
 	if (self:findByGrid(recipe.grid) ~= nil) then
 		return false
 	end
 
-	table.insert(self.recipes, recipe)
+	table.insert(self._recipes, recipe)
 	return true
 end
 
 function RecipeBook:findByName(name)
 	local recipes = {}
 
-	for i = 1, #self.recipes do
-		if (self.recipes[i].name == name) then
-			table.insert(recipes, self.recipes[i])
+	for i = 1, #self._recipes do
+		if (self._recipes[i].name == name) then
+			table.insert(recipes, self._recipes[i])
 		end
 	end
 
@@ -32,17 +30,17 @@ function RecipeBook:findByName(name)
 end
 
 function RecipeBook:findByGrid(recipe)
-	for i = 1, #self.recipes do
+	for i = 1, #self._recipes do
 		local match = true
 		for j = 1, 9 do
-			if (self.recipes[i].grid[j] ~= recipe[j]) then
+			if (self._recipes[i].grid[j] ~= recipe[j]) then
 				match = false
 				break
 			end
 		end
 
 		if (match) then
-			return self.recipes[i]
+			return self._recipes[i]
 		end
 	end
 
