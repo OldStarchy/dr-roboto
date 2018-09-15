@@ -13,6 +13,7 @@ require 'Skills/TreeFarmSkill'
 
 --Mods / APIs
 require 'Crafting/Crafter'
+require 'Inventory/Chest'
 require 'Inventory/ItemStorage'
 require 'Inventory/Inventory'
 require 'Navigation/Gps'
