@@ -82,6 +82,8 @@ function Furnace:gotoFront()
 	return false
 end
 
+--Puts one item in the top, and one in the bottom of a furnace
+--then waits 12 seconds for it to cook, and takes the item out
 function Furnace:smelt(item, fuel)
 	print('smelting ' .. item)
 	self:gotoTop()
