@@ -1,25 +1,33 @@
+-- Generates a snippets file for all the apis currently available on the computercraft computer its run on
+-- The snippets file can be used in vscode to provide autocomplete.
+-- Won't create snippets for things starting wtih an underscore, or for the 'turtle' namespace (because there's already a better set of turtle snippets in .vscode/luasnippets.json)
 local done = {}
 local results = {}
 
-local function iterateTable(tbl, prefix)
+local function iterateTable(tbl, prefix, depth)
+	if (depth == nil) then
+		depth = 1
+	end
 	if (done[tbl]) then
 		return
 	end
 	done[tbl] = true
 	for i, v in pairs(tbl) do
-		if (type(v) == 'function') then
-			if (prefix) then
-				if (prefix ~= 'turtle') then
-					table.insert(results, prefix .. '.' .. i)
+		if (type(i) ~= 'string' or i:sub(1, 1) ~= '_') then
+			if (type(v) == 'function') then
+				if (prefix) then
+					if (prefix ~= 'turtle') then
+						table.insert(results, prefix .. '.' .. i)
+					end
+				else
+					table.insert(results, i)
 				end
-			else
-				table.insert(results, i)
-			end
-		elseif (type(v) == 'table') then
-			if (prefix) then
-				iterateTable(v, prefix .. '.' .. i)
-			else
-				iterateTable(v, i)
+			elseif (type(v) == 'table' and depth > 0) then
+				if (prefix) then
+					iterateTable(v, prefix .. '.' .. i, depth - 1)
+				else
+					iterateTable(v, i, depth - 1)
+				end
 			end
 		end
 	end
@@ -40,22 +48,36 @@ end
 
 iterateMetatables(_G)
 
+local ind = 1
 f = fs.open('snippets.json', 'w')
 function writeSnippet(snippet)
 end
 f.write('{\n')
 for i = 1, #results do
 	local snippet = results[i]
-	f.write('\t"' .. snippet .. '()": {\n')
-	f.write('\t\t"prefix": "' .. snippet .. '",\n')
-	f.write('\t\t"body": [\n')
-	f.write('\t\t\t"' .. snippet .. '($0)"\n')
-	f.write('\t\t],\n')
-	f.write('\t\t"description": ""\n')
+	local text = ''
+	text = text .. '\t"' .. snippet .. '()": {\n'
+	text = text .. '\t\t"prefix": "' .. snippet .. '",\n'
+	text = text .. '\t\t"body": [\n'
+	text = text .. '\t\t\t"' .. snippet .. '($0)"\n'
+	text = text .. '\t\t],\n'
+	text = text .. '\t\t"description": ""\n'
 	if (i == #results) then
-		f.write('\t}\n')
+		text = text .. '\t}\n'
 	else
-		f.write('\t},\n')
+		text = text .. '\t},\n'
+	end
+	if
+		(not pcall(
+			function()
+				f.write(text)
+			end
+		))
+	 then
+		f.close()
+		f = fs.open('snippets' .. ind .. '.json', 'w')
+		ind = ind + 1
+		f.write(text)
 	end
 end
 f.write('}')
