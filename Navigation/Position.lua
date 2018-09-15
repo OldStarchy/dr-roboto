@@ -5,6 +5,13 @@ Position.NORTH = 1
 Position.WEST = 2
 Position.SOUTN = 3
 
+Position.directionNames = {
+	[0] = 'EAST',
+	[1] = 'NORTH',
+	[2] = 'WEST',
+	[3] = 'SOUTN'
+}
+
 Position.offsets = {
 	[Position.EAST] = {x = 1, z = 0},
 	[Position.NORTH] = {x = 0, z = -1},

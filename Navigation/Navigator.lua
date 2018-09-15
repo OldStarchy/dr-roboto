@@ -57,6 +57,7 @@ function Navigator:popPosition()
 	return false
 end
 
+
 -- Moves the turtle
 -- direction can be 'up', 'down', 'forward', or 'back'
 function Navigator:move(direction, distance)
@@ -429,6 +430,17 @@ function Navigator:_turnLeft()
 	self._position:rotate(1)
 
 	return unpack(result)
+end
+
+function Navigation:_afterMove()
+	print('Current position:')
+	print('x', 'y', 'z', 'direction')
+	print(
+		self._position.x,
+		self._position.y,
+		self._position.z,
+		Position.directionNames[self._position.direction]
+	)
 end
 
 Nav = Navigator(turtle)
