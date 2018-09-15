@@ -12,6 +12,7 @@ require 'Skills/SkillSet'
 require 'Skills/TreeFarmSkill'
 
 --Mods / APIs
+require 'Crafting/Furnace'
 require 'Crafting/Crafter'
 require 'Inventory/Chest'
 require 'Inventory/ItemStorage'
