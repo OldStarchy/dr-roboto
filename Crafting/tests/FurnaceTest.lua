@@ -4,7 +4,7 @@ test(
 		Constructor = {
 			['Goto Top'] = function(t)
 				local location = Position(5, 5, 5, Position.SOUTH)
-				local obj = Furnace(location)
+				local obj = Furnace('furnace', location)
 
 				obj:navigateTo()
 				t.assertEqual(Nav:getX(), 5)

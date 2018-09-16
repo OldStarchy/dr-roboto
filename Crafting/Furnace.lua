@@ -1,7 +1,14 @@
 Furnace = Class(Block)
 
-function Furnace:constructor(location)
-	Block:constructor(location)
+--[[
+	name: name of the item, 'chest', 'furnace', or block query that is used to select the item from inventory
+	location: Position
+
+	where the direction provided in Position will be the approach direction
+	from the turtle to the block
+]]
+function Furnace:constructor(name, location)
+	Block:constructor(name, location)
 	self._book = RecipeBook()
 
 	self._top = nil
