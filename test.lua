@@ -20,6 +20,10 @@ local function createTestParams()
 			errorString = '\nAssert Table Equal,\n'
 		end
 
+		if result == expected then
+			return
+		end
+
 		for k1, v1 in next, result do
 			if not expected[k1] then
 				error(errorString .. 'Unexpected key "' .. tostring(k1) .. '"', 2)

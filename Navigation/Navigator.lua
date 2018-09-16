@@ -224,7 +224,7 @@ function Navigator:orientFromGps(gps)
 	elseif (dx < 0) then
 		direction = Position.WEST
 	elseif (dz > 0) then
-		direction = Position.SOUTN
+		direction = Position.SOUTH
 	elseif (dz < 0) then
 		direction = Position.NORTH
 	else

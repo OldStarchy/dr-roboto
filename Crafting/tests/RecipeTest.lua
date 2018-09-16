@@ -15,6 +15,9 @@ test(
 			['Correct Items Required'] = function(t)
 				local obj = Recipe('stick', {'plank', nil, nil, 'plank', 'log'}, 4)
 				t.assertTableEqual(obj.items, {['plank'] = 2, ['log'] = 1})
+				--verify the table equals method
+				t.assertEqual(obj.items['plank'], 2)
+				t.assertEqual(obj.items['log'], 1)
 			end
 		}
 

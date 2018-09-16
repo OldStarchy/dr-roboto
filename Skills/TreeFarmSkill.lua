@@ -16,7 +16,7 @@ function TreeFarmSkill:performNextAction()
 end
 
 function TreeFarmSkill:canHandleTask(task)
-	if (task.type == GatherItemTask) then
+	if task.getType() == 'GatherItemTask' then
 		if (task.item.name == 'log') then
 			return true
 		end

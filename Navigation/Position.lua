@@ -3,13 +3,13 @@ Position = Class()
 Position.EAST = 0
 Position.NORTH = 1
 Position.WEST = 2
-Position.SOUTN = 3
+Position.SOUTH = 3
 
 Position.offsets = {
 	[Position.EAST] = {x = 1, z = 0},
 	[Position.NORTH] = {x = 0, z = -1},
 	[Position.WEST] = {x = -1, z = 0},
-	[Position.SOUTN] = {x = 0, z = 1}
+	[Position.SOUTH] = {x = 0, z = 1}
 }
 
 function Position.wrapDirection(direction)
