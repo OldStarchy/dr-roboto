@@ -92,7 +92,7 @@ function Furnace:smelt(furnaceRecipe, quantity, fuel)
 	print('smelting ' .. furnaceRecipe.name)
 
 	self:gotoTop()
-	Inv:select(item)
+	Inv:select(furnaceRecipe.ingredient)
 	Inv:dropDown(1)
 	self:gotoFront()
 	Inv:select(fuel)
