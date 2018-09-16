@@ -432,7 +432,7 @@ function Navigator:_turnLeft()
 	return unpack(result)
 end
 
-function Navigation:_afterMove()
+function Navigator:_afterMove()
 	print('Current position:')
 	print('x', 'y', 'z', 'direction')
 	print(

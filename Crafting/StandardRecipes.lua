@@ -11,7 +11,7 @@ standardRecipes:add(Recipe('torch', {'coal', nil, nil, 'stick'}, 4))
 --log 15
 --plank 15
 --stick 5
-furnaceRecipeBook = RecipeBook()
+--furnaceRecipeBook = RecipeBook()
 
-furnaceRecipeBook:add(FurnaceRecipe('stone', 'cobblestone', 1, 10))
-furnaceRecipeBook:add(FurnaceRecipe('charcoal', 'log', 1, 10))
+--furnaceRecipeBook:add(FurnaceRecipe('stone', 'cobblestone', 1, 10))
+--furnaceRecipeBook:add(FurnaceRecipe('charcoal', 'log', 1, 10))

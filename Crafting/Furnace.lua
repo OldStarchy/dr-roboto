@@ -1,9 +1,8 @@
-Furnace = Class()
+Furnace = Class(Block)
 
 function Furnace:constructor(location)
+	Block:constructor(location)
 	self._book = RecipeBook()
-
-	self.location = location
 
 	self._top = nil
 	self._output = nil

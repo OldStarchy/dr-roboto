@@ -2,7 +2,9 @@ require 'Class'
 
 --Classes
 require 'Log'
+require 'Block'
 require 'Crafting/Recipe'
+require 'Crafting/FurnaceRecipe'
 require 'Crafting/RecipeBook'
 require 'Navigation/Position'
 
