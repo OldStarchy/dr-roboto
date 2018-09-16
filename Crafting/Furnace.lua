@@ -82,19 +82,27 @@ function Furnace:gotoFront()
 	return false
 end
 
+--TODO: Face the furnace.
 --Puts one item in the top, and one in the bottom of a furnace
 --then waits 12 seconds for it to cook, and takes the item out
-function Furnace:smelt(item, fuel)
-	print('smelting ' .. item)
+function Furnace:smelt(furnaceRecipe, quantity, fuel)
+	if furnaceRecipe.getType() ~= FurnaceRecipe then
+		return error('Can not smelt object that is not a furnace recipe')
+	end
+	print('smelting ' .. furnaceRecipe.name)
+
 	self:gotoTop()
 	Inv:select(item)
 	Inv:dropDown(1)
 	self:gotoFront()
 	Inv:select(fuel)
 	Inv:drop()
-	local timerId = os.startTimer(12)
+
+	local burnTime = furnaceRecipe.burnTime * quantity
+
+	local timerId = os.startTimer(burnTime)
 	local timers = {}
-	for i = 1, 11 do
+	for i = 1, (burnTime - 1) do
 		timers[os.startTimer(i)] = i
 	end
 	self:gotoBottom()
@@ -105,7 +113,7 @@ function Furnace:smelt(item, fuel)
 			break
 		end
 		if (timers[id]) then
-			print(12 - timers[id])
+			print(burnTime - timers[id])
 		end
 	end
 

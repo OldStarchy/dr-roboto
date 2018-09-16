@@ -1,6 +1,8 @@
 function Class(parent)
 	local class = {}
 
+	--TODO: To string method
+
 	function class.getType()
 		return class
 	end
