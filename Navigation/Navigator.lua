@@ -71,10 +71,6 @@ function Navigator:move(direction, distance)
 		return true
 	end
 
-	if (self._turtle.getFuelLevel() == 0) then
-		return false, Navigator.NO_FUEL, 'There is a lack of fuel in the way'
-	end
-
 	local move, detect, dig, attack
 
 	if (direction == 'forward') then
@@ -96,6 +92,10 @@ function Navigator:move(direction, distance)
 
 	for i = 1, distance do
 		if (not move()) then
+			if (self._turtle.getFuelLevel() == 0) then
+				return false, Navigator.NO_FUEL, 'There is a lack of fuel in the way'
+			end
+
 			if (detect()) then
 				if (self.autoDig) then
 					while (detect()) do
@@ -311,7 +311,7 @@ end
 --[[ usage:
 goto(y)
 goto(x, z)
-goto(x, y, z) 
+goto(x, y, z)
 goto({x, y, z})
 goto({x = x, y = y, z = z})
 ]]
