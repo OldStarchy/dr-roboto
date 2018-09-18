@@ -1,5 +1,5 @@
 dofile 'bootstrap.lua'
-require 'Core'
+include 'Core/_main'
 
 loadfile('test.lua')(1)
 

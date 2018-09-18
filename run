@@ -1,6 +1,6 @@
 if (runUserFunction == nil) then
 	dofile 'bootstrap.lua'
-	include 'Core'
+	include 'Core/_main'
 	include 'UserFunctions/_main'
 end
 runUserFunction(...)

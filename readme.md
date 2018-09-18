@@ -300,13 +300,13 @@ A few of the ComputerCraft specific apis have polyfills to provide compatibility
 
 ```lua
 dofile 'bootstrap.lua'
-require 'Core'
+include 'Core/_main'
 ```
 
 After that you can run commands as you would through the Turtle's lua prompt.
 
 ```lua
-go = require 'Go/_main'
+go = include 'Go/_main'
 go:execute('udlr', true)
 ```
 
