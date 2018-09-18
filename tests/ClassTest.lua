@@ -15,13 +15,6 @@ test(
 
 				t.assertEqual(constructorCalled, true)
 			end,
-			['Get Type'] = function(t)
-				local A = Class()
-
-				local object = A()
-
-				t.assertEqual(object.getType(), A)
-			end,
 			['Missing'] = function(t)
 				local A = Class()
 
@@ -132,8 +125,7 @@ test(
 			end
 		},
 		--TODO: static methods
-		--TODO: type checking
-		['Inherited'] = {
+		Inheritance = {
 			['Default Constructor'] = function(t)
 				local A = Class()
 
@@ -213,6 +205,51 @@ test(
 
 				t.assertEqual(methodCalled, true)
 			end
-		}
+		},
+		['Get Type'] = function(t)
+			local A = Class()
+
+			local object = A()
+
+			t.assertEqual(object:getType(), A)
+		end,
+		['Is Type'] = function(t)
+			local A = Class()
+			local B = Class(A)
+			local C = Class(B)
+
+			local object = B()
+
+			t.assertEqual(object:isType(A), true)
+			t.assertEqual(object:isType(B), true)
+			t.assertEqual(object:isType(C), false)
+		end,
+		['To String'] = function(t)
+			local A = Class()
+
+			function A:toString()
+				return 'custom tostring result'
+			end
+
+			local object = A()
+
+			t.assertEqual(tostring(object), 'custom tostring result')
+		end,
+		['Default To String'] = function(t)
+			local A = Class()
+
+			local object = A()
+
+			local str = tostring(object)
+
+			-- Please don't do this kind of thing outside of tests
+			setmetatable(object, nil)
+
+			local nativeStr = tostring(object)
+
+			local expectedStr = nativeStr:gsub('table', 'class')
+
+			t.assertEqual(str, expectedStr)
+		end
 	}
 )
