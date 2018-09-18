@@ -9,4 +9,7 @@
 	"files.insertFinalNewline": true,
 	"files.trimFinalNewlines": true,
 	"todo-tree.regex": "((//|#|<!--|;|/\\*|--|^)\\s*($TAGS)|^\\s*- \\[ \\])",
+	"cSpell.words": [
+		"dofile"
+	],
 }
