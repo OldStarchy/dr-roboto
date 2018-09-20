@@ -29,6 +29,7 @@ function Move:constructor(turtle)
 	self._position = Position()
 	self._turtle = turtle
 	self._oldTurtle = {}
+	self._autoPropsStack = {}
 
 	self:_attach()
 end
@@ -40,6 +41,38 @@ Move.HIT_BEDROCK = 3
 Move.NO_FUEL = 4
 
 -- Public
+
+function Move:push(autoDig, autoAttack, autoFuel)
+	table.insert(
+		self._autoPropsStack,
+		{
+			autoDig = self.autoDig,
+			autoAttack = self.autoAttack,
+			autoFuel = self.autoFuel
+		}
+	)
+
+	if (type(autoDig) == 'boolean') then
+		self.autoDig = autoDig
+	end
+	if (type(autoAttack) == 'boolean') then
+		self.autoAttack = autoAttack
+	end
+	if (type(autoFuel) == 'boolean') then
+		self.autoFuel = autoFuel
+	end
+end
+
+function Move:pop()
+	if (#self._autoPropsStack > 0) then
+		local props = table.remove(self._autoPropsStack)
+		self.autoDig = props.autoDig
+		self.autoAttack = props.autoAttack
+		self.autoFuel = props.autoFuel
+	else
+		error('Too many calls to Move:pop', 2)
+	end
+end
 
 function Move:setPosition(position)
 	assert(position.isType(Position))
