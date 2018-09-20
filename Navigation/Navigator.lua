@@ -30,7 +30,7 @@ end
 function Navigator:popPosition()
 	if (#self._locationStack > 0) then
 		local location = table.remove(self._locationStack, #self._locationStack)
-		return self:moveTo(location), location
+		return self:goTo(location), location
 	end
 	return false
 end
@@ -53,7 +53,7 @@ function Navigator:getPosition()
 end
 
 -- Go to absolute x coordinate
-function Navigator:moveToX(x)
+function Navigator:goToX(x)
 	local dir = self:getDirection()
 	local delta = x - self:getX()
 
@@ -70,7 +70,7 @@ function Navigator:moveToX(x)
 	end
 end
 
-function Navigator:moveToY(y)
+function Navigator:goToY(y)
 	local delta = y - self:getY()
 
 	if (delta == 0) then
@@ -84,7 +84,7 @@ function Navigator:moveToY(y)
 	end
 end
 
-function Navigator:moveToZ(z)
+function Navigator:goToZ(z)
 	local dir = self:getDirection()
 	local delta = z - self._position.z
 
@@ -102,13 +102,13 @@ function Navigator:moveToZ(z)
 end
 
 --[[ usage:
-moveTo(y)
-moveTo(x, z)
-moveTo(x, y, z)
-moveTo({x, y, z})
-moveTo({x = x, y = y, z = z})
+goTo(y)
+goTo(x, z)
+goTo(x, y, z)
+goTo({x, y, z})
+goTo({x = x, y = y, z = z})
 ]]
-function Navigator:moveTo(x, y, z)
+function Navigator:goTo(x, y, z)
 	if (type(z) == 'nil') then
 		if (type(y) == 'nil') then
 			if (type(x) == 'nil') then
@@ -121,7 +121,7 @@ function Navigator:moveTo(x, y, z)
 						x, y, z = x.x or x[1], x.y or x[2], x.z or x[3]
 					end
 				else
-					return self:moveToY(x)
+					return self:goToY(x)
 				end
 			end
 		else
@@ -131,9 +131,9 @@ function Navigator:moveTo(x, y, z)
 		end
 	end
 
-	self:moveToX(x)
-	self:moveToZ(z)
-	self:moveToY(y)
+	self:goToX(x)
+	self:goToZ(z)
+	self:goToY(y)
 	return x == self:getX() and y == self:getY() and z == self._position.z
 end
 

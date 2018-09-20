@@ -31,7 +31,7 @@ end
 
 -- TODO: make smarted
 function Block:navigateTo()
-	Nav:moveTo(self.interfaceLocation.x, self.interfaceLocation.y, self.interfaceLocation.z)
+	Nav:goTo(self.interfaceLocation.x, self.interfaceLocation.y, self.interfaceLocation.z)
 	Mov:face(self.interfaceLocation.direction)
 end
 
