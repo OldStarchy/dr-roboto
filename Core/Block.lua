@@ -14,19 +14,13 @@ function Block:constructor(name, location)
 	self.name = name
 
 	self.interfaceLocation = Position(location.x, location.y, location.z, location.direction)
+	self.interfaceLocation:sub(Position.offsets[location.direction])
+end
 
-	local approachDirection = location.direction
-	if approachDirection == Position.NORTH then
-		self.interfaceLocation:sub({z = 1})
-	elseif approachDirection == Position.SOUTH then
-		self.interfaceLocation:add({z = 1})
-	elseif approachDirection == Position.EAST then
-		self.interfaceLocation:add({x = 1})
-	elseif approachDirection == Position.WEST then
-		self.interfaceLocation:sub({x = 1})
-	else
-		error('direction ' .. approachDirection .. 'is not a valid direction')
-	end
+function Block:toString()
+	return 'Block: ' ..
+		tostring(self.name) ..
+			' at location: ' .. self.location:toString() .. ', interface location: ' .. self.interfaceLocation:toString()
 end
 
 -- TODO: make smarted

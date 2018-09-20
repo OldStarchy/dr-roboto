@@ -112,6 +112,7 @@ function Move:move(direction, distance)
 
 	distance = type(distance) == 'number' and distance or 1
 
+	print('moving ' .. direction .. ' for ' .. distance .. ' blocks')
 	if (distance == 0) then
 		return true
 	end
@@ -142,6 +143,7 @@ function Move:move(direction, distance)
 	end
 
 	for i = 1, distance do
+		print('moving')
 		if (not move()) then
 			if (self._turtle.getFuelLevel() == 0) then
 				return false, Move.NO_FUEL, 'There is a lack of fuel in the way'
@@ -160,16 +162,14 @@ function Move:move(direction, distance)
 					return false, Move.HIT_BLOCK, 'There is a block in the way'
 				end
 			end
-		else
-			return true
-		end
 
-		while (not move()) do
-			if (self.autoAttack) then
-				while (attack()) do
+			while (not move()) do
+				if (self.autoAttack) then
+					while (attack()) do
+					end
+				else
+					return false, Move.HIT_MOB, 'There is a mob in the way'
 				end
-			else
-				return false, Move.HIT_MOB, 'There is a mob in the way'
 			end
 		end
 	end

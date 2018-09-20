@@ -9,7 +9,7 @@ Position.directionNames = {
 	[0] = 'EAST',
 	[1] = 'NORTH',
 	[2] = 'WEST',
-	[3] = 'SOUTN'
+	[3] = 'SOUTH'
 }
 
 Position.offsets = {
@@ -74,4 +74,8 @@ function Position:getDirectionOffset(direction)
 		return 0
 	end
 	return Position.wrapDirection(direction - self.direction)
+end
+
+function Position:toString()
+	return 'x: ' .. self.x .. ', y: ' .. self.y .. ', z: ' .. self.z
 end
