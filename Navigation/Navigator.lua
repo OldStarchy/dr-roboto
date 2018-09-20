@@ -86,7 +86,7 @@ end
 
 function Navigator:goToZ(z)
 	local dir = self:getDirection()
-	local delta = z - self:getPosition().z
+	local delta = z - self:getZ()
 
 	if (delta == 0) then
 		return true
@@ -134,7 +134,7 @@ function Navigator:goTo(x, y, z)
 	self:goToX(x)
 	self:goToZ(z)
 	self:goToY(y)
-	return x == self:getX() and y == self:getY() and z == self:getPosition().z
+	return x == self:getX() and y == self:getY() and z == self:getZ()
 end
 
 Nav = Navigator(Mov)
