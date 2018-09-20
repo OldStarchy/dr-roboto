@@ -250,6 +250,32 @@ test(
 			local expectedStr = nativeStr:gsub('table', 'class')
 
 			t.assertEqual(str, expectedStr)
+		end,
+		['Is Equal'] = function(t)
+			local A = Class()
+
+			local a = nil
+			local b = nil
+
+			function A:isEqual(other)
+				return true
+			end
+
+			a = A()
+			b = A()
+
+			t.assertEqual(a == b, true)
+		end,
+		['Default Is Equal'] = function(t)
+			local A = Class()
+
+			local a = nil
+			local b = nil
+
+			a = A()
+			b = A()
+
+			t.assertEqual(a == b, false)
 		end
 	}
 )

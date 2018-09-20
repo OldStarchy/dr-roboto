@@ -25,6 +25,21 @@ function Class(parent)
 
 			objectMeta.__tostring = oldToString
 			return result
+		end,
+		__eq = function(self, other)
+			local oldEq = objectMeta.__eq
+			-- Allow native == to work
+			objectMeta.__eq = nil
+
+			local result = ''
+			if (type(class.isEqual) == 'function') then
+				result = class.isEqual(self, other)
+			else
+				result = self == other
+			end
+
+			objectMeta.__eq = oldEq
+			return result
 		end
 	}
 
