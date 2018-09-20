@@ -408,7 +408,7 @@ local function findTests(directory)
 			local files = fs.list(currentDirectory)
 
 			for _, file in ipairs(files) do
-				if (fs.isDir(file)) then
+				if (fs.isDir(currentDirectory .. '/' .. file)) then
 					if (file ~= '.' and file ~= '..') then
 						table.insert(dirsToCheck, currentDirectory .. '/' .. file)
 					end
