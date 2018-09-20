@@ -8,7 +8,7 @@ Block = Class()
 	from the turtle to the block
 ]]
 function Block:constructor(name, location)
-	assert(location.isType(Position), 'Location must be of type Position')
+	assert(location:isType(Position), 'Location must be of type Position')
 
 	self.location = location
 	self.name = name
