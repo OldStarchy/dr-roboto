@@ -35,7 +35,7 @@ function Furnace:gotoBottom()
 		return true
 	end
 	if (self._pos == 'front') then
-		if (Nav:down() and Nav:forward()) then
+		if (Mov:down() and Mov:forward()) then
 			self._pos = 'bottom'
 			return true
 		else
@@ -52,7 +52,7 @@ function Furnace:gotoTop()
 		return true
 	end
 	if (self._pos == 'front') then
-		if (Nav:up() and Nav:forward()) then
+		if (Mov:up() and Mov:forward()) then
 			self._pos = 'top'
 			return true
 		else
@@ -69,7 +69,7 @@ function Furnace:gotoFront()
 		return true
 	end
 	if (self._pos == 'top') then
-		if (Nav:back() and Nav:down()) then
+		if (Mov:back() and Mov:down()) then
 			self._pos = 'front'
 			return true
 		else
@@ -77,7 +77,7 @@ function Furnace:gotoFront()
 			return false
 		end
 	elseif (self._pos == 'bottom') then
-		if (Nav:back() and Nav:up()) then
+		if (Mov:back() and Mov:up()) then
 			self._pos = 'front'
 			return true
 		else

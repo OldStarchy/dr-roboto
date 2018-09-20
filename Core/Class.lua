@@ -33,6 +33,10 @@ function Class(parent)
 	end
 
 	function class:isType(clazz)
+		if (self == clazz) then
+			error('Called isType on class, did you use "." instead of ":"?')
+		end
+
 		if (class == clazz) then
 			return true
 		elseif (parent == nil) then
