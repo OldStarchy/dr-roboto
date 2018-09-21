@@ -1,6 +1,37 @@
-local Miner = {}
+Miner = {}
 
-function Miner.needleMine(tracker)
+function Miner.needleMine()
+	Mov:push(true, true)
+
+	local depth
+
+	while (Mov:down()) do
+		depth = depth + 1
+
+		for i = 1, 4 do
+			if (Inv:isNiceToHave(Inv:detect())) then
+				turtle.dig()
+			end
+
+			Mov.turnRight()
+		end
+	end
+
+	while (depth > 0) do
+		Mov.up()
+		depth = depth - 1
+	end
+
+	Inv:select(Inv.rubbishBlock)
+
+	turtle.placeDown()
+
+	Mov:pop()
+
+	return true
+end
+
+function Miner.trackedNeedleMine(tracker)
 	Mov:push(true, true)
 
 	tracker:initVar('depth', 0)
