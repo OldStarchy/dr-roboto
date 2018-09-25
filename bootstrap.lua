@@ -103,7 +103,6 @@ _G.startlocal = function()
 	local oldenv = getfenv(2)
 	local env = {}
 	local isEnded = false
-	env._G = env
 	env.endlocal = function()
 		if (isEnded) then
 			return
@@ -112,7 +111,7 @@ _G.startlocal = function()
 		setfenv(2, oldenv)
 		return env
 	end
-	setfenv(2, setmetatable(env, {__index = _G}))
+	setfenv(2, setmetatable(env, {__index = oldenv}))
 end
 
 --Runs a file in the same environment (access to global variables) as the caller
