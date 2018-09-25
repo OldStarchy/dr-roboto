@@ -147,11 +147,6 @@ if (read == nil) then
 	end
 end
 
-local ignoreMissingGlobals = {
-	_PROMPT = true,
-	_PROMPT2 = true
-}
-
 --[[
 	Does not handle recursive tables
 ]]
@@ -209,6 +204,10 @@ function tableToString(tbl, ind, printed)
 	return r
 end
 
+local ignoreMissingGlobals = {
+	_PROMPT = true,
+	_PROMPT2 = true
+}
 setmetatable(
 	_G,
 	{
