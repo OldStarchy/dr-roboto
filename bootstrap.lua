@@ -9,10 +9,6 @@ if (os.loadAPI == nil) then
 	dofile '_polyfills/os.lua'
 end
 
-if (_G.require == nil) then
-	dofile '_polyfills/require.lua'
-end
-
 if (fs.listRecursive == nil) then
 	function fs.listRecursive(directory)
 		local results = {}

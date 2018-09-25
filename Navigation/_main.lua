@@ -1,5 +1,5 @@
-require 'Navigation/Position'
+include 'Navigation/Position'
 
-require 'Navigation/Move'
-require 'Navigation/Gps'
-require 'Navigation/Navigator'
+include 'Navigation/Move'
+include 'Navigation/Gps'
+include 'Navigation/Navigator'

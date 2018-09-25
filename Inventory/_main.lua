@@ -1,3 +1,3 @@
-require 'Inventory/Chest'
-require 'Inventory/ItemStorage'
-require 'Inventory/Inventory'
+include 'Inventory/Chest'
+include 'Inventory/ItemStorage'
+include 'Inventory/Inventory'

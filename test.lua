@@ -1,4 +1,4 @@
-local col = require 'Util/TextColors'
+local col = include 'Util/TextColors'
 
 local LOG_NONE = -1
 local LOG_SOME = 0

@@ -1,4 +1,4 @@
-require 'Skills/Skill'
-require 'Skills/SkillSet'
+include 'Skills/Skill'
+include 'Skills/SkillSet'
 
-require 'Skills/TreeFarmSkill'
+include 'Skills/TreeFarmSkill'

@@ -1,8 +1,8 @@
-require 'Crafting/Recipe'
-require 'Crafting/FurnaceRecipe'
-require 'Crafting/RecipeBook'
+include 'Crafting/Recipe'
+include 'Crafting/FurnaceRecipe'
+include 'Crafting/RecipeBook'
 
-require 'Crafting/Furnace'
-require 'Crafting/Crafter'
+include 'Crafting/Furnace'
+include 'Crafting/Crafter'
 
-require 'Crafting/StandardRecipes'
+include 'Crafting/StandardRecipes'
