@@ -1,5 +1,5 @@
-Move = Class()
-Move.ClassName = 'Move'
+MoveManager = Class()
+MoveManager.ClassName = 'Move'
 
 --[[
 	A wrapper the movement functions defined for a turtle.
@@ -14,7 +14,7 @@ Move.ClassName = 'Move'
 
 	Keeps track of the current position by modifying coordinates after each successful move
 ]]
-function Move:constructor(turtle)
+function MoveManager:constructor(turtle)
 	assertType(turtle, 'table')
 
 	-- Public api stuff
@@ -37,15 +37,15 @@ function Move:constructor(turtle)
 	self:_attach()
 end
 
-Move.UNKNOWN_FAILURE = 0
-Move.HIT_BLOCK = 1
-Move.HIT_MOB = 2
-Move.HIT_BEDROCK = 3
-Move.NO_FUEL = 4
+MoveManager.UNKNOWN_FAILURE = 0
+MoveManager.HIT_BLOCK = 1
+MoveManager.HIT_MOB = 2
+MoveManager.HIT_BEDROCK = 3
+MoveManager.NO_FUEL = 4
 
 -- Public
 
-function Move:push(autoDig, autoAttack, autoFuel)
+function MoveManager:push(autoDig, autoAttack, autoFuel)
 	table.insert(
 		self._autoPropsStack,
 		{
@@ -66,36 +66,36 @@ function Move:push(autoDig, autoAttack, autoFuel)
 	end
 end
 
-function Move:pop()
+function MoveManager:pop()
 	if (#self._autoPropsStack > 0) then
 		local props = table.remove(self._autoPropsStack)
 		self.autoDig = props.autoDig
 		self.autoAttack = props.autoAttack
 		self.autoFuel = props.autoFuel
 	else
-		error('Too many calls to Move:pop', 2)
+		error('Too many calls to MoveManager:pop', 2)
 	end
 end
 
-function Move:setPosition(position)
+function MoveManager:setPosition(position)
 	assert(position.isType(Position))
 	self._position = position
 end
 
-function Move:getX()
+function MoveManager:getX()
 	return self._position.x
 end
-function Move:getY()
+function MoveManager:getY()
 	return self._position.y
 end
-function Move:getZ()
+function MoveManager:getZ()
 	return self._position.z
 end
-function Move:getDirection()
+function MoveManager:getDirection()
 	return self._position.direction
 end
 
-function Move:getPosition()
+function MoveManager:getPosition()
 	return self._position
 end
 
@@ -108,7 +108,7 @@ end
 
 	TODO: report back partial success when distance is > 1 and total movement is > 0
 ]]
-function Move:move(direction, distance)
+function MoveManager:move(direction, distance)
 	if (direction == 'back') then
 		return self:back(distance)
 	end
@@ -147,7 +147,7 @@ function Move:move(direction, distance)
 	for i = 1, distance do
 		if (not move()) then
 			if (self._turtle.getFuelLevel() == 0) then
-				return false, Move.NO_FUEL, 'There is a lack of fuel in the way'
+				return false, MoveManager.NO_FUEL, 'There is a lack of fuel in the way'
 			end
 
 			if (detect()) then
@@ -156,11 +156,11 @@ function Move:move(direction, distance)
 						--TODO: autodig whitelist
 						if (not dig()) then
 							--bedrock
-							return false, Move.HIT_BEDROCK, 'There is a bedrock in the way'
+							return false, MoveManager.HIT_BEDROCK, 'There is a bedrock in the way'
 						end
 					end
 				else
-					return false, Move.HIT_BLOCK, 'There is a block in the way'
+					return false, MoveManager.HIT_BLOCK, 'There is a block in the way'
 				end
 			end
 
@@ -169,7 +169,7 @@ function Move:move(direction, distance)
 					while (attack()) do
 					end
 				else
-					return false, Move.HIT_MOB, 'There is a mob in the way'
+					return false, MoveManager.HIT_MOB, 'There is a mob in the way'
 				end
 			end
 		end
@@ -178,16 +178,16 @@ function Move:move(direction, distance)
 	return true
 end
 
-function Move:forward(distance)
+function MoveManager:forward(distance)
 	return self:move('forward', distance)
 end
-function Move:up(distance)
+function MoveManager:up(distance)
 	return self:move('up', distance)
 end
-function Move:down(distance)
+function MoveManager:down(distance)
 	return self:move('down', distance)
 end
-function Move:back(distance)
+function MoveManager:back(distance)
 	distance = ((type(distance) == 'number') and distance) or 1
 
 	for i = 1, distance do
@@ -199,7 +199,7 @@ function Move:back(distance)
 	return true
 end
 
-function Move:turn(direction)
+function MoveManager:turn(direction)
 	direction = Position.wrapDirection(direction + 2) - 2
 
 	if (direction == 0) then
@@ -211,7 +211,7 @@ function Move:turn(direction)
 	end
 end
 
-function Move:turnLeft(times)
+function MoveManager:turnLeft(times)
 	times = ((type(times) == 'number') and times) or 1
 
 	for i = 1, times do
@@ -221,7 +221,7 @@ function Move:turnLeft(times)
 	return true
 end
 
-function Move:turnRight(times)
+function MoveManager:turnRight(times)
 	times = ((type(times) == 'number') and times) or 1
 
 	for i = 1, times do
@@ -231,7 +231,7 @@ function Move:turnRight(times)
 	return true
 end
 
-function Move:face(direction)
+function MoveManager:face(direction)
 	if (type(direction) ~= 'number') then
 		error('Invalid argument passed to Nav:face')
 	end
@@ -241,7 +241,7 @@ end
 
 -- PRIVATE
 
-function Move:_attach()
+function MoveManager:_attach()
 	local this = self
 	local overrideFunctionsList = {
 		'forward',
@@ -260,7 +260,7 @@ function Move:_attach()
 	end
 end
 
-function Move:_forward()
+function MoveManager:_forward()
 	local result = {self._oldTurtle.forward()}
 	if (result[1]) then
 		local offset = Position.offsets[self._position.direction]
@@ -271,7 +271,7 @@ function Move:_forward()
 	return unpack(result)
 end
 
-function Move:_back()
+function MoveManager:_back()
 	local result = {self._oldTurtle.back()}
 	if (result[1]) then
 		local offset = Position.offsets[self._position.direction]
@@ -282,7 +282,7 @@ function Move:_back()
 	return unpack(result)
 end
 
-function Move:_up()
+function MoveManager:_up()
 	local result = {self._oldTurtle.up()}
 
 	if (result[1]) then
@@ -293,7 +293,7 @@ function Move:_up()
 	return unpack(result)
 end
 
-function Move:_down()
+function MoveManager:_down()
 	local result = {self._oldTurtle.down()}
 
 	if (result[1]) then
@@ -304,7 +304,7 @@ function Move:_down()
 	return unpack(result)
 end
 
-function Move:_turnRight()
+function MoveManager:_turnRight()
 	local result = {self._oldTurtle.turnRight()}
 
 	self._position:rotate(-1)
@@ -313,7 +313,7 @@ function Move:_turnRight()
 	return unpack(result)
 end
 
-function Move:_turnLeft()
+function MoveManager:_turnLeft()
 	local result = {self._oldTurtle.turnLeft()}
 
 	self._position:rotate(1)
@@ -322,8 +322,8 @@ function Move:_turnLeft()
 	return unpack(result)
 end
 
-function Move:_afterMove()
+function MoveManager:_afterMove()
 	print(self._position)
 end
 
-Mov = Move(turtle)
+Mov = MoveManager(turtle)

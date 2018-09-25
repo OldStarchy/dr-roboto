@@ -1,5 +1,5 @@
 include 'Navigation/Position'
 
-include 'Navigation/Move'
+include 'Navigation/MoveManager'
 include 'Navigation/Gps'
 include 'Navigation/Navigator'
