@@ -103,3 +103,55 @@ function Class(parent)
 	setmetatable(class, classMeta)
 	return class
 end
+
+--[[
+	Checks if something is something. Can test for primative types, or class types.
+
+	assert('hello', 'string')
+	assert(Nav, Navigator)
+	assert(Mov, Navigator)
+	-- assertType failed "Move: 011FA5B8" is not a "Class: Navigator"
+]]
+function assertType(obj, typ, err, startFrame, frames)
+	if (type(typ) ~= 'string' and (type(typ) ~= 'table' or type(typ.getType) ~= 'function')) then
+		error('typ must be a string or class', 2)
+	end
+
+	if (type(err) ~= 'string') then
+		err = 'assertType failed "' .. tostring(obj) .. '" is not a "' .. tostring(typ) .. '"'
+	end
+
+	if (type(frames) ~= 'number') then
+		frames = 1
+	end
+
+	if (type(startFrame) ~= 'number') then
+		startFrame = 1
+	end
+
+	local ok = true
+	local typeString = ''
+
+	if (type(typ) == 'string') then
+		typeString = typ
+
+		if (type(obj) ~= typ) then
+			ok = false
+		end
+	else
+		typeString = tostring(typ)
+
+		if (type(obj.isType) ~= 'function') then
+			ok = false
+		else
+			ok = obj:isType(typ)
+		end
+	end
+
+	if (not ok) then
+		if (frames > 0) then
+			printStackTrace(frames, startFrame + 1)
+		end
+		error(err, 2)
+	end
+end
