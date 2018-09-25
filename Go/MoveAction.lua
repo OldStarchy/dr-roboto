@@ -1,4 +1,5 @@
 MoveAction = Class(FunctionAction)
+MoveAction.ClassName = 'MoveAction'
 function MoveAction.GetFactory(func)
 	return function()
 		return MoveAction(

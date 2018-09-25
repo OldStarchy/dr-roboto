@@ -1,5 +1,6 @@
 -- TODO: potential name change to Artisan
 Crafter = Class()
+Crafter.ClassName = 'Crafter'
 
 function Crafter:constructor(turtle)
 	self._book = RecipeBook()

@@ -1,4 +1,5 @@
 Go = Class()
+Go.ClassName = 'Go'
 function Go:constructor()
 	self.actions = {}
 	self.tokens = {}

@@ -1,4 +1,5 @@
 FunctionAction = Class(Action)
+FunctionAction.ClassName = 'FunctionAction'
 
 function FunctionAction.GetFactory(func)
 	return function()

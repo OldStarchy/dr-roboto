@@ -89,6 +89,7 @@ This project has a Class object which implements some basics of a Class based OO
 ```lua
 -- Create classes by calling Class()
 Animal = Class()
+Animal.ClassName = 'Animal'
 
 -- Class variables are defined on the class itself
 -- They should start with a capital letter to differentiate them from object variables
@@ -157,6 +158,7 @@ end
 
 -- Cat inherits from Animal
 Cat = Class(Animal)
+Cat.ClassName = 'Cat'
 
 -- Remember comments make things easier to understand. The average programmer spends 10 times more time reading code then they do writing. (https://www.goodreads.com/quotes/835238-indeed-the-ratio-of-time-spent-reading-versus-writing-is)
 --[[
@@ -173,6 +175,7 @@ scratch:speak()
 --> Scratch the cat says nyan
 
 Dog = Class(Animal)
+Dog.ClassName = 'Dog'
 
 function Dog:growl()
     print('grrrr')
@@ -207,6 +210,7 @@ The old example code I'm leaving in this readme because why not
 -- One class per file is idea.
 -- Most classes won't be local
 Robot = Class()
+Robot.ClassName = 'Robot'
 
 -- Static Scope: CamelCase
 
@@ -252,6 +256,7 @@ end
 
 
 FastRobot = Class(Robot)
+FastRobot.ClassName = 'FastRobot'
 
 function FastRobot:constructor(name)
 	self._speed = 'so fast'

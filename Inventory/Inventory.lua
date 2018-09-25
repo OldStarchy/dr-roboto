@@ -1,4 +1,5 @@
 Inventory = Class()
+Inventory.ClassName = 'Inventory'
 
 --[[
 	Checks if an item matches an item selector.

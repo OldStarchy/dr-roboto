@@ -1,4 +1,5 @@
 FindAction = Class(Action)
+FindAction.ClassName = 'FindAction'
 function FindAction.GetFactory(func)
 	return function()
 		return FindAction(func)

@@ -1,4 +1,5 @@
 Sequence = Class(Action)
+Sequence.ClassName = 'Sequence'
 function Sequence.GetFactory(actions)
 	return function()
 		return Sequence(actions)

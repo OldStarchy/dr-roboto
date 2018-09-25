@@ -1,4 +1,5 @@
 Navigator = Class()
+Navigator.ClassName = 'Navigator'
 
 --[[
 	A Location is an (x, y, z)

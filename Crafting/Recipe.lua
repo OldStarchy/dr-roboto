@@ -1,4 +1,5 @@
 Recipe = Class()
+Recipe.ClassName = 'Recipe'
 
 --[[
 	name: name of the item that the recipe will produce.

@@ -1,4 +1,5 @@
 Log = Class()
+Log.ClassName = 'Log'
 
 Log.INFO = 0
 Log.WARNING = 1

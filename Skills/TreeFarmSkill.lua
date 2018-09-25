@@ -1,4 +1,5 @@
 TreeFarmSkill = Class(Skill)
+TreeFarmSkill.ClassName = 'TreeFarmSkill'
 
 function TreeFarmSkill:performNextAction()
 	if (logCount >= requiredLogCount) then

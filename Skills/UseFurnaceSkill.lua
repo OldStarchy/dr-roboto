@@ -1,4 +1,5 @@
 UseFurnaceSkill = Class(Skill)
+UseFurnaceSkill.ClassName = 'UseFurnaceSkill'
 
 function UseFurnaceSkill:performNextAction()
 end

@@ -1,4 +1,5 @@
 Position = Class()
+Position.ClassName = 'Position'
 
 Position.EAST = 0
 Position.NORTH = 1

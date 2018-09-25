@@ -1,4 +1,5 @@
 Move = Class()
+Move.ClassName = 'Move'
 
 --[[
 	A wrapper the movement functions defined for a turtle.

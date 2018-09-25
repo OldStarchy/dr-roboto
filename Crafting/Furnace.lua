@@ -1,4 +1,5 @@
 Furnace = Class(Block)
+Furnace.ClassName = 'Furnace'
 
 --[[
 	name: name of the item, 'chest', 'furnace', or block query that is used to select the item from inventory

@@ -1,4 +1,5 @@
 RecipeBook = Class()
+RecipeBook.ClassName = 'RecipeBook'
 
 function RecipeBook:constructor()
 	self._recipes = {}

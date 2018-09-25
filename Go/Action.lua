@@ -1,4 +1,5 @@
 Action = Class()
+Action.ClassName = 'Action'
 
 Action.RETRY = 'retry'
 Action.IGNORE = 'ignore'

@@ -1,4 +1,5 @@
 AttachmentAction = Class(Action)
+AttachmentAction.ClassName = 'AttachmentAction'
 function AttachmentAction.GetFactory(func)
 	return function()
 		return AttachmentAction(func)

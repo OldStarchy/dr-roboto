@@ -1,4 +1,5 @@
 FurnaceRecipe = Class(Recipe)
+FurnaceRecipe.ClassName = 'FurnaceRecipe'
 
 --[[
 	name: name of the item that the recipe will produce.

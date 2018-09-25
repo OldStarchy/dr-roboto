@@ -1,4 +1,5 @@
 TaskTracker = Class()
+TaskTracker.ClassName = 'TaskTracker'
 
 function TaskTracker:constructor(state)
 	self.head = 1

@@ -1,4 +1,5 @@
 Skill = Class()
+Skill.ClassName = 'Skill'
 
 Skill.priority = 1
 

@@ -1,4 +1,5 @@
 ItemAction = Class(Action)
+ItemAction.ClassName = 'ItemAction'
 function ItemAction.GetFactory(func)
 	return function()
 		return ItemAction(func)

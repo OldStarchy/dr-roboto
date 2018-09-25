@@ -1,4 +1,5 @@
 ActionResult = Class()
+ActionResult.ClassName = 'ActionResult'
 
 --[[
 	Stores information about what happened when an action was run

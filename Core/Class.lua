@@ -20,7 +20,11 @@ function Class(parent)
 			if (type(class.toString) == 'function') then
 				result = class.toString(self)
 			else
-				result = tostring(self):gsub('table', 'class')
+				if (class.ClassName ~= nil) then
+					result = tostring(self):gsub('table', class.ClassName)
+				else
+					result = tostring(self):gsub('table', 'class')
+				end
 			end
 
 			objectMeta.__tostring = oldToString
