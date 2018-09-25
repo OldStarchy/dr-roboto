@@ -24,6 +24,10 @@ local function createTestParams()
 			return
 		end
 
+		if (type(result) ~= 'table') then
+			error(errorString .. 'Result is not table', 2)
+		end
+
 		for k1, v1 in next, result do
 			if not expected[k1] then
 				error(errorString .. 'Unexpected key "' .. tostring(k1) .. '"', 2)
@@ -277,8 +281,6 @@ local function doTest(testObj, testContext)
 			-- Print any errors
 			for _, errMsg in ipairs(errors) do
 				col.print(col.red, ' ' .. errMsg .. '\n')
-			end
-			if (not success) then
 				read()
 			end
 		end
