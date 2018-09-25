@@ -107,10 +107,9 @@ end
 --[[
 	Checks if something is something. Can test for primative types, or class types.
 
-	isType('hello', 'string')
-	isType(Nav, Navigator)
-	assertType(Mov, Navigator)
-	-- assertType failed "Move: 011FA5B8" is not a "Class: Navigator"
+	isType('hello', 'string') -- true
+	isType(Nav, Navigator) -- true
+	isType(Mov, Navigator) -- false
 
 	obj: the object (or primative) to check
 	typ: the type it should be
