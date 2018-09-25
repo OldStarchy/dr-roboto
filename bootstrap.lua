@@ -145,6 +145,16 @@ if (sleep == nil) then
 	end
 end
 
+setmetatable(
+	_G,
+	{
+		__index = function(t, v)
+			print('Attempt to access missing global "' .. tostring(v) .. '"')
+			printStackTrace(1, 2)
+			return nil
+		end
+	}
+)
 --[[
 turtle.attackUp()
 
