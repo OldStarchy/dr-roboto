@@ -111,6 +111,12 @@ end
 	assert(Nav, Navigator)
 	assert(Mov, Navigator)
 	-- assertType failed "Move: 011FA5B8" is not a "Class: Navigator"
+
+	obj: the object (or primative) to check
+	typ: the type it should be
+	err: the error message to be thrown
+	startFrame: what stack level to print the error for
+	frames: how many stack frames to print (in addition to the error thrown)
 ]]
 function assertType(obj, typ, err, startFrame, frames)
 	if (type(typ) ~= 'string' and (type(typ) ~= 'table' or type(typ.getType) ~= 'function')) then
@@ -149,9 +155,9 @@ function assertType(obj, typ, err, startFrame, frames)
 	end
 
 	if (not ok) then
-		if (frames > 0) then
-			printStackTrace(frames, startFrame + 1)
+		if (frames) then
+			printStackTrace(frames, startFrame + 2)
 		end
-		error(err, 2)
+		error(err, startFrame + 1)
 	end
 end
