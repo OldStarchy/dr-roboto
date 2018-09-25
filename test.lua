@@ -203,14 +203,18 @@ local function doTest(testObj, testContext)
 	local errors = {}
 
 	local testWrapper = function()
+		include 'Core/_main'
+
 		testObj.tester(testParams)
 		testParams.finalize()
 	end
 
 	local env = {}
 	env._G = env
+	env.turtle = testParams.mock('turtle', true, true, 0)
 	setmetatable(env, {__index = _G})
 	setfenv(testWrapper, env)
+	setfenv(testObj.tester, env)
 
 	-- Start buffering calls to io.write and print (so they dont interfere with the nice formatting)
 	local oldwrite = io.write
@@ -297,7 +301,7 @@ local testMeta = {
 
 --[[
 	Prepares tests for execution.
-	
+
 	Tester functions are invoked using xpcall. If the function returns; the test passes, if it errors; it fails.
 
 	A "testing table" is a recursive structure for tests. A value can be either a tester function, or another testing table.
