@@ -279,6 +279,9 @@ local function doTest(testObj, testContext)
 			for _, errMsg in ipairs(errors) do
 				col.print(col.red, ' ' .. errMsg .. '\n')
 			end
+			if (not success) then
+				read()
+			end
 		end
 	end
 
