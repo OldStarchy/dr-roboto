@@ -141,6 +141,12 @@ if (sleep == nil) then
 	end
 end
 
+if (read == nil) then
+	read = function()
+		return ''
+	end
+end
+
 setmetatable(
 	_G,
 	{
