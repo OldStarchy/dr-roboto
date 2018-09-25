@@ -146,7 +146,7 @@ local function createTestParams()
 						printStackTrace(stackLevels, 2)
 					end
 
-					return unpack(retVal)
+					return unpack(retVals)
 				end
 			end
 		)
