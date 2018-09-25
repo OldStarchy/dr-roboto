@@ -1,5 +1,5 @@
-Inventory = Class()
-Inventory.ClassName = 'Inventory'
+InventoryManager = Class()
+InventoryManager.ClassName = 'InventoryManager'
 
 --[[
 	Checks if an item matches an item selector.
@@ -17,7 +17,7 @@ Inventory.ClassName = 'Inventory'
 	Omitted parts default to a wildcard
 	'dirt' == 'dirt:*' == '*:dirt:*'
 ]]
-function Inventory.ItemIs(item, selector)
+function InventoryManager.ItemIs(item, selector)
 	if (type(item) == 'number') then
 		item = turtle.getItemDetail(item)
 	end
@@ -53,19 +53,19 @@ function Inventory.ItemIs(item, selector)
 	end
 	return false
 end
-function Inventory:constructor(turtle)
+function InventoryManager:constructor(turtle)
 	self._turtle = turtle
 	self._oldTurtle = turtle
 end
 
-function Inventory:select(item)
+function InventoryManager:select(item)
 	if (type(item) == 'number') then
 		return self._oldTurtle.select(item)
 	end
 
 	if (type(item) == 'string') then
 		for i = 1, 16 do
-			if (Inventory.ItemIs(i, item)) then
+			if (InventoryManager.ItemIs(i, item)) then
 				return self:select(i)
 			end
 		end
@@ -75,24 +75,24 @@ function Inventory:select(item)
 	print('what')
 end
 
-function Inventory:drop()
+function InventoryManager:drop()
 	return self._oldTurtle.drop()
 end
-function Inventory:dropUp()
+function InventoryManager:dropUp()
 	return self._oldTurtle.dropUp()
 end
-function Inventory:dropDown()
+function InventoryManager:dropDown()
 	return self._oldTurtle.dropDown()
 end
 
-function Inventory:suck()
+function InventoryManager:suck()
 	return self._oldTurtle.suck()
 end
-function Inventory:suckUp()
+function InventoryManager:suckUp()
 	return self._oldTurtle.suckUp()
 end
-function Inventory:suckDown()
+function InventoryManager:suckDown()
 	return self._oldTurtle.suckDown()
 end
 
-Inv = Inventory(turtle)
+Inv = InventoryManager(turtle)
