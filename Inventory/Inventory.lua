@@ -9,7 +9,7 @@ Inventory.ClassName = 'Inventory'
 
 	An item selector is a string in the form 'namespace:item:damage'
 	eg. dirt is 'minecraft:dirt:0', oak 'minecraft:log:0', and birch 'minecraft:log:2'
-	
+
 	Namespace can be omited, or namespace and damage can be omitted
 	'dirt:0' or 'dirt' is ok
 	'minecraft:dirt' is not ok
