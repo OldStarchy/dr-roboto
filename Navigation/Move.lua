@@ -15,6 +15,8 @@ Move.ClassName = 'Move'
 	Keeps track of the current position by modifying coordinates after each successful move
 ]]
 function Move:constructor(turtle)
+	assertType(turtle, 'table')
+
 	-- Public api stuff
 	-- Should the movement functions dig blocks that are in the way?
 	self.autoDig = false
@@ -113,7 +115,6 @@ function Move:move(direction, distance)
 
 	distance = type(distance) == 'number' and distance or 1
 
-	print('moving ' .. direction .. ' for ' .. distance .. ' blocks')
 	if (distance == 0) then
 		return true
 	end
@@ -144,7 +145,6 @@ function Move:move(direction, distance)
 	end
 
 	for i = 1, distance do
-		print('moving')
 		if (not move()) then
 			if (self._turtle.getFuelLevel() == 0) then
 				return false, Move.NO_FUEL, 'There is a lack of fuel in the way'
@@ -323,9 +323,7 @@ function Move:_turnLeft()
 end
 
 function Move:_afterMove()
-	print('Current position:')
-	print('x', 'y', 'z', 'direction')
-	print(self._position.x, self._position.y, self._position.z, Position.directionNames[self._position.direction])
+	print(self._position)
 end
 
 Mov = Move(turtle)
