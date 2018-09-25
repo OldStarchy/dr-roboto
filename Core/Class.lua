@@ -71,7 +71,8 @@ function Class(parent)
 		end
 	end
 
-	local classMeta = {
+	local classMeta
+	classMeta = {
 		__index = parent,
 		__call = function(_, ...)
 			-- First argument is always class
@@ -82,6 +83,21 @@ function Class(parent)
 			end
 
 			return object
+		end,
+		__tostring = function()
+			local oldToString = classMeta.__tostring
+			-- Allow native tostring to work
+			classMeta.__tostring = nil
+
+			local result = ''
+			if (class.ClassName ~= nil) then
+				result = 'Class: ' .. class.ClassName
+			else
+				result = tostring(class):gsub('table', 'Class')
+			end
+
+			classMeta.__tostring = oldToString
+			return result
 		end
 	}
 	setmetatable(class, classMeta)
