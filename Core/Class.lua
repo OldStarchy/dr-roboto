@@ -107,22 +107,55 @@ end
 --[[
 	Checks if something is something. Can test for primative types, or class types.
 
-	assert('hello', 'string')
-	assert(Nav, Navigator)
-	assert(Mov, Navigator)
+	isType('hello', 'string')
+	isType(Nav, Navigator)
+	assertType(Mov, Navigator)
 	-- assertType failed "Move: 011FA5B8" is not a "Class: Navigator"
 
 	obj: the object (or primative) to check
 	typ: the type it should be
+]]
+function isType(obj, typ)
+	if (type(typ) ~= 'string' and (type(typ) ~= 'table' or type(typ.getType) ~= 'function')) then
+		error('typ must be a string or class', 2)
+	end
+
+	local ok = true
+
+	if (type(typ) == 'string') then
+		if (type(obj) ~= typ) then
+			ok = false
+		end
+	else
+		if (type(obj) ~= 'table') then
+			ok = false
+		elseif (type(obj.isType) ~= 'function') then
+			ok = false
+		else
+			ok = obj:isType(typ)
+
+			if (type(ok) ~= 'boolean') then
+				ok = false
+			end
+		end
+	end
+
+	return ok
+end
+
+--[[
+	Throws an error if isType returns false
+
+	assertType(Mov, Navigator)
+	-- assertType failed "Move: 011FA5B8" is not a "Class: Navigator"
+
+	obj: see isType
+	typ: see isType
 	err: the error message to be thrown
 	startFrame: what stack level to print the error for
 	frames: how many stack frames to print (in addition to the error thrown)
 ]]
 function assertType(obj, typ, err, startFrame, frames)
-	if (type(typ) ~= 'string' and (type(typ) ~= 'table' or type(typ.getType) ~= 'function')) then
-		error('typ must be a string or class', 2)
-	end
-
 	if (type(err) ~= 'string') then
 		err = 'assertType failed "' .. tostring(obj) .. '" is not a "' .. tostring(typ) .. '"'
 	end
@@ -135,25 +168,7 @@ function assertType(obj, typ, err, startFrame, frames)
 		startFrame = 1
 	end
 
-	local ok = true
-	local typeString = ''
-
-	if (type(typ) == 'string') then
-		typeString = typ
-
-		if (type(obj) ~= typ) then
-			ok = false
-		end
-	else
-		typeString = tostring(typ)
-		if (type(obj) ~= 'table') then
-			ok = false
-		elseif (type(obj.isType) ~= 'function') then
-			ok = false
-		else
-			ok = obj:isType(typ)
-		end
-	end
+	local ok = isType(obj, typ)
 
 	if (not ok) then
 		if (frames) then
