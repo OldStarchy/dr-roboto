@@ -28,19 +28,18 @@ local function createTestParams()
 			if not expected[k1] then
 				error(errorString .. 'Unexpected key "' .. tostring(k1) .. '"', 2)
 			end
-			if expected[k1] ~= v1 then
-				error(
-					errorString ..
-						'Incorrect value for key "' ..
-							tostring(k1) .. '"\n expected "' .. tostring(expected[k1]) .. '"\n  but got "' .. tostring(v1) .. '"',
-					2
-				)
-			end
 			if type(v1) == 'table' then
 				t.assertTableEqual(
 					v1,
 					expected[k1],
 					errorString .. ' \nIn inner table "' .. tostring(k1) .. '":\n ' .. tostring(k1):gsub('\n', '\n ')
+				)
+			elseif expected[k1] ~= v1 then
+				error(
+					errorString ..
+						'Incorrect value for key "' ..
+							tostring(k1) .. '"\n expected "' .. tostring(expected[k1]) .. '"\n  but got "' .. tostring(v1) .. '"',
+					2
 				)
 			end
 		end
