@@ -147,10 +147,18 @@ if (read == nil) then
 	end
 end
 
+local ignoreMissingGlobals = {
+	_PROMPT = true,
+	_PROMPT2 = true
+}
+
 setmetatable(
 	_G,
 	{
 		__index = function(t, v)
+			if (ignoreMissingGlobals[v]) then
+				return nil
+			end
 			print('Attempt to access missing global "' .. tostring(v) .. '"')
 			printStackTrace(1, 2)
 			return nil
