@@ -146,8 +146,9 @@ function assertType(obj, typ, err, startFrame, frames)
 		end
 	else
 		typeString = tostring(typ)
-
-		if (type(obj.isType) ~= 'function') then
+		if (type(obj) ~= 'table') then
+			ok = false
+		elseif (type(obj.isType) ~= 'function') then
 			ok = false
 		else
 			ok = obj:isType(typ)
