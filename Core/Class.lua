@@ -78,6 +78,11 @@ function Class(parent)
 			-- First argument is always class
 			local object = setmetatable({}, objectMeta)
 
+			if (type(class.ClassName) ~= 'string') then
+				print('warning: ClassName not set on class')
+				printStackTrace(1)
+			end
+
 			if (class.constructor ~= nil) then
 				class.constructor(object, ...)
 			end
