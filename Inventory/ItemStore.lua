@@ -1,25 +1,25 @@
-Inventory = Class()
-Inventory.ClassName = 'Inventory'
+ItemStore = Class()
+ItemStore.ClassName = 'ItemStore'
 
-function Inventory:constructor()
+function ItemStore:constructor()
 	self._items = {}
 
 	self._stack = {}
 end
 
-function Inventory:push()
+function ItemStore:push()
 	table.insert(self._stack, cloneTable(self._items, 2))
 end
 
-function Inventory:pop()
-	assert(#self._stack > 0, 'Too many calls to Inventory:pop')
+function ItemStore:pop()
+	assert(#self._stack > 0, 'Too many calls to ItemStore:pop')
 
 	local oldItems = self._items
 	self._items = table.remove(self._stack)
 	return oldItems
 end
 
-function Inventory:add(item, count)
+function ItemStore:add(item, count)
 	assertType(item, 'table')
 
 	--TODO: maybe create itemStack class? discussion required
@@ -33,7 +33,7 @@ function Inventory:add(item, count)
 	)
 end
 
-function Inventory:remove(itemSelector, count)
+function ItemStore:remove(itemSelector, count)
 	assertType(itemSelector, 'string')
 	self:push()
 	local removed = {}

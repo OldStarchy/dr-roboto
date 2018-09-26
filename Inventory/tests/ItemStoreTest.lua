@@ -1,8 +1,8 @@
 test(
-	'Inventory',
+	'ItemStore',
 	{
 		Add = function(t)
-			local i = Inventory()
+			local i = ItemStore()
 
 			i:add(
 				{
@@ -36,7 +36,7 @@ test(
 			)
 		end,
 		Remove = function(t)
-			local i = Inventory()
+			local i = ItemStore()
 
 			i:add(
 				{
@@ -72,7 +72,7 @@ test(
 			)
 		end,
 		Push = function(t)
-			local i = Inventory()
+			local i = ItemStore()
 
 			i:add(
 				{
@@ -113,7 +113,7 @@ test(
 			)
 		end,
 		Pop = function(t)
-			local i = Inventory()
+			local i = ItemStore()
 
 			i:add(
 				{
@@ -151,7 +151,7 @@ test(
 			)
 		end,
 		['Pop too much'] = function(t)
-			local i = Inventory()
+			local i = ItemStore()
 			i:push()
 			i:pop()
 
