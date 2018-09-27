@@ -7,6 +7,9 @@
 			"label": "test",
 			"type": "shell",
 			"command": "lua startup",
+			"options": {
+				"cwd": "computerRoot"
+			},
 			"group": "test",
 			"presentation": {
 				"echo": true,
