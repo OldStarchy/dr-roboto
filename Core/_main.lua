@@ -1,3 +1,4 @@
+include 'Core/hardTable'
 include 'Core/Class'
 include 'Core/Log'
 include 'Core/Block'
