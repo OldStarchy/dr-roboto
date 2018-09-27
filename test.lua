@@ -455,6 +455,25 @@ local function loadAllTests()
 	return tests
 end
 
+local function filterTests(tests, filters, blacklist)
+	local testsToDo = {}
+	if (type(filters) == 'string') then
+		filters = {filters}
+	end
+	for _, testName in ipairs(filters) do
+		local pattern = string.gsub(testName, '%.', '%%.')
+		pattern = '^' .. string.gsub(pattern, '%*', '.*') .. '$'
+		for _, testObj in ipairs(tests) do
+			local matches = string.match(testObj.fullName, pattern) ~= nil
+
+			if ((matches and (not blacklist)) or ((not matches) and blacklist)) then
+				table.insert(testsToDo, testObj)
+			end
+		end
+	end
+	return testsToDo
+end
+
 local args = {...}
 local loglevel = 1
 if (#args > 0) then
@@ -465,18 +484,17 @@ end
 if (#args == 0) then
 	print('Running startup tests...')
 	print()
-	runTests(loadAllTests(), loglevel)
+	local allTests = loadAllTests()
+	local totalCount = #allTests
+	allTests = filterTests(allTests, 'Crafter.*', true)
+	local runCount = #allTests
+	runTests(allTests, loglevel)
+
+	if (runCount < totalCount) then
+		print('(skipped ' .. (totalCount - runCount) .. ')')
+	end
 else
 	local allTests = loadAllTests()
-	local testsToDo = {}
-	for _, testName in ipairs(args) do
-		local pattern = string.gsub(testName, '%.', '%%.')
-		pattern = '^' .. string.gsub(pattern, '%*', '.*') .. '$'
-		for _, testObj in ipairs(allTests) do
-			if (string.match(testObj.fullName, pattern) ~= nil) then
-				table.insert(testsToDo, testObj)
-			end
-		end
-		runTests(testsToDo, loglevel)
-	end
+	allTests = filterTests(allTests, args)
+	runTests(allTests, loglevel)
 end
