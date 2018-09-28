@@ -111,8 +111,8 @@ function hardTable(filename)
 	function ht.load()
 		local f = fs.open(filename, 'r')
 		if (f) then
-			print(fs.readAll(f))
-			local tbl = textutils.unserialize(fs.readAll(f))
+			print(f:readAll())
+			local tbl = textutils.unserialize(f:readAll())
 			f:close()
 
 			if (tbl == nil) then

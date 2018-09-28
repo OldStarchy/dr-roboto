@@ -19,9 +19,28 @@ _G.fs = {
 		return lfs.attributes(directory) ~= nil
 	end,
 	open = function(filename, args)
-		return io.open(filename, args)
-	end,
-	readAll = function(file)
-		return file:read('*a')
+		local f = io.open(filename, args)
+
+		if (f == nil) then
+			return nil
+		end
+
+		return setmetatable(
+			{
+				readAll = function()
+					return f:read('*a')
+				end
+			},
+			{
+				__index = function(proxy, key)
+					if (type(f[key]) == 'function') then
+						return function(_, ...)
+							f[key](f, ...)
+						end
+					end
+					return f[key]
+				end
+			}
+		)
 	end
 }
