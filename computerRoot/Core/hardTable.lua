@@ -98,11 +98,11 @@ function hardTableExport(ht)
 end
 
 function hardTable(filename)
-	if (ends_with(filename, '.lua')) then
+	if (filename:endsWith('.lua')) then
 		error('Creating a hardTable with a .lua extension is probably an error', 2)
 	end
 
-	if (not ends_with(filename, '.ht.txt')) then
+	if (not filename:endsWith('.ht.txt')) then
 		filename = filename .. '.ht.txt'
 	end
 
