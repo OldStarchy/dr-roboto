@@ -32,9 +32,9 @@ _G.fs = {
 				end
 			},
 			{
-				__index = function(proxy, key)
+				__index = function(_, key)
 					if (type(f[key]) == 'function') then
-						return function(_, ...)
+						return function(...)
 							f[key](f, ...)
 						end
 					end

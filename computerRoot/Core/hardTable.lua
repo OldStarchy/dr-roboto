@@ -104,16 +104,17 @@ function hardTable(filename)
 
 	function ht.save()
 		local f = fs.open(filename, 'w')
-		f:write(textutils.serialize(hardTableExport(ht)))
-		f:close()
+		f.write(textutils.serialize(hardTableExport(ht)))
+		f.close()
 	end
 
 	function ht.load()
 		local f = fs.open(filename, 'r')
 		if (f) then
-			print(f:readAll())
-			local tbl = textutils.unserialize(f:readAll())
-			f:close()
+			local str = f.readAll()
+			f.close()
+
+			local tbl = textutils.unserialize(str)
 
 			if (tbl == nil) then
 				-- String could not be parsed
