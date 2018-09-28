@@ -14,7 +14,7 @@ local function iterateTable(tbl, prefix, depth)
 	done[tbl] = true
 
 	local isClass = false
-	if (tbl.ClassName ~= nil) then
+	if (tbl ~= _G and tbl.ClassName ~= nil) then
 		isClass = true
 		table.insert(results, prefix)
 	end
