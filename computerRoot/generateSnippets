@@ -65,7 +65,7 @@ local ind = 1
 f = fs.open('snippets.json', 'w')
 function writeSnippet(snippet)
 end
-f:write('{\n')
+f.write('{\n')
 for i = 1, #results do
 	local snippet = results[i]
 	local text = ''
@@ -83,15 +83,15 @@ for i = 1, #results do
 	if
 		(not pcall(
 			function()
-				f:write(text)
+				f.write(text)
 			end
 		))
 	 then
-		f:close()
+		f.close()
 		f = fs.open('snippets' .. ind .. '.json', 'w')
 		ind = ind + 1
-		f:write(text)
+		f.write(text)
 	end
 end
-f:write('}')
-f:close()
+f.write('}')
+f.close()
