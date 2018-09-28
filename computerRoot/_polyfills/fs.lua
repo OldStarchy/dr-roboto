@@ -17,5 +17,11 @@ _G.fs = {
 	end,
 	exists = function(directory)
 		return lfs.attributes(directory) ~= nil
+	end,
+	open = function(filename, args)
+		return io.open(filename, args)
+	end,
+	readAll = function(file)
+		return file:read('*a')
 	end
 }

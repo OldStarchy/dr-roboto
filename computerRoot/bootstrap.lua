@@ -9,6 +9,10 @@ if (os.loadAPI == nil) then
 	dofile '_polyfills/os.lua'
 end
 
+if (_G.textutils == nil) then
+	dofile '_polyfills/textutils.lua'
+end
+
 if (fs.listRecursive == nil) then
 	function fs.listRecursive(directory)
 		local results = {}

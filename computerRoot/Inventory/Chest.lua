@@ -218,7 +218,7 @@ function Chest:print(start)
 end
 
 function Chest:save(filename)
-	local file = io.open(filename, 'w')
+	local file = fs.open(filename, 'w')
 	file:write(textutils.serialize(self))
 	file:close()
 end
@@ -227,7 +227,7 @@ end
 
 --TODO: make proper serialization / deserialization for class objects
 function load(filename)
-	local file = io.open(filename, 'r')
+	local file = fs.open(filename, 'r')
 	local ch = textutils.unserialize(file:read())
 	file:close()
 
