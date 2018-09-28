@@ -80,6 +80,10 @@ function isHardTable(tbl)
 end
 
 function hardTableExport(ht)
+	if (isHardTable(ht)) then
+		return hardTableExport(getmetatable(ht))
+	end
+
 	local exp = {}
 
 	for i, v in pairs(ht.data) do
