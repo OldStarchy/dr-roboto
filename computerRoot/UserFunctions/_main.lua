@@ -22,8 +22,8 @@ local function loadAllUserFunctions()
 	)
 	local files = fs.listRecursive('UserFunctions')
 	for _, file in ipairs(files) do
-		if (not file:endsWith('_main.lua')) then
-			if (file:endsWith('.lua')) then
+		if (not stringutil.endsWith(file, '_main.lua')) then
+			if (stringutil.endsWith(file, '.lua')) then
 				pcall(
 					function()
 						dofileSandbox(file, env)
@@ -39,7 +39,7 @@ if (shell ~= nil) then
 	local oldComplete = shell.complete
 
 	shell.complete = function(stub)
-		if (stub:startsWith('run ')) then
+		if (stringutil.startsWith(stub, 'run ')) then
 			stub = stub:sub(5)
 
 			local results = {}
@@ -47,7 +47,7 @@ if (shell ~= nil) then
 			local userFunctions = loadAllUserFunctions()
 
 			for name, func in pairs(userFunctions) do
-				if (stub:startsWith(name)) then
+				if (stringutil.startsWith(stub, name)) then
 					local subStub = stub:sub(#name + 1)
 
 					if (func.params and #func.params > 0) then
@@ -71,7 +71,7 @@ if (shell ~= nil) then
 						end
 
 						if (#func.params - argsInput <= 0) then
-							if (func.params[#func.params]:endsWith('...')) then
+							if (stringutil.endsWith(func.params[#func.params], '...')) then
 								if (subStub:sub(#subStub) ~= ' ') then
 									result = result .. ' '
 								end
@@ -80,7 +80,7 @@ if (shell ~= nil) then
 						end
 						table.insert(results, result)
 					end
-				elseif (name:startsWith(stub)) then
+				elseif (stringutil.startsWith(name, stub)) then
 					table.insert(results, name:sub(#stub + 1))
 				end
 			end
