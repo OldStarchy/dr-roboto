@@ -80,6 +80,7 @@ end
 
 include 'Util/debug'
 include 'Util/startlocal'
+include 'Util/math'
 include 'Util/string'
 include 'Util/table'
 
