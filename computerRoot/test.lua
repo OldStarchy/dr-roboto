@@ -215,6 +215,9 @@ local function doTest(testObj, testContext)
 	local env = {}
 	env._G = env
 	env.turtle = testParams.mock('turtle', true, true, 0)
+	env.sleep = function(time)
+		getfenv(2).print('sleeping for ', time)
+	end
 	setmetatable(env, {__index = _G})
 	setfenv(testWrapper, env)
 	setfenv(testObj.tester, env)
