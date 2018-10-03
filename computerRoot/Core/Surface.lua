@@ -93,12 +93,14 @@ function Surface:outputTo(term, x, y)
 	self._outputTerm = term
 end
 
-function Surface:scroll()
-	for i = 1, self._height - 1 do
-		self._buffer[i] = self._buffer[i + 1]
+function Surface:scroll(count)
+	for i = 1, self._height - count do
+		self._buffer[i] = self._buffer[i + count]
 	end
 
-	self._buffer[self._height] = {}
+	for i = self._height - count + 1, self._height do
+		self._buffer[i] = {}
+	end
 end
 
 function Surface:drawTo(x, y, term)
