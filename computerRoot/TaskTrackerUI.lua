@@ -24,6 +24,8 @@ function drawOpeningSplash()
 end
 
 function drawClosingSplash()
+	term.clear()
+	term.setCursorPos(1, 1)
 	print('Thank you for using Task Tracker UI')
 end
 
