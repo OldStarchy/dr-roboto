@@ -1,0 +1,12 @@
+local current = term.current();
+local surface = Surface(term.getSize(), 400)
+
+print(...)
+term.redirect(surface)
+
+shell.run(...)
+
+term.redirect(current)
+print('finished')
+
+surface:drawTo(1, 1, term)
