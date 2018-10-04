@@ -1,3 +1,7 @@
+if (rawget(_G, 'shell') == nil) then
+	return
+end
+
 local function loadAllUserFunctions()
 	local userFunctions = {}
 	local env =

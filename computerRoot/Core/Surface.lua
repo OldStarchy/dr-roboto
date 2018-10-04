@@ -191,11 +191,13 @@ function Surface:_getLine(row)
 	return self._buffer[row]
 end
 
-local nativetermredirect = term.redirect
-term.redirect = function(target)
-	if (isType(target, Surface)) then
-		return nativetermredirect(target:asTerm())
-	else
-		return nativetermredirect(target)
+if (rawget(_G, 'term') ~= nil) then
+	local nativetermredirect = term.redirect
+	term.redirect = function(target)
+		if (isType(target, Surface)) then
+			return nativetermredirect(target:asTerm())
+		else
+			return nativetermredirect(target)
+		end
 	end
 end

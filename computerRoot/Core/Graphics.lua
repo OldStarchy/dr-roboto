@@ -122,4 +122,6 @@ function Graphics:drawSurface(x, y, surface)
 	surface:drawTo(x, y, self._term)
 end
 
-graphics = Graphics(term)
+if (rawget(_G, 'term') ~= nil) then
+	graphics = Graphics(term)
+end

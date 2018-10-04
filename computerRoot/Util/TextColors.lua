@@ -1,4 +1,4 @@
-if (term == nil or not term.isColor()) then
+if (rawget(_G, 'term') == nil or not term.isColor()) then
 	return setmetatable(
 		{
 			print = function(...)
