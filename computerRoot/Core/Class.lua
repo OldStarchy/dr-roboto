@@ -1,11 +1,48 @@
 --[[
+	*** Constructing classes
+	Class() - Creates a new class
+	Class(parent) - Creats a subclass of parent
+
+	*** Instantiating objects
+	MyClass(...) - Instantiates an object. All arguments are passed to the constructor
+
+	*** Special Properties on classes
+	MyClass.ClassName - string: The name of the class, used in the default tostring
+	function MyClass:constructor(...) - called when an object is instantiated
+	function MyClass:toString() - called when an object is converted to a string with tostring
+	function MyClass:isEqual(other) - Called to resolve comparisons with the == operator
+	function MyClass:getType() - Returns the class object used to create this object.
+	function MyClass:isType(classOrInterface) - Returns true if this class extends or implements the given class or interface
+
+
+]]
+--[[
 	Creats a class. There aren't real classes in lua so these classes are just tables with some metatable voodoo
 	For detailed information on how classes work, check the readme.
 
 	parent: the parent class which this one can inherit methods and default values from
 ]]
-function Class(parent)
+Class = {}
+
+local classIndex = {}
+local classMeta = {
+	__index = classIndex
+}
+
+setmetatable(Class, classMeta)
+
+function classMeta.__call(_, parent, ...)
 	local class = {}
+	local interfaces = {}
+
+	if (parent ~= nil) then
+		if (parent.isInterface) then
+			interfaces = {parent, ...}
+			parent = nil
+		else
+			interfaces = {...}
+		end
+	end
 
 	local objectMeta = nil
 	-- Declare objectMeta before creating the table to make sure objectMeta is in-scope for __tostring
@@ -51,18 +88,30 @@ function Class(parent)
 		return class
 	end
 
-	function class:isType(clazz)
-		if (self == clazz) then
+	function class.isOrInherits(typ)
+		if (class == typ) then
+			return true
+		end
+
+		for i, v in pairs(interfaces) do
+			if (v.isOrInherits(typ)) then
+				return true
+			end
+		end
+
+		if (parent == nil) then
+			return false
+		end
+
+		return parent.isOrInherits(typ)
+	end
+
+	function class:isType(typ)
+		if (self == typ) then
 			error('Called isType on class, did you use "." instead of ":"?')
 		end
 
-		if (class == clazz) then
-			return true
-		elseif (parent == nil) then
-			return false
-		else
-			return parent.isType(self, clazz)
-		end
+		return class.isOrInherits(typ)
 	end
 
 	function class:constructor(...)
@@ -70,10 +119,25 @@ function Class(parent)
 			parent.constructor(self, ...)
 		end
 	end
+	function class:assertImplementation()
+		for _, interface in pairs(interfaces) do
+			interface.assertImplementation(self)
+		end
+	end
 
 	local classMeta
 	classMeta = {
-		__index = parent,
+		__index = parent or
+			{
+				isClass = true
+			},
+		__newindex = function(t, k, v)
+			if (k == 'isClass') then
+				error("Can't override isClass", 2)
+			end
+
+			return rawset(t, k, v)
+		end,
 		__call = function(_, ...)
 			-- First argument is always class
 			local object = setmetatable({}, objectMeta)
@@ -133,14 +197,14 @@ function isType(obj, typ)
 	else
 		if (type(obj) ~= 'table') then
 			ok = false
-		elseif (type(obj.isType) ~= 'function') then
-			ok = false
-		else
+		elseif (obj.isClass) then
 			ok = obj:isType(typ)
 
 			if (type(ok) ~= 'boolean') then
 				ok = false
 			end
+		else
+			ok = false
 		end
 	end
 

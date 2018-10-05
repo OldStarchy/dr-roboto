@@ -1,5 +1,6 @@
 include 'Core/hardTable'
 include 'Core/Class'
+include 'Core/Interface'
 include 'Core/Log'
 
 include 'Core/Graphics'

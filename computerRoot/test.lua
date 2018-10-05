@@ -63,11 +63,29 @@ local function createTestParams()
 		error('Assert ~=,\nGot "' .. tostring(result) .. '"', 2)
 	end
 
-	function t.assertThrows(method)
-		local success = pcall(method)
+	function t.assertThrows(method, ...)
+		local success = pcall(method, ...)
 
 		if (success) then
-			error('Assert throws')
+			error('Assert throws', 2)
+		end
+	end
+
+	function t.assertNotThrows(method, ...)
+		local ferr = nil
+		local args = {...}
+		local success =
+			xpcall(
+			function()
+				method(unpack(args))
+			end,
+			function(err)
+				ferr = err
+			end
+		)
+
+		if (not success) then
+			error('Assert Not throws: ' .. ferr, 2)
 		end
 	end
 
