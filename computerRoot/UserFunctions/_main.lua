@@ -1,7 +1,3 @@
-if (rawget(_G, 'shell') == nil) then
-	return
-end
-
 local function loadAllUserFunctions()
 	local userFunctions = {}
 	local env =
@@ -39,7 +35,7 @@ local function loadAllUserFunctions()
 	return userFunctions
 end
 
-if (shell ~= nil) then
+if (rawget(_G, 'shell') ~= nil) then
 	local oldComplete = shell.complete
 
 	shell.complete = function(stub)
