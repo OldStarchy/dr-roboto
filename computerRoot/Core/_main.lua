@@ -4,6 +4,7 @@ include 'Core/Interface'
 include 'Core/Log'
 
 include 'Core/Graphics'
+include 'Term/ITerm'
 include 'Core/Surface'
 
 include 'Core/Block'

@@ -1,4 +1,4 @@
-Surface = Class()
+Surface = Class(ITerm)
 Surface.ClassName = 'Surface'
 
 function Surface:constructor(width, height)
@@ -190,6 +190,8 @@ function Surface:_getLine(row)
 
 	return self._buffer[row]
 end
+
+Surface:assertImplementation()
 
 if (rawget(_G, 'term') ~= nil) then
 	local nativetermredirect = term.redirect
