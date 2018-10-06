@@ -34,6 +34,7 @@ setmetatable(Class, classMeta)
 function classMeta.__call(_, parent, ...)
 	local class = {}
 	local interfaces = {}
+	local implementationAsserted = false
 
 	if (parent ~= nil) then
 		if (parent.isInterface) then
@@ -120,6 +121,7 @@ function classMeta.__call(_, parent, ...)
 		end
 	end
 	function class:assertImplementation()
+		implementationAsserted = true
 		for _, interface in pairs(interfaces) do
 			interface.assertImplementation(self)
 		end
@@ -139,13 +141,17 @@ function classMeta.__call(_, parent, ...)
 			return rawset(t, k, v)
 		end,
 		__call = function(_, ...)
-			-- First argument is always class
-			local object = setmetatable({}, objectMeta)
+			if (not implementationAsserted) then
+				class:assertImplementation()
+			end
 
 			if (type(class.ClassName) ~= 'string') then
 				print('warning: ClassName not set on class')
 				printStackTrace(1)
 			end
+
+			-- First argument is always class
+			local object = setmetatable({}, objectMeta)
 
 			if (class.constructor ~= nil) then
 				class.constructor(object, ...)
