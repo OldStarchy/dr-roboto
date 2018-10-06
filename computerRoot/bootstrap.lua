@@ -101,3 +101,8 @@ setmetatable(
 		end
 	}
 )
+
+if (not isPc) then
+	local freeSpace = fs.getFreeSpace('.')
+	print(tostring(freeSpace) .. 'B of HDD space remaining')
+end
