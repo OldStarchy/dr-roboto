@@ -48,7 +48,7 @@ setmetatable(
 						return true
 					end
 
-					if (#parent == 0) then
+					if (#parents == 0) then
 						return false
 					end
 
