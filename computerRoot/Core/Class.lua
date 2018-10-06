@@ -191,7 +191,9 @@ function isType(obj, typ)
 	local ok = true
 
 	if (type(typ) == 'string') then
-		if (type(obj) ~= typ) then
+		if (typ == 'int') then
+			ok = type(obj) == 'number' and obj == math.floor(obj)
+		elseif (type(obj) ~= typ) then
 			ok = false
 		end
 	else
@@ -244,4 +246,6 @@ function assertType(obj, typ, err, startFrame, frames)
 		end
 		error(err, startFrame + 1)
 	end
+
+	return obj
 end
