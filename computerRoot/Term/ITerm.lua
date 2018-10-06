@@ -18,10 +18,6 @@ ITerm.getTextColor = 'function'
 ITerm.getBackgroundColour = 'function'
 ITerm.getBackgroundColor = 'function'
 ITerm.blit = 'function'
-ITerm.setPaletteColour = 'function'
-ITerm.setPaletteColor = 'function'
-ITerm.getPaletteColour = 'function'
-ITerm.getPaletteColor = 'function'
 
 -- Original CC terminal code:
 --[[

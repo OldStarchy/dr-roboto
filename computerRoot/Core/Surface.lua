@@ -17,8 +17,20 @@ function Surface:constructor(width, height)
 	self._outputTerm = nil
 end
 
+function Surface:clear()
+	self._buffer = {}
+end
+
 function Surface:getSize()
 	return self._width, self._height
+end
+
+function Surface:getColours()
+	return self._foreground, self._background
+end
+
+function Surface:setColours(foreground, background)
+	self._foreground, self._background = foreground, background
 end
 
 function Surface:getTextColour()
@@ -79,6 +91,18 @@ function Surface:write(str)
 	if (self._outputTerm ~= nil) then
 		self:drawTo(self._outputX, self._outputY, self._outputTerm)
 	end
+end
+
+function Surface:blit(str, foreground, background)
+	local f, b = self:getColours()
+
+	self:write(str)
+
+	self:setColours(f, b)
+end
+
+function Surface:clearLine()
+	self._buffer[self._cursorY] = {}
 end
 
 function Surface:outputTo(term, x, y)
