@@ -30,18 +30,19 @@ setmetatable(
 
 					return true
 				end,
-				assertImplementation = function(obj)
+				assertImplementation = function(obj, err, frame)
+					frame = coalesce(frame, 1) + 1
 					if (#parents ~= 0) then
 						for _, parent in pairs(parents) do
-							parent.assertImplementation(obj)
+							parent.assertImplementation(obj, frame + 1)
 						end
 					end
 
 					for i, v in pairs(interface) do
-						assert(type(obj[i]) == v, 'obj[' .. tostring(i) .. '] is ' .. type(obj[i]) .. ' not ' .. v)
+						assert(type(obj[i]) == v, 'obj[' .. tostring(i) .. '] is ' .. type(obj[i]) .. ' not ' .. v, frame)
 					end
 
-					return true
+					return obj
 				end,
 				isOrInherits = function(iface)
 					if (interface == iface) then
