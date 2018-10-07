@@ -2,167 +2,140 @@ Surface = Class(ITerm)
 Surface.ClassName = 'Surface'
 
 function Surface:constructor(width, height)
-	self._width = width
-	self._height = height
+	self._width = assertType(width, 'int')
+	self._height = assertType(coalesce(height, 0), 'int')
 
-	self._buffer = {}
 	self._cursorX = 1
 	self._cursorY = 1
 
 	self._foreground = colours.white
 	self._background = colours.black
 
-	self._outputX = nil
-	self._outputY = nil
-	self._outputTerm = nil
+	self._textBuffer = {}
+	self._foregroundBuffer = {}
+	self._backgroundBuffer = {}
+
+	self._cursorBlink = false
 end
 
-function Surface:clear()
-	self._buffer = {}
+function Surface:_getLine(line)
+	line = assertType(coalesce(line, self._cursorY), 'int')
+
+	if (self._textBuffer[line] == nil) then
+		self._textBuffer[line] = StringBuffer(self._width)
+		self._foregroundBuffer[line] = Buffer(self._width)
+		self._backgroundBuffer[line] = Buffer(self._width)
+	end
+
+	return self._textBuffer[line], self._foregroundBuffer[line], self._backgroundBuffer[line]
+end
+
+function Surface:_onChange()
+	if (self._mirror ~= nil) then
+		self._mirror.write('Mirroring not implemented')
+	end
+end
+
+--[[
+	Writes text to the current cursor position. Does not wrap over lines or advance cursor
+]]
+function Surface:write(str)
+	local x = self._cursorX
+	local y = self._cursorY
+
+	if (y < 1) then
+		return
+	end
+
+	if (self._height ~= 0 and y > self._height) then
+		return
+	end
+
+	text, fore, back = self:_getLine()
+	text:write(str, x)
+	fore:fill(self._foreground, x, x + #str)
+	back:fill(self._background, x, x + #str)
+	self:_onChange()
+end
+
+function Surface:scroll(amount)
+	assertType(amount, 'int')
+
+	if (amount < 0) then
+		error('Cant scroll negative amounts', 2)
+	end
+
+	if (amount == 0) then
+		return
+	end
+
+	if (self._height == 0) then
+		return
+	end
+
+	for i = 1, self._height - amount do
+		local t, f, b = self:_getLine(i)
+		self._textBuffer[i] = t
+		self._foregroundBuffer[i] = f
+		self._backgroundBuffer[i] = b
+	end
+
+	for i = self._height - amount + 1, self._height do
+		self._textBuffer[i] = nil
+		self._foregroundBuffer[i] = nil
+		self._backgroundBuffer[i] = nil
+	end
+
+	self:_onChange()
+end
+
+function Surface:setCursorPos(x, y)
+	self._cursorX, self._cursorY = assertType(x, 'int'), assertType(y, 'int')
+
+	self:_onChange()
+end
+
+function Surface:setCursorBlink(blink)
+	self._cursorBlink = assertType(blink, 'boolean')
+
+	self:_onChange()
+end
+
+function Surface:getCursorPos()
+	return self._cursorX, self._cursorY
 end
 
 function Surface:getSize()
 	return self._width, self._height
 end
 
-function Surface:getColours()
-	return self._foreground, self._background
-end
+function Surface:clear()
+	self._textBuffer = {}
+	self._foregroundBuffer = {}
+	self._backgroundBuffer = {}
 
-function Surface:setColours(foreground, background)
-	self._foreground, self._background = foreground, background
-end
-
-function Surface:getTextColour()
-	return self._foreground
-end
-function Surface:setTextColour(colour)
-	self._foreground = colour
-end
-Surface.getTextColor = Surface.getTextColour
-Surface.setTextColor = Surface.setTextColour
-
-function Surface:getBackgroundColour()
-	return self._background
-end
-function Surface:setBackgroundColour(colour)
-	self._background = colour
-end
-Surface.getBackgroundColor = Surface.getBackgroundColour
-Surface.setBackgroundColor = Surface.setBackgroundColour
-
-function Surface:getCursorPos()
-	return self._cursorX, self._cursorY
-end
-function Surface:setCursorPos(x, y)
-	self._cursorX, self._cursorY = x, y
-end
-
-function Surface:getCursorBlink()
-	return self._blink
-end
-function Surface:setCursorBlink(blink)
-	self._blink = blink
-
-	if (self._outputTerm ~= nil) then
-		self._outputTerm.setCursorBlink(blink)
-	end
-end
-
-function Surface:write(str)
-	local lim = #str
-
-	for i = 1, lim do
-		local char = str:sub(i, i)
-
-		if (char == '\n') then
-			self:_crlf()
-		else
-			self:_getLine(self._cursorY)[self._cursorX] = {
-				foreground = self._foreground,
-				background = self._background,
-				character = char
-			}
-		end
-
-		self:_advance()
-	end
-
-	if (self._outputTerm ~= nil) then
-		self:drawTo(self._outputX, self._outputY, self._outputTerm)
-	end
-end
-
-function Surface:blit(str, foreground, background)
-	local f, b = self:getColours()
-
-	self:write(str)
-
-	self:setColours(f, b)
+	self:_onChange()
 end
 
 function Surface:clearLine()
-	self._buffer[self._cursorY] = {}
+	self._textBuffer[self._cursorY] = nil
+	self._foregroundBuffer[self._cursorY] = nil
+	self._backgroundBuffer[self._cursorY] = nil
+
+	self:_onChange()
 end
 
-function Surface:outputTo(term, x, y)
-	if (x == nil) then
-		x = 1
-	end
-	if (y == nil) then
-		y = 1
-	end
-	self._outputX = x
-	self._outputY = y
-	self._outputTerm = term
+function Surface:setTextColour(col)
+	self._foreground = assertType(col, 'int')
 end
 
-function Surface:scroll(count)
-	for i = 1, self._height - count do
-		self._buffer[i] = self._buffer[i + count]
-	end
+Surface.setTextColor = Surface.setTextColour
 
-	for i = self._height - count + 1, self._height do
-		self._buffer[i] = {}
-	end
+function Surface:setBackgroundColour(col)
+	self._background = assertType(col, 'int')
 end
 
-function Surface:drawTo(x, y, term)
-	local w, h = term.getSize()
-	local maxW = math.max(self._width, w - x + 1)
-	local maxH = math.max(self._height, h - y + 1)
-
-	local f = term.getTextColour()
-	local b = term.getBackgroundColour()
-	local sf, sb = f, b
-	for i = 1, maxH do
-		local line = self:_getLine(i)
-
-		for j = 1, maxW do
-			local chr = line[j]
-			if (chr ~= nil) then
-				if (f ~= chr.foreground) then
-					f = chr.foreground
-					term.setTextColour(f)
-				end
-
-				if (b ~= chr.background) then
-					b = chr.background
-					term.setBackgroundColour(f)
-				end
-
-				term.setCursorPos(x + j - 1, y + i - 1)
-				term.write(chr.character)
-			else
-				term.setCursorPos(x + j - 1, y + i - 1)
-				term.write(' ')
-			end
-		end
-	end
-
-	term.setTextColour(sf)
-	term.setBackgroundColour(sb)
-end
+Surface.setBackgroundColor = Surface.setBackgroundColour
 
 function Surface:isColour()
 	return true
@@ -170,60 +143,127 @@ end
 
 Surface.isColor = Surface.isColour
 
-function Surface:asTerm()
-	return setmetatable(
-		{},
-		{
-			__index = function(tbl, key)
-				if (self[key]) then
-					if (type(self[key]) == 'function') then
-						return function(...)
-							return self[key](self, ...)
-						end
-					else
-						return self[key]
-					end
-				end
-			end
-		}
-	)
+function Surface:getTextColour()
+	return self._foreground
 end
 
-function Surface:_advance()
-	self._cursorX = self._cursorX + 1
+Surface.getTextColor = Surface.getTextColour
 
-	if (self._cursorX > self._width) then
-		self:_crlf()
-	end
+function Surface:getBackgroundColour()
+	return self._background
 end
 
-function Surface:_crlf()
-	self._cursorX = 1
+Surface.getBackgroundColor = Surface.getBackgroundColour
 
-	if (self._cursorY < self._height) then
-		self._cursorY = self._cursorY + 1
-	else
-		self:scroll()
-	end
-end
+function Surface:blit(str, foreCols, backCols)
+	local x = self._cursorX
+	local y = self._cursorY
 
-function Surface:_getLine(row)
-	if (self._buffer[row] == nil) then
-		self._buffer[row] = {}
+	if (y < 1) then
+		return
 	end
 
-	return self._buffer[row]
-end
+	if (self._height ~= 0 and y > self._height) then
+		return
+	end
 
-Surface:assertImplementation()
-
-if (rawget(_G, 'term') ~= nil) then
-	local nativetermredirect = term.redirect
-	term.redirect = function(target)
-		if (isType(target, Surface)) then
-			return nativetermredirect(target:asTerm())
-		else
-			return nativetermredirect(target)
+	if (isType(foreCols, 'string')) then
+		local temp = {}
+		for i = 1, #foreCols do
+			temp[i] = bit.blshift(1, tonumber('0x' .. foreCols:sub(i, i)))
 		end
+		foreCols = temp
 	end
+
+	assertType(foreCols, 'table')
+
+	if (isType(backCols, 'string')) then
+		local temp = {}
+		for i = 1, #backCols do
+			temp[i] = bit.blshift(1, tonumber('0x' .. backCols:sub(i, i)))
+		end
+		backCols = temp
+	end
+
+	assertType(backCols, 'table')
+
+	text, fore, back = self:_getLine()
+	text:write(str, x)
+	fore:write(foreCols, x)
+	back:write(backCols, x)
+
+	self:_onChange()
+end
+
+function Surface:mirrorTo(term, x, y)
+	x = assertType(coalesce(x, 1), 'int')
+	y = assertType(coalesce(y, 1), 'int')
+
+	ITerm.assertImplementation(term)
+
+	self._mirror = term
+	self._mirrorX = x
+	self._mirrorY = y
+end
+
+function Surface:asTerm()
+	return {
+		write = function(...)
+			return self:write(...)
+		end,
+		scroll = function(...)
+			return self:scroll(...)
+		end,
+		setCursorPos = function(...)
+			return self:setCursorPos(...)
+		end,
+		setCursorBlink = function(...)
+			return self:setCursorBlink(...)
+		end,
+		getCursorPos = function(...)
+			return self:getCursorPos(...)
+		end,
+		getSize = function(...)
+			return self:getSize(...)
+		end,
+		clear = function(...)
+			return self:clear(...)
+		end,
+		clearLine = function(...)
+			return self:clearLine(...)
+		end,
+		setTextColour = function(...)
+			return self:setTextColour(...)
+		end,
+		setTextColor = function(...)
+			return self:setTextColor(...)
+		end,
+		setBackgroundColour = function(...)
+			return self:setBackgroundColour(...)
+		end,
+		setBackgroundColor = function(...)
+			return self:setBackgroundColor(...)
+		end,
+		isColour = function(...)
+			return self:isColour(...)
+		end,
+		isColor = function(...)
+			return self:isColor(...)
+		end,
+		getTextColour = function(...)
+			return self:getTextColour(...)
+		end,
+		getTextColor = function(...)
+			return self:getTextColor(...)
+		end,
+		getBackgroundColour = function(...)
+			return self:getBackgroundColour(...)
+		end,
+		getBackgroundColor = function(...)
+			return self:getBackgroundColor(...)
+		end,
+		blit = function(...)
+			return self:blit(...)
+		end
+	}
 end
