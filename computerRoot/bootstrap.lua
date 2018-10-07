@@ -9,6 +9,7 @@ if (isPc) then
 	dofile '_polyfills/turtle.lua'
 	dofile '_polyfills/os.lua'
 	dofile '_polyfills/textutils.lua'
+	dofile '_polyfills/bit.lua'
 end
 
 if (fs.listRecursive == nil) then
