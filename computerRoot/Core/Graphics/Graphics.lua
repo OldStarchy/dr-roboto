@@ -119,5 +119,5 @@ end
 function Graphics:drawSurface(x, y, surface)
 	assertType(surface, Surface)
 
-	surface:drawTo(x, y, self._term)
+	surface:blitTo(x, y, self._term)
 end
