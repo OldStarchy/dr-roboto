@@ -125,6 +125,7 @@ function classMeta.__call(_, parent, ...)
 		for _, interface in pairs(interfaces) do
 			interface.assertImplementation(self)
 		end
+		return self
 	end
 
 	local classMeta
@@ -190,7 +191,7 @@ end
 	typ: the type it should be
 ]]
 function isType(obj, typ)
-	if (type(typ) ~= 'string' and (type(typ) ~= 'table' or type(typ.getType) ~= 'function')) then
+	if (type(typ) ~= 'string' and (type(typ) ~= 'table' or not typ.isClass)) then
 		error('typ must be a string or class', 2)
 	end
 
@@ -228,29 +229,27 @@ end
 	obj: see isType
 	typ: see isType
 	err: the error message to be thrown
-	startFrame: what stack level to print the error for
-	frames: how many stack frames to print (in addition to the error thrown)
+	frame: the stack frame on which to throw
 ]]
-function assertType(obj, typ, err, startFrame, frames)
+function assertType(obj, typ, err, frame)
 	if (type(err) ~= 'string') then
 		err = 'assertType failed "' .. tostring(obj) .. '" is not a "' .. tostring(typ) .. '"'
 	end
 
-	if (type(frames) ~= 'number') then
-		frames = 1
+	if (type(frame) ~= 'number') then
+		frame = 1
 	end
 
-	if (type(startFrame) ~= 'number') then
-		startFrame = 1
+	if (type(typ) == 'table' and typ.isInterface) then
+		return typ:assertImplementation(obj, err, frame + 1)
 	end
 
-	local ok = isType(obj, typ)
+	if (typ == nil) then
+		error('typ must not be nil', 2)
+	end
 
-	if (not ok) then
-		if (frames) then
-			printStackTrace(frames, startFrame + 2)
-		end
-		error(err, startFrame + 1)
+	if (not isType(obj, typ)) then
+		error(err, frame + 1)
 	end
 
 	return obj
