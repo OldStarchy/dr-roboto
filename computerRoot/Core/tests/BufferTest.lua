@@ -15,6 +15,13 @@ test(
 
 			t.assertTableEqual(b:read(1, #vals), vals)
 		end,
+		['Overread'] = function(t)
+			local b = Buffer(0, 5)
+
+			b:write({1, 2, 3, 4, 5})
+
+			t.assertTableEqual(b:read(-4, 10), {1, 2, 3, 4, 5})
+		end,
 		['Truncates data at end'] = function(t)
 			local b = Buffer(0, 5)
 

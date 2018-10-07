@@ -9,6 +9,13 @@ test(
 
 			t.assertEqual(b:read(1, #str), str)
 		end,
+		['Overread'] = function(t)
+			local b = StringBuffer(' ', 5)
+
+			b:write('abcde')
+
+			t.assertTableEqual(b:read(-4, 10), 'abcde')
+		end,
 		['Truncates data at end'] = function(t)
 			local b = StringBuffer(' ', 5)
 
