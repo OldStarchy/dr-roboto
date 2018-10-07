@@ -14,3 +14,8 @@ function math.clamp(min, val, max)
 	end
 	return val
 end
+
+--http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/238061
+function math.logn(x, n)
+	return math.log(x) / math.log(n)
+end
