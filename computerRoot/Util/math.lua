@@ -5,3 +5,12 @@ function math.minMax(a, b)
 		return b, a
 	end
 end
+
+function math.clamp(min, val, max)
+	if (val < min) then
+		return min
+	elseif (val > max) then
+		return max
+	end
+	return val
+end
