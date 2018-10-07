@@ -1,8 +1,4 @@
--- Will print "frames" stack frames starting from startFrame (defaults to 1, the calling function)
--- Sometimes frames are nil but there are more after
--- empty frames are collapsed and are printed as '-'
--- If maxJump empty frames are found in a row, assume there are no more frames
-function printStackTrace(frames, startFrame, maxJump)
+function getStackTrace(frames, startFrame, maxJump)
 	frames = ((type(frames) == 'number') and frames) or 5
 	startFrame = ((type(startFrame) == 'number') and startFrame) or 1
 	startFrame = startFrame + 3
@@ -15,6 +11,7 @@ function printStackTrace(frames, startFrame, maxJump)
 	local i = startFrame
 	local endFrame = frames + startFrame
 	local emptyFrames = 0
+	local trace = {}
 	while not stop and i < endFrame do
 		xpcall(
 			function()
@@ -23,7 +20,7 @@ function printStackTrace(frames, startFrame, maxJump)
 			function(err)
 				if (err == '') then
 					if (emptyFrames == 0) then
-						print('-')
+						table.insert(trace, '-')
 					end
 					emptyFrames = emptyFrames + 1
 					if (emptyFrames > maxJump) then
@@ -33,10 +30,40 @@ function printStackTrace(frames, startFrame, maxJump)
 					end
 				else
 					emptyFrames = 0
-					print(err)
+					table.insert(trace, err)
 				end
 			end
 		)
 		i = i + 1
 	end
+
+	return trace
+end
+
+-- Will print "frames" stack frames starting from startFrame (defaults to 1, the calling function)
+-- Sometimes frames are nil but there are more after
+-- empty frames are collapsed and are printed as '-'
+-- If maxJump empty frames are found in a row, assume there are no more frames
+function printStackTrace(frames, start, jump)
+	local trace = getStackTrace(frames, start, jump)
+
+	for i, v in pairs(trace) do
+		print(v)
+	end
+end
+
+function saveStackTrace(file, frames, start, jump)
+	local f = fs.open(file, 'w')
+	if (f == nil) then
+		printStackTrace(frames, start, jump)
+		error('could not save to file')
+	end
+
+	local trace = getStackTrace(frames, start, jump)
+
+	for i, v in pairs(trace) do
+		f.write(v .. '\n')
+	end
+
+	f.close()
 end
