@@ -6,9 +6,9 @@ include 'Core/Log'
 include 'Core/IBuffer'
 include 'Core/Buffer'
 include 'Core/StringBuffer'
-include 'Core/Graphics'
-include 'Term/ITerm'
-include 'Core/Surface'
+include 'Core/Graphics/ITerm'
+include 'Core/Graphics/Graphics'
+include 'Core/Graphics/Surface'
 
 include 'Core/Block'
 
