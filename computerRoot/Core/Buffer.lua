@@ -44,7 +44,7 @@ function Buffer:write(values, start, ed)
 
 	ed = math.min(ed, self._length)
 
-	if (start >= ed) then
+	if (start > ed) then
 		return
 	end
 
@@ -56,7 +56,7 @@ function Buffer:write(values, start, ed)
 	end
 
 	for i = 1, length do
-		self._buffer[i + start] = values[i + skip]
+		self._buffer[i + start - 1] = values[i + skip]
 	end
 end
 
@@ -69,11 +69,10 @@ function Buffer:read(start, ed)
 	if (start > ed) then
 		return ''
 	end
-	local length = ed - start + 1
 
 	local r = {}
-	for i = 1, length do
-		table.insert(r, self._buffer[i + start])
+	for i = start, ed do
+		table.insert(r, self._buffer[i])
 	end
 
 	return r

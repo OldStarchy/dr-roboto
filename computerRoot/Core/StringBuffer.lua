@@ -2,7 +2,7 @@ StringBuffer = Class(IBuffer)
 StringBuffer.ClassName = 'StringBuffer'
 
 function StringBuffer:constructor(initial, length)
-	self._length = assertType(length, 'int')
+	self._length = assertType(length, 'int', nil, 3)
 	self._buffer = {}
 
 	assert(length > 0, 'StringBuffer length must be > 0')
@@ -51,7 +51,7 @@ function StringBuffer:write(str, start, ed)
 
 	ed = math.min(ed, self._length)
 
-	if (start >= ed) then
+	if (start > ed) then
 		return
 	end
 
@@ -63,7 +63,7 @@ function StringBuffer:write(str, start, ed)
 	end
 
 	for i = 1, length do
-		self._buffer[i + start] = str:sub(i + skip, i + skip)
+		self._buffer[i + start - 1] = str:sub(i + skip, i + skip)
 	end
 end
 
@@ -76,11 +76,10 @@ function StringBuffer:read(start, ed)
 	if (start > ed) then
 		return ''
 	end
-	local length = ed - start + 1
 
 	local r = ''
-	for i = 1, length do
-		r = r .. self._buffer[i + start]
+	for i = start, ed do
+		r = r .. self._buffer[i]
 	end
 
 	return r
