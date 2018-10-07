@@ -12,21 +12,28 @@ function StringBuffer:constructor(initial, length)
 	self:fill(initial)
 end
 
-function StringBuffer:fill(char)
+function StringBuffer:fill(char, start, ed)
 	assertType(char, 'string', 'Fill value for string buffer must be 1 character')
 	assert(#char == 1, 'Fill value for string buffer must be 1 character')
 
-	for i = 1, self._length do
+	start = assertType(coalesce(start, 1), 'int')
+	ed = assertType(coalesce(ed, self._length), 'int')
+
+	start = math.clamp(1, start, self._length)
+	ed = math.clamp(1, ed, self._length)
+
+	if (start >= ed) then
+		return
+	end
+
+	for i = start, ed do
 		self._buffer[i] = char
 	end
 end
-
 function StringBuffer:write(str, start, ed)
 	assertType(str, 'string')
-	start = coalesce(start, 1)
-	ed = coalesce(ed, start + #str - 1)
-	assertType(start, 'int')
-	assertType(ed, 'int')
+	start = assertType(coalesce(start, 1), 'int')
+	ed = assertType(coalesce(ed, start + #str - 1), 'int')
 
 	if (start > self._length) then
 		return
@@ -61,10 +68,8 @@ function StringBuffer:write(str, start, ed)
 end
 
 function StringBuffer:read(start, ed)
-	start = coalesce(start, 1)
-	ed = coalesce(ed, self._length)
-	assertType(start, 'int')
-	assertType(ed, 'int')
+	start = assertType(coalesce(start, 1), 'int')
+	ed = assertType(coalesce(ed, self._length), 'int')
 	start = math.max(start, 1)
 	ed = math.min(ed, self._length)
 

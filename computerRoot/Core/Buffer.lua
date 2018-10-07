@@ -7,18 +7,26 @@ function Buffer:constructor(initial, length)
 	self:fill(initial)
 end
 
-function Buffer:fill(val)
-	for i = 1, self._length do
+function Buffer:fill(val, start, ed)
+	start = assertType(coalesce(start, 1), 'int')
+	ed = assertType(coalesce(ed, self._length), 'int')
+
+	start = math.clamp(1, start, self._length)
+	ed = math.clamp(1, ed, self._length)
+
+	if (start >= ed) then
+		return
+	end
+
+	for i = start, ed do
 		self._buffer[i] = val
 	end
 end
 
 function Buffer:write(values, start, ed)
 	assertType(values, 'table')
-	start = coalesce(start, 1)
-	ed = coalesce(ed, start + #values - 1)
-	assertType(start, 'int')
-	assertType(ed, 'int')
+	start = assertType(coalesce(start, 1), 'int')
+	ed = assertType(coalesce(ed, start + #values - 1), 'int')
 
 	if (start > self._length) then
 		return
@@ -53,10 +61,8 @@ function Buffer:write(values, start, ed)
 end
 
 function Buffer:read(start, ed)
-	start = coalesce(start, 1)
-	ed = coalesce(ed, self._length)
-	assertType(start, 'int')
-	assertType(ed, 'int')
+	start = assertType(coalesce(start, 1), 'int')
+	ed = assertType(coalesce(ed, self._length), 'int')
 	start = math.max(start, 1)
 	ed = math.min(ed, self._length)
 
