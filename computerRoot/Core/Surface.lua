@@ -22,17 +22,75 @@ function Surface:_getLine(line)
 	line = assertType(coalesce(line, self._cursorY), 'int')
 
 	if (self._textBuffer[line] == nil) then
-		self._textBuffer[line] = StringBuffer(self._width)
-		self._foregroundBuffer[line] = Buffer(self._width)
-		self._backgroundBuffer[line] = Buffer(self._width)
+		self._textBuffer[line] = StringBuffer(' ', self._width)
+		self._foregroundBuffer[line] = Buffer(colours.white, self._width)
+		self._backgroundBuffer[line] = Buffer(colours.black, self._width)
 	end
 
 	return self._textBuffer[line], self._foregroundBuffer[line], self._backgroundBuffer[line]
 end
 
+function Surface:_prepareBlit(line, start, ed)
+	local t, f, b = self:_getLine(line)
+
+	local tstr = t:read(start, ed)
+	local farr = f:read(start, ed)
+	local barr = b:read(start, ed)
+
+	local fstr = ''
+	local bstr = ''
+
+	for i = 1, #farr do
+		fstr = fstr .. string.format('%x', math.logn(farr[i], 2))
+		bstr = bstr .. string.format('%x', math.logn(barr[i], 2))
+	end
+
+	return tstr, fstr, bstr
+end
+
 function Surface:_onChange()
-	if (self._mirror ~= nil) then
-		self._mirror.write('Mirroring not implemented')
+	if (self._mirror == nil) then
+		return
+	end
+
+	self:mirrorTo(self._mirror, self._mirrorX, self._mirrorY)
+end
+
+function Surface:mirrorTo(term, x, y)
+	x = coalesce(x, 1)
+	y = coalesce(y, 1)
+	term.setCursorBlink(false)
+	self:blitTo(term, x, y)
+	term.setCursorPos(x + self._cursorX - 1, y + self._cursorY - 1)
+	term.setCursorBlink(self._cursorBlink)
+end
+
+function Surface:blitTo(term, x, y)
+	assert(self._height > 0, 'cant copy heightless surface') ---yet?
+	x = coalesce(x, 1)
+	y = coalesce(y, 1)
+
+	local tx, ty = term.getSize()
+
+	local targetStartY = x
+	-- local targetEndY = math.min(targetStartY + self._height, ty)
+
+	local targetStartX = y
+	-- local targetEndX = math.min(targetStartX + self._width, tx)
+
+	local startX = 1
+	local startY = 1
+
+	local endX = self._width
+	local endY = self._height
+
+	local w = endX - startX + 1
+	local h = endY - startY + 1
+
+	for Y = 1, h do
+		local t, f, b = self:_prepareBlit(startY + Y - 1, startX, endX)
+		term.setCursorPos(targetStartX, Y + targetStartY - 1)
+		term.blit(t, f, b)
 	end
 end
 
@@ -55,6 +113,7 @@ function Surface:write(str)
 	text:write(str, x)
 	fore:fill(self._foreground, x, x + #str)
 	back:fill(self._background, x, x + #str)
+	self._cursorX = self._cursorX + #str
 	self:_onChange()
 end
 
@@ -74,7 +133,7 @@ function Surface:scroll(amount)
 	end
 
 	for i = 1, self._height - amount do
-		local t, f, b = self:_getLine(i)
+		local t, f, b = self:_getLine(i + amount)
 		self._textBuffer[i] = t
 		self._foregroundBuffer[i] = f
 		self._backgroundBuffer[i] = b
@@ -195,13 +254,17 @@ function Surface:blit(str, foreCols, backCols)
 	self:_onChange()
 end
 
-function Surface:mirrorTo(term, x, y)
+function Surface:startMirroring(newTerm, x, y)
 	x = assertType(coalesce(x, 1), 'int')
 	y = assertType(coalesce(y, 1), 'int')
 
-	ITerm.assertImplementation(term)
+	if (term == newTerm) then
+		newTerm = term.native()
+	end
 
-	self._mirror = term
+	ITerm.assertImplementation(newTerm)
+
+	self._mirror = newTerm
 	self._mirrorX = x
 	self._mirrorY = y
 end
