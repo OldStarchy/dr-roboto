@@ -13,28 +13,6 @@ if (isPc) then
 end
 
 if (fs.listRecursive == nil) then
-	function fs.listRecursive(directory)
-		local results = {}
-
-		local dirsToCheck = {directory}
-
-		while (#dirsToCheck > 0) do
-			local currentDirectory = table.remove(dirsToCheck)
-			local files = fs.list(currentDirectory)
-
-			for _, file in ipairs(files) do
-				if (fs.isDir(file)) then
-					if (file ~= '.' and file ~= '..') then
-						table.insert(dirsToCheck, currentDirectory .. '/' .. file)
-					end
-				else
-					table.insert(results, currentDirectory .. '/' .. file)
-				end
-			end
-		end
-
-		return results
-	end
 end
 
 function dofileSandbox(filename, env)
@@ -82,6 +60,7 @@ end
 include 'Util/debug'
 include 'Util/startlocal'
 include 'Util/util'
+include 'Util/fs'
 include 'Util/math'
 include 'Util/string'
 include 'Util/table'
