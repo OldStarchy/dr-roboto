@@ -26,3 +26,10 @@ end
 function Queue:getItems()
 	return cloneTable(self._queue)
 end
+
+--TODO: remove this, but its used in task manager right now
+function Queue:remove(index)
+	assertType(index, 'int')
+
+	table.remove(self._queue, index)
+end
