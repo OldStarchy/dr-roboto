@@ -48,48 +48,90 @@ function Surface:_prepareBlit(line, start, ed)
 	return tstr, fstr, bstr
 end
 
-function Surface:_onChange()
+function Surface:_onChange(lineNumbers)
 	if (self._mirror == nil) then
 		return
 	end
 
-	self:mirrorTo(self._mirror, self._mirrorX, self._mirrorY)
+	self:mirrorTo(self._mirror, self._mirrorX, self._mirrorY, lineNumbers)
 end
 
-function Surface:mirrorTo(term, x, y)
+function Surface:mirrorTo(term, x, y, lineNumbers)
 	x = coalesce(x, 1)
 	y = coalesce(y, 1)
-	term.setCursorBlink(false)
-	self:blitTo(term, x, y)
+	if (type(lineNumbers) ~= 'table' or #lineNumbers ~= 1 or lineNumbers[1] ~= 0) then
+		term.setCursorBlink(false)
+		self:blitTo(term, x, y, lineNumbers)
+	end
 	term.setCursorPos(x + self._cursorX - 1, y + self._cursorY - 1)
 	term.setCursorBlink(self._cursorBlink)
 end
 
-function Surface:blitTo(term, x, y)
+function Surface:blitTo(term, x, y, lineNumbers)
 	assert(self._height > 0, 'cant copy heightless surface') ---yet?
 	x = coalesce(x, 1)
 	y = coalesce(y, 1)
 
-	local tx, ty = term.getSize()
+	local w, h = self:getSize()
+	local W, H = term.getSize()
 
-	local targetStartY = x
-	-- local targetEndY = math.min(targetStartY + self._height, ty)
+	-- Sidenote; if lua started counting from 0 rather than 1, this would be slightly easier.
 
-	local targetStartX = y
-	-- local targetEndX = math.min(targetStartX + self._width, tx)
+	-- Top left visible 'pixel' in this surface's coordinates
+	local sx, sy
+	if (x >= 1) then
+		sx = 1
+	else
+		sx = 2 - x
+	end
+	if (y >= 1) then
+		sy = 1
+	else
+		sy = 2 - y
+	end
 
-	local startX = 1
-	local startY = 1
+	-- Bottom right visible 'pixel' in this surface's coordinates
+	local sx2, sy2
+	if (x + w - 1 <= W) then
+		sx2 = w
+	else
+		sx2 = W - x + 1
+	end
+	if (y + h - 1 <= H) then
+		sy2 = h
+	else
+		sy2 = H - y + 1
+	end
 
-	local endX = self._width
-	local endY = self._height
+	-- Top left visible 'pixel' in the target term's coordinates
+	local tx, ty
+	if (x <= 1) then
+		tx = 1
+	else
+		tx = x
+	end
+	if (y <= 1) then
+		ty = 1
+	else
+		ty = y
+	end
 
-	local w = endX - startX + 1
-	local h = endY - startY + 1
+	-- The size of the actual visible area that should be drawn
+	local dw = sx2 - sx + 1
+	local dh = sy2 - sy + 1
 
-	for Y = 1, h do
-		local t, f, b = self:_prepareBlit(startY + Y - 1, startX, endX)
-		term.setCursorPos(targetStartX, Y + targetStartY - 1)
+	-- Redraw all lines by default
+	if (lineNumbers == nil) then
+		lineNumbers = {}
+		for i = 1, dh do
+			table.insert(lineNumbers, i)
+		end
+	end
+
+	for _, i in pairs(lineNumbers) do
+		term.setCursorPos(tx, ty + i - 1)
+
+		local t, f, b = self:_prepareBlit(sy + i - 1, sx, sx2)
 		term.blit(t, f, b)
 	end
 end
@@ -114,7 +156,7 @@ function Surface:write(str)
 	fore:fill(self._foreground, x, x + #str)
 	back:fill(self._background, x, x + #str)
 	self._cursorX = self._cursorX + #str
-	self:_onChange()
+	self:_onChange({y})
 end
 
 function Surface:scroll(amount)
@@ -151,13 +193,13 @@ end
 function Surface:setCursorPos(x, y)
 	self._cursorX, self._cursorY = assertType(x, 'int'), assertType(y, 'int')
 
-	self:_onChange()
+	self:_onChange({0})
 end
 
 function Surface:setCursorBlink(blink)
 	self._cursorBlink = assertType(blink, 'boolean')
 
-	self:_onChange()
+	self:_onChange({0})
 end
 
 function Surface:getCursorPos()
@@ -181,7 +223,7 @@ function Surface:clearLine()
 	self._foregroundBuffer[self._cursorY] = nil
 	self._backgroundBuffer[self._cursorY] = nil
 
-	self:_onChange()
+	self:_onChange({self._cursorY})
 end
 
 function Surface:setTextColour(col)
@@ -251,7 +293,7 @@ function Surface:blit(str, foreCols, backCols)
 	fore:write(foreCols, x)
 	back:write(backCols, x)
 
-	self:_onChange()
+	self:_onChange({self._cursorY})
 end
 
 function Surface:startMirroring(newTerm, x, y)
