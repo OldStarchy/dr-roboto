@@ -111,9 +111,7 @@ function hardTable(filename)
 	ht.proxy = {}
 
 	function ht.save()
-		local f = fs.open(filename, 'w')
-		f.write(textutils.serialize(hardTableExport(ht)))
-		f.close()
+		fs.writeTableToFile(filename, hardTableExport(ht))
 	end
 
 	function ht.load()
