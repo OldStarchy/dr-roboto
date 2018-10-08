@@ -45,7 +45,7 @@ end
 -- empty frames are collapsed and are printed as '-'
 -- If maxJump empty frames are found in a row, assume there are no more frames
 function printStackTrace(frames, start, jump)
-	local trace = getStackTrace(frames, start, jump)
+	local trace = getStackTrace(frames, coalesce(start, 2) + 1, jump)
 
 	for i, v in pairs(trace) do
 		print(v)
@@ -55,11 +55,11 @@ end
 function saveStackTrace(file, frames, start, jump)
 	local f = fs.open(file, 'w')
 	if (f == nil) then
-		printStackTrace(frames, start, jump)
+		printStackTrace(frames, start, jump + 1)
 		error('could not save to file')
 	end
 
-	local trace = getStackTrace(frames, start, jump)
+	local trace = getStackTrace(frames, coalesce(start, 2) + 1, jump)
 
 	for i, v in pairs(trace) do
 		f.write(v .. '\n')
