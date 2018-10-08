@@ -120,6 +120,10 @@ function Surface:blitTo(term, x, y, lineNumbers)
 	local dw = sx2 - sx + 1
 	local dh = sy2 - sy + 1
 
+	if (dw <= 0 or dh <= 0) then
+		return
+	end
+
 	-- Redraw all lines by default
 	if (lineNumbers == nil) then
 		lineNumbers = {}
