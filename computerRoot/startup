@@ -4,3 +4,10 @@ loadfile('test.lua')(1)
 
 include 'Core/_main'
 include 'UserFunctions/_main'
+
+taskManager = TaskManager()
+pcall(
+	function()
+		taskManager:load('data/tasks')
+	end
+)

@@ -1,0 +1,39 @@
+local args = {...}
+
+if (#args == 0) then
+	args = {'list'}
+end
+
+local actions = {}
+
+function actions.list()
+	local tasks = taskManager:getTasks()
+
+	print(#tasks .. ' tasks:')
+	for i, v in ipairs(tasks) do
+		print('- ' .. tostring(task))
+	end
+end
+
+function actions.help()
+	print('Usage:')
+	for i, _ in pairs(actions) do
+		print(' task ' .. i)
+	end
+end
+
+function actions.add(name)
+	if (not isType(name, 'string')) then
+		print('Must specifiy name')
+	end
+
+	local task = Task(name)
+	taskManager.addTask(task)
+end
+
+local cmd = table.remove(args, 1)
+if (actions[cmd] ~= nil) then
+	actions[cmd](unpack(args))
+else
+	actions.help()
+end
