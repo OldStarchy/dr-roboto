@@ -1,13 +1,40 @@
-local SkillSet = Class()
+SkillSet = Class()
+SkillSet.ClassName = 'SkillSet'
+
+function SkillSet.GetDefaultSkillSet()
+	local skillSet = SkillSet()
+
+	skillSet:addSkill(TreeFarmSkill())
+	skillSet:addSkill(DanceSkill())
+
+	return skillSet
+end
 
 function SkillSet:constructor()
+	self._skills = {}
+
 	self:addSkill(DefaultSkill())
 end
 
-function SkillSet:getSkills()
-	--TODO: order skills by priority, highest first
+function SkillSet:addSkill(skill)
+	assertType(skill, Skill)
 
-	return self.skills
+	table.insert(self._skills, skill)
 end
 
-return SkillSet
+function SkillSet:getSkillForTask(task)
+	assertType(task, Task)
+
+	table.sort(
+		self._skills,
+		function(a, b)
+			return a.priority > b.priority
+		end
+	)
+
+	for _, skill in ipairs(self._skills) do
+		if (skill:canHandleTask(task)) then
+			return skill
+		end
+	end
+end
