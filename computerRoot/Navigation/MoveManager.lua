@@ -14,7 +14,7 @@ MoveManager.ClassName = 'Move'
 
 	Keeps track of the current position by modifying coordinates after each successful move
 ]]
-function MoveManager:constructor(turtle)
+function MoveManager:constructor(turtle, verbose)
 	assertType(turtle, 'table')
 
 	-- Public api stuff
@@ -33,6 +33,8 @@ function MoveManager:constructor(turtle)
 	self._turtle = turtle
 	self._oldTurtle = {}
 	self._autoPropsStack = {}
+
+	self._verbose = assertType(coalesce(verbose, false), 'boolean')
 
 	self:_attach()
 end
@@ -323,7 +325,9 @@ function MoveManager:_turnLeft()
 end
 
 function MoveManager:_afterMove()
-	print(self._position)
+	if (self._verbose) then
+		print(self._position)
+	end
 end
 
 Mov = MoveManager(turtle)
