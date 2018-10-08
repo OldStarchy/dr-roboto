@@ -1,3 +1,5 @@
+-- global taskManager
+
 local args = {...}
 
 if (#args == 0) then
@@ -10,8 +12,8 @@ function actions.list()
 	local tasks = taskManager:getTasks()
 
 	print(#tasks .. ' tasks:')
-	for i, v in ipairs(tasks) do
-		print('- ' .. tostring(task))
+	for i, task in ipairs(tasks) do
+		print(' ' .. i .. ': ' .. tostring(task))
 	end
 end
 
@@ -25,10 +27,34 @@ end
 function actions.add(name)
 	if (not isType(name, 'string')) then
 		print('Must specifiy name')
+		return
 	end
 
 	local task = Task(name)
-	taskManager.addTask(task)
+	taskManager:addTask(task)
+end
+
+function actions.run()
+	print('Start executing tasks? [Y/n] ')
+
+	os.pullEvent('key')
+
+	while (true) do
+		local e, cc = os.pullEvent('key_up')
+
+		if (cc == 28 or cc == 21) then
+			break
+		elseif (cc == 49) then
+			return
+		end
+		os.pullEvent('key')
+	end
+
+	local skillSet = SkillSet.GetDefaultSkillSet()
+
+	local runner = TaskRunner(skillSet, taskManager, true)
+
+	runner:run()
 end
 
 local cmd = table.remove(args, 1)
