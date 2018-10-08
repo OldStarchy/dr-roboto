@@ -2,6 +2,7 @@ TaskManager = Class()
 TaskManager.ClassName = 'TaskManager'
 
 function TaskManager:constructor()
+	--TODO: maybe queue isn't necassary here
 	self._tasks = Queue()
 end
 
@@ -23,10 +24,14 @@ function TaskManager:load(fname)
 end
 
 function TaskManager:addTask(task)
-	assertType(task, 'Task')
+	assertType(task, Task)
 	self._tasks:enqueue(task)
 end
 
 function TaskManager:getTasks()
 	return self._tasks:getItems()
+end
+
+function TaskManager:removeTask(index)
+	self._tasks:remove(index)
 end
