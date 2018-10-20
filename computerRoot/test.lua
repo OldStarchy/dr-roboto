@@ -109,15 +109,17 @@ local function createTestParams()
 			local args = {...}
 
 			if (#args ~= #expectedArgs) then
-				error('Incorrect call, got "' .. #args .. '" args but expected "' .. #expectedArgs .. '"')
+				--error('Incorrect call, got "' .. #args .. '" args but expected "' .. #expectedArgs .. '"')
+				return
 			end
 
 			for i = 1, #args do
 				if (args[i] ~= expectedArgs[i]) then
-					error(
-						'Incorrect call,\nExpected arg "' .. tostring(args[i]) .. '"\n but got arg "' .. tostring(expectedArgs[i]) .. '"',
-						2
-					)
+					-- error(
+					-- 	'Incorrect call,\nExpected arg "' .. tostring(args[i]) .. '"\n but got arg "' .. tostring(expectedArgs[i]) .. '"',
+					-- 	2
+					-- )
+					return
 				end
 			end
 
@@ -127,13 +129,15 @@ local function createTestParams()
 
 	function t.assertNotCalled()
 		return function()
-			error('Function should not have been called')
+			error('Function called')
 		end
 	end
 
 	function t.finalize()
 		for _, call in pairs(calls) do
-			t.assertEqual(call, true)
+			if (call ~= true) then
+				error('Function not called')
+			end
 		end
 	end
 
