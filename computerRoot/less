@@ -1,12 +1,67 @@
-local current = term.current();
-local surface = Surface(term.getSize(), 400)
+local current = term.current()
+local hw, hh = term.getSize()
+local surface = Surface(hw, 400)
 
 print(...)
-term.redirect(surface)
+term.redirect(surface:asTerm())
 
 shell.run(...)
 
 term.redirect(current)
 print('finished')
 
-surface:drawTo(1, 1, term)
+local _, lastLine = surface:getCursorPos()
+local lim = lastLine - hh + 2
+
+print(lim)
+if (lim <= 0) then
+	lim = 1
+end
+
+local head = 1
+local run = true
+while run do
+	surface:mirrorTo(term, 1, 2 - head)
+
+	local percent = tostring(math.floor(100 * head / lim))
+	term.setCursorPos(1, hh)
+
+	while (#percent < 3) do
+		percent = ' ' .. percent
+	end
+	term.write('Navigate with arrows, q to exit')
+	term.setCursorPos(hw - 5, hh)
+	term.write('[' .. tostring(percent) .. '%]')
+
+	local e, key = os.pullEvent('key')
+
+	if (key == keys.q) then
+		run = false
+		os.pullEvent('key_up')
+	elseif (key == keys.j or key == keys.enter or key == keys.down) then
+		if (head < lim) then
+			head = head + 1
+		end
+	elseif (key == keys.k or key == keys.up) then
+		if (head > 1) then
+			head = head - 1
+		end
+	elseif (key == keys.home) then
+		head = 1
+	elseif (key == keys['end']) then
+		head = lim
+	elseif (key == keys.pageDown) then
+		head = head + hh - 1
+		if (head > lim) then
+			head = lim
+		end
+	elseif (key == keys.pageUp) then
+		head = head - hh + 1
+		if (head < 1) then
+			head = 1
+		end
+	end
+end
+
+term.scroll(1)
+term.setCursorPos(1, hh)
