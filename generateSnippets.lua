@@ -73,6 +73,9 @@ f = fs.open('.vscode/luagenerated.code-snippets', 'w')
 function writeSnippet(snippet)
 end
 f.write('{\n')
+
+table.sort(results)
+
 for i = 1, #results do
 	local snippet = results[i]
 	local text = ''
