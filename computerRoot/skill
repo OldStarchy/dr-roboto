@@ -1,0 +1,19 @@
+local cli = Cli('skill', nil, 'list')
+
+cli:addAction(
+	'list',
+	function()
+		local skills = SkillSet.GetDefaultSkillSet():getSkills()
+
+		for _, v in ipairs(skills) do
+			print(' ' .. stringutil.lPad(tostring(v.priority), 4) .. ' ' .. v.ClassName)
+			if (v.description ~= nil) then
+				print('  ' .. v.description)
+			end
+		end
+	end,
+	nil,
+	'Lists available skills'
+)
+
+cli:run(...)

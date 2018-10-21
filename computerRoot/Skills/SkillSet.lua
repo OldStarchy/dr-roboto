@@ -42,3 +42,13 @@ function SkillSet:getSkillForTask(task)
 		end
 	end
 end
+
+function SkillSet:getSkills()
+	local r = {}
+
+	for _, skill in ipairs(self._skills) do
+		table.insert(r, skill)
+	end
+
+	return r
+end
