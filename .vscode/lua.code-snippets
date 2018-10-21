@@ -1,0 +1,233 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"turtle.craft(number: quantity)": {
+		"prefix": "turtle.craft",
+		"body": ["turtle.craft(${1:number: quantity})"],
+		"description": "Craft items using ingredients anywhere in the turtle's inventory and place results in the active slot. If a quantity is specified, it will craft only up to that many items, otherwise, it will craft as many of the items as possible.. returns: boolean: success"
+	},
+	"turtle.forward()": {
+		"prefix": "turtle.forward",
+		"body": ["turtle.forward()"],
+		"description": "Try to move the turtle forward. returns: boolean: success"
+	},
+	"turtle.back()": {
+		"prefix": "turtle.back",
+		"body": ["turtle.back()"],
+		"description": "Try to move the turtle backward. returns: boolean: success"
+	},
+	"turtle.up()": {
+		"prefix": "turtle.up",
+		"body": ["turtle.up()"],
+		"description": "Try to move the turtle up. returns: boolean: success"
+	},
+	"turtle.down()": {
+		"prefix": "turtle.down",
+		"body": ["turtle.down()"],
+		"description": "Try to move the turtle down. returns: boolean: success"
+	},
+	"turtle.turnLeft()": {
+		"prefix": "turtle.turnLeft",
+		"body": ["turtle.turnLeft()"],
+		"description": "Turn the turtle left. returns: boolean: success"
+	},
+	"turtle.turnRight()": {
+		"prefix": "turtle.turnRight",
+		"body": ["turtle.turnRight()"],
+		"description": "Turn the turtle right. returns: boolean: success"
+	},
+	"turtle.select(number: slotNum)": {
+		"prefix": "turtle.select",
+		"body": ["turtle.select(${1:number: slotNum})"],
+		"description": "Make the turtle select slot <code>slotNum</code> (1 is top left, 16 (9 in 1.33 and earlier) is bottom right). returns: boolean: success"
+	},
+	"turtle.getSelectedSlot()": {
+		"prefix": "turtle.getSelectedSlot",
+		"body": ["turtle.getSelectedSlot()"],
+		"description": "Indicates the currently selected inventory slot. returns: number: slot"
+	},
+	"turtle.getItemCount(number: slotNum)": {
+		"prefix": "turtle.getItemCount",
+		"body": ["turtle.getItemCount(${1:number: slotNum})"],
+		"description": "Counts how many items are in the currently selected slot or, if specified, <code>slotNum</code> slot. returns: number: count"
+	},
+	"turtle.getItemSpace(number: slotNum)": {
+		"prefix": "turtle.getItemSpace",
+		"body": ["turtle.getItemSpace(${1:number: slotNum})"],
+		"description": "Counts how many remaining items you need to fill the stack in the currently selected slot or, if specified, <code>slotNum</code> slot. returns: number: count"
+	},
+	"turtle.getItemDetail(number: slotNum)": {
+		"prefix": "turtle.getItemDetail",
+		"body": ["turtle.getItemDetail(${1:number: slotNum})"],
+		"description": "Returns the ID string, count and damage values of currently selected slot or, if specified, <code>slotNum</code> slot. returns: table: data"
+	},
+	"turtle.equipLeft()": {
+		"prefix": "turtle.equipLeft",
+		"body": ["turtle.equipLeft()"],
+		"description": "Attempts to equip an item in the current slot to the turtle's left side, switching the previously equipped item back into the inventory. returns: boolean: success"
+	},
+	"turtle.equipRight()": {
+		"prefix": "turtle.equipRight",
+		"body": ["turtle.equipRight()"],
+		"description": "Attempts to equip an item in the current slot to the turtle's right side, switching the previously equipped item back into the inventory. returns: boolean: success"
+	},
+	"turtle.attack()": {
+		"prefix": "turtle.attack",
+		"body": ["turtle.attack()"],
+		"description": "Attacks in front of the turtle.. returns: boolean: success"
+	},
+	"turtle.attackUp()": {
+		"prefix": "turtle.attackUp",
+		"body": ["turtle.attackUp()"],
+		"description": "Attacks above the turtle.. returns: boolean: success"
+	},
+	"turtle.attackDown()": {
+		"prefix": "turtle.attackDown",
+		"body": ["turtle.attackDown()"],
+		"description": "Attacks under the turtle.. returns: boolean: success"
+	},
+	"turtle.dig()": {
+		"prefix": "turtle.dig",
+		"body": ["turtle.dig()"],
+		"description": "Breaks the block in front. With hoe: tills the dirt in front of it.. returns: boolean: success"
+	},
+	"turtle.digUp()": {
+		"prefix": "turtle.digUp",
+		"body": ["turtle.digUp()"],
+		"description": "Breaks the block above.. returns: boolean: success"
+	},
+	"turtle.digDown()": {
+		"prefix": "turtle.digDown",
+		"body": ["turtle.digDown()"],
+		"description": "Breaks the block below. With hoe: tills the dirt beneath the space below it.. returns: boolean: success"
+	},
+	"turtle.place(string: signText)": {
+		"prefix": "turtle.place",
+		"body": ["turtle.place(${1:string: signText})"],
+		"description": "Places a block of the selected slot in front. Engrave <code>signText</code> on signs if provided. Collects <a >water or <a >lava if the currently selected slot is an empty bucket.. returns: boolean: success"
+	},
+	"turtle.placeUp()": {
+		"prefix": "turtle.placeUp",
+		"body": ["turtle.placeUp()"],
+		"description": "Places a block of the selected slot above. Collects water or lava if the currently selected slot is an empty bucket.. returns: boolean: success"
+	},
+	"turtle.placeDown()": {
+		"prefix": "turtle.placeDown",
+		"body": ["turtle.placeDown()"],
+		"description": "Places a block of the selected slot below. Collects water or lava if the currently selected slot is an empty bucket.. returns: boolean: success"
+	},
+	"turtle.detect()": {
+		"prefix": "turtle.detect",
+		"body": ["turtle.detect()"],
+		"description": "Detects if there is a block in front. Does not detect mobs.. returns: boolean: result"
+	},
+	"turtle.detectUp()": {
+		"prefix": "turtle.detectUp",
+		"body": ["turtle.detectUp()"],
+		"description": "Detects if there is a block above. returns: boolean: result"
+	},
+	"turtle.detectDown()": {
+		"prefix": "turtle.detectDown",
+		"body": ["turtle.detectDown()"],
+		"description": "Detects if there is a block below. returns: boolean: result"
+	},
+	"turtle.inspect()": {
+		"prefix": "turtle.inspect",
+		"body": ["turtle.inspect()"],
+		"description": "Returns the ID string and metadata of the block in front of the Turtle. returns: boolean: success, <a ><span >table: data/<a ><span >string: error message"
+	},
+	"turtle.inspectUp()": {
+		"prefix": "turtle.inspectUp",
+		"body": ["turtle.inspectUp()"],
+		"description": "Returns the ID string and metadata of the block above the Turtle. returns: boolean: success, <a ><span >table: data/<a ><span >string: error message"
+	},
+	"turtle.inspectDown()": {
+		"prefix": "turtle.inspectDown",
+		"body": ["turtle.inspectDown()"],
+		"description": "Returns the ID string and metadata of the block below the Turtle. returns: boolean: success, <a ><span >table: data/<a ><span >string: error message"
+	},
+	"turtle.compare()": {
+		"prefix": "turtle.compare",
+		"body": ["turtle.compare()"],
+		"description": "Detects if the block in front is the same as the one in the currently selected slot. returns: boolean: result"
+	},
+	"turtle.compareUp()": {
+		"prefix": "turtle.compareUp",
+		"body": ["turtle.compareUp()"],
+		"description": "Detects if the block above is the same as the one in the currently selected slot. returns: boolean: result"
+	},
+	"turtle.compareDown()": {
+		"prefix": "turtle.compareDown",
+		"body": ["turtle.compareDown()"],
+		"description": "Detects if the block below is the same as the one in the currently selected slot. returns: boolean: result"
+	},
+	"turtle.compareTo(number: slot)": {
+		"prefix": "turtle.compareTo",
+		"body": ["turtle.compareTo(${1:number: slot})"],
+		"description": "Compare the current selected slot and the given slot to see if the items are the same. Returns true if they are the same, false if not.. returns: boolean: result"
+	},
+	"turtle.drop(number: count)": {
+		"prefix": "turtle.drop",
+		"body": ["turtle.drop(${1:number: count})"],
+		"description": "Drops all items in the selected slot, or specified, drops <code>count</code> items.<br />&gt;= 1.4 only: If there is a inventory on the side (i.e in front of the turtle) it will try to place into the inventory, returning false if the inventory is full.. returns: boolean: success"
+	},
+	"turtle.dropUp(number: count)": {
+		"prefix": "turtle.dropUp",
+		"body": ["turtle.dropUp(${1:number: count})"],
+		"description": "Drops all items in the selected slot, or specified, drops <code>count</code> items.<br />&gt;= 1.4 only: If there is a inventory on the side (i.e above the turtle) it will try to place into the inventory, returning false if the inventory is full.. returns: boolean: success"
+	},
+	"turtle.dropDown(number: count)": {
+		"prefix": "turtle.dropDown",
+		"body": ["turtle.dropDown(${1:number: count})"],
+		"description": "Drops all items in the selected slot, or specified, drops <code>count</code> items.<br />&gt;= 1.4 only: If there is a inventory on the side (i.e below the turtle) it will try to place into the inventory, returning false if the inventory is full. If above a furnace, will place item in the top slot.. returns: boolean: success"
+	},
+	"turtle.suck(number: amount)": {
+		"prefix": "turtle.suck",
+		"body": ["turtle.suck(${1:number: amount})"],
+		"description": "Picks up an item stack of any number, from the ground or an inventory in front of the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false. <code>amount</code> parameter requires ComputerCraft 1.6 or later.. returns: boolean: success"
+	},
+	"turtle.suckUp(number: amount)": {
+		"prefix": "turtle.suckUp",
+		"body": ["turtle.suckUp(${1:number: amount})"],
+		"description": "Picks up an item stack of any number, from the ground or an inventory above the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false. <code>amount</code> parameter requires ComputerCraft 1.6 or later.. returns: boolean: success"
+	},
+	"turtle.suckDown(number: amount)": {
+		"prefix": "turtle.suckDown",
+		"body": ["turtle.suckDown(${1:number: amount})"],
+		"description": "Picks up an item stack of any number, from the ground or an inventory below the turtle, then places it in the selected slot. If the turtle can't pick up the item, the function returns false. <code>amount</code> parameter requires ComputerCraft 1.6 or later.. returns: boolean: success"
+	},
+	"turtle.refuel(number: quantity)": {
+		"prefix": "turtle.refuel",
+		"body": ["turtle.refuel(${1:number: quantity})"],
+		"description": "If the current selected slot contains a fuel item, it will consume it to give the turtle the ability to move.<br />Added in 1.4 and is only needed in needfuel mode. If the current slot doesn't contain a fuel item, it returns false. Fuel values for different items can be found at <a >Turtle.refuel#Fuel_Values. If a quantity is specified, it will refuel only up to that many items, otherwise, it will consume all the items in the slot.. returns: boolean: success"
+	},
+	"turtle.getFuelLevel()": {
+		"prefix": "turtle.getFuelLevel",
+		"body": ["turtle.getFuelLevel()"],
+		"description": "Returns the current fuel level of the turtle, this is the number of blocks the turtle can move.<br />If <code>turtleNeedFuel = 0</code> then it returns <code>\"unlimited\"</code>.. returns: number: fuel"
+	},
+	"turtle.getFuelLimit()": {
+		"prefix": "turtle.getFuelLimit",
+		"body": ["turtle.getFuelLimit()"],
+		"description": "Returns the maximum amount of fuel a turtle can store - by default, 20,000 for regular turtles, 100,000 for advanced.<br />If <code>turtleNeedFuel = 0</code> then it returns <code>\"unlimited\"</code>.. returns: number: fuel"
+	},
+	"turtle.transferTo(number: slot, number: quantity)": {
+		"prefix": "turtle.transferTo",
+		"body": ["turtle.transferTo(${1:number: slot}, ${2:number: quantity})"],
+		"description": "Transfers <code>quantity</code> items from the selected slot to <code>slot</code>. If <code>quantity</code> isn't specified, will attempt to transfer everything in the selected slot to <code>slot</code>.. returns: boolean: success"
+	}
+}

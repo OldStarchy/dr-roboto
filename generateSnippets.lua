@@ -1,7 +1,14 @@
+require 'lfs'
+lfs.chdir('computerRoot')
+dofile 'startup'
+lfs.chdir('..')
 -- Generates a snippets file for all the apis currently available on the computercraft computer its run on
 -- The snippets file can be used in vscode to provide autocomplete.
 -- Won't create snippets for things starting wtih an underscore, or for the 'turtle' namespace (because there's already a better set of turtle snippets in .vscode/luasnippets.json)
-local done = {}
+local done = {
+	[debug] = true,
+	[lfs] = true
+}
 local results = {}
 
 local function iterateTable(tbl, prefix, depth)
@@ -62,7 +69,7 @@ end
 iterateMetatables(_G)
 
 local ind = 1
-f = fs.open('snippets.json', 'w')
+f = fs.open('.vscode/luagenerated.code-snippets', 'w')
 function writeSnippet(snippet)
 end
 f.write('{\n')

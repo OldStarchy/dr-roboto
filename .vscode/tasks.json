@@ -21,6 +21,19 @@
 			"osx": {
 				"command": "/usr/local/opt/lua@5.1/bin/lua5.1 startup"
 			}
+		},
+		{
+			"label": "Generate Snippets",
+			"type": "shell",
+			"command": "lua generateSnippets.lua",
+			"group": "build",
+			"presentation": {
+				"reveal": "never"
+			},
+			"osx": {
+				"command": "/usr/local/opt/lua@5.1/bin/lua5.1 generateSnippets.lua"
+			},
+			"problemMatcher": []
 		}
 	]
 }
