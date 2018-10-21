@@ -3,6 +3,8 @@ include 'Core/Class'
 include 'Core/Interface'
 include 'Core/Log'
 
+include 'Core/Cli'
+
 include 'Core/IBuffer'
 include 'Core/Buffer'
 include 'Core/StringBuffer'
