@@ -5,6 +5,7 @@ function SkillSet.GetDefaultSkillSet()
 	local skillSet = SkillSet()
 
 	skillSet:addSkill(TreeFarmSkill())
+	skillSet:addSkill(ChopTreeSkill())
 	skillSet:addSkill(DanceSkill())
 
 	return skillSet

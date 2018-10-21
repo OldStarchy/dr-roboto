@@ -18,16 +18,30 @@ cli:addAction(
 
 cli:addAction(
 	'add',
-	function(name)
+	function(name, ...)
 		if (not isType(name, 'string')) then
 			print('Must specifiy name')
 			return
 		end
 
-		local task = Task(name)
+		local task = nil
+		if (isDefined(name)) then
+			local typ = getfenv()[name]
+			assertType(typ, Task)
+
+			task = typ.fromArgs({...})
+		elseif (isDefined(name .. 'Task')) then
+			local typ = getfenv()[name .. 'Task']
+			assertType(typ, Task)
+
+			task = typ.fromArgs({...})
+		else
+			error('Unknown task type "' .. name .. '"')
+		end
+
 		taskManager:addTask(task)
 	end,
-	'name',
+	{'name', 'taskArgs...'},
 	'Queues a task for completion'
 )
 

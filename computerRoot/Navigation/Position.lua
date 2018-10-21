@@ -24,6 +24,27 @@ function Position.wrapDirection(direction)
 	return (((direction % 4) + 4) % 4)
 end
 
+--CLI helper
+function Position.fromArgs(args)
+	if (#args == 0) then
+		error('Missing args for position')
+	end
+
+	if (args[1] == 'here') then
+		table.remove(args, 1)
+		return Position(Mov:getPosition())
+	end
+
+	local numericArgs = {}
+
+	local lim = math.min(4, #args)
+	for i = 1, lim do
+		table.insert(numericArgs, tonumber(table.remove(args, 1)))
+	end
+
+	return Position(unpack(numericArgs))
+end
+
 function Position:constructor(x, y, z, direction)
 	if (type(x) == 'table') then
 		Position.constructor(self, x.x, x.y, x.z, x.direction)
@@ -82,5 +103,6 @@ function Position:getDirectionOffset(direction)
 end
 
 function Position:toString()
-	return 'x: ' .. self.x .. ', y: ' .. self.y .. ', z: ' .. self.z
+	return 'x: ' ..
+		self.x .. ', y: ' .. self.y .. ', z: ' .. self.z .. ', f: ' .. Position.directionNames[self.direction]:sub(1, 1)
 end

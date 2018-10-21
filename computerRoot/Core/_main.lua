@@ -18,6 +18,6 @@ include 'Core/Block'
 
 include 'Crafting/_main'
 include 'Navigation/_main'
+include 'Tasks/_main'
 include 'Skills/_main'
 include 'Inventory/_main'
-include 'Tasks/_main'
