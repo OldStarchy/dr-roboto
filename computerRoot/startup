@@ -7,6 +7,11 @@ include 'UserFunctions/_main'
 
 Mov:trackLocation('.mov.tbl')
 
+info('Loading skills')
+skillSet = SkillSet.GetDefaultSkillSet()
+info(skillSet:getSkillCount() .. ' slills')
+
+info('Loading TaskManager')
 taskManager = TaskManager()
 pcall(
 	function()

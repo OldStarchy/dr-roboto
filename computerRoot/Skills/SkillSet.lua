@@ -22,6 +22,10 @@ function SkillSet:addSkill(skill)
 	table.insert(self._skills, skill)
 end
 
+function SkillSet:getSkillCount()
+	return #self._skills
+end
+
 function SkillSet:getSkillForTask(task)
 	assertType(task, Task)
 
