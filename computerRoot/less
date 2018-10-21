@@ -1,3 +1,14 @@
+--[[
+	Runs a command to an offscreen buffer, then shows the output in a scrollable pane.
+
+	down, j, enter	- scroll down 1 line
+	up, k			- scroll up 1 line
+	pageDown		- scroll down 1 page
+	pageUp			- scroll up 1 page
+	home			- go to top
+	end				- go to bottom
+	q				- quit
+]]
 local current = term.current()
 local hw, hh = term.getSize()
 local surface = Surface(hw, 400)
