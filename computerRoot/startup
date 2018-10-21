@@ -5,6 +5,8 @@ loadfile('test.lua')(1)
 include 'Core/_main'
 include 'UserFunctions/_main'
 
+Mov:trackLocation('.mov.tbl')
+
 taskManager = TaskManager()
 pcall(
 	function()

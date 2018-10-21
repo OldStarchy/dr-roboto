@@ -33,6 +33,7 @@ function MoveManager:constructor(turtle, verbose)
 	self._turtle = turtle
 	self._oldTurtle = {}
 	self._autoPropsStack = {}
+	self._autoSaveFile = nil
 
 	self._verbose = assertType(coalesce(verbose, false), 'boolean')
 
@@ -241,6 +242,14 @@ function MoveManager:face(direction)
 	return self:turn(self._position:getDirectionOffset(direction))
 end
 
+function MoveManager:trackLocation(filename)
+	self._autoSaveFile = filename
+
+	if (fs.exists(filename)) then
+		self._position = Position(fs.readTableFromFile(filename))
+	end
+end
+
 -- PRIVATE
 
 function MoveManager:_attach()
@@ -327,6 +336,10 @@ end
 function MoveManager:_afterMove()
 	if (self._verbose) then
 		print(self._position)
+	end
+
+	if (self._autoSaveFile) then
+		fs.writeTableToFile(self._autoSaveFile, self._position)
 	end
 end
 

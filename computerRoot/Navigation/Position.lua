@@ -25,6 +25,10 @@ function Position.wrapDirection(direction)
 end
 
 function Position:constructor(x, y, z, direction)
+	if (type(x) == 'table') then
+		Position.constructor(self, x.x, x.y, x.z, x.direction)
+		return
+	end
 	self.x = ((type(x) == 'number') and x) or 0
 	self.y = ((type(y) == 'number') and y) or 0
 	self.z = ((type(z) == 'number') and z) or 0
