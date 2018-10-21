@@ -31,12 +31,9 @@ local run = true
 while run do
 	surface:mirrorTo(term, 1, 2 - head)
 
-	local percent = tostring(math.floor(100 * head / lim))
+	local percent = stringutil.lPad(tostring(math.floor(100 * head / lim)), 3)
 	term.setCursorPos(1, hh)
 
-	while (#percent < 3) do
-		percent = ' ' .. percent
-	end
 	term.write('Navigate with arrows, q to exit')
 	term.setCursorPos(hw - 5, hh)
 	term.write('[' .. tostring(percent) .. '%]')
