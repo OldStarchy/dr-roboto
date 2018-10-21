@@ -20,6 +20,13 @@ function SkillSet:addSkill(skill)
 	assertType(skill, Skill)
 
 	table.insert(self._skills, skill)
+
+	table.sort(
+		self._skills,
+		function(a, b)
+			return a.priority > b.priority
+		end
+	)
 end
 
 function SkillSet:getSkillCount()
@@ -28,13 +35,6 @@ end
 
 function SkillSet:getSkillForTask(task)
 	assertType(task, Task)
-
-	table.sort(
-		self._skills,
-		function(a, b)
-			return a.priority > b.priority
-		end
-	)
 
 	for _, skill in ipairs(self._skills) do
 		if (skill:canHandleTask(task)) then
