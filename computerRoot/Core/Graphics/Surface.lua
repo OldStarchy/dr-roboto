@@ -4,6 +4,7 @@ Surface.ClassName = 'Surface'
 function Surface:constructor(width, height)
 	self._width = assertType(width, 'int')
 	self._height = assertType(coalesce(height, 0), 'int')
+	self._maxY = 1
 
 	self._cursorX = 1
 	self._cursorY = 1
@@ -68,11 +69,13 @@ function Surface:mirrorTo(term, x, y, lineNumbers)
 end
 
 function Surface:blitTo(term, x, y, lineNumbers)
-	assert(self._height > 0, 'cant copy heightless surface') ---yet?
 	x = coalesce(x, 1)
 	y = coalesce(y, 1)
 
 	local w, h = self:getSize()
+	if (h == 0) then
+		h = self._maxY
+	end
 	local W, H = term.getSize()
 
 	-- Sidenote; if lua started counting from 0 rather than 1, this would be slightly easier.
@@ -153,6 +156,10 @@ function Surface:write(str)
 
 	if (self._height ~= 0 and y > self._height) then
 		return
+	end
+
+	if (self._maxY < y) then
+		self._maxY = y
 	end
 
 	text, fore, back = self:_getLine()
@@ -313,6 +320,10 @@ function Surface:startMirroring(newTerm, x, y)
 	self._mirror = newTerm
 	self._mirrorX = x
 	self._mirrorY = y
+end
+
+function Surface:getLastLine()
+	return self._maxY
 end
 
 function Surface:asTerm()
