@@ -11,20 +11,17 @@
 ]]
 local current = term.current()
 local hw, hh = term.getSize()
-local surface = Surface(hw, 400)
+local surface = Surface(hw, 10000)
 
-print(...)
 term.redirect(surface:asTerm())
 
 shell.run(...)
 
 term.redirect(current)
-print('finished')
 
-local _, lastLine = surface:getCursorPos()
+local lastLine = surface:getLastLine()
 local lim = lastLine - hh + 2
 
-print(lim)
 if (lim <= 0) then
 	lim = 1
 end
