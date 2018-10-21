@@ -16,5 +16,29 @@ function isUpper(str)
 	return str:upper() == str
 end
 
+function lPad(str, size, char)
+	assertType(str, 'string')
+	assertType(size, 'int')
+	char = assertType(coalesce(char, ' '), 'char')
+
+	while (#str < size) do
+		str = char .. str
+	end
+
+	return str
+end
+
+function rPad(str, size, char)
+	assertType(str, 'string')
+	assertType(size, 'int')
+	char = assertType(coalesce(char, ' '), 'char')
+
+	while (#str < size) do
+		str = str .. char
+	end
+
+	return str
+end
+
 --for i=0,100 do stringutil.progressBar(i, 100); sleep(0.02) end
 stringutil = endlocal()
