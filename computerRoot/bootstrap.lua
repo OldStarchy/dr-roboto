@@ -59,6 +59,7 @@ end
 
 include 'Util/debug'
 include 'Util/startlocal'
+include 'Util/type'
 include 'Util/util'
 include 'Util/fs'
 include 'Util/math'
