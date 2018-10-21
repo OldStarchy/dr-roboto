@@ -1,65 +1,62 @@
 -- global taskManager
 
-local args = {...}
+local cli = Cli('task', 'Cli interface for the TaskManager', 'list')
 
-if (#args == 0) then
-	args = {'list'}
-end
+cli:addAction(
+	'list',
+	function()
+		local tasks = taskManager:getTasks()
 
-local actions = {}
+		print(#tasks .. ' tasks:')
+		for i, task in ipairs(tasks) do
+			print(' ' .. i .. ': ' .. tostring(task))
+		end
+	end,
+	nil,
+	'Lists queued tasks'
+)
 
-function actions.list()
-	local tasks = taskManager:getTasks()
-
-	print(#tasks .. ' tasks:')
-	for i, task in ipairs(tasks) do
-		print(' ' .. i .. ': ' .. tostring(task))
-	end
-end
-
-function actions.help()
-	print('Usage:')
-	for i, _ in pairs(actions) do
-		print(' task ' .. i)
-	end
-end
-
-function actions.add(name)
-	if (not isType(name, 'string')) then
-		print('Must specifiy name')
-		return
-	end
-
-	local task = Task(name)
-	taskManager:addTask(task)
-end
-
-function actions.run()
-	print('Start executing tasks? [Y/n] ')
-
-	os.pullEvent('key')
-
-	while (true) do
-		local e, cc = os.pullEvent('key_up')
-
-		if (cc == 28 or cc == 21) then
-			break
-		elseif (cc == 49) then
+cli:addAction(
+	'add',
+	function(name)
+		if (not isType(name, 'string')) then
+			print('Must specifiy name')
 			return
 		end
+
+		local task = Task(name)
+		taskManager:addTask(task)
+	end,
+	'name',
+	'Queues a task for completion'
+)
+
+cli:addAction(
+	'run',
+	function()
+		print('Start executing tasks? [Y/n] ')
+
 		os.pullEvent('key')
-	end
 
-	local skillSet = SkillSet.GetDefaultSkillSet()
+		while (true) do
+			local e, cc = os.pullEvent('key_up')
 
-	local runner = TaskRunner(skillSet, taskManager, true)
+			if (cc == 28 or cc == 21) then
+				break
+			elseif (cc == 49) then
+				return
+			end
+			os.pullEvent('key')
+		end
 
-	runner:run()
-end
+		local skillSet = SkillSet.GetDefaultSkillSet()
 
-local cmd = table.remove(args, 1)
-if (actions[cmd] ~= nil) then
-	actions[cmd](unpack(args))
-else
-	actions.help()
-end
+		local runner = TaskRunner(skillSet, taskManager, true)
+
+		runner:run()
+	end,
+	nil,
+	'Runs the currently queued tasks'
+)
+
+cli:run(...)
