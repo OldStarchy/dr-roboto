@@ -1,4 +1,11 @@
 {
+	"isDefined()": {
+		"prefix": "isDefined",
+		"body": [
+			"isDefined($0)"
+		],
+		"description": ""
+	},
 	"fs.exists()": {
 		"prefix": "fs.exists",
 		"body": [
@@ -524,6 +531,62 @@
 		],
 		"description": ""
 	},
+	"Cli()": {
+		"prefix": "Cli",
+		"body": [
+			"Cli($0)"
+		],
+		"description": ""
+	},
+	"Cli:isType()": {
+		"prefix": "Cli:isType",
+		"body": [
+			"Cli:isType($0)"
+		],
+		"description": ""
+	},
+	"Cli:printUsage()": {
+		"prefix": "Cli:printUsage",
+		"body": [
+			"Cli:printUsage($0)"
+		],
+		"description": ""
+	},
+	"Cli:run()": {
+		"prefix": "Cli:run",
+		"body": [
+			"Cli:run($0)"
+		],
+		"description": ""
+	},
+	"Cli:addAction()": {
+		"prefix": "Cli:addAction",
+		"body": [
+			"Cli:addAction($0)"
+		],
+		"description": ""
+	},
+	"Cli:getType()": {
+		"prefix": "Cli:getType",
+		"body": [
+			"Cli:getType($0)"
+		],
+		"description": ""
+	},
+	"Cli:isOrInherits()": {
+		"prefix": "Cli:isOrInherits",
+		"body": [
+			"Cli:isOrInherits($0)"
+		],
+		"description": ""
+	},
+	"Cli:assertImplementation()": {
+		"prefix": "Cli:assertImplementation",
+		"body": [
+			"Cli:assertImplementation($0)"
+		],
+		"description": ""
+	},
 	"SkillSet()": {
 		"prefix": "SkillSet",
 		"body": [
@@ -542,6 +605,13 @@
 		"prefix": "SkillSet:getSkillCount",
 		"body": [
 			"SkillSet:getSkillCount($0)"
+		],
+		"description": ""
+	},
+	"SkillSet:getSkills()": {
+		"prefix": "SkillSet:getSkills",
+		"body": [
+			"SkillSet:getSkills($0)"
 		],
 		"description": ""
 	},
@@ -1105,6 +1175,13 @@
 		],
 		"description": ""
 	},
+	"Position:fromArgs()": {
+		"prefix": "Position:fromArgs",
+		"body": [
+			"Position:fromArgs($0)"
+		],
+		"description": ""
+	},
 	"Position:assertImplementation()": {
 		"prefix": "Position:assertImplementation",
 		"body": [
@@ -1112,10 +1189,10 @@
 		],
 		"description": ""
 	},
-	"Position:sub()": {
-		"prefix": "Position:sub",
+	"Position:isType()": {
+		"prefix": "Position:isType",
 		"body": [
-			"Position:sub($0)"
+			"Position:isType($0)"
 		],
 		"description": ""
 	},
@@ -1126,10 +1203,10 @@
 		],
 		"description": ""
 	},
-	"Position:isType()": {
-		"prefix": "Position:isType",
+	"Position:sub()": {
+		"prefix": "Position:sub",
 		"body": [
-			"Position:isType($0)"
+			"Position:sub($0)"
 		],
 		"description": ""
 	},
@@ -1221,6 +1298,13 @@
 		"prefix": "TaskRunner:isOrInherits",
 		"body": [
 			"TaskRunner:isOrInherits($0)"
+		],
+		"description": ""
+	},
+	"runUserFunction()": {
+		"prefix": "runUserFunction",
+		"body": [
+			"runUserFunction($0)"
 		],
 		"description": ""
 	},
@@ -1343,6 +1427,13 @@
 		],
 		"description": ""
 	},
+	"Inv()": {
+		"prefix": "Inv",
+		"body": [
+			"Inv($0)"
+		],
+		"description": ""
+	},
 	"package.loadlib()": {
 		"prefix": "package.loadlib",
 		"body": [
@@ -1361,83 +1452,6 @@
 		"prefix": "bit.blshift",
 		"body": [
 			"bit.blshift($0)"
-		],
-		"description": ""
-	},
-	"runUserFunction()": {
-		"prefix": "runUserFunction",
-		"body": [
-			"runUserFunction($0)"
-		],
-		"description": ""
-	},
-	"Nav()": {
-		"prefix": "Nav",
-		"body": [
-			"Nav($0)"
-		],
-		"description": ""
-	},
-	"isHardTable()": {
-		"prefix": "isHardTable",
-		"body": [
-			"isHardTable($0)"
-		],
-		"description": ""
-	},
-	"Task()": {
-		"prefix": "Task",
-		"body": [
-			"Task($0)"
-		],
-		"description": ""
-	},
-	"Task:isType()": {
-		"prefix": "Task:isType",
-		"body": [
-			"Task:isType($0)"
-		],
-		"description": ""
-	},
-	"Task:toString()": {
-		"prefix": "Task:toString",
-		"body": [
-			"Task:toString($0)"
-		],
-		"description": ""
-	},
-	"Task:getType()": {
-		"prefix": "Task:getType",
-		"body": [
-			"Task:getType($0)"
-		],
-		"description": ""
-	},
-	"Task:assertImplementation()": {
-		"prefix": "Task:assertImplementation",
-		"body": [
-			"Task:assertImplementation($0)"
-		],
-		"description": ""
-	},
-	"Task:isOrInherits()": {
-		"prefix": "Task:isOrInherits",
-		"body": [
-			"Task:isOrInherits($0)"
-		],
-		"description": ""
-	},
-	"unpack()": {
-		"prefix": "unpack",
-		"body": [
-			"unpack($0)"
-		],
-		"description": ""
-	},
-	"Inv()": {
-		"prefix": "Inv",
-		"body": [
-			"Inv($0)"
 		],
 		"description": ""
 	},
@@ -1532,10 +1546,185 @@
 		],
 		"description": ""
 	},
-	"require()": {
-		"prefix": "require",
+	"ChopTreeTask()": {
+		"prefix": "ChopTreeTask",
 		"body": [
-			"require($0)"
+			"ChopTreeTask($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeTask:isType()": {
+		"prefix": "ChopTreeTask:isType",
+		"body": [
+			"ChopTreeTask:isType($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeTask:toString()": {
+		"prefix": "ChopTreeTask:toString",
+		"body": [
+			"ChopTreeTask:toString($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeTask:fromArgs()": {
+		"prefix": "ChopTreeTask:fromArgs",
+		"body": [
+			"ChopTreeTask:fromArgs($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeTask:getType()": {
+		"prefix": "ChopTreeTask:getType",
+		"body": [
+			"ChopTreeTask:getType($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeTask:assertImplementation()": {
+		"prefix": "ChopTreeTask:assertImplementation",
+		"body": [
+			"ChopTreeTask:assertImplementation($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeTask:isOrInherits()": {
+		"prefix": "ChopTreeTask:isOrInherits",
+		"body": [
+			"ChopTreeTask:isOrInherits($0)"
+		],
+		"description": ""
+	},
+	"isHardTable()": {
+		"prefix": "isHardTable",
+		"body": [
+			"isHardTable($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeSkill()": {
+		"prefix": "ChopTreeSkill",
+		"body": [
+			"ChopTreeSkill($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeSkill:isType()": {
+		"prefix": "ChopTreeSkill:isType",
+		"body": [
+			"ChopTreeSkill:isType($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeSkill:completeTask()": {
+		"prefix": "ChopTreeSkill:completeTask",
+		"body": [
+			"ChopTreeSkill:completeTask($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeSkill:assertImplementation()": {
+		"prefix": "ChopTreeSkill:assertImplementation",
+		"body": [
+			"ChopTreeSkill:assertImplementation($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeSkill:canHandleTask()": {
+		"prefix": "ChopTreeSkill:canHandleTask",
+		"body": [
+			"ChopTreeSkill:canHandleTask($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeSkill:isOrInherits()": {
+		"prefix": "ChopTreeSkill:isOrInherits",
+		"body": [
+			"ChopTreeSkill:isOrInherits($0)"
+		],
+		"description": ""
+	},
+	"ChopTreeSkill:getType()": {
+		"prefix": "ChopTreeSkill:getType",
+		"body": [
+			"ChopTreeSkill:getType($0)"
+		],
+		"description": ""
+	},
+	"table.pack()": {
+		"prefix": "table.pack",
+		"body": [
+			"table.pack($0)"
+		],
+		"description": ""
+	},
+	"table.setn()": {
+		"prefix": "table.setn",
+		"body": [
+			"table.setn($0)"
+		],
+		"description": ""
+	},
+	"table.insert()": {
+		"prefix": "table.insert",
+		"body": [
+			"table.insert($0)"
+		],
+		"description": ""
+	},
+	"table.getn()": {
+		"prefix": "table.getn",
+		"body": [
+			"table.getn($0)"
+		],
+		"description": ""
+	},
+	"table.foreachi()": {
+		"prefix": "table.foreachi",
+		"body": [
+			"table.foreachi($0)"
+		],
+		"description": ""
+	},
+	"table.maxn()": {
+		"prefix": "table.maxn",
+		"body": [
+			"table.maxn($0)"
+		],
+		"description": ""
+	},
+	"table.foreach()": {
+		"prefix": "table.foreach",
+		"body": [
+			"table.foreach($0)"
+		],
+		"description": ""
+	},
+	"table.concat()": {
+		"prefix": "table.concat",
+		"body": [
+			"table.concat($0)"
+		],
+		"description": ""
+	},
+	"table.unpack()": {
+		"prefix": "table.unpack",
+		"body": [
+			"table.unpack($0)"
+		],
+		"description": ""
+	},
+	"table.sort()": {
+		"prefix": "table.sort",
+		"body": [
+			"table.sort($0)"
+		],
+		"description": ""
+	},
+	"table.remove()": {
+		"prefix": "table.remove",
+		"body": [
+			"table.remove($0)"
 		],
 		"description": ""
 	},
@@ -1637,6 +1826,69 @@
 		],
 		"description": ""
 	},
+	"require()": {
+		"prefix": "require",
+		"body": [
+			"require($0)"
+		],
+		"description": ""
+	},
+	"DefaultSkill()": {
+		"prefix": "DefaultSkill",
+		"body": [
+			"DefaultSkill($0)"
+		],
+		"description": ""
+	},
+	"DefaultSkill:isType()": {
+		"prefix": "DefaultSkill:isType",
+		"body": [
+			"DefaultSkill:isType($0)"
+		],
+		"description": ""
+	},
+	"DefaultSkill:canHandleTask()": {
+		"prefix": "DefaultSkill:canHandleTask",
+		"body": [
+			"DefaultSkill:canHandleTask($0)"
+		],
+		"description": ""
+	},
+	"DefaultSkill:completeTask()": {
+		"prefix": "DefaultSkill:completeTask",
+		"body": [
+			"DefaultSkill:completeTask($0)"
+		],
+		"description": ""
+	},
+	"DefaultSkill:assertImplementation()": {
+		"prefix": "DefaultSkill:assertImplementation",
+		"body": [
+			"DefaultSkill:assertImplementation($0)"
+		],
+		"description": ""
+	},
+	"DefaultSkill:isOrInherits()": {
+		"prefix": "DefaultSkill:isOrInherits",
+		"body": [
+			"DefaultSkill:isOrInherits($0)"
+		],
+		"description": ""
+	},
+	"DefaultSkill:getType()": {
+		"prefix": "DefaultSkill:getType",
+		"body": [
+			"DefaultSkill:getType($0)"
+		],
+		"description": ""
+	},
+	"Nav()": {
+		"prefix": "Nav",
+		"body": [
+			"Nav($0)"
+		],
+		"description": ""
+	},
 	"Buffer()": {
 		"prefix": "Buffer",
 		"body": [
@@ -1707,52 +1959,45 @@
 		],
 		"description": ""
 	},
-	"DefaultSkill()": {
-		"prefix": "DefaultSkill",
+	"Task()": {
+		"prefix": "Task",
 		"body": [
-			"DefaultSkill($0)"
+			"Task($0)"
 		],
 		"description": ""
 	},
-	"DefaultSkill:isType()": {
-		"prefix": "DefaultSkill:isType",
+	"Task:isType()": {
+		"prefix": "Task:isType",
 		"body": [
-			"DefaultSkill:isType($0)"
+			"Task:isType($0)"
 		],
 		"description": ""
 	},
-	"DefaultSkill:canHandleTask()": {
-		"prefix": "DefaultSkill:canHandleTask",
+	"Task:toString()": {
+		"prefix": "Task:toString",
 		"body": [
-			"DefaultSkill:canHandleTask($0)"
+			"Task:toString($0)"
 		],
 		"description": ""
 	},
-	"DefaultSkill:completeTask()": {
-		"prefix": "DefaultSkill:completeTask",
+	"Task:getType()": {
+		"prefix": "Task:getType",
 		"body": [
-			"DefaultSkill:completeTask($0)"
+			"Task:getType($0)"
 		],
 		"description": ""
 	},
-	"DefaultSkill:assertImplementation()": {
-		"prefix": "DefaultSkill:assertImplementation",
+	"Task:assertImplementation()": {
+		"prefix": "Task:assertImplementation",
 		"body": [
-			"DefaultSkill:assertImplementation($0)"
+			"Task:assertImplementation($0)"
 		],
 		"description": ""
 	},
-	"DefaultSkill:isOrInherits()": {
-		"prefix": "DefaultSkill:isOrInherits",
+	"Task:isOrInherits()": {
+		"prefix": "Task:isOrInherits",
 		"body": [
-			"DefaultSkill:isOrInherits($0)"
-		],
-		"description": ""
-	},
-	"DefaultSkill:getType()": {
-		"prefix": "DefaultSkill:getType",
-		"body": [
-			"DefaultSkill:getType($0)"
+			"Task:isOrInherits($0)"
 		],
 		"description": ""
 	},
@@ -2036,6 +2281,20 @@
 		],
 		"description": ""
 	},
+	"stringutil.endsWith()": {
+		"prefix": "stringutil.endsWith",
+		"body": [
+			"stringutil.endsWith($0)"
+		],
+		"description": ""
+	},
+	"stringutil.lPad()": {
+		"prefix": "stringutil.lPad",
+		"body": [
+			"stringutil.lPad($0)"
+		],
+		"description": ""
+	},
 	"stringutil.endlocal()": {
 		"prefix": "stringutil.endlocal",
 		"body": [
@@ -2050,10 +2309,10 @@
 		],
 		"description": ""
 	},
-	"stringutil.endsWith()": {
-		"prefix": "stringutil.endsWith",
+	"stringutil.rPad()": {
+		"prefix": "stringutil.rPad",
 		"body": [
-			"stringutil.endsWith($0)"
+			"stringutil.rPad($0)"
 		],
 		"description": ""
 	},
@@ -2225,83 +2484,6 @@
 		],
 		"description": ""
 	},
-	"table.pack()": {
-		"prefix": "table.pack",
-		"body": [
-			"table.pack($0)"
-		],
-		"description": ""
-	},
-	"table.setn()": {
-		"prefix": "table.setn",
-		"body": [
-			"table.setn($0)"
-		],
-		"description": ""
-	},
-	"table.insert()": {
-		"prefix": "table.insert",
-		"body": [
-			"table.insert($0)"
-		],
-		"description": ""
-	},
-	"table.getn()": {
-		"prefix": "table.getn",
-		"body": [
-			"table.getn($0)"
-		],
-		"description": ""
-	},
-	"table.foreachi()": {
-		"prefix": "table.foreachi",
-		"body": [
-			"table.foreachi($0)"
-		],
-		"description": ""
-	},
-	"table.maxn()": {
-		"prefix": "table.maxn",
-		"body": [
-			"table.maxn($0)"
-		],
-		"description": ""
-	},
-	"table.foreach()": {
-		"prefix": "table.foreach",
-		"body": [
-			"table.foreach($0)"
-		],
-		"description": ""
-	},
-	"table.concat()": {
-		"prefix": "table.concat",
-		"body": [
-			"table.concat($0)"
-		],
-		"description": ""
-	},
-	"table.unpack()": {
-		"prefix": "table.unpack",
-		"body": [
-			"table.unpack($0)"
-		],
-		"description": ""
-	},
-	"table.sort()": {
-		"prefix": "table.sort",
-		"body": [
-			"table.sort($0)"
-		],
-		"description": ""
-	},
-	"table.remove()": {
-		"prefix": "table.remove",
-		"body": [
-			"table.remove($0)"
-		],
-		"description": ""
-	},
 	"rawset()": {
 		"prefix": "rawset",
 		"body": [
@@ -2313,27 +2495,6 @@
 		"prefix": "Surface",
 		"body": [
 			"Surface($0)"
-		],
-		"description": ""
-	},
-	"Surface:getCursorPos()": {
-		"prefix": "Surface:getCursorPos",
-		"body": [
-			"Surface:getCursorPos($0)"
-		],
-		"description": ""
-	},
-	"Surface:isColour()": {
-		"prefix": "Surface:isColour",
-		"body": [
-			"Surface:isColour($0)"
-		],
-		"description": ""
-	},
-	"Surface:getBackgroundColour()": {
-		"prefix": "Surface:getBackgroundColour",
-		"body": [
-			"Surface:getBackgroundColour($0)"
 		],
 		"description": ""
 	},
@@ -2351,52 +2512,10 @@
 		],
 		"description": ""
 	},
-	"Surface:asTerm()": {
-		"prefix": "Surface:asTerm",
-		"body": [
-			"Surface:asTerm($0)"
-		],
-		"description": ""
-	},
-	"Surface:startMirroring()": {
-		"prefix": "Surface:startMirroring",
-		"body": [
-			"Surface:startMirroring($0)"
-		],
-		"description": ""
-	},
-	"Surface:getSize()": {
-		"prefix": "Surface:getSize",
-		"body": [
-			"Surface:getSize($0)"
-		],
-		"description": ""
-	},
-	"Surface:getBackgroundColor()": {
-		"prefix": "Surface:getBackgroundColor",
-		"body": [
-			"Surface:getBackgroundColor($0)"
-		],
-		"description": ""
-	},
 	"Surface:blitTo()": {
 		"prefix": "Surface:blitTo",
 		"body": [
 			"Surface:blitTo($0)"
-		],
-		"description": ""
-	},
-	"Surface:getTextColor()": {
-		"prefix": "Surface:getTextColor",
-		"body": [
-			"Surface:getTextColor($0)"
-		],
-		"description": ""
-	},
-	"Surface:clear()": {
-		"prefix": "Surface:clear",
-		"body": [
-			"Surface:clear($0)"
 		],
 		"description": ""
 	},
@@ -2407,13 +2526,6 @@
 		],
 		"description": ""
 	},
-	"Surface:setBackgroundColor()": {
-		"prefix": "Surface:setBackgroundColor",
-		"body": [
-			"Surface:setBackgroundColor($0)"
-		],
-		"description": ""
-	},
 	"Surface:assertImplementation()": {
 		"prefix": "Surface:assertImplementation",
 		"body": [
@@ -2421,17 +2533,10 @@
 		],
 		"description": ""
 	},
-	"Surface:setBackgroundColour()": {
-		"prefix": "Surface:setBackgroundColour",
+	"Surface:isType()": {
+		"prefix": "Surface:isType",
 		"body": [
-			"Surface:setBackgroundColour($0)"
-		],
-		"description": ""
-	},
-	"Surface:setTextColour()": {
-		"prefix": "Surface:setTextColour",
-		"body": [
-			"Surface:setTextColour($0)"
+			"Surface:isType($0)"
 		],
 		"description": ""
 	},
@@ -2456,17 +2561,10 @@
 		],
 		"description": ""
 	},
-	"Surface:clearLine()": {
-		"prefix": "Surface:clearLine",
+	"Surface:setCursorBlink()": {
+		"prefix": "Surface:setCursorBlink",
 		"body": [
-			"Surface:clearLine($0)"
-		],
-		"description": ""
-	},
-	"Surface:isColor()": {
-		"prefix": "Surface:isColor",
-		"body": [
-			"Surface:isColor($0)"
+			"Surface:setCursorBlink($0)"
 		],
 		"description": ""
 	},
@@ -2477,24 +2575,101 @@
 		],
 		"description": ""
 	},
-	"Surface:isType()": {
-		"prefix": "Surface:isType",
+	"Surface:getLastLine()": {
+		"prefix": "Surface:getLastLine",
 		"body": [
-			"Surface:isType($0)"
+			"Surface:getLastLine($0)"
 		],
 		"description": ""
 	},
-	"Surface:setCursorBlink()": {
-		"prefix": "Surface:setCursorBlink",
+	"Surface:getCursorPos()": {
+		"prefix": "Surface:getCursorPos",
 		"body": [
-			"Surface:setCursorBlink($0)"
+			"Surface:getCursorPos($0)"
 		],
 		"description": ""
 	},
-	"Surface:isOrInherits()": {
-		"prefix": "Surface:isOrInherits",
+	"Surface:isColour()": {
+		"prefix": "Surface:isColour",
 		"body": [
-			"Surface:isOrInherits($0)"
+			"Surface:isColour($0)"
+		],
+		"description": ""
+	},
+	"Surface:getBackgroundColor()": {
+		"prefix": "Surface:getBackgroundColor",
+		"body": [
+			"Surface:getBackgroundColor($0)"
+		],
+		"description": ""
+	},
+	"Surface:clear()": {
+		"prefix": "Surface:clear",
+		"body": [
+			"Surface:clear($0)"
+		],
+		"description": ""
+	},
+	"Surface:asTerm()": {
+		"prefix": "Surface:asTerm",
+		"body": [
+			"Surface:asTerm($0)"
+		],
+		"description": ""
+	},
+	"Surface:getBackgroundColour()": {
+		"prefix": "Surface:getBackgroundColour",
+		"body": [
+			"Surface:getBackgroundColour($0)"
+		],
+		"description": ""
+	},
+	"Surface:startMirroring()": {
+		"prefix": "Surface:startMirroring",
+		"body": [
+			"Surface:startMirroring($0)"
+		],
+		"description": ""
+	},
+	"Surface:getSize()": {
+		"prefix": "Surface:getSize",
+		"body": [
+			"Surface:getSize($0)"
+		],
+		"description": ""
+	},
+	"Surface:isColor()": {
+		"prefix": "Surface:isColor",
+		"body": [
+			"Surface:isColor($0)"
+		],
+		"description": ""
+	},
+	"Surface:setTextColour()": {
+		"prefix": "Surface:setTextColour",
+		"body": [
+			"Surface:setTextColour($0)"
+		],
+		"description": ""
+	},
+	"Surface:getTextColor()": {
+		"prefix": "Surface:getTextColor",
+		"body": [
+			"Surface:getTextColor($0)"
+		],
+		"description": ""
+	},
+	"Surface:setBackgroundColor()": {
+		"prefix": "Surface:setBackgroundColor",
+		"body": [
+			"Surface:setBackgroundColor($0)"
+		],
+		"description": ""
+	},
+	"Surface:setBackgroundColour()": {
+		"prefix": "Surface:setBackgroundColour",
+		"body": [
+			"Surface:setBackgroundColour($0)"
 		],
 		"description": ""
 	},
@@ -2502,6 +2677,20 @@
 		"prefix": "Surface:getType",
 		"body": [
 			"Surface:getType($0)"
+		],
+		"description": ""
+	},
+	"Surface:clearLine()": {
+		"prefix": "Surface:clearLine",
+		"body": [
+			"Surface:clearLine($0)"
+		],
+		"description": ""
+	},
+	"Surface:isOrInherits()": {
+		"prefix": "Surface:isOrInherits",
+		"body": [
+			"Surface:isOrInherits($0)"
 		],
 		"description": ""
 	},
@@ -2824,6 +3013,13 @@
 		"prefix": "pcall",
 		"body": [
 			"pcall($0)"
+		],
+		"description": ""
+	},
+	"unpack()": {
+		"prefix": "unpack",
+		"body": [
+			"unpack($0)"
 		],
 		"description": ""
 	},
