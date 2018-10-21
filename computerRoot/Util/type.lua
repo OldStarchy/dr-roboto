@@ -10,6 +10,11 @@
 ]]
 function isType(obj, typ)
 	if (type(typ) ~= 'string' and (type(typ) ~= 'table' or not typ.isClass)) then
+		if (typ == Class) then
+			return type(obj) == 'table' and obj.isClass == true
+		else
+			return false
+		end
 		error('typ must be a string or class', 2)
 	end
 
@@ -27,7 +32,7 @@ function isType(obj, typ)
 		if (type(obj) ~= 'table') then
 			ok = false
 		elseif (obj.isClass) then
-			ok = obj:isType(typ)
+			ok = obj.isOrInherits(typ)
 
 			if (type(ok) ~= 'boolean') then
 				ok = false

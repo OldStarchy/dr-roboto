@@ -12,9 +12,6 @@ if (isPc) then
 	dofile '_polyfills/bit.lua'
 end
 
-if (fs.listRecursive == nil) then
-end
-
 function dofileSandbox(filename, env)
 	local status, result = assert(pcall(setfenv(assert(loadfile(filename)), env)))
 	return result
@@ -65,6 +62,12 @@ include 'Util/fs'
 include 'Util/math'
 include 'Util/string'
 include 'Util/table'
+
+--[[
+	These functions reference "Class" but Class hasn't been defined yet. This fixes it somehow
+]]
+setfenv(isType, getfenv(2))
+setfenv(assertType, getfenv(2))
 
 local ignoreMissingGlobal = false
 local ignoreMissingGlobals = {
