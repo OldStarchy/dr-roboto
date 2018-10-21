@@ -5,6 +5,7 @@ test(
 			Constructor = {
 				['Called'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local constructorCalled = false
 
@@ -18,11 +19,13 @@ test(
 				end,
 				['Missing'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local object = A()
 				end,
 				['Passes self'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local selfValue = nil
 
@@ -37,6 +40,7 @@ test(
 				end,
 				['Recieves Arguments'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local aValue = nil
 					local bValue = nil
@@ -62,6 +66,7 @@ test(
 			Method = {
 				['Called'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local methodCalled = false
 
@@ -76,6 +81,7 @@ test(
 				end,
 				['Missing'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local object = A()
 
@@ -87,6 +93,7 @@ test(
 				end,
 				['Passes self'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local selfValue = nil
 
@@ -102,6 +109,7 @@ test(
 				end,
 				['Recieves Arguments'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local aValue = nil
 					local bValue = nil
@@ -129,6 +137,7 @@ test(
 			Inheritance = {
 				['Default Constructor'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local constructorCalled = false
 					function A:constructor()
@@ -136,6 +145,7 @@ test(
 					end
 
 					local B = Class(A)
+					B.ClassName = 'B'
 
 					local object = B()
 
@@ -143,6 +153,7 @@ test(
 				end,
 				['Explicit Super Constructor'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local constructorCalled = false
 					function A:constructor()
@@ -150,6 +161,7 @@ test(
 					end
 
 					local B = Class(A)
+					B.ClassName = 'B'
 					function B:constructor()
 						A.constructor(self)
 					end
@@ -160,6 +172,7 @@ test(
 				end,
 				['Object Method'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local methodCalled = false
 					function A:method()
@@ -167,6 +180,7 @@ test(
 					end
 
 					local B = Class(A)
+					B.ClassName = 'B'
 
 					local object = B()
 					object:method()
@@ -175,6 +189,7 @@ test(
 				end,
 				['Object Super Method'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local methodCalled = false
 					function A:method()
@@ -182,6 +197,7 @@ test(
 					end
 
 					local B = Class(A)
+					B.ClassName = 'B'
 
 					function B:method()
 						A.method(self)
@@ -194,6 +210,7 @@ test(
 				end,
 				['Static Method'] = function(t)
 					local A = Class()
+					A.ClassName = 'A'
 
 					local methodCalled = false
 					function A.method()
@@ -201,6 +218,7 @@ test(
 					end
 
 					local B = Class(A)
+					B.ClassName = 'B'
 
 					B.method()
 
@@ -209,6 +227,7 @@ test(
 			},
 			['Get Type'] = function(t)
 				local A = Class()
+				A.ClassName = 'A'
 
 				local object = A()
 
@@ -216,8 +235,11 @@ test(
 			end,
 			['Is Type'] = function(t)
 				local A = Class()
+				A.ClassName = 'A'
 				local B = Class(A)
+				B.ClassName = 'B'
 				local C = Class(B)
+				C.ClassName = 'C'
 
 				local object = B()
 
@@ -227,6 +249,7 @@ test(
 			end,
 			['To String'] = function(t)
 				local A = Class()
+				A.ClassName = 'A'
 
 				function A:toString()
 					return 'custom tostring result'
@@ -238,6 +261,7 @@ test(
 			end,
 			['Default To String'] = function(t)
 				local A = Class()
+				A.ClassName = 'A'
 
 				local object = A()
 
@@ -248,12 +272,13 @@ test(
 
 				local nativeStr = tostring(object)
 
-				local expectedStr = nativeStr:gsub('table', 'class')
+				local expectedStr = nativeStr:gsub('table', 'A')
 
 				t.assertEqual(str, expectedStr)
 			end,
 			['Is Equal'] = function(t)
 				local A = Class()
+				A.ClassName = 'A'
 
 				local a = nil
 				local b = nil
@@ -269,6 +294,7 @@ test(
 			end,
 			['Default Is Equal'] = function(t)
 				local A = Class()
+				A.ClassName = 'A'
 
 				local a = nil
 				local b = nil
@@ -283,10 +309,12 @@ test(
 				I.amethod = 'function'
 
 				local A = Class(I)
+				A.ClassName = 'A'
 				function A:amethod()
 				end
 
 				local B = Class(I)
+				B.ClassName = 'B'
 				--Does not implement amethod
 
 				t.assertNotThrows(A.assertImplementation, A)
