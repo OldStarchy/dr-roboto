@@ -66,6 +66,7 @@ include 'Util/math'
 include 'Util/string'
 include 'Util/table'
 
+local ignoreMissingGlobal = false
 local ignoreMissingGlobals = {
 	_PROMPT = true,
 	_PROMPT2 = true
@@ -74,7 +75,7 @@ setmetatable(
 	_G,
 	{
 		__index = function(t, v)
-			if (ignoreMissingGlobals[v]) then
+			if (ignoreMissingGlobals[v] or ignoreMissingGlobal) then
 				return nil
 			end
 			print('Attempt to access missing global "' .. tostring(v) .. '"')
@@ -83,6 +84,13 @@ setmetatable(
 		end
 	}
 )
+
+function isDefined(key)
+	ignoreMissingGlobal = true
+	local isDef = getfenv(2)[key] ~= nil
+	ignoreMissingGlobal = false
+	return isDef
+end
 
 if (not isPc) then
 	local freeSpace = fs.getFreeSpace('.')
