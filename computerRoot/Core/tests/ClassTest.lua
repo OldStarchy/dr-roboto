@@ -2,6 +2,33 @@ test(
 	'OO',
 	{
 		class = {
+			Conversion = {
+				['With Constructor'] = function(t)
+					local A = Class()
+					A.ClassName = 'A'
+
+					function A:conversionConstructor(a)
+						self.a = a
+					end
+
+					local object = {}
+
+					A.convertToInstance(object, 'test')
+
+					t.assertEqual(object.a, 'test')
+					t.assertEqual(object:getType(), A)
+				end,
+				['Without Constructor'] = function(t)
+					local A = Class()
+					A.ClassName = 'A'
+
+					local object = {}
+
+					A.convertToInstance(object, 'test')
+
+					t.assertEqual(object:getType(), A)
+				end
+			},
 			Constructor = {
 				['Called'] = function(t)
 					local A = Class()

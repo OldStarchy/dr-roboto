@@ -120,6 +120,13 @@ function classMeta.__call(_, parent, ...)
 			parent.constructor(self, ...)
 		end
 	end
+
+	function class:conversionConstructor(...)
+		if (parent and parent.conversionConstructor) then
+			parent.conversionConstructor(self, ...)
+		end
+	end
+
 	function class:assertImplementation()
 		implementationAsserted = true
 		for _, interface in pairs(interfaces) do
@@ -130,10 +137,33 @@ function classMeta.__call(_, parent, ...)
 
 	local classMeta
 	classMeta = {
-		__index = parent or
+		__index = setmetatable(
 			{
-				isClass = true
+				isClass = true,
+				convertToInstance = function(tbl, ...)
+					if (type(tbl) ~= 'table') then
+						error("Can't convert " .. type(tbl) .. ' to ' .. tostring(class), 2)
+					end
+
+					if
+						(not pcall(
+							function()
+								setmetatable(tbl, objectMeta)
+							end
+						))
+					 then
+						error("Couldn't set metatable when converting table to " .. tostring(class), 2)
+					end
+
+					if (class.conversionConstructor ~= nil) then
+						class.conversionConstructor(tbl, ...)
+					end
+
+					return tbl
+				end
 			},
+			{__index = parent}
+		),
 		__newindex = function(t, k, v)
 			if (k == 'isClass') then
 				error("Can't override isClass", 2)
