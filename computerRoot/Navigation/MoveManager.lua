@@ -148,32 +148,41 @@ function MoveManager:move(direction, distance)
 	end
 
 	for i = 1, distance do
-		if (not move()) then
+		local attacked = false
+		while (not move()) do
 			if (self._turtle.getFuelLevel() == 0) then
 				return false, MoveManager.NO_FUEL, 'There is a lack of fuel in the way'
 			end
 
+			local dug = false
 			if (detect()) then
 				if (self.autoDig) then
-					while (detect()) do
-						--TODO: autodig whitelist
-						if (not dig()) then
-							--bedrock
-							return false, MoveManager.HIT_BEDROCK, 'There is a bedrock in the way'
-						end
+					--TODO: autodig whitelist
+					if (dig()) then
+						dug = true
+					else
+						--bedrock
+						return false, MoveManager.HIT_BEDROCK, 'There is a bedrock in the way'
 					end
 				else
 					return false, MoveManager.HIT_BLOCK, 'There is a block in the way'
 				end
 			end
 
-			while (not move()) do
-				if (self.autoAttack) then
-					while (attack()) do
-					end
+			if (not dug and self.autoAttack) then
+				if (attack()) then
+					attacked = true
 				else
-					return false, MoveManager.HIT_MOB, 'There is a mob in the way'
+					if (not attacked) then
+						return false, MoveManager.UNKNOWN_FAILURE, "I can't move and I don't know why"
+					else
+						-- Mob may be dead but still falling over, wait for it to despawn
+						sleep(0.5) -- 0.5 from testing
+					end
+					attacked = false
 				end
+			else
+				return false, MoveManager.HIT_MOB, 'There is a mob in the way'
 			end
 		end
 	end
