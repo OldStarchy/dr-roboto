@@ -35,12 +35,12 @@ function MoveAction:run(invoc)
 			Nav.autoDig = false
 		end
 		if (self.autoDigAttack) then
-			Nav.autoDig = true
-			Nav.autoAttack = true
+			Mov.autoDig = true
+			Mov.autoAttack = true
 		end
 		r = self:call(ActionInvocation(optional, invoc.previousResult))
-		Nav.autoDig = autoDig
-		Nav.autoAttack = autoAttack
+		Mov.autoDig = autoDig
+		Mov.autoAttack = autoAttack
 
 		success = r.success ~= self.invert
 
