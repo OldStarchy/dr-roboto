@@ -19,43 +19,76 @@ InventoryManager.ClassName = 'InventoryManager'
 ]]
 function InventoryManager.ItemIs(item, selector)
 	if (type(item) == 'number') then
-		item = turtle.getItemDetail(item)
+		item = self:getItemDetail(item)
 	end
 
 	if (item == nil) then
 		return false
 	end
 
-	if (selector == '*') then
-		return true
+	if (not isType(item, ItemDetail)) then
+		item = ItemDetail.convertToInstance(cloneTable(item, 3))
 	end
 
-	local name = item.name .. ':' .. item.damage
-	print(name)
-
-	local subSelectors = {}
-	for subSelector in selector:gmatch('[^,]*') do
-		local colons = select(2, subSelector:gsub(':', ''))
-		if (colons == 0) then
-			subSelector = '*:' .. subSelector .. ':*'
-		elseif (colons == 1) then
-			subSelector = '*:' .. subSelector
-		end
-		subSelector = string.gsub(subSelector, '([%(%)%.%%%+%-%?%[%^%$%]])', '%%%1')
-		subSelector = string.gsub(subSelector, '%*', '[^:]*')
-		table.insert(subSelectors, subSelector)
-	end
-
-	for _, subSelector in pairs(subSelectors) do
-		if (name:match(subSelector)) then
-			return true
-		end
-	end
-	return false
+	return item:matches(selector)
 end
+
 function InventoryManager:constructor(turtle)
 	self._turtle = turtle
-	self._oldTurtle = turtle
+	self._oldTurtle = {}
+
+	self:_attach()
+end
+
+function InventoryManager:_attach()
+	local this = self
+	local overrideFunctionsList = {
+		'inspect',
+		'getItemDetail',
+		'select'
+	}
+
+	for _, func in ipairs(overrideFunctionsList) do
+		self._oldTurtle[func] = self._turtle[func]
+		self._turtle[func] = function(...)
+			return this[func](this, unpack({...}))
+		end
+	end
+end
+
+function InventoryManager:inspect()
+	local exists, data = self._oldTurtle.inspect()
+
+	print('converting to blockdetail')
+	return exists, BlockDetail.convertToInstance(data)
+end
+
+function InventoryManager:getItemDetail(selector)
+	local slot = self:findItemSlot(selector)
+	local data = self._oldTurtle.getItemDetail(slot)
+
+	if (data == nil) then
+		return nil
+	end
+
+	return ItemStackDetail.convertToInstance(data)
+end
+
+function InventoryManager:findItemSlot(selector)
+	if (selector == nil) then
+		return nil
+	end
+
+	if (type(selector) == 'number') then
+		return selector
+	end
+
+	if (type(selector) == 'string') then
+		-- TODO: selector search
+		error('String selections not yet implemented')
+	end
+
+	error('Invalid type passed to InventoryManager:findItemSlot', 2)
 end
 
 function InventoryManager:select(item)
@@ -72,7 +105,7 @@ function InventoryManager:select(item)
 		return false
 	end
 
-	print('what')
+	error(type(item) .. ' passed to select not supported', 2)
 end
 
 function InventoryManager:drop()
