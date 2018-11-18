@@ -1,22 +1,4 @@
 --[[
-	*** Constructing classes
-	Class() - Creates a new class
-	Class(parent) - Creats a subclass of parent
-
-	*** Instantiating objects
-	MyClass(...) - Instantiates an object. All arguments are passed to the constructor
-
-	*** Special Properties on classes
-	MyClass.ClassName - string: The name of the class, used in the default tostring
-	function MyClass:constructor(...) - called when an object is instantiated
-	function MyClass:toString() - called when an object is converted to a string with tostring
-	function MyClass:isEqual(other) - Called to resolve comparisons with the == operator
-	function MyClass:getType() - Returns the class object used to create this object.
-	function MyClass:isType(classOrInterface) - Returns true if this class extends or implements the given class or interface
-
-
-]]
---[[
 	Creats a class. There aren't real classes in lua so these classes are just tables with some metatable voodoo
 	For detailed information on how classes work, check the readme.
 

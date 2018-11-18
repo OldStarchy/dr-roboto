@@ -42,6 +42,7 @@ function isType(obj, typ)
 		end
 	end
 
+	--TODO: interfaces
 	return ok
 end
 
