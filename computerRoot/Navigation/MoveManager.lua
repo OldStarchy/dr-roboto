@@ -169,23 +169,24 @@ function MoveManager:move(direction, distance)
 				end
 			end
 
-			if (not dug and self.autoAttack) then
-				if (attack()) then
-					attacked = true
-				else
-					if (not attacked) then
-						return false, MoveManager.UNKNOWN_FAILURE, "I can't move and I don't know why"
+			if (not dug) then
+				if (self.autoAttack) then
+					if (attack()) then
+						attacked = true
 					else
-						-- Mob may be dead but still falling over, wait for it to despawn
-						sleep(0.5) -- 0.5 from testing
+						if (not attacked) then
+							return false, MoveManager.UNKNOWN_FAILURE, "I can't move and I don't know why"
+						else
+							-- Mob may be dead but still falling over, wait for it to despawn
+							sleep(0.5) -- 0.5 from testing
+						end
+						attacked = false
 					end
-					attacked = false
+				else
+					return false, MoveManager.HIT_MOB, 'There is a mob in the way'
 				end
-			else
-				return false, MoveManager.HIT_MOB, 'There is a mob in the way'
 			end
 		end
-	end
 
 	return true
 end
