@@ -36,6 +36,7 @@ function MoveManager:constructor(turtle, verbose)
 	self._autoSaveFile = nil
 
 	self._verbose = assertType(coalesce(verbose, false), 'boolean')
+	self._afterPositionChangedListeners = {}
 
 	self:_attach()
 end
@@ -187,6 +188,7 @@ function MoveManager:move(direction, distance)
 				end
 			end
 		end
+	end
 
 	return true
 end
@@ -257,6 +259,7 @@ function MoveManager:trackLocation(filename)
 
 	if (fs.exists(filename)) then
 		self._position = Position(fs.readTableFromFile(filename))
+		self:_afterPositionChanged()
 	end
 end
 
@@ -286,7 +289,7 @@ function MoveManager:_forward()
 	if (result[1]) then
 		local offset = Position.offsets[self._position.direction]
 		self._position:add(offset)
-		self:_afterMove()
+		self:_afterPositionChanged()
 	end
 
 	return unpack(result)
@@ -297,7 +300,7 @@ function MoveManager:_back()
 	if (result[1]) then
 		local offset = Position.offsets[self._position.direction]
 		self._position:sub(offset)
-		self:_afterMove()
+		self:_afterPositionChanged()
 	end
 
 	return unpack(result)
@@ -308,7 +311,7 @@ function MoveManager:_up()
 
 	if (result[1]) then
 		self._position:add({y = 1})
-		self:_afterMove()
+		self:_afterPositionChanged()
 	end
 
 	return unpack(result)
@@ -319,7 +322,7 @@ function MoveManager:_down()
 
 	if (result[1]) then
 		self._position:add({y = -1})
-		self:_afterMove()
+		self:_afterPositionChanged()
 	end
 
 	return unpack(result)
@@ -329,7 +332,7 @@ function MoveManager:_turnRight()
 	local result = {self._oldTurtle.turnRight()}
 
 	self._position:rotate(-1)
-	self:_afterMove()
+	self:_afterPositionChanged()
 
 	return unpack(result)
 end
@@ -338,12 +341,12 @@ function MoveManager:_turnLeft()
 	local result = {self._oldTurtle.turnLeft()}
 
 	self._position:rotate(1)
-	self:_afterMove()
+	self:_afterPositionChanged()
 
 	return unpack(result)
 end
 
-function MoveManager:_afterMove()
+function MoveManager:_afterPositionChanged()
 	if (self._verbose) then
 		print(self._position)
 	end
@@ -351,6 +354,19 @@ function MoveManager:_afterMove()
 	if (self._autoSaveFile) then
 		fs.writeTableToFile(self._autoSaveFile, self._position)
 	end
+
+	for func, _ in pairs(self._afterPositionChangedListeners) do
+		func()
+	end
+end
+
+--TODO: a better event handler system
+function MoveManager:onPositionChanged(func)
+	self._afterPositionChangedListeners[func] = true
+end
+
+function MoveManager:offPositionChanged(func)
+	self._afterPositionChangedListeners[func] = nil
 end
 
 Mov = MoveManager(turtle)
