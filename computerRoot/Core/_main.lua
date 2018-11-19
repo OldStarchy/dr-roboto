@@ -21,3 +21,5 @@ include 'Navigation/_main'
 include 'Tasks/_main'
 include 'Skills/_main'
 include 'Inventory/_main'
+
+include 'UI/Hud'
