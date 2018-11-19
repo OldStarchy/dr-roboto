@@ -5,6 +5,12 @@ function ItemDetail:constructor()
 	error("Can't construct items manually", 3)
 end
 
+function ItemDetail:conversionConstructor()
+	if (self:getType() == ItemDetail) then
+		error('Use either ItemStackDetail or ItemDetail', 3)
+	end
+end
+
 function ItemDetail:toString()
 	return textutils.serialize(self)
 end

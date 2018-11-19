@@ -27,7 +27,7 @@ function InventoryManager.ItemIs(item, selector)
 	end
 
 	if (not isType(item, ItemDetail)) then
-		item = ItemDetail.convertToInstance(cloneTable(item, 3))
+		item = ItemStackDetail.convertToInstance(cloneTable(item, 3))
 	end
 
 	return item:matches(selector)
