@@ -62,6 +62,7 @@ include 'Util/fs'
 include 'Util/math'
 include 'Util/string'
 include 'Util/table'
+include 'Util/Pixel'
 
 --[[
 	These functions reference "Class" but Class hasn't been defined yet. This fixes it somehow

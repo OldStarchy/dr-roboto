@@ -7,7 +7,18 @@ end
 
 function Graphics:drawText(x, y, str)
 	self._term.setCursorPos(x, y)
-	self._term.write(str)
+
+	if (type(str) == 'string') then
+		self._term.write(str)
+	else
+		if (str.inverted) then
+			self:invertColours()
+			self._term.write(str.char)
+			self:invertColours()
+		else
+			self._term.write(str.char)
+		end
+	end
 end
 
 function Graphics:progressBar(progress, max, row, startCol, endCol)
@@ -51,6 +62,10 @@ end
 function Graphics:setColours(foreground, background)
 	self._term.setTextColour(foreground)
 	self._term.setBackgroundColour(background)
+end
+
+function Graphics:getColours()
+	return self._term.getTextColour(), self._term.getBackgroundColour()
 end
 
 function Graphics:invertColours()
