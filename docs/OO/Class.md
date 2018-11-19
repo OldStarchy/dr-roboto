@@ -14,11 +14,11 @@ Creates a new independent class.
 
 Creates a new class that inherits from parent.
 
-### `Class(interfaces...: Inteface)`
+### `Class(interfaces...: Interface)`
 
 Creates a new class that should implement the given interfaces. See the Interface docs for information on how interfaces work.
 
-### `Class(parent: Class, interfaces...: Inteface)`
+### `Class(parent: Class, interfaces...: Interface)`
 
 Creates a new class that inherits from `parent` and should implement the given interfaces.
 
