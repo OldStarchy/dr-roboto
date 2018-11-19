@@ -67,7 +67,7 @@ function assertType(obj, typ, err, frame)
 	end
 
 	if (type(typ) == 'table' and typ.isInterface) then
-		return typ:assertImplementation(obj, err, frame + 1)
+		return typ.assertImplementation(obj, err, frame + 1)
 	end
 
 	if (typ == nil) then
