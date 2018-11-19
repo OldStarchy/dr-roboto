@@ -58,8 +58,12 @@ while not bExit do
 	else
 		sLine = read(nil, tCommandHistory)
 	end
-	table.insert(tCommandHistory, sLine)
-	shell.run(sLine)
+	if (sLine == 'exit') then
+		bExit = true
+	else
+		table.insert(tCommandHistory, sLine)
+		shell.run(sLine)
+	end
 end
 
 hud:stop()
