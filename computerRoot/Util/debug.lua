@@ -18,7 +18,9 @@ function getStackTrace(frames, startFrame, maxJump)
 				error('', i)
 			end,
 			function(err)
-				if (err == '') then
+				if (err == 'bios.lua:883: ') then
+					stop = true
+				elseif (err == '') then
 					if (emptyFrames == 0) then
 						table.insert(trace, '-')
 					end

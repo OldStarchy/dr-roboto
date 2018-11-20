@@ -1,3 +1,14 @@
+if (_G.osStarted == true) then
+	suppressMissingGlobalWarnings(false)
+
+	return
+end
+
+_G.osStarted = true
+
+term.clear()
+term.setCursorPos(1, 1)
+
 if (settings ~= nil) then
 	if (multishell ~= nil) then
 		settings.set('bios.use_multishell', false)
@@ -6,74 +17,40 @@ if (settings ~= nil) then
 	end
 end
 
-dofile 'bootstrap.lua'
+local osshutdown = os.shutdown
+local osrun = os.run
 
-include 'Core/_main'
-include 'UserFunctions/_main'
+os.shutdown = function()
+	os.shutdown = osshutdown
+	os.run = osrun
 
-hud = Hud()
-hud:start()
+	local ok, err =
+		pcall(
+		function()
+			dofile 'bootstrap.lua'
 
--- Colours
-local promptColour, textColour, bgColour
-if term.isColour() then
-	promptColour = colours.yellow
-	textColour = colours.white
-	bgColour = colours.black
-else
-	promptColour = colours.white
-	textColour = colours.white
-	bgColour = colours.black
+			dofile 'os.lua'
+		end
+	)
+
+	-- If the shell errored, let the user read it.
+	term.redirect(term.native())
+	if not ok then
+		printError(err)
+		printStackTrace(4)
+		pcall(
+			function()
+				term.setCursorBlink(false)
+				print('Press any key to continue')
+				os.pullEvent('key')
+			end
+		)
+	end
+
+	os.shutdown()
 end
 
-local parentTerm = term.current()
-
-term.setBackgroundColor(bgColour)
-term.setTextColour(promptColour)
-print(os.version())
-term.setTextColour(textColour)
-
-loadfile('test.lua')(1)
-
-Mov:trackLocation('.mov.tbl')
-
-info('Loading skills')
-skillSet = SkillSet.GetDefaultSkillSet()
-info(skillSet:getSkillCount() .. ' slills')
-
-info('Loading TaskManager')
-taskManager = TaskManager()
-pcall(
-	function()
-		taskManager:load('data/tasks')
-	end
-)
-
-local bExit = false
-
--- Read commands and execute them
-local tCommandHistory = {}
-while not bExit do
-	term.redirect(parentTerm)
-	term.setBackgroundColor(bgColour)
-	term.setTextColour(promptColour)
-	write(shell.dir() .. '> ')
-	term.setTextColour(textColour)
-
-	local sLine
-	if settings.get('shell.autocomplete') then
-		sLine = read(nil, tCommandHistory, shell.complete)
-	else
-		sLine = read(nil, tCommandHistory)
-	end
-	if (sLine == 'exit') then
-		bExit = true
-	else
-		table.insert(tCommandHistory, sLine)
-		shell.run(sLine)
-	end
+os.run = function(...)
 end
-
-hud:stop()
 
 shell.exit()

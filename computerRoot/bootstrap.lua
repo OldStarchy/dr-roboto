@@ -73,7 +73,8 @@ setfenv(assertType, getfenv(2))
 local ignoreMissingGlobal = false
 local ignoreMissingGlobals = {
 	_PROMPT = true,
-	_PROMPT2 = true
+	_PROMPT2 = true,
+	multishell = true
 }
 setmetatable(
 	_G,
@@ -83,11 +84,15 @@ setmetatable(
 				return nil
 			end
 			print('Attempt to access missing global "' .. tostring(v) .. '"')
-			printStackTrace(1, 2)
+			printStackTrace(2, 2)
 			return nil
 		end
 	}
 )
+
+function suppressMissingGlobalWarnings(suppress)
+	ignoreMissingGlobal = suppress
+end
 
 function isDefined(key)
 	ignoreMissingGlobal = true

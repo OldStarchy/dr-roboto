@@ -53,4 +53,9 @@ function Hud:start()
 
 		term.redirect(tterm)
 	end
+
+	positionChangedHdlr()
+
+	--TODO: copy the code from the monitor program and redirect the shell to the console
+	os.run({}, 'rom/programs/shell')
 end
