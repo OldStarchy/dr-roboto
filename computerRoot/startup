@@ -1,3 +1,11 @@
+if (settings ~= nil) then
+	if (multishell ~= nil) then
+		settings.set('bios.use_multishell', false)
+		settings.save('.settings')
+		os.reboot()
+	end
+end
+
 dofile 'bootstrap.lua'
 
 include 'Core/_main'
