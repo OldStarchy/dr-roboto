@@ -1,6 +1,8 @@
 if (_G.osStarted == true) then
 	suppressMissingGlobalWarnings(false)
 
+	taskManager:addTask(GatherItemTask('glass_pane', 1))
+
 	return
 end
 

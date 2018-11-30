@@ -91,6 +91,20 @@ function InventoryManager:findItemSlot(selector)
 	error('Invalid type passed to InventoryManager:findItemSlot', 2)
 end
 
+function InventoryManager:countItem(selector)
+	local count = 0
+
+	for i = 1, 16 do
+		local item = self:getItemDetail(i)
+
+		if (item:matches(selector)) then
+			count = count + item.count
+		end
+	end
+
+	return count
+end
+
 function InventoryManager:select(item)
 	if (type(item) == 'number') then
 		return self._oldTurtle.select(item)

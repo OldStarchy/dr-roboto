@@ -15,14 +15,25 @@ function TaskRunner:run()
 			print('Running task ' .. tostring(task))
 		end
 
-		skill:completeTask(task)
-
-		if (self._verbose) then
-			print('Completed task ' .. tostring(task))
+		local result = skill:completeTask(task)
+		if (result == true) then
+			if (self._verbose) then
+				print('Completed task ' .. tostring(task))
+			end
+		elseif (result == false) then
+			error('Could not complete task')
+		else
+			for _, v in ipairs(result) do
+				self._taskManager:addTask(v)
+			end
+			self._taskManager:addTask(task)
 		end
 
 		-- Long running tasks must call sleep regularly or they'll be killed
 		sleep(0)
+
+		loadfile('task')('list')
+		read()
 
 		task, skill = self:_getNextTaskAndSkill()
 	end
@@ -31,14 +42,15 @@ end
 function TaskRunner:_getNextTaskAndSkill()
 	local tasks = self._taskManager:getTasks()
 
-	for i, task in ipairs(tasks) do
-		local skill = self._skillSet:getSkillForTask(task)
+	-- for i, task in ipairs(tasks) do
+	local task = tasks[1]
+	local skill = self._skillSet:getSkillForTask(task)
 
-		if (skill ~= nil) then
-			self._taskManager:removeTask(i)
-			return task, skill
-		end
+	if (skill ~= nil) then
+		self._taskManager:removeTask(1)
+		return task, skill
 	end
+	-- end
 
 	return nil
 end
