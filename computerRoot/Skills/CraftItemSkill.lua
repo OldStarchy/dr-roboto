@@ -8,35 +8,27 @@ function CraftItemSkill:canHandleTask(task)
 		return false
 	end
 
-	local recipies = book:findByName(task.name)
+	local recipe = standardRecipes:findCraftingRecipeByName(task.item)
 
-	if (#recipies == 0) then
-		return false
-	end
-
-	return true
+	return recipe ~= nil
 end
 
-function CraftItemSkill:completeTask(task)
+function CraftItemSkill:getRequirements(task)
 	local requirements = {}
 
-	local recipies = standardRecipes:findByName(task.name)
-	-- for _, recipe in ipairs(recipies) do
-	local recipe = recipes[1]
+	local recipe = standardRecipes:findCraftingRecipeByName(task.item)
+
 	for item, count in pairs(recipe.items) do
 		local haveCount = Inv:countItem(item)
 
 		if (haveCount < count) then
-			table.push(requirements, GatherItemTask(item, count - haveCount))
+			table.insert(requirements, GatherItemTask(item, count - haveCount))
 		end
 	end
-	-- end
 
-	if (#requirements > 0) then
-		return requirements
-	end
+	return requirements
+end
 
-	Crafting.craft(task.item, task.amount)
-
-	return true
+function CraftItemSkill:completeTask(task)
+	return Crafting.craft(task.item, task.amount)
 end

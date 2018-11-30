@@ -6,7 +6,7 @@ end
 
 function UseFurnaceSkill:canHandleTask(task)
 	if task.getType() == 'GatherItemTask' then
-		local recipe = RecipeBook:findByName(task.item.name)
+		local recipe = RecipeBook:findCraftingRecipeByName(task.item.name)
 		if not recipe then
 			return false
 		end

@@ -4,7 +4,7 @@ test(
 		['find'] = function(t)
 			local book = RecipeBook()
 
-			local matches = book:findByName('item1')
+			local matches = book:findCraftingRecipeByName('item1')
 
 			t.assertEqual(type(matches), 'table')
 		end,
@@ -17,12 +17,12 @@ test(
 			t.assertEqual(book:add(recipe1), true)
 			t.assertEqual(book:add(recipe2), false)
 
-			t.assertEqual(#book:findByName('anotherthing'), 0)
+			t.assertEqual(#book:findCraftingRecipeByName('anotherthing'), 0)
 		end,
 		['find on empty'] = function(t)
 			local book = RecipeBook()
 
-			local matches = book:findByName('item1')
+			local matches = book:findCraftingRecipeByName('item1')
 
 			t.assertEqual(#matches, 0)
 		end,
@@ -32,7 +32,7 @@ test(
 			local recipe = Recipe('item1', {}, 1)
 			book:add(recipe)
 
-			local matches = book:findByName('item1')
+			local matches = book:findCraftingRecipeByName('item1')
 
 			t.assertEqual(#matches, 1)
 			t.assertEqual(matches[1], recipe)
@@ -43,7 +43,7 @@ test(
 			local recipe = Recipe('item1', {}, 1)
 			book:add(recipe)
 
-			local matches = book:findByName('potatoes')
+			local matches = book:findCraftingRecipeByName('potatoes')
 
 			t.assertEqual(#matches, 0)
 		end
