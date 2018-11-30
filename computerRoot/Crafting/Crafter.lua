@@ -48,7 +48,7 @@ function Crafter:getRawItems(itemName, amount, checked)
 
 	checked[itemName] = true
 
-	local recipes = self._book:findByName(itemName)
+	local recipes = self._book:findCraftingRecipeByName(itemName)
 
 	if (#recipes == 0) then
 		return {[itemName] = amount}
@@ -80,9 +80,45 @@ function Crafter:getRawItems(itemName, amount, checked)
 end
 
 function Crafter:craft(item, amount)
-	local graph = self:buildCraftGraph(item, amount)
+	local recipe = standardRecipes:findCraftingRecipeByName(item)
 
-	self:craftFromGraph(graph)
+	local grid = recipe.grid
+
+	Inv:select('chest')
+	turtle.placeDown()
+
+	local items = cloneTable(recipe.items)
+
+	for i = 1, 16 do
+		print(tableToString(items))
+		read()
+		local itemStack = Inv:getItemDetail(i)
+
+		local needed = false
+		for _item, _amount in pairs(items) do
+			if (itemStack:matches(_item)) then
+				print('found item')
+				if (itemStack.count >= _amount) then
+					items[_item] = nil
+
+					print('found enough')
+
+					turtle.select(i)
+					turtle.dropDown(itemStack.count - _amount)
+				else
+					print('found', itemStack.count)
+					items[_item] = items[_item] - itemStack.count
+				end
+				needed = true
+				break
+			end
+		end
+
+		if (not needed) then
+			turtle.select(i)
+			turtle.dropDown()
+		end
+	end
 end
 
 function Crafter:craftFromGraph(graph)

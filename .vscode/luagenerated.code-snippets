@@ -377,6 +377,13 @@
 		],
 		"description": ""
 	},
+	"CraftItemSkill:getRequirements()": {
+		"prefix": "CraftItemSkill:getRequirements",
+		"body": [
+			"CraftItemSkill:getRequirements($0)"
+		],
+		"description": ""
+	},
 	"CraftItemSkill:getType()": {
 		"prefix": "CraftItemSkill:getType",
 		"body": [
@@ -563,6 +570,13 @@
 		"prefix": "DefaultSkill:conversionConstructor",
 		"body": [
 			"DefaultSkill:conversionConstructor($0)"
+		],
+		"description": ""
+	},
+	"DefaultSkill:getRequirements()": {
+		"prefix": "DefaultSkill:getRequirements",
+		"body": [
+			"DefaultSkill:getRequirements($0)"
 		],
 		"description": ""
 	},
@@ -2036,10 +2050,17 @@
 		],
 		"description": ""
 	},
-	"RecipeBook:findByName()": {
-		"prefix": "RecipeBook:findByName",
+	"RecipeBook:findCraftingRecipeByName()": {
+		"prefix": "RecipeBook:findCraftingRecipeByName",
 		"body": [
-			"RecipeBook:findByName($0)"
+			"RecipeBook:findCraftingRecipeByName($0)"
+		],
+		"description": ""
+	},
+	"RecipeBook:findFurnaceRecipeByName()": {
+		"prefix": "RecipeBook:findFurnaceRecipeByName",
+		"body": [
+			"RecipeBook:findFurnaceRecipeByName($0)"
 		],
 		"description": ""
 	},
@@ -2544,6 +2565,20 @@
 		"prefix": "TaskManager:conversionConstructor",
 		"body": [
 			"TaskManager:conversionConstructor($0)"
+		],
+		"description": ""
+	},
+	"TaskManager:count()": {
+		"prefix": "TaskManager:count",
+		"body": [
+			"TaskManager:count($0)"
+		],
+		"description": ""
+	},
+	"TaskManager:getTask()": {
+		"prefix": "TaskManager:getTask",
+		"body": [
+			"TaskManager:getTask($0)"
 		],
 		"description": ""
 	},

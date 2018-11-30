@@ -19,7 +19,7 @@ InventoryManager.ClassName = 'InventoryManager'
 ]]
 function InventoryManager.ItemIs(item, selector)
 	if (type(item) == 'number') then
-		item = self:getItemDetail(item)
+		item = Inv:getItemDetail(item)
 	end
 
 	if (item == nil) then
@@ -37,6 +37,8 @@ function InventoryManager:constructor(turtle)
 	self._turtle = turtle
 	self._oldTurtle = {}
 
+	self._locked = {}
+	self._selectionStack = {}
 	self:_attach()
 end
 
@@ -97,7 +99,7 @@ function InventoryManager:countItem(selector)
 	for i = 1, 16 do
 		local item = self:getItemDetail(i)
 
-		if (item:matches(selector)) then
+		if (item ~= nil and item:matches(selector)) then
 			count = count + item.count
 		end
 	end
