@@ -6,6 +6,12 @@ end
 
 _G.osStarted = true
 
+if (os.version == nil) then
+	dofile 'bootstrap.lua'
+	loadfile('test.lua')(1)
+	return
+end
+
 term.clear()
 term.setCursorPos(1, 1)
 
