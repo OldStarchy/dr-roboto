@@ -42,6 +42,9 @@ end
 function TaskRunner:_getNextTaskAndSkill()
 	local tasks = self._taskManager:getTasks()
 
+	if (#tasks == 0) then
+		return nil
+	end
 	-- for i, task in ipairs(tasks) do
 	local task = tasks[1]
 	local skill = self._skillSet:getSkillForTask(task)
