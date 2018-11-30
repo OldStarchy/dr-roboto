@@ -1,6 +1,10 @@
 require 'lfs'
 lfs.chdir('computerRoot')
-dofile 'startup'
+
+dofile 'bootstrap.lua'
+include 'Core/_main'
+suppressMissingGlobalWarnings(true)
+
 lfs.chdir('..')
 -- Generates a snippets file for all the apis currently available on the computercraft computer its run on
 -- The snippets file can be used in vscode to provide autocomplete.
