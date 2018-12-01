@@ -27,5 +27,5 @@ function ItemAction:mod(mod)
 		return true
 	end
 
-	return Action.__index.mod(self, mod)
+	return Action.mod(self, mod)
 end

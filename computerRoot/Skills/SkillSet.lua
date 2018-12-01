@@ -7,6 +7,9 @@ function SkillSet.GetDefaultSkillSet()
 	skillSet:addSkill(TreeFarmSkill())
 	skillSet:addSkill(ChopTreeSkill())
 	skillSet:addSkill(DanceSkill())
+	skillSet:addSkill(GatherSandSkill())
+	skillSet:addSkill(CraftItemSkill())
+	skillSet:addSkill(NeedleMineSkill())
 
 	return skillSet
 end

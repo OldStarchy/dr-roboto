@@ -8,25 +8,49 @@ function TaskRunner:constructor(skillSet, taskManager, verbose)
 end
 
 function TaskRunner:run()
-	local task, skill = self:_getNextTaskAndSkill()
+	while (self._taskManager:count() > 0) do
+		local task = self._taskManager:getTask(1)
+		local skill = self._skillSet:getSkillForTask(task)
 
-	while (skill ~= nil) do
-		if (self._verbose) then
-			print('Running task ' .. tostring(task))
+		if (skill == nil) then
+			--TODO: don't just error ig guess?
+			error('No skills for task')
 		end
 
-		local result = skill:completeTask(task)
-		if (result == true) then
-			if (self._verbose) then
-				print('Completed task ' .. tostring(task))
+		if (self._verbose) then
+			print('Gathering requirements')
+		end
+
+		local requirements = skill:getRequirements(task)
+
+		if (self._verbose) then
+			if (requirements ~= nil and #requirements == 0) then
+				print('None!')
+			else
+				for _, requirement in ipairs(requirements) do
+					print(' ' .. tostring(requirement))
+				end
 			end
-		elseif (result == false) then
-			error('Could not complete task')
+		end
+
+		if (#requirements ~= 0) then
+			for _, requirement in ipairs(requirements) do
+				self._taskManager:addTask(requirement, 1)
+			end
 		else
-			for _, v in ipairs(result) do
-				self._taskManager:addTask(v)
+			if (self._verbose) then
+				print('Running task ' .. tostring(task))
 			end
-			self._taskManager:addTask(task)
+
+			local result = skill:completeTask(task)
+			if (result) then
+				if (self._verbose) then
+					print('Completed task ' .. tostring(task))
+				end
+				self._taskManager:removeTask(1)
+			else
+				error('Could not complete task')
+			end
 		end
 
 		-- Long running tasks must call sleep regularly or they'll be killed
@@ -34,14 +58,15 @@ function TaskRunner:run()
 
 		loadfile('task')('list')
 		read()
-
-		task, skill = self:_getNextTaskAndSkill()
 	end
 end
 
 function TaskRunner:_getNextTaskAndSkill()
 	local tasks = self._taskManager:getTasks()
 
+	if (#tasks == 0) then
+		return nil
+	end
 	-- for i, task in ipairs(tasks) do
 	local task = tasks[1]
 	local skill = self._skillSet:getSkillForTask(task)

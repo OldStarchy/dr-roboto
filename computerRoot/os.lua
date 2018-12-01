@@ -1,7 +1,7 @@
 include 'Core/_main'
 include 'UserFunctions/_main'
 
-loadfile('test.lua')(1)
+-- loadfile('test.lua')(1)
 
 Mov:trackLocation('.mov.tbl')
 
@@ -19,7 +19,7 @@ pcall(
 
 print('OK')
 --TODO: don't actually sleep cus thats slow
-sleep(1)
+-- sleep(1)
 
 local runKernal = true
 

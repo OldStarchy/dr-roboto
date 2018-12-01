@@ -28,16 +28,21 @@ function RecipeBook:add(recipe)
 	return true
 end
 
-function RecipeBook:findByName(name)
-	local recipes = {}
-
+function RecipeBook:findCraftingRecipeByName(name)
 	for i = 1, #self._craftingRecipes do
+		print(self._craftingRecipes[i].name, name)
 		if (self._craftingRecipes[i].name == name) then
-			table.insert(recipes, self._craftingRecipes[i])
+			return self._craftingRecipes[i]
 		end
 	end
+end
 
-	return recipes
+function RecipeBook:findFurnaceRecipeByName(name)
+	for i = 1, #self.furnaceRecipes do
+		if (self.furnaceRecipes[i].name == name) then
+			return self.furnaceRecipes[i]
+		end
+	end
 end
 
 function RecipeBook:findByIngredient(ingredient)

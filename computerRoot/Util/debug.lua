@@ -69,3 +69,43 @@ function saveStackTrace(file, frames, start, jump)
 
 	f.close()
 end
+
+function runAndPrintErrLines(func)
+	xpcall(
+		func,
+		function(err)
+			if (type(err) == 'string') then
+				local bits = stringutil.split(err, ':')
+				local file = bits[1]
+				local line = bits[2]
+				local erro = bits[3]
+
+				if (term.isColour()) then
+					term.setTextColor(colours.red)
+				end
+
+				print(erro)
+				print(file .. ':' .. line)
+
+				if (term.isColour()) then
+					term.setTextColor(colours.orange)
+				end
+
+				if (file) then
+					local files = fs.listRecursive('')
+					for _, f in ipairs(files) do
+						if (stringutil.endsWith(f, file)) then
+							local fh = fs.open(f, 'r')
+							local content = fh.readAll()
+							fh.close()
+
+							local lines = stringutil.split(content, '\n')
+
+							print(lines[tonumber(line)])
+						end
+					end
+				end
+			end
+		end
+	)
+end

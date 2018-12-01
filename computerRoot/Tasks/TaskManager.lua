@@ -3,35 +3,48 @@ TaskManager.ClassName = 'TaskManager'
 
 function TaskManager:constructor()
 	--TODO: maybe queue isn't necassary here
-	self._tasks = Queue()
+	self._tasks = {}
 end
 
 function TaskManager:save(fname)
-	local data = self._tasks:getItems()
+	local data = self._tasks
 
 	fs.writeToFile(fname, data)
+end
+
+function TaskManager:count()
+	return #self._tasks
 end
 
 function TaskManager:load(fname)
 	local data = fs.readFromFile(fname)
 
 	if (data) then
-		self._tasks = Queue()
+		self._tasks = {}
 		for _, v in ipairs(data) do
-			self._tasks:enqueue(v)
+			table.insert(self._tasks, v)
 		end
 	end
 end
 
-function TaskManager:addTask(task)
+function TaskManager:addTask(task, index)
 	assertType(task, Task)
-	self._tasks:enqueue(task)
+
+	if (isType(index, 'number')) then
+		table.insert(self._tasks, index, task)
+	else
+		table.insert(self._tasks, task)
+	end
 end
 
 function TaskManager:getTasks()
-	return self._tasks:getItems()
+	return cloneTable(self._tasks, 2)
+end
+
+function TaskManager:getTask(index)
+	return self._tasks[index]
 end
 
 function TaskManager:removeTask(index)
-	self._tasks:remove(index)
+	table.remove(self._tasks, index)
 end

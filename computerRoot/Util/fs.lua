@@ -9,7 +9,7 @@ function fs.listRecursive(directory)
 
 		for _, file in ipairs(files) do
 			if (fs.isDir(file)) then
-				if (file ~= '.' and file ~= '..') then
+				if (file ~= '.' and file ~= '..' and file ~= 'rom') then
 					table.insert(dirsToCheck, currentDirectory .. '/' .. file)
 				end
 			else

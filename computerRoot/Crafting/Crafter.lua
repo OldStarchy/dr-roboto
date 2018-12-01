@@ -48,7 +48,7 @@ function Crafter:getRawItems(itemName, amount, checked)
 
 	checked[itemName] = true
 
-	local recipes = self._book:findByName(itemName)
+	local recipes = self._book:findCraftingRecipeByName(itemName)
 
 	if (#recipes == 0) then
 		return {[itemName] = amount}
@@ -80,9 +80,58 @@ function Crafter:getRawItems(itemName, amount, checked)
 end
 
 function Crafter:craft(item, amount)
-	local graph = self:buildCraftGraph(item, amount)
+	local recipe = standardRecipes:findCraftingRecipeByName(item)
 
-	self:craftFromGraph(graph)
+	if (Inv:select('chest')) then
+		turtle.placeDown()
+	else
+		error('No crafting Chest')
+	end
+
+	local items = cloneTable(recipe.items)
+
+	for i = 1, 16 do
+		local itemStack = Inv:getItemDetail(i)
+
+		local dump = true
+		for _item, _amount in pairs(items) do
+			if (itemStack == nil) then
+				dump = false
+			elseif (itemStack:matches(_item)) then
+				if (itemStack.count >= _amount) then
+					items[_item] = nil
+
+					turtle.select(i)
+					turtle.dropDown(itemStack.count - _amount)
+				else
+					items[_item] = items[_item] - itemStack.count
+				end
+				dump = false
+				break
+			end
+		end
+
+		if (dump) then
+			turtle.select(i)
+			turtle.dropDown()
+		end
+	end
+
+	for i = 1, 9 do
+		if (recipe.grid[i] ~= nil) then
+			if (not Inv:lock(i + math.floor((i - 1) / 3), recipe.grid[i], amount)) then
+				error('failed to set up crafting recipe')
+			end
+		end
+	end
+
+	turtle.craft(amount)
+
+	while (turtle.suckDown()) do
+	end
+	turtle.digDown()
+
+	return true
 end
 
 function Crafter:craftFromGraph(graph)
