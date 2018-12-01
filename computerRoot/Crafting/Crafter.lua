@@ -82,43 +82,56 @@ end
 function Crafter:craft(item, amount)
 	local recipe = standardRecipes:findCraftingRecipeByName(item)
 
-	local grid = recipe.grid
-
-	Inv:select('chest')
-	turtle.placeDown()
+	if (Inv:select('chest')) then
+		turtle.placeDown()
+	else
+		error('No crafting Chest')
+	end
 
 	local items = cloneTable(recipe.items)
 
 	for i = 1, 16 do
-		print(tableToString(items))
-		read()
 		local itemStack = Inv:getItemDetail(i)
 
-		local needed = false
+		local dump = true
 		for _item, _amount in pairs(items) do
-			if (itemStack:matches(_item)) then
-				print('found item')
+			if (itemStack == nil) then
+				dump = false
+			elseif (itemStack:matches(_item)) then
 				if (itemStack.count >= _amount) then
 					items[_item] = nil
-
-					print('found enough')
 
 					turtle.select(i)
 					turtle.dropDown(itemStack.count - _amount)
 				else
-					print('found', itemStack.count)
 					items[_item] = items[_item] - itemStack.count
 				end
-				needed = true
+				dump = false
 				break
 			end
 		end
 
-		if (not needed) then
+		if (dump) then
 			turtle.select(i)
 			turtle.dropDown()
 		end
 	end
+
+	for i = 1, 9 do
+		if (recipe.grid[i] ~= nil) then
+			if (not Inv:lock(i + math.floor((i - 1) / 3), recipe.grid[i], amount)) then
+				error('failed to set up crafting recipe')
+			end
+		end
+	end
+
+	turtle.craft(amount)
+
+	while (turtle.suckDown()) do
+	end
+	turtle.digDown()
+
+	return true
 end
 
 function Crafter:craftFromGraph(graph)
