@@ -1,16 +1,28 @@
-local Chest = Class()
+Chest = Class(Block)
+Chest.ClassName = 'Chest'
 
-function Chest:constructor(name, isDouble)
+--[[
+	name: name of the item, 'chest', 'furnace', or block query that is used to select the item from inventory
+	location: Position
+
+	where the direction provided in Position will be the approach direction
+	from the turtle to the block
+]]
+function Chest:constructor(name, _locations, isDouble)
+	Block:constructor(name, _locations)
+
 	self.name = name
-	chest.isDouble = not (not isDouble)
+	self.isDouble = isDouble
+	self.filename = 'chest-' .. name:gsub('%s', '-')
+	self.contents = hardTable(self.filename)
 end
 
 function Chest:size()
 	return self.isDouble and 54 or 27
 end
 
-function Chest:printName()
-	print(self.name)
+function Chest:toString()
+	return self.name
 end
 
 function Chest:isEmpty()
@@ -28,7 +40,7 @@ function Chest:isEmpty()
 end
 
 function Chest:getFirst(delegate)
-	for i = 1, self.size do
+	for i = 1, self:size() do
 		if delegate(self, i) then
 			return i
 		end
@@ -37,7 +49,7 @@ function Chest:getFirst(delegate)
 end
 
 function Chest:getNext(delegate, last)
-	for i = last + 1, self.size do
+	for i = last + 1, self:size() do
 		if delegate(self, i) then
 			return i
 		end
@@ -46,7 +58,7 @@ function Chest:getNext(delegate, last)
 end
 
 function Chest:getLast(delegate) --GOOD
-	for i = self.size, 1, -1 do
+	for i = self:size(), 1, -1 do
 		if delegate(self, i) then
 			return i
 		end
@@ -55,7 +67,7 @@ function Chest:getLast(delegate) --GOOD
 end
 
 function Chest:getPrevious(delegate, last) --GOOD
-	last = last or self.size + 1
+	last = last or self:size() + 1
 	for i = last - 1, 1, -1 do
 		if delegate(self, i) then
 			return i
@@ -65,24 +77,24 @@ function Chest:getPrevious(delegate, last) --GOOD
 end
 
 function Chest:getItemAt(slot)
-	if self[slot] == nil then
+	if self.contents[slot] == nil then
 		return nil
 	else
-		return self[slot].name
+		return self.contents[slot].name
 	end
 end
 
 function Chest:getItemCount(slot)
-	return ((self[slot] and self[slot].count) or 0)
+	return ((self.contents[slot] and self.contents[slot].count) or 0)
 end
 
 function Chest:getItemSpace(slot, item)
-	return inv.stackSize(self:getItemAt(slot) or item) - self:getItemCount(slot)
+	return itemInfo:getStackSize(self:getItemAt(slot) or item) - self:getItemCount(slot)
 end
 
 local function delHasFree(item)
 	return function(self, slot)
-		if self[slot] == nil then
+		if self.contents[slot] == nil then
 			return true
 		elseif self:getItemAt(slot) == item then
 			return self:getItemSpace(slot) > 0
@@ -101,12 +113,12 @@ function Chest:nextAvailable(item, from)
 end
 
 function Chest:nextAvailable(item, from)
-	for i = from + 1, self.size do
-		if self[i] == nil then
-			return i, inv.stackSize(item)
-		elseif self[i].name == item then
-			if (inv.stackSize(item) - self[i].count > 0) then
-				return i, inv.stackSize(item) - self[i].count
+	for i = from + 1, self:size() do
+		if self.contents[i] == nil then
+			return i, itemInfo:getStackSize(item)
+		elseif self.contents[i].name == item then
+			if (itemInfo:getStackSize(item) - self.contents[i].count > 0) then
+				return i, itemInfo:getStackSize(item) - self.contents[i].count
 			end
 		end
 	end
@@ -138,6 +150,13 @@ local function slot(item, count)
 end
 
 function Chest:canPush(item, count)
+	assert(item ~= nil, 'cannot check for nil item')
+	assertType(count, 'int', 'count is required and a number')
+
+	if (count == 0) then
+		return true
+	end
+
 	local c = self:getTotalSpaceFor(item) - count
 	if c >= 0 then
 		return true
@@ -147,6 +166,13 @@ function Chest:canPush(item, count)
 end
 
 function Chest:push(item, count)
+	assert(item ~= nil, 'cannot check for nil item')
+	assertType(count, 'int', 'count is required and a number')
+
+	if (count == 0) then
+		return true
+	end
+
 	if (self:getTotalSpaceFor(item) < count) then
 		return false, 'Not enough space for items'
 	end
@@ -157,10 +183,10 @@ function Chest:push(item, count)
 		if spare > (count - moved) then
 			spare = (count - moved)
 		end
-		if (self[i] == nil) then
-			self[i] = slot(item, spare)
+		if (self.contents[i] == nil) then
+			self.contents[i] = slot(item, spare)
 		else
-			self[i].count = self[i].count + spare
+			self.contents[i].count = self.contents[i].count + spare
 		end
 		moved = moved + spare
 
@@ -174,9 +200,9 @@ function Chest:push(item, count)
 end
 
 function Chest:has(item)
-	for i = 1, self.size do
-		if self[i] then
-			if self[i].name == item then
+	for i = 1, self:size() do
+		if self.contents[i] then
+			if self.contents[i].name == item then
 				return true
 			end
 		end
@@ -185,42 +211,47 @@ function Chest:has(item)
 end
 
 function Chest:peek()
-	for i = 1, self.size do
-		if self[i] then
-			return self[i].name, self[i].count
+	for i = 1, self:size() do
+		if self.contents[i] then
+			return self.contents[i].name, self.contents[i].count
 		end
 	end
 end
 
 function Chest:pop()
 	local r = nil
-	for i = 1, self.size do
-		if self[i] then
-			r = self[i]
-			self[i] = nil
+	for i = 1, self:size() do
+		if self.contents[i] then
+			r = self.contents[i]
+			self.contents[i] = nil
 			break
 		end
 	end
 	return r.name, r.count
 end
 
+function Chest:clear()
+	for k in pairs(hardTableExport(self.contents)) do
+		self.contents[k] = nil
+	end
+end
+
+function Chest:remove()
+	self:clear()
+	removeHardTable(self.filename)
+end
+
 function Chest:print(start)
 	start = start or 1
-	local lim = self.size
+	local lim = self:size()
 	if lim > start + 10 then
 		lim = start + 10
 	end
 	for i = start, lim do
-		if self[i] then
-			print(i .. ': ' .. self[i].count .. ' ' .. self[i].name)
+		if self.contents[i] then
+			print(i .. ': ' .. self.contents[i].count .. ' ' .. self.contents[i].name)
 		end
 	end
-end
-
-function Chest:save(filename)
-	local file = fs.open(filename, 'w')
-	file:write(textutils.serialize(self))
-	file:close()
 end
 
 --[=[

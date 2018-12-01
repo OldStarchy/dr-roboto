@@ -225,6 +225,7 @@ local function doTest(testObj, testContext)
 	end
 
 	local testParams = createTestParams()
+	testParams.testName = testObj.name
 	local errors = {}
 
 	local testWrapper = function()

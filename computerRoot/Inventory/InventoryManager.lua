@@ -71,7 +71,12 @@ function InventoryManager:getItemDetail(selector)
 		return nil
 	end
 
-	return ItemStackDetail.convertToInstance(data)
+	local itemDetail = ItemStackDetail.convertToInstance(data)
+
+	itemDetail.stackSize = self._oldTurtle.getItemCount(slot) + self._oldTurtle.getItemSpace(slot)
+	itemInfo:setStackSize(itemDetail.name, itemDetail.stackSize)
+
+	return itemDetail
 end
 
 function InventoryManager:findItemSlot(selector)

@@ -97,6 +97,10 @@ function hardTableExport(ht)
 	return exp
 end
 
+function removeHardTable(filename)
+	os.remove(filename)
+end
+
 function hardTable(filename)
 	if (stringutil.endsWith(filename, '.lua')) then
 		error('Creating a hardTable with a .lua extension is probably an error', 2)
