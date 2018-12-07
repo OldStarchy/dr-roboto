@@ -50,15 +50,16 @@ _G.includeAll = function(directory)
 
 			local loaded = false
 			for _, path in ipairs(content) do
-				print(path)
 				if (stringutil.endsWith(path, '.lua')) then
 					if (not fs.isDir(directory .. '/' .. path)) then
-						include(directory .. '/' .. path)
+						include(directory .. '/' .. path:sub(1, #path - 4))
 						loaded = true
 					end
 				end
 			end
-			print("Warning, no files found in call to includeAll '" .. directory .. "'")
+			if (not loaded) then
+				print("Warning, no files found in call to includeAll '" .. directory .. "'")
+			end
 		else
 			error('Path ' .. directory .. ' is not a directory', 2)
 		end
