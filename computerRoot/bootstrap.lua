@@ -44,6 +44,7 @@ _G.include = function(module, ...)
 end
 
 _G.includeAll = function(directory)
+	setfenv(1, getfenv(2))
 	if (fs.exists(directory)) then
 		if (fs.isDir(directory)) then
 			local content = fs.list(directory)
