@@ -80,12 +80,22 @@ function Crafter:getRawItems(itemName, amount, checked)
 end
 
 function Crafter:craft(item, amount)
-	local recipe = standardRecipes:findCraftingRecipeByName(item)
+	local recipe = nil
+
+	if (type(item) == 'string') then
+		standardRecipes:findCraftingRecipeByName(item)
+	elseif (isType(item, Recipe)) then
+		recipe = item
+	end
 
 	if (Inv:select('chest')) then
 		turtle.placeDown()
 	else
 		error('No crafting Chest')
+	end
+
+	if (recipe == nil) then
+		error('no recipe for ' .. item)
 	end
 
 	local items = cloneTable(recipe.items)
