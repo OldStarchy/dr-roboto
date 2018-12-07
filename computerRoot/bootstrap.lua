@@ -43,6 +43,30 @@ _G.include = function(module, ...)
 	end
 end
 
+_G.includeAll = function(directory)
+	if (fs.exists(directory)) then
+		if (fs.isDir(directory)) then
+			local content = fs.list(directory)
+
+			local loaded = false
+			for _, path in ipairs(content) do
+				print(path)
+				if (stringutil.endsWith(path, '.lua')) then
+					if (not fs.isDir(directory .. '/' .. path)) then
+						include(directory .. '/' .. path)
+						loaded = true
+					end
+				end
+			end
+			print("Warning, no files found in call to includeAll '" .. directory .. "'")
+		else
+			error('Path ' .. directory .. ' is not a directory', 2)
+		end
+	else
+		error('Path ' .. directory .. ' does not exist')
+	end
+end
+
 if (sleep == nil) then
 	sleep = function()
 	end
