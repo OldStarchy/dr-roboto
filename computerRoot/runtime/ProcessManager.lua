@@ -3,6 +3,7 @@ ProcMan.ClassName = 'ProcessManager'
 
 function ProcMan:constructor()
 	self._processes = {}
+	self._newProcesses = {}
 	self._currentProcess = nil
 
 	self._run = false
@@ -19,8 +20,8 @@ function ProcMan:_getProcessById(pid)
 end
 
 function ProcMan:spawnProcess(func, name)
-	assertType(func)
-	name = assertType(coalesce(name, 'anon'))
+	assertType(func, 'function')
+	name = assertType(coalesce(name, 'anon'), 'string')
 	local co = coroutine.create(func)
 
 	local proc = {
@@ -87,6 +88,10 @@ function ProcMan:run()
 
 	local eventData = {}
 
+	while (#self._newProcesses > 0) do
+		table.insert(self._processes, table.remove(self._newProcesses, 1))
+	end
+
 	while self._run and #self._processes > 0 do
 		local n = 1
 		while n <= #self._processes do
@@ -150,3 +155,5 @@ function ProcMan:getAPI()
 
 	return api
 end
+
+return ProcMan

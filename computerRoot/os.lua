@@ -35,8 +35,5 @@ procMan:spawnProcess(
 
 procMan:run()
 
-if (#coroutines == 0) then
-	print('Goodbye')
-	sleep(1)
-	return
-end
+print('Goodbye')
+sleep(1)
