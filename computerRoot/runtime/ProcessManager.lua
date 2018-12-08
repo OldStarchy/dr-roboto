@@ -56,7 +56,7 @@ function ProcMan:getProcesses()
 end
 
 function ProcMan:sendTerminate(pid)
-	local proc = ProcMan:_getProcessById(pid)
+	local proc = self:_getProcessById(pid)
 
 	if (proc == nil) then
 		return false
@@ -68,7 +68,7 @@ function ProcMan:sendTerminate(pid)
 end
 
 function ProcMan:wait(pid)
-	local proc = ProcMan._getProcessById(pid)
+	local proc = self:_getProcessById(pid)
 
 	if (proc == nil) then
 		return false
