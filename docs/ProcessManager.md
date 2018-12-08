@@ -4,7 +4,9 @@ The process manager is an api for creating and running multiple processes simult
 
 To use this API you should have a good understanding of lua coroutines and read up on ComputerCrafts os.pullEvent.
 
-## `process.spawnProcess(func: function, name?: string): table`
+## API
+
+### `process.spawnProcess(func: function, name?: string): table`
 
 Creates a process from the given function and returns the process id. This adds the process to a queue of new processes which will be added to the list of running processes once the current event finishes processing.
 
@@ -16,7 +18,7 @@ local shellPid = process.spawnProcess(
     'shell')
 ```
 
-## `process.wait(processId: table): boolean`
+### `process.wait(processId: table): boolean`
 
 Pauses this process until the process with the given id terminates. This is the same as waiting for a `process.died` event with the given id, with the addition of first checking if a process with the given id actually exists.
 
@@ -28,7 +30,7 @@ process.wait(shellPid)
 print('shell finished')
 ```
 
-## `process.getProcesses(): table`
+### `process.getProcesses(): table`
 
 Returns a list of all running processes' info. The list contains tables of the following form:
 
@@ -48,7 +50,7 @@ for _,proc in ipairs(procs) do
 end
 ```
 
-## `process.sendTerminate(pid)`
+### `process.sendTerminate(pid)`
 
 Sends a 'terminate' event to a process. It will be added to the event queue for that process and it is up to the process to handle it accordingly.
 
@@ -74,6 +76,15 @@ process.wait(dancePid)
 
 print('Stopped dancing')
 ```
+
+## Events
+
+There are two events emitted by the process manager, they can be pulled with `os.pullEvent`.
+
+-   `process.new` emitted with `id: table, name: string`
+-   `process.died` emitted with `id: table, name: string`
+
+Maybe you can guess what they're for.
 
 ## TODO
 
