@@ -15,7 +15,8 @@ local shellPid = process.spawnProcess(
     function()
         os.run(getfenv(), '/rom/programs/shell'))
     end,
-    'shell')
+    'shell'
+)
 ```
 
 ### `process.wait(processId: table): boolean`

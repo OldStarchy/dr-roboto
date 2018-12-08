@@ -95,7 +95,7 @@ function ProcMan:run()
 	while self._run and #self._processes > 0 do
 		local n = 1
 		while n <= #self._processes do
-			proc = self._processes[n]
+			local proc = self._processes[n]
 
 			table.insert(proc.eventQueue, eventData)
 
