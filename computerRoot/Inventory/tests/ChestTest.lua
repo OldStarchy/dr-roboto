@@ -34,11 +34,9 @@ test(
 		},
 		['Chest Item Placement'] = function(t)
 			ItemInfo.DefaultItemInfo = ItemInfo()
-			local io = ItemInfo.DefaultItemInfo
-
-			io:setStackSize('bucket', 16)
-			io:setStackSize('cobblestone', 64)
-			io:setStackSize('shovel', 1)
+			ItemInfo.DefaultItemInfo:setStackSize('bucket', 16)
+			ItemInfo.DefaultItemInfo:setStackSize('cobblestone', 64)
+			ItemInfo.DefaultItemInfo:setStackSize('shovel', 1)
 
 			local chest = Chest(t.testName, Position(5, 5, 5, Position.SOUTH), false)
 			chest:clear()
