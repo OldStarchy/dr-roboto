@@ -4,12 +4,11 @@
 	"editor.insertSpaces": false,
 	"lua.format.singleQuote": true,
 	"files.associations": {
-		"startup": "lua"
+		"startup": "lua",
+		"*.ht.txt": "lua"
 	},
 	"files.insertFinalNewline": true,
 	"files.trimFinalNewlines": true,
 	"todo-tree.regex": "((//|#|<!--|;|/\\*|--|^)\\s*($TAGS)|^\\s*- \\[ \\])",
-	"cSpell.words": [
-		"dofile"
-	],
+	"cSpell.words": ["dofile"]
 }
