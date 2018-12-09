@@ -167,6 +167,195 @@
 		],
 		"description": ""
 	},
+	"Chest()": {
+		"prefix": "Chest",
+		"body": [
+			"Chest($0)"
+		],
+		"description": ""
+	},
+	"Chest:assertImplementation()": {
+		"prefix": "Chest:assertImplementation",
+		"body": [
+			"Chest:assertImplementation($0)"
+		],
+		"description": ""
+	},
+	"Chest:canPush()": {
+		"prefix": "Chest:canPush",
+		"body": [
+			"Chest:canPush($0)"
+		],
+		"description": ""
+	},
+	"Chest:clear()": {
+		"prefix": "Chest:clear",
+		"body": [
+			"Chest:clear($0)"
+		],
+		"description": ""
+	},
+	"Chest:conversionConstructor()": {
+		"prefix": "Chest:conversionConstructor",
+		"body": [
+			"Chest:conversionConstructor($0)"
+		],
+		"description": ""
+	},
+	"Chest:firstAvailable()": {
+		"prefix": "Chest:firstAvailable",
+		"body": [
+			"Chest:firstAvailable($0)"
+		],
+		"description": ""
+	},
+	"Chest:getFirst()": {
+		"prefix": "Chest:getFirst",
+		"body": [
+			"Chest:getFirst($0)"
+		],
+		"description": ""
+	},
+	"Chest:getItemAt()": {
+		"prefix": "Chest:getItemAt",
+		"body": [
+			"Chest:getItemAt($0)"
+		],
+		"description": ""
+	},
+	"Chest:getItemCount()": {
+		"prefix": "Chest:getItemCount",
+		"body": [
+			"Chest:getItemCount($0)"
+		],
+		"description": ""
+	},
+	"Chest:getItemSpace()": {
+		"prefix": "Chest:getItemSpace",
+		"body": [
+			"Chest:getItemSpace($0)"
+		],
+		"description": ""
+	},
+	"Chest:getLast()": {
+		"prefix": "Chest:getLast",
+		"body": [
+			"Chest:getLast($0)"
+		],
+		"description": ""
+	},
+	"Chest:getNext()": {
+		"prefix": "Chest:getNext",
+		"body": [
+			"Chest:getNext($0)"
+		],
+		"description": ""
+	},
+	"Chest:getPrevious()": {
+		"prefix": "Chest:getPrevious",
+		"body": [
+			"Chest:getPrevious($0)"
+		],
+		"description": ""
+	},
+	"Chest:getTotalSpaceFor()": {
+		"prefix": "Chest:getTotalSpaceFor",
+		"body": [
+			"Chest:getTotalSpaceFor($0)"
+		],
+		"description": ""
+	},
+	"Chest:getType()": {
+		"prefix": "Chest:getType",
+		"body": [
+			"Chest:getType($0)"
+		],
+		"description": ""
+	},
+	"Chest:has()": {
+		"prefix": "Chest:has",
+		"body": [
+			"Chest:has($0)"
+		],
+		"description": ""
+	},
+	"Chest:isEmpty()": {
+		"prefix": "Chest:isEmpty",
+		"body": [
+			"Chest:isEmpty($0)"
+		],
+		"description": ""
+	},
+	"Chest:isOrInherits()": {
+		"prefix": "Chest:isOrInherits",
+		"body": [
+			"Chest:isOrInherits($0)"
+		],
+		"description": ""
+	},
+	"Chest:isType()": {
+		"prefix": "Chest:isType",
+		"body": [
+			"Chest:isType($0)"
+		],
+		"description": ""
+	},
+	"Chest:nextAvailable()": {
+		"prefix": "Chest:nextAvailable",
+		"body": [
+			"Chest:nextAvailable($0)"
+		],
+		"description": ""
+	},
+	"Chest:peek()": {
+		"prefix": "Chest:peek",
+		"body": [
+			"Chest:peek($0)"
+		],
+		"description": ""
+	},
+	"Chest:pop()": {
+		"prefix": "Chest:pop",
+		"body": [
+			"Chest:pop($0)"
+		],
+		"description": ""
+	},
+	"Chest:print()": {
+		"prefix": "Chest:print",
+		"body": [
+			"Chest:print($0)"
+		],
+		"description": ""
+	},
+	"Chest:push()": {
+		"prefix": "Chest:push",
+		"body": [
+			"Chest:push($0)"
+		],
+		"description": ""
+	},
+	"Chest:remove()": {
+		"prefix": "Chest:remove",
+		"body": [
+			"Chest:remove($0)"
+		],
+		"description": ""
+	},
+	"Chest:size()": {
+		"prefix": "Chest:size",
+		"body": [
+			"Chest:size($0)"
+		],
+		"description": ""
+	},
+	"Chest:toString()": {
+		"prefix": "Chest:toString",
+		"body": [
+			"Chest:toString($0)"
+		],
+		"description": ""
+	},
 	"ChopTreeSkill()": {
 		"prefix": "ChopTreeSkill",
 		"body": [
@@ -1119,10 +1308,157 @@
 		],
 		"description": ""
 	},
+	"InventoryManager:getAll()": {
+		"prefix": "InventoryManager:getAll",
+		"body": [
+			"InventoryManager:getAll($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getAllContaining()": {
+		"prefix": "InventoryManager:getAllContaining",
+		"body": [
+			"InventoryManager:getAllContaining($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getAllEmpty()": {
+		"prefix": "InventoryManager:getAllEmpty",
+		"body": [
+			"InventoryManager:getAllEmpty($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getAllSameAs()": {
+		"prefix": "InventoryManager:getAllSameAs",
+		"body": [
+			"InventoryManager:getAllSameAs($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getAllUnlockedContaining()": {
+		"prefix": "InventoryManager:getAllUnlockedContaining",
+		"body": [
+			"InventoryManager:getAllUnlockedContaining($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getFirst()": {
+		"prefix": "InventoryManager:getFirst",
+		"body": [
+			"InventoryManager:getFirst($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getFirstContaining()": {
+		"prefix": "InventoryManager:getFirstContaining",
+		"body": [
+			"InventoryManager:getFirstContaining($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getFirstEmpty()": {
+		"prefix": "InventoryManager:getFirstEmpty",
+		"body": [
+			"InventoryManager:getFirstEmpty($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getFirstSameAs()": {
+		"prefix": "InventoryManager:getFirstSameAs",
+		"body": [
+			"InventoryManager:getFirstSameAs($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getFirstUnlockedContaining()": {
+		"prefix": "InventoryManager:getFirstUnlockedContaining",
+		"body": [
+			"InventoryManager:getFirstUnlockedContaining($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getFreeItemCount()": {
+		"prefix": "InventoryManager:getFreeItemCount",
+		"body": [
+			"InventoryManager:getFreeItemCount($0)"
+		],
+		"description": ""
+	},
 	"InventoryManager:getItemDetail()": {
 		"prefix": "InventoryManager:getItemDetail",
 		"body": [
 			"InventoryManager:getItemDetail($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getLast()": {
+		"prefix": "InventoryManager:getLast",
+		"body": [
+			"InventoryManager:getLast($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getLastEmpty()": {
+		"prefix": "InventoryManager:getLastEmpty",
+		"body": [
+			"InventoryManager:getLastEmpty($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getLock()": {
+		"prefix": "InventoryManager:getLock",
+		"body": [
+			"InventoryManager:getLock($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getNext()": {
+		"prefix": "InventoryManager:getNext",
+		"body": [
+			"InventoryManager:getNext($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getNextContaining()": {
+		"prefix": "InventoryManager:getNextContaining",
+		"body": [
+			"InventoryManager:getNextContaining($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getNextEmpty()": {
+		"prefix": "InventoryManager:getNextEmpty",
+		"body": [
+			"InventoryManager:getNextEmpty($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getNextSameAs()": {
+		"prefix": "InventoryManager:getNextSameAs",
+		"body": [
+			"InventoryManager:getNextSameAs($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getNextUnlockedContaining()": {
+		"prefix": "InventoryManager:getNextUnlockedContaining",
+		"body": [
+			"InventoryManager:getNextUnlockedContaining($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getPrevious()": {
+		"prefix": "InventoryManager:getPrevious",
+		"body": [
+			"InventoryManager:getPrevious($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:getTotalFreeItemCount()": {
+		"prefix": "InventoryManager:getTotalFreeItemCount",
+		"body": [
+			"InventoryManager:getTotalFreeItemCount($0)"
 		],
 		"description": ""
 	},
@@ -1133,10 +1469,38 @@
 		],
 		"description": ""
 	},
+	"InventoryManager:hasEmpty()": {
+		"prefix": "InventoryManager:hasEmpty",
+		"body": [
+			"InventoryManager:hasEmpty($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:hasItem()": {
+		"prefix": "InventoryManager:hasItem",
+		"body": [
+			"InventoryManager:hasItem($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:have()": {
+		"prefix": "InventoryManager:have",
+		"body": [
+			"InventoryManager:have($0)"
+		],
+		"description": ""
+	},
 	"InventoryManager:inspect()": {
 		"prefix": "InventoryManager:inspect",
 		"body": [
 			"InventoryManager:inspect($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:isLocked()": {
+		"prefix": "InventoryManager:isLocked",
+		"body": [
+			"InventoryManager:isLocked($0)"
 		],
 		"description": ""
 	},
@@ -1151,6 +1515,34 @@
 		"prefix": "InventoryManager:isType",
 		"body": [
 			"InventoryManager:isType($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:isUnlocked()": {
+		"prefix": "InventoryManager:isUnlocked",
+		"body": [
+			"InventoryManager:isUnlocked($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:lock()": {
+		"prefix": "InventoryManager:lock",
+		"body": [
+			"InventoryManager:lock($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:popSelection()": {
+		"prefix": "InventoryManager:popSelection",
+		"body": [
+			"InventoryManager:popSelection($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:pushSelection()": {
+		"prefix": "InventoryManager:pushSelection",
+		"body": [
+			"InventoryManager:pushSelection($0)"
 		],
 		"description": ""
 	},
@@ -1179,6 +1571,27 @@
 		"prefix": "InventoryManager:suckUp",
 		"body": [
 			"InventoryManager:suckUp($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:transferTo()": {
+		"prefix": "InventoryManager:transferTo",
+		"body": [
+			"InventoryManager:transferTo($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:unlock()": {
+		"prefix": "InventoryManager:unlock",
+		"body": [
+			"InventoryManager:unlock($0)"
+		],
+		"description": ""
+	},
+	"InventoryManager:unlockAll()": {
+		"prefix": "InventoryManager:unlockAll",
+		"body": [
+			"InventoryManager:unlockAll($0)"
 		],
 		"description": ""
 	},
@@ -1235,6 +1648,69 @@
 		"prefix": "ItemDetail:toString",
 		"body": [
 			"ItemDetail:toString($0)"
+		],
+		"description": ""
+	},
+	"ItemInfo()": {
+		"prefix": "ItemInfo",
+		"body": [
+			"ItemInfo($0)"
+		],
+		"description": ""
+	},
+	"ItemInfo:assertImplementation()": {
+		"prefix": "ItemInfo:assertImplementation",
+		"body": [
+			"ItemInfo:assertImplementation($0)"
+		],
+		"description": ""
+	},
+	"ItemInfo:conversionConstructor()": {
+		"prefix": "ItemInfo:conversionConstructor",
+		"body": [
+			"ItemInfo:conversionConstructor($0)"
+		],
+		"description": ""
+	},
+	"ItemInfo:getStackSize()": {
+		"prefix": "ItemInfo:getStackSize",
+		"body": [
+			"ItemInfo:getStackSize($0)"
+		],
+		"description": ""
+	},
+	"ItemInfo:getType()": {
+		"prefix": "ItemInfo:getType",
+		"body": [
+			"ItemInfo:getType($0)"
+		],
+		"description": ""
+	},
+	"ItemInfo:isOrInherits()": {
+		"prefix": "ItemInfo:isOrInherits",
+		"body": [
+			"ItemInfo:isOrInherits($0)"
+		],
+		"description": ""
+	},
+	"ItemInfo:isType()": {
+		"prefix": "ItemInfo:isType",
+		"body": [
+			"ItemInfo:isType($0)"
+		],
+		"description": ""
+	},
+	"ItemInfo:loadHardTable()": {
+		"prefix": "ItemInfo:loadHardTable",
+		"body": [
+			"ItemInfo:loadHardTable($0)"
+		],
+		"description": ""
+	},
+	"ItemInfo:setStackSize()": {
+		"prefix": "ItemInfo:setStackSize",
+		"body": [
+			"ItemInfo:setStackSize($0)"
 		],
 		"description": ""
 	},
@@ -2841,6 +3317,13 @@
 		],
 		"description": ""
 	},
+	"fs.delete()": {
+		"prefix": "fs.delete",
+		"body": [
+			"fs.delete($0)"
+		],
+		"description": ""
+	},
 	"fs.exists()": {
 		"prefix": "fs.exists",
 		"body": [
@@ -2943,6 +3426,13 @@
 		"prefix": "include",
 		"body": [
 			"include($0)"
+		],
+		"description": ""
+	},
+	"includeAll()": {
+		"prefix": "includeAll",
+		"body": [
+			"includeAll($0)"
 		],
 		"description": ""
 	},
@@ -3499,10 +3989,24 @@
 		],
 		"description": ""
 	},
+	"removeHardTable()": {
+		"prefix": "removeHardTable",
+		"body": [
+			"removeHardTable($0)"
+		],
+		"description": ""
+	},
 	"require()": {
 		"prefix": "require",
 		"body": [
 			"require($0)"
+		],
+		"description": ""
+	},
+	"runAndPrintErrLines()": {
+		"prefix": "runAndPrintErrLines",
+		"body": [
+			"runAndPrintErrLines($0)"
 		],
 		"description": ""
 	},
@@ -3699,6 +4203,13 @@
 		"prefix": "stringutil.rPad",
 		"body": [
 			"stringutil.rPad($0)"
+		],
+		"description": ""
+	},
+	"stringutil.split()": {
+		"prefix": "stringutil.split",
+		"body": [
+			"stringutil.split($0)"
 		],
 		"description": ""
 	},
