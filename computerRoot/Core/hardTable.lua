@@ -98,7 +98,7 @@ function hardTableExport(ht)
 end
 
 function removeHardTable(filename)
-	os.remove(filename)
+	fs.delete(filename)
 end
 
 function hardTable(filename)

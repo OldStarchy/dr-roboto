@@ -42,5 +42,6 @@ _G.fs = {
 				end
 			}
 		)
-	end
+	end,
+	delete = os.remove
 }
