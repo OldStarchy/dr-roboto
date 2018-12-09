@@ -1,13 +1,8 @@
 if (_G.osStarted == true) then
 	suppressMissingGlobalWarnings(false)
 
-	runAndPrintErrLines(
-		function()
-			taskManager:addTask(GatherItemTask('glass_pane', 1))
-			-- c = Crafter(turtle)
-			-- c:craft('glass_pane', 1)
-		end
-	)
+	print('Running startup tests')
+	shell.run('less run test')
 
 	return
 end
