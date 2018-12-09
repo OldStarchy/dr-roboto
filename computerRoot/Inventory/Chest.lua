@@ -40,12 +40,7 @@ function Chest:isEmpty()
 end
 
 function Chest:getFirst(delegate)
-	for i = 1, self:size() do
-		if delegate(self, i) then
-			return i
-		end
-	end
-	return nil
+	return self:getNext(delegate, 0)
 end
 
 function Chest:getNext(delegate, last)
@@ -96,26 +91,16 @@ function Chest:getItemSpace(slot, item)
 	return stackSize - items
 end
 
-local function delHasFree(item)
-	return function(self, slot)
-		if self.contents[slot] == nil then
-			return true
-		elseif self:getItemAt(slot) == item then
-			return self:getItemSpace(slot) > 0
-		else
-			return false
-		end
-	end
-end
-
+--[[
+	return the first avaiable index of a free slot for the provided item
+	]]
 function Chest:firstAvailable(item)
-	return self:getFirst(delHasFree(item))
+	return self:nextAvailable(item, 0)
 end
 
-function Chest:nextAvailable(item, from)
-	return self:getNext(delHasFree(item), from)
-end
-
+--[[
+	return the next avaiable index of a free slot for the provided item and starting index
+	]]
 function Chest:nextAvailable(item, from)
 	for i = from + 1, self:size() do
 		if self.contents[i] == nil then
@@ -129,6 +114,9 @@ function Chest:nextAvailable(item, from)
 	return nil
 end
 
+--[[
+	returns the total avaiable space in the chest for this item
+]]
 function Chest:getTotalSpaceFor(item)
 	local count = 0
 	local i = self:firstAvailable(item)
@@ -154,6 +142,9 @@ local function slot(item, count)
 	return s
 end
 
+--[[
+	verifies if it can push an item into the chest
+]]
 function Chest:canPush(item, count)
 	assert(item ~= nil, 'cannot check for nil item')
 	assertType(count, 'int', 'count is required and a number')
@@ -170,6 +161,10 @@ function Chest:canPush(item, count)
 	end
 end
 
+--[[
+	pushes an item into the chest at the next space available.
+	will return false, 'error desc' if failed. 
+]]
 function Chest:push(item, count)
 	assert(item ~= nil, 'cannot check for nil item')
 	assertType(count, 'int', 'count is required and a number')
@@ -204,6 +199,9 @@ function Chest:push(item, count)
 	return true
 end
 
+--[[
+	returns true if the chest contains item by exact name
+]]
 function Chest:has(item)
 	for i = 1, self:size() do
 		if self.contents[i] then
@@ -215,6 +213,10 @@ function Chest:has(item)
 	return false
 end
 
+--[[
+	returns top item in chest stack
+	returns name, count
+]]
 function Chest:peek()
 	for i = 1, self:size() do
 		if self.contents[i] then
@@ -223,6 +225,10 @@ function Chest:peek()
 	end
 end
 
+--[[
+	returns and removes top item in chest stack
+	returns name, count
+]]
 function Chest:pop()
 	local r = nil
 	for i = 1, self:size() do
@@ -235,12 +241,20 @@ function Chest:pop()
 	return r.name, r.count
 end
 
+--[[
+	clears information about contents of chest
+]]
 function Chest:clear()
 	for k in pairs(hardTableExport(self.contents)) do
 		self.contents[k] = nil
 	end
 end
 
+--[[
+
+remove the saved copy of the chest contents
+when a chest block is removed from the world call this method.
+]]
 function Chest:remove()
 	self:clear()
 	removeHardTable(self.filename)
