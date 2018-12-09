@@ -55,7 +55,7 @@ function InventoryManager:constructor(turtle)
 
 	local this = self
 
-	function self._delContaining(selector)
+	function self._delegateContaining(selector)
 		return function(slot)
 			local stack = this:getItemDetail(slot)
 
@@ -63,7 +63,7 @@ function InventoryManager:constructor(turtle)
 		end
 	end
 
-	function self._delSameAs(slot)
+	function self._delegateCameAs(slot)
 		if this._turtle.getItemCount(slot) == 0 then
 			if this._turtle.getItemCount() == 0 then
 				return true
@@ -74,11 +74,11 @@ function InventoryManager:constructor(turtle)
 		return this._turtle.compareTo(slot)
 	end
 
-	function self._delEmpty(slot)
+	function self._delegateEmpty(slot)
 		return this._turtle.getItemCount(slot) == 0
 	end
 
-	function self._delContainingFree(selector)
+	function self._delegateContainingFree(selector)
 		return function(slot)
 			return this:getFreeItemCount(slot) > 0 and self:getItemDetail(slot):matches(selector)
 		end
@@ -361,15 +361,15 @@ function InventoryManager:hasItem(itemName) --GOOD
 end
 
 function InventoryManager:getFirstUnlockedContaining(item) --GOOD
-	return self:getFirst(self._delContainingFree(item))
+	return self:getFirst(self._delegateContainingFree(item))
 end
 
 function InventoryManager:getNextUnlockedContaining(item, index) --GOOD
-	return self:getNext(self._delContainingFree(item), index)
+	return self:getNext(self._delegateContainingFree(item), index)
 end
 
 function InventoryManager:getAllUnlockedContaining(item) --GOOD
-	return self:getAll(self._delContaining(item))
+	return self:getAll(self._delegateContaining(item))
 end
 
 function InventoryManager:unlock(slot) --GOOD
@@ -462,46 +462,46 @@ function InventoryManager:getAll(delegate)
 end
 
 function InventoryManager:getFirstContaining(selector) --GOOD
-	return self:getFirst(self._delContaining(selector))
+	return self:getFirst(self._delegateContaining(selector))
 end
 
 function InventoryManager:getNextContaining(selector, last) --GOOD
-	return self:getNext(self._delContaining(selector), last)
+	return self:getNext(self._delegateContaining(selector), last)
 end
 
 --[[
 	Returns a list of slots that contain items matching the selector
 ]]
 function InventoryManager:getAllContaining(selector)
-	return self:getAll(self._delContaining(selector))
+	return self:getAll(self._delegateContaining(selector))
 end
 
 function InventoryManager:getFirstSameAs(slot) --GOOD
-	return self:getFirst(self._delSameAs)
+	return self:getFirst(self._delegateCameAs)
 end
 
 function InventoryManager:getNextSameAs(slot, index) --GOOD
-	return self:getNext(self._delSameAs, index)
+	return self:getNext(self._delegateCameAs, index)
 end
 
 function InventoryManager:getAllSameAs(slot) --GOOD
-	return self:getAll(self._delSameAs)
+	return self:getAll(self._delegateCameAs)
 end
 
 function InventoryManager:getFirstEmpty() --GOOD
-	return self:getFirst(self._delEmpty)
+	return self:getFirst(self._delegateEmpty)
 end
 
 function InventoryManager:getNextEmpty(last) --GOOD
-	return self:getNext(self._delEmpty, last)
+	return self:getNext(self._delegateEmpty, last)
 end
 
 function InventoryManager:getAllEmpty() --GOOD
-	return self:getAll(self._delEmpty)
+	return self:getAll(self._delegateEmpty)
 end
 
 function InventoryManager:getLastEmpty() --GOOD
-	return self:getLast(self._delEmpty)
+	return self:getLast(self._delegateEmpty)
 end
 
 Inv = InventoryManager(turtle)
