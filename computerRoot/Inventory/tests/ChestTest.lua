@@ -7,6 +7,8 @@ test(
 				local chest = Chest(t.testName, p, false)
 
 				chest:remove()
+
+				t.assertFinished()
 			end,
 			['Single Chest fill'] = function(t)
 				local chest = Chest(t.testName, Position(5, 5, 5, Position.SOUTH), false)

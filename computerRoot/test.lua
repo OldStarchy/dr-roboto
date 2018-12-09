@@ -137,6 +137,7 @@ local function createTestParams()
 		end
 	end
 
+	-- Call this at the end of a test if there are no other assertations.
 	function t.assertFinished()
 		assertCalled = true
 	end
