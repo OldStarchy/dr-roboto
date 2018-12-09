@@ -1,10 +1,13 @@
 if (_G.osStarted == true) then
 	suppressMissingGlobalWarnings(false)
 
-	-- taskManager:addTask(GatherItemTask('glass_pane', 1))
-
-	c = Crafter(turtle)
-	c:craft('glass_pane', 1)
+	runAndPrintErrLines(
+		function()
+			taskManager:addTask(GatherItemTask('glass_pane', 1))
+			-- c = Crafter(turtle)
+			-- c:craft('glass_pane', 1)
+		end
+	)
 
 	return
 end
