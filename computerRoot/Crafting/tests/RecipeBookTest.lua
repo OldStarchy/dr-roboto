@@ -1,14 +1,23 @@
 test(
 	'RecipeBook',
 	{
-		['find'] = function(t)
+		['crafting find by grid'] = function(t)
 			local book = RecipeBook()
 
-			local matches = book:findCraftingRecipeByName('item1')
+			local recipe = Recipe('something', {'inputA', nil, nil, 'inputB'}, 1)
 
-			t.assertEqual(type(matches), 'table')
+			book:add(recipe)
+			t.assertEqual(book:findByGrid(recipe.grid), recipe)
 		end,
-		['duplicate recipe'] = function(t)
+		['crafting find by name'] = function(t)
+			local book = RecipeBook()
+
+			local recipe = Recipe('something', {}, 1)
+
+			book:add(recipe)
+			t.assertEqual(book:findCraftingRecipeByName(recipe.name), recipe)
+		end,
+		['crafting duplicate recipe'] = function(t)
 			local book = RecipeBook()
 
 			local recipe1 = Recipe('something', {'inputA', nil, nil, 'inputB'}, 1)
@@ -16,36 +25,67 @@ test(
 
 			t.assertEqual(book:add(recipe1), true)
 			t.assertEqual(book:add(recipe2), false)
-
-			t.assertEqual(#book:findCraftingRecipeByName('anotherthing'), 0)
+			t.assertEqual(book:findCraftingRecipeByName('anotherthing'), nil)
 		end,
-		['find on empty'] = function(t)
+		['crafting find on empty'] = function(t)
 			local book = RecipeBook()
 
-			local matches = book:findCraftingRecipeByName('item1')
-
-			t.assertEqual(#matches, 0)
+			t.assertEqual(book:findCraftingRecipeByName('item1'), nil)
 		end,
-		['find with match'] = function(t)
+		['crafting find with match'] = function(t)
 			local book = RecipeBook()
 
 			local recipe = Recipe('item1', {}, 1)
 			book:add(recipe)
 
-			local matches = book:findCraftingRecipeByName('item1')
-
-			t.assertEqual(#matches, 1)
-			t.assertEqual(matches[1], recipe)
+			t.assertEqual(book:findCraftingRecipeByName('item1'), recipe)
 		end,
-		['find without match'] = function(t)
+		['crafting find without match'] = function(t)
 			local book = RecipeBook()
 
 			local recipe = Recipe('item1', {}, 1)
 			book:add(recipe)
 
-			local matches = book:findCraftingRecipeByName('potatoes')
+			t.assertEqual(book:findCraftingRecipeByName('potatoes'), nil)
+		end,
+		['smelting find by name'] = function(t)
+			local book = RecipeBook()
 
-			t.assertEqual(#matches, 0)
+			local recipe = FurnaceRecipe('iron bars', 'iron ore', 4, 16)
+
+			book:add(recipe)
+			t.assertEqual(book:findFurnaceRecipeByName(recipe.name), recipe)
+		end,
+		['smelting duplicate recipe'] = function(t)
+			local book = RecipeBook()
+
+			local recipe1 = FurnaceRecipe('iron bars', 'iron ore', 4, 16)
+			local recipe2 = FurnaceRecipe('iron barz', 'iron ore', 4, 16)
+
+			t.assertEqual(book:add(recipe1), true)
+			t.assertEqual(book:add(recipe2), false)
+			t.assertEqual(book:findFurnaceRecipeByName('iron barz'), nil)
+		end,
+		['smelting find on empty'] = function(t)
+			local book = RecipeBook()
+
+			t.assertEqual(book:findFurnaceRecipeByName('item1'), nil)
+		end,
+		['smelting find with match'] = function(t)
+			local book = RecipeBook()
+
+			local recipe = FurnaceRecipe('iron bars', 'iron ore', 4, 16)
+			book:add(recipe)
+
+			t.assertEqual(book:findFurnaceRecipeByName('iron bars'), recipe)
+		end,
+		['smelting find without match'] = function(t)
+			local book = RecipeBook()
+
+			local recipe = FurnaceRecipe('iron bars', 'iron ore', 4, 16)
+			book:add(recipe)
+
+			t.assertEqual(book:findFurnaceRecipeByName('potatoes'), nil)
 		end
 	}
 )

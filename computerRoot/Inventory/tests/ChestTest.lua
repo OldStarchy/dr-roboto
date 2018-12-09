@@ -72,7 +72,7 @@ test(
 			--assert(chest:pop(5) == 'cobblestone', 'item not found in chest')
 			--assert(chest:pop(9) == 'shovel', 'item not found in chest')
 
-			--chest:remove()
+			chest:remove()
 		end
 	}
 )
