@@ -57,5 +57,7 @@ function Hud:start()
 	positionChangedHdlr()
 
 	--TODO: copy the code from the monitor program and redirect the shell to the console
+
+	suppressMissingGlobalWarnings(true)
 	os.run({}, 'rom/programs/shell')
 end
