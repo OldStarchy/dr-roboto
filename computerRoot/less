@@ -14,9 +14,12 @@ local hw, hh = term.getSize()
 local surface = Surface(hw, 10000)
 
 term.redirect(surface:asTerm())
+local oldread = read
+_G.read = function() return '' end
 
 shell.run(...)
 
+_G.read = oldread
 term.redirect(current)
 
 local lastLine = surface:getLastLine()
