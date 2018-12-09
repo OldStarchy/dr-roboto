@@ -7,7 +7,9 @@ local LOG_ALL = 1
 local function createTestParams()
 	local calls = {}
 	local t = {}
+	local assertCalled = false
 	function t.assertEqual(result, expected)
+		assertCalled = true
 		if (result == expected) then
 			return
 		end
@@ -16,6 +18,7 @@ local function createTestParams()
 	end
 
 	function t.assertTableEqual(result, expected, errorString)
+		assertCalled = true
 		if errorString == nil then
 			errorString = '\nAssert Table Equal,\n'
 		end
@@ -56,6 +59,7 @@ local function createTestParams()
 	end
 
 	function t.assertNotEqual(result, unexpected)
+		assertCalled = true
 		if (result ~= unexpected) then
 			return
 		end
@@ -64,6 +68,7 @@ local function createTestParams()
 	end
 
 	function t.assertThrows(method, ...)
+		assertCalled = true
 		local success = pcall(method, ...)
 
 		if (success) then
@@ -72,6 +77,7 @@ local function createTestParams()
 	end
 
 	function t.assertNotThrows(method, ...)
+		assertCalled = true
 		local ferr = nil
 		local args = {...}
 		local success =
@@ -90,6 +96,7 @@ local function createTestParams()
 	end
 
 	function t.assertCalled()
+		assertCalled = true
 		local id = {}
 
 		calls[id] = false
@@ -100,6 +107,7 @@ local function createTestParams()
 	end
 
 	function t.assertCalledWith(...)
+		assertCalled = true
 		local id = {}
 		local expectedArgs = {...}
 
@@ -109,16 +117,11 @@ local function createTestParams()
 			local args = {...}
 
 			if (#args ~= #expectedArgs) then
-				--error('Incorrect call, got "' .. #args .. '" args but expected "' .. #expectedArgs .. '"')
 				return
 			end
 
 			for i = 1, #args do
 				if (args[i] ~= expectedArgs[i]) then
-					-- error(
-					-- 	'Incorrect call,\nExpected arg "' .. tostring(args[i]) .. '"\n but got arg "' .. tostring(expectedArgs[i]) .. '"',
-					-- 	2
-					-- )
 					return
 				end
 			end
@@ -128,9 +131,14 @@ local function createTestParams()
 	end
 
 	function t.assertNotCalled()
+		assertCalled = true
 		return function()
 			error('Function called')
 		end
+	end
+
+	function t.assertFinished()
+		assertCalled = true
 	end
 
 	function t.finalize()
@@ -138,6 +146,10 @@ local function createTestParams()
 			if (call ~= true) then
 				error('Function not called')
 			end
+		end
+
+		if (not assertCalled) then
+			error('No assertations in test!')
 		end
 	end
 
