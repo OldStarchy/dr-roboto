@@ -11,24 +11,23 @@ test(
 				t.assertFinished()
 			end,
 			['Single Chest fill'] = function(t)
+				ItemInfo.DefaultItemInfo = ItemInfo()
+				ItemInfo.DefaultItemInfo:setStackSize('item', 64)
+
 				local chest = Chest(t.testName, Position(5, 5, 5, Position.SOUTH), false)
 
 				chest:push('item', chest:size() * 64)
-				assert(chest:getItemAt(chest:size()) == 'item', 'item not found in chest')
 
-				assert(chest:getItemCount(chest:size()) == 64, 'item count in chest for slot is incorrect')
+				t.assertEqual(chest:getItemAt(chest:size()), 'item')
+				t.assertEqual(chest:getItemCount(chest:size()), 64)
+				t.assertEqual(chest:getItemSpace(chest:size()), 0)
+				t.assertEqual(chest:getTotalSpaceFor('item'), 0)
+				t.assertEqual(chest:canPush('item', 1), false)
+				t.assertEqual(chest:push('item', 1), false)
+				t.assertEqual(chest:isEmpty(), false)
 
-				assert(chest:getItemSpace(chest:size()) == 0, 'item space in chest for slot is incorrect')
-
-				assert(chest:getTotalSpaceFor('item') == 0, 'item space in chest in incorrect')
-
-				assert(chest:canPush('item', 1) == false, 'chest can push in incorrect')
-
-				assert(chest:push('item', 1) == false, 'chest can push in incorrect')
-
-				assert(chest:has('item') == true, 'chest has Item is not correct')
-
-				assert(chest:isEmpty() == false, 'chest is empty is not correct')
+				--TODO: move to a different test
+				t.assertEqual(chest:has('item'), true)
 
 				chest:remove()
 			end

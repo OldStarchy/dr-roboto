@@ -89,7 +89,11 @@ function Chest:getItemCount(slot)
 end
 
 function Chest:getItemSpace(slot, item)
-	return ItemInfo.DefaultItemInfo:getStackSize(self:getItemAt(slot) or item) - self:getItemCount(slot)
+	local _item = self:getItemAt(slot) or item
+	local stackSize = ItemInfo.DefaultItemInfo:getStackSize(_item)
+	local items = self:getItemCount(slot)
+
+	return stackSize - items
 end
 
 local function delHasFree(item)
@@ -128,11 +132,12 @@ end
 function Chest:getTotalSpaceFor(item)
 	local count = 0
 	local i = self:firstAvailable(item)
-	local spare = self:getItemSpace(i)
+	local spare = self:getItemSpace(i, item)
+
 	while i ~= nil do
 		count = count + spare
 		i = self:nextAvailable(item, i)
-		spare = self:getItemSpace(i)
+		spare = self:getItemSpace(i, item)
 	end
 
 	return count
