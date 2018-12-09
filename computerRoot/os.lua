@@ -26,33 +26,33 @@ local procMan = ProcessManager()
 
 _G.process = procMan:getAPI()
 
-local elpid =
-	procMan:spawnProcess(
-	function()
-		local s = Surface(11, 13)
-		s:startMirroring(term.current(), 22, 1)
-		local st = s:asTerm()
-		while true do
-			local ed = {os.pullEvent()}
+-- local elpid =
+-- 	procMan:spawnProcess(
+-- 	function()
+-- 		local s = Surface(11, 13)
+-- 		s:startMirroring(term.current(), 22, 1)
+-- 		local st = s:asTerm()
+-- 		while true do
+-- 			local ed = {os.pullEvent()}
 
-			local pt = term.current()
-			local cp = {term.getCursorPos()}
-			term.redirect(st)
-			print(ed[1])
-			term.redirect(pt)
-			term.setCursorPos(unpack(cp))
-			term.setCursorBlink(true)
-		end
-	end,
-	'Event Logger'
-)
+-- 			local pt = term.current()
+-- 			local cp = {term.getCursorPos()}
+-- 			term.redirect(st)
+-- 			print(ed[1])
+-- 			term.redirect(pt)
+-- 			term.setCursorPos(unpack(cp))
+-- 			term.setCursorBlink(true)
+-- 		end
+-- 	end,
+-- 	'Event Logger'
+-- )
 
 procMan:spawnProcess(
 	function()
 		hud = Hud()
 		hud:start()
 
-		procMan:sendTerminate(elpid)
+		-- procMan:sendTerminate(elpid)
 	end
 )
 
