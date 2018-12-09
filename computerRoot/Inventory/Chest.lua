@@ -89,7 +89,7 @@ function Chest:getItemCount(slot)
 end
 
 function Chest:getItemSpace(slot, item)
-	return itemInfo:getStackSize(self:getItemAt(slot) or item) - self:getItemCount(slot)
+	return ItemInfo.DefaultItemInfo:getStackSize(self:getItemAt(slot) or item) - self:getItemCount(slot)
 end
 
 local function delHasFree(item)
@@ -115,10 +115,10 @@ end
 function Chest:nextAvailable(item, from)
 	for i = from + 1, self:size() do
 		if self.contents[i] == nil then
-			return i, itemInfo:getStackSize(item)
+			return i, ItemInfo.DefaultItemInfo:getStackSize(item)
 		elseif self.contents[i].name == item then
-			if (itemInfo:getStackSize(item) - self.contents[i].count > 0) then
-				return i, itemInfo:getStackSize(item) - self.contents[i].count
+			if (ItemInfo.DefaultItemInfo:getStackSize(item) - self.contents[i].count > 0) then
+				return i, ItemInfo.DefaultItemInfo:getStackSize(item) - self.contents[i].count
 			end
 		end
 	end

@@ -29,31 +29,51 @@ test(
 				assert(chest:isEmpty() == false, 'chest is empty is not correct')
 
 				chest:remove()
-			end,
-			['Chest Get Item At'] = function(t)
-				local chest = Chest(t.testName, Position(5, 5, 5, Position.SOUTH), false)
-				chest:clear()
-
-				chest:push('bucket', 33)
-				chest:push('cobblestone', 65)
-				chest:push('shovel', 4)
-
-				assert(chest:getItemAt(1) == 'bucket', 'item not found in chest')
-				assert(chest:getItemAt(2) == 'bucket', 'item not found in chest')
-				assert(chest:getItemAt(3) == 'bucket', 'item not found in chest')
-				assert(chest:getItemAt(4) == 'cobblestone', 'item not found in chest')
-				assert(chest:getItemAt(5) == 'cobblestone', 'item not found in chest')
-				assert(chest:getItemAt(6) == 'shovel', 'item not found in chest')
-				assert(chest:getItemAt(7) == 'shovel', 'item not found in chest')
-				assert(chest:getItemAt(8) == 'shovel', 'item not found in chest')
-				assert(chest:getItemAt(9) == 'shovel', 'item not found in chest')
-
-				--assert(chest:pop(3) == 'bucket', 'item not found in chest')
-				--assert(chest:pop(5) == 'cobblestone', 'item not found in chest')
-				--assert(chest:pop(9) == 'shovel', 'item not found in chest')
-
-				--chest:remove()
 			end
-		}
+		},
+		['Chest Item Placement'] = function(t)
+			ItemInfo.DefaultItemInfo = ItemInfo()
+			local io = ItemInfo.DefaultItemInfo
+
+			io:setStackSize('bucket', 16)
+			io:setStackSize('cobblestone', 64)
+			io:setStackSize('shovel', 1)
+
+			local chest = Chest(t.testName, Position(5, 5, 5, Position.SOUTH), false)
+			chest:clear()
+
+			chest:push('bucket', 33)
+			chest:push('cobblestone', 65)
+			chest:push('shovel', 4)
+
+			--Should result in chest as follows
+
+			-- bucket x 16
+			-- bucket x 16
+			-- bucket x 1
+			-- cobblestone x 64
+			-- cobblestone x 1
+			-- shovel x 1
+			-- shovel x 1
+			-- shovel x 1
+			-- shovel x 1
+
+			t.assertEqual(chest:getItemAt(1), 'bucket')
+			t.assertEqual(chest:getItemAt(2), 'bucket')
+			t.assertEqual(chest:getItemAt(3), 'bucket')
+			t.assertEqual(chest:getItemAt(4), 'cobblestone')
+			t.assertEqual(chest:getItemAt(5), 'cobblestone')
+			t.assertEqual(chest:getItemAt(6), 'shovel')
+			t.assertEqual(chest:getItemAt(7), 'shovel')
+			t.assertEqual(chest:getItemAt(8), 'shovel')
+			t.assertEqual(chest:getItemAt(9), 'shovel')
+			t.assertEqual(chest:getItemAt(10), nil)
+
+			--assert(chest:pop(3) == 'bucket', 'item not found in chest')
+			--assert(chest:pop(5) == 'cobblestone', 'item not found in chest')
+			--assert(chest:pop(9) == 'shovel', 'item not found in chest')
+
+			--chest:remove()
+		end
 	}
 )

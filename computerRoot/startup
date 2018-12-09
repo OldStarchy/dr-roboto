@@ -4,6 +4,8 @@ if (_G.osStarted == true) then
 	print('Running startup tests')
 	shell.run('less run test')
 
+	ItemInfo.DefaultItemInfo = ItemInfo()
+	ItemInfo.DefaultItemInfo:loadHardTable('item.dictionary')
 	return
 end
 

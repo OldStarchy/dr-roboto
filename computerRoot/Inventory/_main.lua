@@ -7,4 +7,3 @@ include 'Inventory/ItemStorage'
 include 'Inventory/InventoryManager'
 
 include 'Inventory/ItemInfo'
-itemInfo = ItemInfo()

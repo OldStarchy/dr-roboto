@@ -1,14 +1,21 @@
 ItemInfo = Class()
 ItemInfo.ClassName = 'ItemInfo'
+ItemInfo.DefaultItemInfo = nil
 
 function ItemInfo:constructor()
-	self.itemDictionary = hardTable('item.dictionary')
+	self._data = {}
+end
+
+function ItemInfo:loadHardTable(filename)
+	assertType(filename, 'string')
+
+	self._data = hardTable(filename)
 end
 
 function ItemInfo:getStackSize(item)
-	return self.itemDictionary[item] or 64
+	return self._data[item] or 64
 end
 
 function ItemInfo:setStackSize(item, size)
-	self.itemDictionary[item] = size
+	self._data[item] = size
 end
