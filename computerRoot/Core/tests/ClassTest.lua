@@ -44,11 +44,13 @@ test(
 
 					t.assertEqual(constructorCalled, true)
 				end,
-				['Missing'] = function(t)
+				['Default'] = function(t)
 					local A = Class()
 					A.ClassName = 'A'
 
 					local object = A()
+
+					t.assertNotEqual(object, nil)
 				end,
 				['Passes self'] = function(t)
 					local A = Class()
