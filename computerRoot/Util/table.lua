@@ -32,6 +32,14 @@ function tableToString(tbl, ind, printed)
 		printed = {}
 	end
 
+	if (tbl == nil) then
+		error('tbl is nil', 2)
+	end
+
+	if (isHardTable(tbl)) then
+		tbl = hardTableExport(tbl)
+	end
+
 	if (printed[tbl]) then
 		return tostring(tbl)
 	end
