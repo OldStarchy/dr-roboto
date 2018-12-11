@@ -1,3 +1,4 @@
 *.ht.txt
 .mov.tbl
 .settings
+mystartup.lua

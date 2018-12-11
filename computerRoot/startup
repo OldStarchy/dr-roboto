@@ -23,6 +23,10 @@ if (_G.osStarted == true) then
 
 	ItemInfo.DefaultItemInfo = ItemInfo()
 	ItemInfo.DefaultItemInfo:loadHardTable('item.dictionary')
+
+	if (fs.exists('mystartup.lua')) then
+		dofile('mystartup.lua')
+	end
 	return
 end
 
