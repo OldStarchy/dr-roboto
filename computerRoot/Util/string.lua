@@ -41,6 +41,9 @@ function rPad(str, size, char)
 end
 
 function split(str, pat)
+	if (type(str) ~= 'string') then
+		error('str must be string', 2)
+	end
 	local t = {}
 	local fpat = '(.-)' .. pat
 	local last_end = 1
@@ -57,6 +60,32 @@ function split(str, pat)
 		table.insert(t, cap)
 	end
 	return t
+end
+
+function join(tbl, glue)
+	if (tbl == nil) then
+		error('Table expected, got nil', 2)
+	end
+
+	if (type(glue) ~= 'string') then
+		error('string expected', 2)
+	end
+
+	if (#tbl == 0) then
+		return ''
+	end
+
+	if (#tbl == 1) then
+		return tbl[1]
+	end
+
+	local r = tbl[1]
+
+	for i = 2, #tbl do
+		r = r .. glue .. tbl[i]
+	end
+
+	return r
 end
 
 --for i=0,100 do stringutil.progressBar(i, 100); sleep(0.02) end
