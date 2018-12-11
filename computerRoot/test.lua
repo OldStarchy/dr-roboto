@@ -1,5 +1,7 @@
 local col = include 'Util/TextColors'
 
+local vfs = include 'runtime/vfs'
+
 local LOG_NONE = -1
 local LOG_SOME = 0
 local LOG_ALL = 1
@@ -242,10 +244,18 @@ local function doTest(testObj, testContext)
 	local errors = {}
 
 	local testWrapper = function()
+		--Apply fs util over vfs
+		include 'Util/fs'
+
 		include 'Core/_main'
 
 		testObj.tester(testParams)
 		testParams.finalize()
+
+		local dirList = fs.list('')
+		if (#dirList > 0) then
+			print(dirList, 'files left over')
+		end
 	end
 
 	local env = {}
@@ -254,6 +264,7 @@ local function doTest(testObj, testContext)
 	env.sleep = function(time)
 		getfenv(2).print('sleeping for ', time)
 	end
+	env.fs = vfs(testObj.name)
 	setmetatable(env, {__index = _G})
 	setfenv(testWrapper, env)
 	setfenv(testObj.tester, env)
@@ -283,6 +294,9 @@ local function doTest(testObj, testContext)
 	-- Restore printing functions
 	io.write = oldwrite
 	print = oldprint
+
+	-- Long running programs must yield regularly or risk getting killed
+	sleep(0)
 
 	--TODO: potentially check for changes to env to detect side-effects?
 
