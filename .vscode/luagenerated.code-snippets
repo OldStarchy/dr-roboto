@@ -4192,6 +4192,13 @@
 		],
 		"description": ""
 	},
+	"stringutil.join()": {
+		"prefix": "stringutil.join",
+		"body": [
+			"stringutil.join($0)"
+		],
+		"description": ""
+	},
 	"stringutil.lPad()": {
 		"prefix": "stringutil.lPad",
 		"body": [
