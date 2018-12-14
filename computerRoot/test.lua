@@ -229,13 +229,16 @@ local function doTest(testObj, testContext)
 		testContext.lastNamespace = testObj.namespace
 	end
 
+	local termWidth = term.getSize()
+	local limChars = termWidth - 3
+
 	-- Print out the test name
 	if (testContext.logLevel > LOG_ALL) then
 		testContext.loggedAny = true
 		if (#testObj.name > 37) then
-			io.write(string.sub(testObj.name, 1, 37) .. ':')
+			io.write(string.sub(testObj.name, 1, limChars) .. ':')
 		else
-			io.write(testObj.name .. string.rep(' ', 37 - #testObj.name) .. ':')
+			io.write(testObj.name .. string.rep(' ', limChars - #testObj.name) .. ':')
 		end
 	end
 
@@ -309,10 +312,10 @@ local function doTest(testObj, testContext)
 
 			testContext.loggedAny = true
 
-			if (#testObj.name > 37) then
-				io.write(string.sub(testObj.name, 1, 37) .. ':')
+			if (#testObj.name > limChars) then
+				io.write(string.sub(testObj.name, 1, limChars) .. ':')
 			else
-				io.write(testObj.name .. string.rep(' ', 37 - #testObj.name) .. ':')
+				io.write(testObj.name .. string.rep(' ', limChars - #testObj.name) .. ':')
 			end
 		end
 		if (testContext.logLevel > LOG_ALL or not success) then
