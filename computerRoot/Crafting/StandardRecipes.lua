@@ -1,4 +1,4 @@
-RecipeBook.Instance = RecipeBook()
+--RecipeBook.Instance = RecipeBook()
 
 RecipeBook.Instance:add(CraftingRecipe('plank', {'log'}, 4))
 RecipeBook.Instance:add(CraftingRecipe('stick', {'plank', nil, nil, 'plank'}, 4))

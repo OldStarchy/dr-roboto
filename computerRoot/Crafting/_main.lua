@@ -5,5 +5,3 @@ include 'Crafting/RecipeBook'
 
 include 'Crafting/Furnace'
 include 'Crafting/Crafter'
-
-include 'Crafting/StandardRecipes'

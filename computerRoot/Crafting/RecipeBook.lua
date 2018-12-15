@@ -6,6 +6,22 @@ function RecipeBook:constructor()
 	self._furnaceRecipes = {}
 end
 
+function RecipeBook:loadHardTable(filename)
+	assertType(filename, 'string')
+
+	self._data = hardTable(filename)
+
+	if (self._data.crafting == nil) then
+		self._data.crafting = {}
+	end
+	self._craftingRecipes = self._data.crafting
+
+	if (self._data.furnace == nil) then
+		self._data.furnace = {}
+	end
+	self._furnaceRecipes = self._data.furnace
+end
+
 function RecipeBook:add(recipe)
 	assertType(recipe, Recipe, 'Attempt to add a non recipe to a book', 2)
 
@@ -17,6 +33,7 @@ function RecipeBook:add(recipe)
 			return false
 		end
 
+		-- Doesn't work if loaded from a hardtable
 		table.insert(self._craftingRecipes, recipe)
 	elseif (isType(rt, FurnaceRecipe)) then
 		if (self:findByIngredient(recipe.ingredient) ~= nil) then
