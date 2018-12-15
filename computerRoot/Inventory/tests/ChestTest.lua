@@ -11,8 +11,8 @@ test(
 				t.assertFinished()
 			end,
 			['Single Chest fill'] = function(t)
-				ItemInfo.DefaultItemInfo = ItemInfo()
-				ItemInfo.DefaultItemInfo:setStackSize('item', 64)
+				ItemInfo.Instance = ItemInfo()
+				ItemInfo.Instance:setStackSize('item', 64)
 
 				local chest = Chest(t.testName, Position(5, 5, 5, Position.SOUTH), false)
 
@@ -33,10 +33,10 @@ test(
 			end
 		},
 		['Chest Item Placement'] = function(t)
-			ItemInfo.DefaultItemInfo = ItemInfo()
-			ItemInfo.DefaultItemInfo:setStackSize('bucket', 16)
-			ItemInfo.DefaultItemInfo:setStackSize('cobblestone', 64)
-			ItemInfo.DefaultItemInfo:setStackSize('shovel', 1)
+			ItemInfo.Instance = ItemInfo()
+			ItemInfo.Instance:setStackSize('bucket', 16)
+			ItemInfo.Instance:setStackSize('cobblestone', 64)
+			ItemInfo.Instance:setStackSize('shovel', 1)
 
 			local chest = Chest(t.testName, Position(5, 5, 5, Position.SOUTH), false)
 			chest:clear()
@@ -71,20 +71,17 @@ test(
 			--assert(chest:pop(3) == 'bucket', 'item not found in chest')
 			--assert(chest:pop(5) == 'cobblestone', 'item not found in chest')
 			--assert(chest:pop(9) == 'shovel', 'item not found in chest')
-			t.assertEqual(chest:getTotalSpaceFor('shovel'), (27 - 9) * ItemInfo.DefaultItemInfo:getStackSize('shovel'))
-			t.assertEqual(chest:getTotalSpaceFor('bucket'), 15 + (27 - 9) * ItemInfo.DefaultItemInfo:getStackSize('bucket'))
-			t.assertEqual(
-				chest:getTotalSpaceFor('cobblestone'),
-				63 + (27 - 9) * ItemInfo.DefaultItemInfo:getStackSize('cobblestone')
-			)
+			t.assertEqual(chest:getTotalSpaceFor('shovel'), (27 - 9) * ItemInfo.Instance:getStackSize('shovel'))
+			t.assertEqual(chest:getTotalSpaceFor('bucket'), 15 + (27 - 9) * ItemInfo.Instance:getStackSize('bucket'))
+			t.assertEqual(chest:getTotalSpaceFor('cobblestone'), 63 + (27 - 9) * ItemInfo.Instance:getStackSize('cobblestone'))
 
 			chest:remove()
 		end,
 		['Chest Pop'] = function(t)
-			ItemInfo.DefaultItemInfo = ItemInfo()
-			ItemInfo.DefaultItemInfo:setStackSize('bucket', 16)
-			ItemInfo.DefaultItemInfo:setStackSize('cobblestone', 64)
-			ItemInfo.DefaultItemInfo:setStackSize('shovel', 1)
+			ItemInfo.Instance = ItemInfo()
+			ItemInfo.Instance:setStackSize('bucket', 16)
+			ItemInfo.Instance:setStackSize('cobblestone', 64)
+			ItemInfo.Instance:setStackSize('shovel', 1)
 
 			local chest = Chest(t.testName, Position(5, 5, 5, Position.SOUTH), false)
 			chest:clear()

@@ -1,6 +1,6 @@
 ItemInfo = Class()
 ItemInfo.ClassName = 'ItemInfo'
-ItemInfo.DefaultItemInfo = nil
+ItemInfo.Instance = nil
 
 function ItemInfo:constructor()
 	self._data = {}

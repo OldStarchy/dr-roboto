@@ -21,8 +21,8 @@ if (_G.osStarted == true) then
 		event, id = os.pullEvent()
 	end
 
-	ItemInfo.DefaultItemInfo = ItemInfo()
-	ItemInfo.DefaultItemInfo:loadHardTable('item.dictionary')
+	ItemInfo.Instance = ItemInfo()
+	ItemInfo.Instance:loadHardTable('item.dictionary')
 
 	if (fs.exists('mystartup.lua')) then
 		dofile('mystartup.lua')
