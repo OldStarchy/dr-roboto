@@ -134,7 +134,7 @@ function InventoryManager:getItemDetail(selector)
 	local itemDetail = ItemStackDetail.convertToInstance(data)
 
 	itemDetail.stackSize = self._turtle.getItemCount(slot) + self._turtle.getItemSpace(slot)
-	itemInfo:setStackSize(itemDetail.name, itemDetail.stackSize)
+	ItemInfo.DefaultItemInfo:setStackSize(itemDetail.name, itemDetail.stackSize)
 
 	return itemDetail
 end
