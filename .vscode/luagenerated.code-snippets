@@ -671,6 +671,48 @@
 		],
 		"description": ""
 	},
+	"CraftingRecipe()": {
+		"prefix": "CraftingRecipe",
+		"body": [
+			"CraftingRecipe($0)"
+		],
+		"description": ""
+	},
+	"CraftingRecipe:assertImplementation()": {
+		"prefix": "CraftingRecipe:assertImplementation",
+		"body": [
+			"CraftingRecipe:assertImplementation($0)"
+		],
+		"description": ""
+	},
+	"CraftingRecipe:conversionConstructor()": {
+		"prefix": "CraftingRecipe:conversionConstructor",
+		"body": [
+			"CraftingRecipe:conversionConstructor($0)"
+		],
+		"description": ""
+	},
+	"CraftingRecipe:getType()": {
+		"prefix": "CraftingRecipe:getType",
+		"body": [
+			"CraftingRecipe:getType($0)"
+		],
+		"description": ""
+	},
+	"CraftingRecipe:isOrInherits()": {
+		"prefix": "CraftingRecipe:isOrInherits",
+		"body": [
+			"CraftingRecipe:isOrInherits($0)"
+		],
+		"description": ""
+	},
+	"CraftingRecipe:isType()": {
+		"prefix": "CraftingRecipe:isType",
+		"body": [
+			"CraftingRecipe:isType($0)"
+		],
+		"description": ""
+	},
 	"DanceSkill()": {
 		"prefix": "DanceSkill",
 		"body": [
@@ -2561,6 +2603,13 @@
 		],
 		"description": ""
 	},
+	"RecipeBook:loadHardTable()": {
+		"prefix": "RecipeBook:loadHardTable",
+		"body": [
+			"RecipeBook:loadHardTable($0)"
+		],
+		"description": ""
+	},
 	"Skill()": {
 		"prefix": "Skill",
 		"body": [
@@ -4042,13 +4091,6 @@
 		"prefix": "sleep",
 		"body": [
 			"sleep($0)"
-		],
-		"description": ""
-	},
-	"standardRecipes()": {
-		"prefix": "standardRecipes",
-		"body": [
-			"standardRecipes($0)"
 		],
 		"description": ""
 	},
