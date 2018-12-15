@@ -11,8 +11,8 @@ function RecipeBook:add(recipe)
 
 	local rt = recipe:getType()
 
-	--TODO: Recipe should be base of CraftingRecipe and FurnaceRecipe
-	if (rt == Recipe) then
+	--TODO: CraftingRecipe should be base of CraftingRecipe and FurnaceRecipe
+	if (rt == CraftingRecipe) then
 		if (self:findByGrid(recipe.grid) ~= nil) then
 			return false
 		end

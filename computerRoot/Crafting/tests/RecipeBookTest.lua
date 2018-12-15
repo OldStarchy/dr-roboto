@@ -4,7 +4,7 @@ test(
 		['crafting find by grid'] = function(t)
 			local book = RecipeBook()
 
-			local recipe = Recipe('something', {'inputA', nil, nil, 'inputB'}, 1)
+			local recipe = CraftingRecipe('something', {'inputA', nil, nil, 'inputB'}, 1)
 
 			book:add(recipe)
 			t.assertEqual(book:findByGrid(recipe.grid), recipe)
@@ -12,7 +12,7 @@ test(
 		['crafting find by name'] = function(t)
 			local book = RecipeBook()
 
-			local recipe = Recipe('something', {}, 1)
+			local recipe = CraftingRecipe('something', {}, 1)
 
 			book:add(recipe)
 			t.assertEqual(book:findCraftingRecipeByName(recipe.name), recipe)
@@ -20,8 +20,8 @@ test(
 		['crafting duplicate recipe'] = function(t)
 			local book = RecipeBook()
 
-			local recipe1 = Recipe('something', {'inputA', nil, nil, 'inputB'}, 1)
-			local recipe2 = Recipe('anotherthing', {'inputA', nil, nil, 'inputB'}, 1)
+			local recipe1 = CraftingRecipe('something', {'inputA', nil, nil, 'inputB'}, 1)
+			local recipe2 = CraftingRecipe('anotherthing', {'inputA', nil, nil, 'inputB'}, 1)
 
 			t.assertEqual(book:add(recipe1), true)
 			t.assertEqual(book:add(recipe2), false)
@@ -35,7 +35,7 @@ test(
 		['crafting find with match'] = function(t)
 			local book = RecipeBook()
 
-			local recipe = Recipe('item1', {}, 1)
+			local recipe = CraftingRecipe('item1', {}, 1)
 			book:add(recipe)
 
 			t.assertEqual(book:findCraftingRecipeByName('item1'), recipe)
@@ -43,7 +43,7 @@ test(
 		['crafting find without match'] = function(t)
 			local book = RecipeBook()
 
-			local recipe = Recipe('item1', {}, 1)
+			local recipe = CraftingRecipe('item1', {}, 1)
 			book:add(recipe)
 
 			t.assertEqual(book:findCraftingRecipeByName('potatoes'), nil)

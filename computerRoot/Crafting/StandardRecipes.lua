@@ -1,12 +1,12 @@
 standardRecipes = RecipeBook()
 
-standardRecipes:add(Recipe('plank', {'log'}, 4))
-standardRecipes:add(Recipe('stick', {'plank', nil, nil, 'plank'}, 4))
-standardRecipes:add(Recipe('torch', {'coal', nil, nil, 'stick'}, 4))
+standardRecipes:add(CraftingRecipe('plank', {'log'}, 4))
+standardRecipes:add(CraftingRecipe('stick', {'plank', nil, nil, 'plank'}, 4))
+standardRecipes:add(CraftingRecipe('torch', {'coal', nil, nil, 'stick'}, 4))
 
-standardRecipes:add(Recipe('glass_pane', {'glass', 'glass', 'glass', 'glass', 'glass', 'glass'}, 16))
+standardRecipes:add(CraftingRecipe('glass_pane', {'glass', 'glass', 'glass', 'glass', 'glass', 'glass'}, 16))
 standardRecipes:add(
-	Recipe(
+	CraftingRecipe(
 		'furnace',
 		{
 			'cobblestone',
