@@ -1,11 +1,11 @@
-standardRecipes = RecipeBook()
+RecipeBook.Instance = RecipeBook()
 
-standardRecipes:add(CraftingRecipe('plank', {'log'}, 4))
-standardRecipes:add(CraftingRecipe('stick', {'plank', nil, nil, 'plank'}, 4))
-standardRecipes:add(CraftingRecipe('torch', {'coal', nil, nil, 'stick'}, 4))
+RecipeBook.Instance:add(CraftingRecipe('plank', {'log'}, 4))
+RecipeBook.Instance:add(CraftingRecipe('stick', {'plank', nil, nil, 'plank'}, 4))
+RecipeBook.Instance:add(CraftingRecipe('torch', {'coal', nil, nil, 'stick'}, 4))
 
-standardRecipes:add(CraftingRecipe('glass_pane', {'glass', 'glass', 'glass', 'glass', 'glass', 'glass'}, 16))
-standardRecipes:add(
+RecipeBook.Instance:add(CraftingRecipe('glass_pane', {'glass', 'glass', 'glass', 'glass', 'glass', 'glass'}, 16))
+RecipeBook.Instance:add(
 	CraftingRecipe(
 		'furnace',
 		{
@@ -23,7 +23,7 @@ standardRecipes:add(
 	)
 )
 
-standardRecipes:add(FurnaceRecipe('glass', {'sand'}, 1))
+RecipeBook.Instance:add(FurnaceRecipe('glass', {'sand'}, 1))
 
 --complete list:
 --https://minecraft.gamepedia.com/Smelting
