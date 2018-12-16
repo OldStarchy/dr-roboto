@@ -21,17 +21,21 @@ if (_G.osStarted == true) then
 		event, id = os.pullEvent()
 	end
 
-	ItemInfo.Instance = ItemInfo()
-	ItemInfo.Instance:loadHardTable('item.dictionary')
+	runAndPrintErrLines(
+		function()
+			ItemInfo.Instance = ItemInfo()
+			ItemInfo.Instance:loadHardTable('item.dictionary')
 
-	--This wont work until recipe serialization is working.
-	-- RecipeBook.Instance = RecipeBook()
-	-- RecipeBook.Instance:loadHardTable('recipe.dictionary')
-	-- include 'Crafting/StandardRecipes'
+			RecipeBook.Instance = RecipeBook()
+			--This wont work until recipe serialization is working.
+			-- RecipeBook.Instance:loadHardTable('recipe.dictionary')
+			-- include 'Crafting/StandardRecipes'
 
-	if (fs.exists('mystartup.lua')) then
-		dofile('mystartup.lua')
-	end
+			if (fs.exists('mystartup.lua')) then
+				dofile('mystartup.lua')
+			end
+		end
+	)
 	return
 end
 
