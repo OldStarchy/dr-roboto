@@ -88,5 +88,27 @@ function join(tbl, glue)
 	return r
 end
 
+function trim(str, char)
+	if (char == nil) then
+		char = ' '
+	end
+
+	local start = 1
+	local ed = #str
+
+	while (str:sub(start, start) == char) do
+		start = start + 1
+		if (start > ed) then
+			return ''
+		end
+	end
+
+	while (str:sub(ed, ed) == char) do
+		ed = ed - 1
+	end
+
+	return str:sub(start, ed)
+end
+
 --for i=0,100 do stringutil.progressBar(i, 100); sleep(0.02) end
 stringutil = endlocal()
