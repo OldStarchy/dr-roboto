@@ -2,6 +2,16 @@ local isPc = false
 
 if (os.version == nil) then
 	isPc = true
+else
+	_G.loadfile = function(_sFile, _tEnv)
+		local file = fs.open(_sFile, 'r')
+		if file then
+			local func, err = load(file.readAll(), _sFile, 't', _tEnv)
+			file.close()
+			return func, err
+		end
+		return nil, 'File not found'
+	end
 end
 
 if (isPc) then
@@ -27,16 +37,19 @@ _G.include = function(module, ...)
 
 	local chunk, err
 
+	local fname = nil
+
 	if (fs.exists(module)) then
-		chunk, err = loadfile(module)
+		fname = module
 	elseif (fs.exists(module .. '.lua')) then
-		chunk, err = loadfile(module .. '.lua')
+		fname = module .. '.lua'
 	else
 		error('Could not find ' .. module)
 	end
 
+	chunk, err = loadfile(fname, getfenv(2))
+
 	if (chunk ~= nil) then
-		setfenv(chunk, getfenv(2))
 		return chunk(...)
 	else
 		error(err, 2)
