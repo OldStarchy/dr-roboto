@@ -24,7 +24,7 @@ function CraftingRecipe:constructor(name, grid, produces)
 	end
 
 	self.name = name
-	self.grid = grid
+	self.grid = cloneTable(grid)
 	self.produces = produces
 
 	--the number of items required in the recipe
@@ -41,4 +41,16 @@ function CraftingRecipe:constructor(name, grid, produces)
 			self.items[item] = self.items[item] + 1
 		end
 	end
+end
+
+function CraftingRecipe:serialize()
+	return {
+		name = self.name,
+		grid = cloneTable(self.grid),
+		produces = self.produces
+	}
+end
+
+function CraftingRecipe.Deserialize(tbl)
+	return CraftingRecipe(tbl.name, tbl.grid, tbl.produces)
 end

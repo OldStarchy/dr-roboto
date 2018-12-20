@@ -4,22 +4,67 @@ RecipeBook.ClassName = 'RecipeBook'
 function RecipeBook:constructor()
 	self._craftingRecipes = {}
 	self._furnaceRecipes = {}
+
+	self._saveToFilename = nil
 end
 
-function RecipeBook:loadHardTable(filename)
+function RecipeBook:serialize()
+	local data = {
+		crafting = {},
+		smelting = {}
+	}
+
+	for _, v in ipairs(self._craftingRecipes) do
+		table.insert(data.crafting, v:serialize())
+	end
+
+	for _, v in ipairs(self._furnaceRecipes) do
+		table.insert(data.smelting, v:serialize())
+	end
+
+	return data
+end
+
+function RecipeBook.Deserialize(data)
+	local book = RecipeBook()
+
+	for _, v in ipairs(data.crafting) do
+		table.insert(book._craftingRecipes, CraftingRecipe.Deserialize(v))
+	end
+
+	for _, v in ipairs(data.smelting) do
+		table.insert(book._furnaceRecipes, FurnaceRecipe.Deserialize(v))
+	end
+
+	return book
+end
+
+function RecipeBook:saveToFile(filename)
 	assertType(filename, 'string')
 
-	self._data = hardTable(filename)
+	local data = self:serialize()
 
-	if (self._data.crafting == nil) then
-		self._data.crafting = {}
-	end
-	self._craftingRecipes = self._data.crafting
+	print('saving to', filename)
+	fs.writeTableToFile(filename, data)
+end
 
-	if (self._data.furnace == nil) then
-		self._data.furnace = {}
+function RecipeBook.LoadFromFile(filename, autoSave)
+	assertType(filename, 'string')
+	local book
+
+	if (fs.exists(filename)) then
+		local data = fs.readTableFromFile(filename)
+
+		book = RecipeBook.Deserialize(data)
+	else
+		book = RecipeBook()
 	end
-	self._furnaceRecipes = self._data.furnace
+
+	if (autoSave) then
+		book._saveToFilename = filename
+	end
+
+	return book
 end
 
 function RecipeBook:add(recipe)
@@ -28,7 +73,7 @@ function RecipeBook:add(recipe)
 	local rt = recipe:getType()
 
 	--TODO: CraftingRecipe should be base of CraftingRecipe and FurnaceRecipe
-	if (rt == CraftingRecipe) then
+	if (isType(rt, CraftingRecipe)) then
 		if (self:findByGrid(recipe.grid) ~= nil) then
 			return false
 		end
@@ -43,6 +88,10 @@ function RecipeBook:add(recipe)
 		table.insert(self._furnaceRecipes, recipe)
 	else
 		error('unknown recipe type', 2)
+	end
+
+	if (self._saveToFilename ~= nil) then
+		self:saveToFile(self._saveToFilename)
 	end
 
 	return true
