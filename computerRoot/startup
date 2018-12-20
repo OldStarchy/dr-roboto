@@ -26,10 +26,8 @@ if (_G.osStarted == true) then
 			ItemInfo.Instance = ItemInfo()
 			ItemInfo.Instance:loadHardTable('item.dictionary')
 
-			RecipeBook.Instance = RecipeBook()
-			--This wont work until recipe serialization is working.
-			-- RecipeBook.Instance:loadHardTable('recipe.dictionary')
-			-- include 'Crafting/StandardRecipes'
+			RecipeBook.Instance = RecipeBook.LoadFromFile('recipe.dictionary.tbl', true)
+			include 'Crafting/StandardRecipes'
 
 			if (fs.exists('mystartup.lua')) then
 				dofile('mystartup.lua')
@@ -39,7 +37,13 @@ if (_G.osStarted == true) then
 	return
 end
 
-_G.osStarted = true
+-- Print call logging
+-- local oldPrint = print
+-- _G.print = function(...)
+-- 	local st = getStackTrace(1, 2)[1]
+-- 	oldPrint(st, ...)
+-- end
+-- _G.osStarted = true
 
 if (os.version == nil) then
 	dofile 'bootstrap.lua'
