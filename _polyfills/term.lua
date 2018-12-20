@@ -1,6 +1,6 @@
 _G.term = {
 	getSize = function()
-		return 180, 400
+		return 120, 400
 	end,
 	isColor = function()
 		return false
