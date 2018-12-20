@@ -15,11 +15,12 @@ else
 end
 
 if (isPc) then
-	dofile '_polyfills/fs.lua'
-	dofile '_polyfills/turtle.lua'
-	dofile '_polyfills/os.lua'
-	dofile '_polyfills/textutils.lua'
-	dofile '_polyfills/bit.lua'
+	dofile '../_polyfills/fs.lua'
+	dofile '../_polyfills/turtle.lua'
+	dofile '../_polyfills/os.lua'
+	dofile '../_polyfills/textutils.lua'
+	dofile '../_polyfills/bit.lua'
+	dofile '../_polyfills/term.lua'
 end
 
 function dofileSandbox(filename, env)
