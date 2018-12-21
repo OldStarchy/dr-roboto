@@ -83,7 +83,7 @@ function Crafter:craft(item, amount)
 	local recipe = nil
 
 	if (type(item) == 'string') then
-		standardRecipes:findCraftingRecipeByName(item)
+		RecipeBook.Instance:findCraftingRecipeByName(item)
 	elseif (isType(item, Recipe)) then
 		recipe = item
 	end

@@ -19,7 +19,7 @@ test(
 			local crafting = Crafter(t.mock('turtle', true))
 			local book = RecipeBook()
 
-			book:add(Recipe('hat', {'hat part', 'hat part'}, 1))
+			book:add(CraftingRecipe('hat', {'hat part', 'hat part'}, 1))
 			crafting:setRecipeBook(book)
 
 			local rawItems = crafting:getRawItems('hat', 1)
@@ -30,7 +30,7 @@ test(
 			local crafting = Crafter(t.mock('turtle', true))
 			local book = RecipeBook()
 
-			book:add(Recipe('hat', {'hat part', 'hat part'}, 1))
+			book:add(CraftingRecipe('hat', {'hat part', 'hat part'}, 1))
 			crafting:setRecipeBook(book)
 
 			local rawItems = crafting:getRawItems('hat', 5)
@@ -41,7 +41,7 @@ test(
 			local crafting = Crafter(t.mock('turtle', true))
 			local book = RecipeBook()
 
-			book:add(Recipe('hat', {'hat part', 'hat part'}, 5))
+			book:add(CraftingRecipe('hat', {'hat part', 'hat part'}, 5))
 			crafting:setRecipeBook(book)
 
 			local rawItems = crafting:getRawItems('hat', 5)
@@ -52,9 +52,9 @@ test(
 			local crafting = Crafter(t.mock('turtle', true))
 			local book = RecipeBook()
 
-			book:add(Recipe('surplus part', {'raw part'}, 4))
+			book:add(CraftingRecipe('surplus part', {'raw part'}, 4))
 			book:add(
-				Recipe(
+				CraftingRecipe(
 					'final part',
 					{
 						'surplus part',
@@ -77,7 +77,7 @@ test(
 			local book = RecipeBook()
 
 			book:add(
-				Recipe(
+				CraftingRecipe(
 					'Iron Block',
 					{
 						'Iron Ingot',
@@ -93,7 +93,7 @@ test(
 					1
 				)
 			)
-			book:add(Recipe('Iron Ingot', {'Iron Block'}, 9))
+			book:add(CraftingRecipe('Iron Ingot', {'Iron Block'}, 9))
 			crafting:setRecipeBook(book)
 
 			local rawItems = crafting:getRawItems('Iron Ingot', 1)
@@ -105,7 +105,7 @@ test(
 			local book = RecipeBook()
 
 			book:add(
-				Recipe(
+				CraftingRecipe(
 					'Iron Block',
 					{
 						'Iron Ingot',
@@ -121,7 +121,7 @@ test(
 					1
 				)
 			)
-			book:add(Recipe('Iron Ingot', {'Iron Block'}, 9))
+			book:add(CraftingRecipe('Iron Ingot', {'Iron Block'}, 9))
 			crafting:setRecipeBook(book)
 
 			local rawItems = crafting:getRawItems('Iron Block', 1)

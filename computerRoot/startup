@@ -1,15 +1,49 @@
 if (_G.osStarted == true) then
 	suppressMissingGlobalWarnings(false)
 
-	print('Running startup tests')
-	shell.run('less run test')
+	print('Running startup in 2 seconds')
+	term.write('Press enter to skip ... ')
 
-	ItemInfo.DefaultItemInfo = ItemInfo()
-	ItemInfo.DefaultItemInfo:loadHardTable('item.dictionary')
+	term.setCursorBlink(true)
+	local tid = os.startTimer(2)
+
+	local event, id = os.pullEvent()
+	local wait = true
+	while (wait) do
+		if (event == 'timer' and id == tid) then
+			print('running')
+			shell.run('less run test')
+			break
+		elseif (event == 'key' and id == 28) then
+			print('skipping')
+			break
+		end
+		event, id = os.pullEvent()
+	end
+
+	runAndPrintErrLines(
+		function()
+			ItemInfo.Instance = ItemInfo()
+			ItemInfo.Instance:loadHardTable('item.dictionary')
+
+			RecipeBook.Instance = RecipeBook.LoadFromFile('recipe.dictionary.tbl', true)
+			include 'Crafting/StandardRecipes'
+
+			if (fs.exists('mystartup.lua')) then
+				dofile('mystartup.lua')
+			end
+		end
+	)
 	return
 end
 
-_G.osStarted = true
+-- Print call logging
+-- local oldPrint = print
+-- _G.print = function(...)
+-- 	local st = getStackTrace(1, 2)[1]
+-- 	oldPrint(st, ...)
+-- end
+-- _G.osStarted = true
 
 if (os.version == nil) then
 	dofile 'bootstrap.lua'

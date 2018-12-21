@@ -1,5 +1,7 @@
 local col = include 'Util/TextColors'
 
+local vfs = include 'runtime/vfs'
+
 local LOG_NONE = -1
 local LOG_SOME = 0
 local LOG_ALL = 1
@@ -227,13 +229,16 @@ local function doTest(testObj, testContext)
 		testContext.lastNamespace = testObj.namespace
 	end
 
+	local termWidth = term.getSize()
+	local limChars = termWidth - 3
+
 	-- Print out the test name
 	if (testContext.logLevel > LOG_ALL) then
 		testContext.loggedAny = true
 		if (#testObj.name > 37) then
-			io.write(string.sub(testObj.name, 1, 37) .. ':')
+			io.write(string.sub(testObj.name, 1, limChars) .. ':')
 		else
-			io.write(testObj.name .. string.rep(' ', 37 - #testObj.name) .. ':')
+			io.write(testObj.name .. string.rep(' ', limChars - #testObj.name) .. ':')
 		end
 	end
 
@@ -242,10 +247,18 @@ local function doTest(testObj, testContext)
 	local errors = {}
 
 	local testWrapper = function()
+		--Apply fs util over vfs
+		include 'Util/fs'
+
 		include 'Core/_main'
 
 		testObj.tester(testParams)
 		testParams.finalize()
+
+		local dirList = fs.list('')
+		if (#dirList > 0) then
+			print(dirList, 'files left over')
+		end
 	end
 
 	local env = {}
@@ -254,6 +267,7 @@ local function doTest(testObj, testContext)
 	env.sleep = function(time)
 		getfenv(2).print('sleeping for ', time)
 	end
+	env.fs = vfs(testObj.name)
 	setmetatable(env, {__index = _G})
 	setfenv(testWrapper, env)
 	setfenv(testObj.tester, env)
@@ -284,6 +298,9 @@ local function doTest(testObj, testContext)
 	io.write = oldwrite
 	print = oldprint
 
+	-- Long running programs must yield regularly or risk getting killed
+	sleep(0)
+
 	--TODO: potentially check for changes to env to detect side-effects?
 
 	if (testContext.logLevel > LOG_SOME) then
@@ -295,10 +312,10 @@ local function doTest(testObj, testContext)
 
 			testContext.loggedAny = true
 
-			if (#testObj.name > 37) then
-				io.write(string.sub(testObj.name, 1, 37) .. ':')
+			if (#testObj.name > limChars) then
+				io.write(string.sub(testObj.name, 1, limChars) .. ':')
 			else
-				io.write(testObj.name .. string.rep(' ', 37 - #testObj.name) .. ':')
+				io.write(testObj.name .. string.rep(' ', limChars - #testObj.name) .. ':')
 			end
 		end
 		if (testContext.logLevel > LOG_ALL or not success) then

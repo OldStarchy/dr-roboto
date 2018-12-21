@@ -1,3 +1,6 @@
 *.ht.txt
+*.tbl
 .mov.tbl
 .settings
+mystartup.lua
+stacktrace.txt

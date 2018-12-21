@@ -86,7 +86,7 @@ end
 
 function Chest:getItemSpace(slot, item)
 	local _item = self:getItemAt(slot) or item
-	local stackSize = ItemInfo.DefaultItemInfo:getStackSize(_item)
+	local stackSize = ItemInfo.Instance:getStackSize(_item)
 	local items = self:getItemCount(slot)
 
 	return stackSize - items
@@ -106,10 +106,10 @@ function Chest:nextAvailable(item, from)
 	from = from or 0
 	for i = from + 1, self:size() do
 		if self.contents[i] == nil then
-			return i, ItemInfo.DefaultItemInfo:getStackSize(item)
+			return i, ItemInfo.Instance:getStackSize(item)
 		elseif self.contents[i].name == item then
-			if (ItemInfo.DefaultItemInfo:getStackSize(item) - self.contents[i].count > 0) then
-				return i, ItemInfo.DefaultItemInfo:getStackSize(item) - self.contents[i].count
+			if (ItemInfo.Instance:getStackSize(item) - self.contents[i].count > 0) then
+				return i, ItemInfo.Instance:getStackSize(item) - self.contents[i].count
 			end
 		end
 	end
@@ -165,7 +165,7 @@ end
 
 --[[
 	pushes an item into the chest at the next space available.
-	will return false, 'error desc' if failed. 
+	will return false, 'error desc' if failed.
 ]]
 function Chest:push(item, count)
 	assert(item ~= nil, 'cannot check for nil item')

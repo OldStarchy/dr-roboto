@@ -21,6 +21,8 @@ print('OK')
 --TODO: don't actually sleep cus thats slow
 -- sleep(1)
 
+VirtualFileSystem = include 'runtime/vfs'
+
 local ProcessManager = include 'runtime/ProcessManager'
 local procMan = ProcessManager()
 

@@ -36,9 +36,10 @@ function tableToString(tbl, ind, printed)
 		error('tbl is nil', 2)
 	end
 
-	if (isHardTable(tbl)) then
-		tbl = hardTableExport(tbl)
-	end
+	-- hardTable functions aren't defined yet
+	-- if (isHardTable(tbl)) then
+	-- 	tbl = hardTableExport(tbl)
+	-- end
 
 	if (printed[tbl]) then
 		return tostring(tbl)

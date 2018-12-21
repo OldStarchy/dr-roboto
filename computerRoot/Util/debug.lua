@@ -70,42 +70,98 @@ function saveStackTrace(file, frames, start, jump)
 	f.close()
 end
 
+function getFileLines(file, line, count)
+	if (count == nil) then
+		count = 1
+	end
+
+	if (fs.exists(file)) then
+		local fh = fs.open(file, 'r')
+		local content = fh.readAll()
+		fh.close()
+
+		local lines = stringutil.split(content, '\n')
+
+		local r = ''
+		local start = math.ceil(line - count / 2)
+		local ed = start + count - 1
+
+		if (start < 1) then
+			start = 1
+		end
+
+		if (ed > #lines) then
+			ed = #lines
+		end
+		for i = start, ed do
+			r = r .. i .. '\t' .. lines[tonumber(i)] .. '\n'
+		end
+
+		return stringutil.trim(r, '\n')
+	else
+		return nil
+	end
+end
+
 function runAndPrintErrLines(func)
 	xpcall(
 		func,
-		function(err)
-			if (type(err) == 'string') then
-				local bits = stringutil.split(err, ':')
-				local file = bits[1]
-				local line = bits[2]
-				local erro = bits[3]
+		function(rootErr)
+			local lineText = ''
 
-				if (term.isColour()) then
-					term.setTextColor(colours.red)
-				end
+			local trace = getStackTrace(20, 2)
+			trace[1] = rootErr
 
-				print(erro)
-				print(file .. ':' .. line)
+			local fileOutput = ''
 
-				if (term.isColour()) then
-					term.setTextColor(colours.orange)
-				end
+			local first = true
+			for _, err in pairs(trace) do
+				if (type(err) == 'string') then
+					local bits = stringutil.split(err, ':')
+					local file = stringutil.trim(bits[1])
+					local line = stringutil.trim(bits[2])
+					local errLine = nil
 
-				if (file) then
-					local files = fs.listRecursive('')
-					for _, f in ipairs(files) do
-						if (stringutil.endsWith(f, file)) then
-							local fh = fs.open(f, 'r')
-							local content = fh.readAll()
-							fh.close()
+					fileOutput = fileOutput .. err .. '\n'
 
-							local lines = stringutil.split(content, '\n')
-
-							print(lines[tonumber(line)])
+					if (#file > 0 and #line > 0) then
+						errLine = getFileLines(file, line, 3)
+						if (errLine ~= nil) then
+							fileOutput = fileOutput .. '\t' .. string.gsub(errLine, '\n', '\n\t') .. '\n\n'
 						end
+					end
+
+					if (first) then
+						if (term.isColour()) then
+							term.setTextColor(colours.red)
+						end
+
+						local erro = stringutil.join({select(3, unpack(bits))}, ':')
+						print(erro)
+						print(file .. ':' .. line)
+
+						if (term.isColour()) then
+							term.setTextColor(colours.orange)
+						end
+
+						if (errLine ~= nil) then
+							print(errLine)
+						end
+
+						first = false
 					end
 				end
 			end
+
+			file = 'stacktrace.txt'
+			local f = fs.open(file, 'w')
+
+			if (f == nil) then
+				printStackTrace(10, 2)
+				error('could not save to file')
+			end
+			f.write(fileOutput)
+			f.close()
 		end
 	)
 end

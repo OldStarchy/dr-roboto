@@ -8,7 +8,7 @@ function CraftItemSkill:canHandleTask(task)
 		return false
 	end
 
-	local recipe = standardRecipes:findCraftingRecipeByName(task.item)
+	local recipe = RecipeBook.Instance:findCraftingRecipeByName(task.item)
 
 	return recipe ~= nil
 end
@@ -16,7 +16,7 @@ end
 function CraftItemSkill:getRequirements(task)
 	local requirements = {}
 
-	local recipe = standardRecipes:findCraftingRecipeByName(task.item)
+	local recipe = RecipeBook.Instance:findCraftingRecipeByName(task.item)
 
 	for item, count in pairs(recipe.items) do
 		local haveCount = Inv:countItem(item)
