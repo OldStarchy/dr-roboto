@@ -414,7 +414,12 @@ function InventoryManager:getFreeItemCount(slot)
 end
 
 function InventoryManager:getFirst(delegate)
-	for i = 1, 16 do
+	return self:getNext(delegate, 0)
+end
+
+function InventoryManager:getNext(delegate, last)
+	last = last or 0
+	for i = last + 1, 16 do
 		if delegate(i) then
 			return i
 		end
@@ -434,16 +439,6 @@ end
 function InventoryManager:getPrevious(delegate, last)
 	last = last or 17
 	for i = last - 1, 1, -1 do
-		if delegate(i) then
-			return i
-		end
-	end
-	return nil
-end
-
-function InventoryManager:getNext(delegate, last)
-	last = last or 0
-	for i = last + 1, 16 do
 		if delegate(i) then
 			return i
 		end

@@ -44,6 +44,7 @@ function Chest:getFirst(delegate)
 end
 
 function Chest:getNext(delegate, last)
+	last = last or 0
 	for i = last + 1, self:size() do
 		if delegate(self, i) then
 			return i
@@ -102,6 +103,7 @@ end
 	return the next avaiable index of a free slot for the provided item and starting index
 	]]
 function Chest:nextAvailable(item, from)
+	from = from or 0
 	for i = from + 1, self:size() do
 		if self.contents[i] == nil then
 			return i, ItemInfo.DefaultItemInfo:getStackSize(item)
