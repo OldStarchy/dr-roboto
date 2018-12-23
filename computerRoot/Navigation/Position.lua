@@ -61,6 +61,8 @@ function Position:rotate(direction)
 		return
 	end
 	self.direction = Position.wrapDirection(self.direction + direction)
+
+	return self
 end
 
 function Position:add(deltas)
@@ -77,6 +79,8 @@ function Position:add(deltas)
 	if (type(deltas.direction) == 'number') then
 		self:rotate(deltas.direction)
 	end
+
+	return self
 end
 
 function Position:sub(deltas)
@@ -93,6 +97,8 @@ function Position:sub(deltas)
 	if (type(deltas.direction) == 'number') then
 		self:rotate(-deltas.direction)
 	end
+
+	return self
 end
 
 function Position:getDirectionOffset(direction)
@@ -105,4 +111,14 @@ end
 function Position:toString()
 	return 'x: ' ..
 		self.x .. ', y: ' .. self.y .. ', z: ' .. self.z .. ', f: ' .. Position.directionNames[self.direction]:sub(1, 1)
+end
+
+function Position:posEquals(other)
+	assertType(other, 'table')
+
+	return self.x == other.x and self.y == other.y and self.z == other.z
+end
+
+function Position:posHash()
+	return tostring(self.x) .. ',' .. tostring(self.y) .. ',' .. tostring(self.z)
 end
