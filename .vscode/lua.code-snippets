@@ -15,6 +15,27 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
+	"class": {
+		"prefix": "class",
+		"body": [
+			"${1:MyClass} = Class(${2:parent})",
+			"$1.ClassName = '$1'",
+			"",
+			"function $1:constructor($3)",
+			"\t$0",
+			"end"
+		],
+		"description": "class definition",
+		"scope": "lua"
+	},
+	"constructor": {
+		"prefix": "constructor",
+		"body": ["function ${1:MyClass}:constructor($2)", "\t$0", "end"]
+	},
+	"func:": {
+		"prefix": "func:",
+		"body": ["function ${1:MyClass}:${2:func}($3)", "\t$0", "end"]
+	},
 	"turtle.craft(number: quantity)": {
 		"prefix": "turtle.craft",
 		"body": ["turtle.craft(${1:number: quantity})"],
