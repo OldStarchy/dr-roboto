@@ -119,6 +119,16 @@ function Position:posEquals(other)
 	return self.x == other.x and self.y == other.y and self.z == other.z
 end
 
+function Position:isEqual(other)
+	assertType(other, 'table')
+
+	return self.x == other.x and self.y == other.y and self.z == other.z and self.direction == other.direction
+end
+
 function Position:posHash()
 	return tostring(self.x) .. ',' .. tostring(self.y) .. ',' .. tostring(self.z)
+end
+
+function Position:hash()
+	return tostring(self.x) .. ',' .. tostring(self.y) .. ',' .. tostring(self.z) .. ',' .. tostring(self.direction)
 end

@@ -108,7 +108,7 @@ function Map:findPath(start, ed)
 		local steps = self:_getPossibleSteps(curr)
 
 		for _, step in ipairs(steps) do
-			if (step.position:posEquals(ed)) then
+			if (step.position:isEqual(ed)) then
 				goal = step
 				break
 			end
@@ -116,7 +116,7 @@ function Map:findPath(start, ed)
 			if (not self:isProtected(step.position.x, step.position.y, step.position.z)) then
 				self:_updateScore(step, ed)
 
-				local posHash = step.position:posHash()
+				local posHash = step.position:hash()
 
 				local ex = closed[posHash]
 				if (ex ~= nil) then
@@ -129,7 +129,7 @@ function Map:findPath(start, ed)
 			end
 		end
 
-		closed[curr.position:posHash()] = curr
+		closed[curr.position:hash()] = curr
 		nodesChecked = nodesChecked + 1
 
 		if (goal == nil and nodesChecked > 1000) then
@@ -221,6 +221,7 @@ function Map:_updateScore(node, target)
 	local dx = node.position.x - target.x
 	local dy = node.position.y - target.y
 	local dz = node.position.z - target.z
+	local dd = node.position:getDirectionOffset(target.direction)
 
 	if (dx < 0) then
 		dx = -dx
@@ -231,7 +232,10 @@ function Map:_updateScore(node, target)
 	if (dz < 0) then
 		dz = -dz
 	end
+	if (dd < 0) then
+		dd = -dd
+	end
 
-	node.score = node.travel + dx + dy + dz
+	node.score = node.travel + dx + dy + dz + (dd / 4)
 	return node
 end
