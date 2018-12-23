@@ -142,23 +142,44 @@ function Map:findPath(start, ed)
 	end
 
 	local path = {}
+	local gPath = {}
 
 	local curr = goal
 
 	table.insert(path, curr.position)
+	table.insert(gPath, curr.g)
 	while (curr.parent ~= nil) do
 		curr = curr.parent
 		table.insert(path, 1, curr.position)
+		table.insert(gPath, 1, curr.g)
 	end
 
-	return path
+	local gPathStr = ''
+	local currG = ''
+	local currC = 0
+
+	for i, g in ipairs(gPath) do
+		if (g == currG) then
+			currC = currC + 1
+		else
+			gPathStr = gPathStr .. currG
+			if (currC > 1) then
+				gPathStr = gPathStr .. tostring(currC)
+			end
+			currG = g
+			currC = 1
+		end
+	end
+
+	return path, gPathStr
 end
 
-function Map:_createNode(pos, parent)
+function Map:_createNode(pos, parent, g)
 	return {
 		position = pos,
 		travel = (parent and parent.travel or 0) + 1,
-		parent = parent
+		parent = parent,
+		g = g
 	}
 end
 
@@ -168,7 +189,8 @@ function Map:_getPossibleSteps(node)
 		Position(node.position):add( --
 			Position.offsets[node.position.direction] --
 		), --
-		node --
+		node, --
+		'f'
 	)
 
 	local back =
@@ -176,7 +198,8 @@ function Map:_getPossibleSteps(node)
 		Position(node.position):sub( --
 			Position.offsets[node.position.direction] --
 		), --
-		node --
+		node, --
+		'b'
 	)
 
 	local up =
@@ -184,7 +207,8 @@ function Map:_getPossibleSteps(node)
 		Position(node.position):add( --
 			{y = 1} --
 		), --
-		node --
+		node, --
+		'u'
 	)
 
 	local down =
@@ -192,19 +216,22 @@ function Map:_getPossibleSteps(node)
 		Position(node.position):add( --
 			{y = -1} --
 		), --
-		node --
+		node, --
+		'd'
 	)
 
 	local left =
 		self:_createNode( --
 		Position(node.position):rotate(1), --
-		node --
+		node, --
+		'l'
 	)
 
 	local right =
 		self:_createNode( --
 		Position(node.position):rotate(-1), --
-		node --
+		node, --
+		'r'
 	)
 
 	return {
