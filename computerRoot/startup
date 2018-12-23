@@ -43,7 +43,8 @@ end
 -- 	local st = getStackTrace(1, 2)[1]
 -- 	oldPrint(st, ...)
 -- end
--- _G.osStarted = true
+
+_G.osStarted = true
 
 if (os.version == nil) then
 	dofile 'bootstrap.lua'
