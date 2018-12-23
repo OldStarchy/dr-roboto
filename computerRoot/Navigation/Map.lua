@@ -34,7 +34,7 @@ function Map:_getOrCreateData(x, y, z)
 	return self._points[x][y][z]
 end
 
-function Map:protectLocation(x, y, z, protected)
+function Map:setProtected(x, y, z, protected)
 	assertType(x, 'int')
 	assertType(y, 'int')
 	assertType(z, 'int')
@@ -163,16 +163,58 @@ function Map:_createNode(pos, parent)
 end
 
 function Map:_getPossibleSteps(node)
-	local steps = {
-		self:_createNode(Position(node.position):add({x = 1}), node),
-		self:_createNode(Position(node.position):add({x = -1}), node),
-		self:_createNode(Position(node.position):add({y = 1}), node),
-		self:_createNode(Position(node.position):add({y = -1}), node),
-		self:_createNode(Position(node.position):add({z = 1}), node),
-		self:_createNode(Position(node.position):add({z = -1}), node)
-	}
+	local forward =
+		self:_createNode( --
+		Position(node.position):add( --
+			Position.offsets[node.position.direction] --
+		), --
+		node --
+	)
 
-	return steps
+	local back =
+		self:_createNode( --
+		Position(node.position):sub( --
+			Position.offsets[node.position.direction] --
+		), --
+		node --
+	)
+
+	local up =
+		self:_createNode( --
+		Position(node.position):add( --
+			{y = 1} --
+		), --
+		node --
+	)
+
+	local down =
+		self:_createNode( --
+		Position(node.position):add( --
+			{y = -1} --
+		), --
+		node --
+	)
+
+	local left =
+		self:_createNode( --
+		Position(node.position):rotate(1), --
+		node --
+	)
+
+	local right =
+		self:_createNode( --
+		Position(node.position):rotate(-1), --
+		node --
+	)
+
+	return {
+		up,
+		down,
+		forward,
+		back,
+		left,
+		right
+	}
 end
 
 function Map:_updateScore(node, target)
