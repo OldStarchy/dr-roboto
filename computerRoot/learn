@@ -1,0 +1,19 @@
+-- Learns about items in the inventory by trying to craft them
+
+local grid = {}
+
+for slot = 1, 16 do
+	local item = turtle.getItemDetail(slot)
+
+	if (item ~= nil and slot % 4 >= 0) then
+		grid[slot - math.floor(slot / 4)] = item.name
+	end
+end
+
+if (turtle.craft(1)) then
+	local result = turtle.getItemDetail()
+
+	RecipeBook:add(CraftingRecipe(result.name, grid, result.count))
+
+	print('Added entry for ' .. result.name)
+end
