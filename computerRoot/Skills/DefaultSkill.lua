@@ -14,7 +14,3 @@ end
 function DefaultSkill:canHandleTask(task)
 	return true
 end
-
-function DefaultSkill:getRequirements(task)
-	return {}
-end

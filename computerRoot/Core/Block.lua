@@ -9,7 +9,7 @@ Block.ClassName = 'Block'
 	from the turtle to the block
 ]]
 function Block:constructor(name, location)
-	assert(location:isType(Position), 'Location must be of type Position')
+	assertType(location, Position, 'Location must be of type Position', 2)
 
 	self.location = location
 	self.name = name

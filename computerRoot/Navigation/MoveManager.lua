@@ -1,5 +1,5 @@
 MoveManager = Class()
-MoveManager.ClassName = 'Move'
+MoveManager.ClassName = 'MoveManager'
 
 --[[
 	A wrapper the movement functions defined for a turtle.

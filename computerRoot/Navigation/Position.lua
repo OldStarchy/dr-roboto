@@ -114,7 +114,7 @@ function Position:toString()
 end
 
 function Position:posEquals(other)
-	assertType(other, 'table')
+	assertType(other, Position, 'other must be of type Position', 2)
 
 	return self.x == other.x and self.y == other.y and self.z == other.z
 end
@@ -123,6 +123,12 @@ function Position:isEqual(other)
 	assertType(other, 'table')
 
 	return self.x == other.x and self.y == other.y and self.z == other.z and self.direction == other.direction
+end
+
+function Position:distanceTo(other)
+	assertType(other, Position, 'other must be of type Position', 2)
+
+	return math.abs(self.x - other.x) + math.abs(self.y - other.y) + math.abs(self.z - other.z)
 end
 
 function Position:posHash()

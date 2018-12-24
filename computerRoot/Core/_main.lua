@@ -15,6 +15,7 @@ include 'Core/Graphics/Graphics'
 include 'Core/Graphics/Surface'
 
 include 'Core/Block'
+include 'Core/BlockMap'
 
 include 'Crafting/_main'
 include 'Navigation/_main'

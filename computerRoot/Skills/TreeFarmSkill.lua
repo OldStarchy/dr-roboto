@@ -1,7 +1,7 @@
 TreeFarmSkill = Class(Skill)
 TreeFarmSkill.ClassName = 'TreeFarmSkill'
 
-function TreeFarmSkill:performNextAction()
+function TreeFarmSkill:completeTask()
 	if (logCount >= requiredLogCount) then
 		return self:finishTask()
 	else

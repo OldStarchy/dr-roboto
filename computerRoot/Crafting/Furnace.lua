@@ -9,7 +9,7 @@ Furnace.ClassName = 'Furnace'
 	from the turtle to the block
 ]]
 function Furnace:constructor(name, location)
-	Block:constructor(name, location)
+	Block.constructor(self, name, location)
 	self._book = RecipeBook()
 
 	self._top = nil

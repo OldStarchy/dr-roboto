@@ -8,8 +8,8 @@ Chest.ClassName = 'Chest'
 	where the direction provided in Position will be the approach direction
 	from the turtle to the block
 ]]
-function Chest:constructor(name, _locations, isDouble)
-	Block:constructor(name, _locations)
+function Chest:constructor(name, location, isDouble)
+	Block.constructor(self, name, location)
 
 	self.name = name
 	self.isDouble = isDouble

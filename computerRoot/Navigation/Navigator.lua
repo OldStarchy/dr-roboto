@@ -10,7 +10,7 @@ Navigator.ClassName = 'Navigator'
 	Initialized as "Nav" at the bottom of this file.
 ]]
 function Navigator:constructor(mov)
-	assertType(mov, MoveManager, 'mov is not of type Move')
+	assertType(mov, MoveManager, 'mov is not of type MoveManager')
 
 	-- Private stuff
 	self._locationStack = {

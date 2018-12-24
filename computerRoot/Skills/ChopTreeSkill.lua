@@ -10,19 +10,19 @@ function ChopTreeSkill:completeTask(task)
 	Nav.goTo(task._location)
 end
 
-ChopTreeTask = Class(Task)
-ChopTreeTask.ClassName = 'ChopTreeTask'
+-- ChopTreeSkill = Class(Task)
+-- ChopTreeSkill.ClassName = 'ChopTreeSkill'
 
-function ChopTreeTask.fromArgs(args)
-	return ChopTreeTask(Position.fromArgs(args))
-end
+-- function ChopTreeSkill.fromArgs(args)
+-- 	return ChopTreeSkill(Position.fromArgs(args))
+-- end
 
-function ChopTreeTask:constructor(location)
-	Task.constructor(self)
+-- function ChopTreeSkill:constructor(location)
+-- 	Task.constructor(self)
 
-	self._location = assertType(location, Position)
-end
+-- 	self._location = assertType(location, Position)
+-- end
 
-function ChopTreeTask:toString()
-	return 'ChopTree{' .. tostring(self._location) .. '}'
-end
+-- function ChopTreeSkill:toString()
+-- 	return 'ChopTree{' .. tostring(self._location) .. '}'
+-- end
