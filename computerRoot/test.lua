@@ -19,6 +19,15 @@ local function createTestParams()
 		error('Assert ==,\nExpected "' .. tostring(expected) .. '"\n but got "' .. tostring(result) .. '"', 2)
 	end
 
+	function t.assertNotEqual(result, unexpected)
+		assertCalled = true
+		if (result ~= unexpected) then
+			return
+		end
+
+		error('Assert ~=,\nGot "' .. tostring(result) .. '"', 2)
+	end
+
 	function t.assertTableEqual(result, expected, errorString)
 		assertCalled = true
 		if errorString == nil then
@@ -58,15 +67,6 @@ local function createTestParams()
 				error(errorString .. 'Missing key "' .. tostring(k2) .. '"', 2)
 			end
 		end
-	end
-
-	function t.assertNotEqual(result, unexpected)
-		assertCalled = true
-		if (result ~= unexpected) then
-			return
-		end
-
-		error('Assert ~=,\nGot "' .. tostring(result) .. '"', 2)
 	end
 
 	function t.assertThrows(method, ...)
