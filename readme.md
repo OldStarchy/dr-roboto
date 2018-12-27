@@ -12,6 +12,10 @@ For fun and learning.
 
 A self replicating turtle for ComputerCraft
 
+## Docs
+
+The docs are a work in progress, but go ahead and have a look in the docs folder, and raise an issue if you need some documentation that doesn't exist yet.
+
 ## Code Conventions
 
 Before you start you should at least familiarize yourself with Lua's syntactic sugar, but for a quick reminder:
