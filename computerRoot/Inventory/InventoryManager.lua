@@ -89,6 +89,8 @@ function InventoryManager:_attach()
 	local this = self
 	local overrideFunctionsList = {
 		'inspect',
+		'inspectUp',
+		'inspectDown',
 		'getItemDetail',
 		'select',
 		'transferTo'
@@ -119,8 +121,19 @@ end
 function InventoryManager:inspect()
 	local exists, data = self._oldTurtle.inspect()
 
-	print('converting to blockdetail')
-	return exists, BlockDetail.convertToInstance(data)
+	return exists, exists and BlockDetail.convertToInstance(data) or nil
+end
+
+function InventoryManager:inspectDown()
+	local exists, data = self._oldTurtle.inspectDown()
+
+	return exists, exists and BlockDetail.convertToInstance(data) or nil
+end
+
+function InventoryManager:inspectUp()
+	local exists, data = self._oldTurtle.inspectUp()
+
+	return exists, exists and BlockDetail.convertToInstance(data) or nil
 end
 
 function InventoryManager:getItemDetail(selector)
