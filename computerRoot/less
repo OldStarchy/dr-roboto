@@ -17,7 +17,13 @@ term.redirect(surface:asTerm())
 local oldread = read
 _G.read = function() return '' end
 
-shell.run(...)
+if (isDefined('shell')) then
+	shell.run(...)
+else
+	local args = {...}
+	local fname = table.remove(args, 1)
+	loadfile(fname)(unpack(args))
+end
 
 _G.read = oldread
 term.redirect(current)

@@ -619,4 +619,4 @@ local function VirtualFileSystem(name, maxSize)
 	return o
 end
 
-return VirtualFileSystem
+vfs = VirtualFileSystem

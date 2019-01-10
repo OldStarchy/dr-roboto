@@ -1,22 +1,22 @@
-startlocal()
+stringutil = {}
 
-function startsWith(str, start)
+function stringutil.startsWith(str, start)
 	return start == '' or str:sub(1, #start) == start
 end
 
-function endsWith(str, ending)
+function stringutil.endsWith(str, ending)
 	return ending == '' or str:sub(-(#ending)) == ending
 end
 
-function isLower(str)
+function stringutil.isLower(str)
 	return str:lower() == str
 end
 
-function isUpper(str)
+function stringutil.isUpper(str)
 	return str:upper() == str
 end
 
-function lPad(str, size, char)
+function stringutil.lPad(str, size, char)
 	assertType(str, 'string')
 	assertType(size, 'int')
 	char = assertType(coalesce(char, ' '), 'char')
@@ -28,7 +28,7 @@ function lPad(str, size, char)
 	return str
 end
 
-function rPad(str, size, char)
+function stringutil.rPad(str, size, char)
 	assertType(str, 'string')
 	assertType(size, 'int')
 	char = assertType(coalesce(char, ' '), 'char')
@@ -40,7 +40,7 @@ function rPad(str, size, char)
 	return str
 end
 
-function split(str, pat)
+function stringutil.split(str, pat)
 	if (type(str) ~= 'string') then
 		error('str must be string', 2)
 	end
@@ -62,7 +62,7 @@ function split(str, pat)
 	return t
 end
 
-function join(tbl, glue)
+function stringutil.join(tbl, glue)
 	if (tbl == nil) then
 		error('Table expected, got nil', 2)
 	end
@@ -88,7 +88,7 @@ function join(tbl, glue)
 	return r
 end
 
-function trim(str, char)
+function stringutil.trim(str, char)
 	if (char == nil) then
 		char = ' '
 	end
@@ -109,6 +109,3 @@ function trim(str, char)
 
 	return str:sub(start, ed)
 end
-
---for i=0,100 do stringutil.progressBar(i, 100); sleep(0.02) end
-stringutil = endlocal()

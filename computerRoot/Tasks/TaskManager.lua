@@ -17,12 +17,14 @@ function TaskManager:count()
 end
 
 function TaskManager:load(fname)
-	local data = fs.readFromFile(fname)
+	if (fs.exists(fname)) then
+		local data = fs.readTableFromFile(fname)
 
-	if (data) then
-		self._tasks = {}
-		for _, v in ipairs(data) do
-			table.insert(self._tasks, v)
+		if (data) then
+			self._tasks = {}
+			for _, v in ipairs(data) do
+				table.insert(self._tasks, v)
+			end
 		end
 	end
 end

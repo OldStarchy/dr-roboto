@@ -1,3 +1,16 @@
+function getStackFrame(frameIndex)
+	local frameInfo
+	xpcall(
+		function()
+			error('', frameIndex + 1)
+		end,
+		function(err)
+			frameInfo = err
+		end
+	)
+	return frameInfo
+end
+
 function getStackTrace(frames, startFrame, maxJump)
 	frames = ((type(frames) == 'number') and frames) or 5
 	startFrame = ((type(startFrame) == 'number') and startFrame) or 1
@@ -13,29 +26,25 @@ function getStackTrace(frames, startFrame, maxJump)
 	local emptyFrames = 0
 	local trace = {}
 	while not stop and i < endFrame do
-		xpcall(
-			function()
-				error('', i)
-			end,
-			function(err)
-				if (err == 'bios.lua:883: ') then
-					stop = true
-				elseif (err == '') then
-					if (emptyFrames == 0) then
-						table.insert(trace, '-')
-					end
-					emptyFrames = emptyFrames + 1
-					if (emptyFrames > maxJump) then
-						stop = true
-					else
-						endFrame = endFrame + 1
-					end
-				else
-					emptyFrames = 0
-					table.insert(trace, err)
-				end
+		local frameInfo = getStackFrame(i + 1)
+
+		if (frameInfo == 'bios.lua:883: ') then
+			stop = true
+		elseif (frameInfo == '') then
+			if (emptyFrames == 0) then
+				table.insert(trace, '-')
 			end
-		)
+			emptyFrames = emptyFrames + 1
+			if (emptyFrames > maxJump) then
+				stop = true
+			else
+				endFrame = endFrame + 1
+			end
+		else
+			emptyFrames = 0
+			table.insert(trace, frameInfo)
+		end
+
 		i = i + 1
 	end
 
@@ -103,6 +112,36 @@ function getFileLines(file, line, count)
 	end
 end
 
+function getStackFrameInfo(frame)
+	if (type(frame) == 'number') then
+		frame = getStackFrame(frame + 1)
+	end
+
+	local result = {}
+	local index, oldIndex
+
+	result.frame = stringutil.trim(frame)
+
+	index = frame:find(':')
+	if (index == nil) then
+		result.file = stringutil.trim(frame)
+		return result
+	end
+	result.file = stringutil.trim(frame:sub(1, index - 1))
+	oldIndex = index + 1
+
+	index = frame:find(':', oldIndex)
+	if (index == nil) then
+		result.line = stringutil.trim(frame:sub(oldIndex))
+		return result
+	end
+	result.line = stringutil.trim(frame:sub(oldIndex, index - 1))
+	oldIndex = index + 1
+
+	result.message = stringutil.trim(frame:sub(oldIndex))
+	return result
+end
+
 function runAndPrintErrLines(func)
 	xpcall(
 		func,
@@ -117,15 +156,17 @@ function runAndPrintErrLines(func)
 			local first = true
 			for _, err in pairs(trace) do
 				if (type(err) == 'string') then
-					local bits = stringutil.split(err, ':')
-					local file = stringutil.trim(bits[1])
-					local line = stringutil.trim(bits[2])
+					local frameInfo = getStackFrameInfo(err)
+					print(frameInfo.frame)
+					print(frameInfo.file)
+					print(frameInfo.line)
+					print(frameInfo.message)
 					local errLine = nil
 
 					fileOutput = fileOutput .. err .. '\n'
 
-					if (#file > 0 and #line > 0) then
-						errLine = getFileLines(file, line, 3)
+					if (frameInfo.file and frameInfo.line) then
+						errLine = getFileLines(frameInfo.file, frameInfo.line, 3)
 						if (errLine ~= nil) then
 							fileOutput = fileOutput .. '\t' .. string.gsub(errLine, '\n', '\n\t') .. '\n\n'
 						end
@@ -136,9 +177,8 @@ function runAndPrintErrLines(func)
 							term.setTextColor(colours.red)
 						end
 
-						local erro = stringutil.join({select(3, unpack(bits))}, ':')
-						print(erro)
-						print(file .. ':' .. line)
+						print(line.message)
+						print(frameInfo.file .. ':' .. frameInfo.line)
 
 						if (term.isColour()) then
 							term.setTextColor(colours.orange)

@@ -1,3 +1,22 @@
+local native = fs
+fs = {}
+fs.native = native
+
+local currentTarget = native
+
+setmetatable(
+	fs,
+	{
+		__index = function(tbl, key)
+			return rawget(currentTarget, key)
+		end
+	}
+)
+
+function fs.redirect(fsTarget)
+	currentTarget = fsTarget
+end
+
 function fs.listRecursive(directory)
 	local results = {}
 

@@ -43,5 +43,23 @@ _G.fs = {
 			}
 		)
 	end,
-	delete = os.remove
+	delete = os.remove,
+	move = function(source, destination)
+		if (fs.exists(destination)) then
+			error('Destination exists', 2)
+		end
+
+		if (not fs.exists(source)) then
+			error('Source file does not exist', 2)
+		end
+		local s = fs.open(source, 'r')
+		local data = s.readAll()
+		s.close()
+
+		local d = fs.open(destination, 'w')
+		d.write(data)
+		d.close()
+
+		fs.delete(source)
+	end
 }

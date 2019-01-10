@@ -1,7 +1,3 @@
-local col = include 'Util/TextColors'
-
-local vfs = include 'runtime/vfs'
-
 local LOG_NONE = -1
 local LOG_SOME = 0
 local LOG_ALL = 1
@@ -223,7 +219,7 @@ local function doTest(testObj, testContext)
 	if (testContext.lastNamespace ~= testObj.namespace and testObj.namespace ~= nil) then
 		testContext.printedNamespace = false
 		if (testContext.logLevel > LOG_ALL) then
-			col.print(col.blue .. '[' .. testObj.namespace .. ']\n')
+			cprint(cprint.blue .. '[' .. testObj.namespace .. ']\n')
 			testContext.printedNamespace = true
 		end
 		testContext.lastNamespace = testObj.namespace
@@ -247,10 +243,8 @@ local function doTest(testObj, testContext)
 	local errors = {}
 
 	local testWrapper = function()
-		--Apply fs util over vfs
-		include 'Util/fs'
-
 		include 'Core/_main'
+		fs.redirect(vfs(testObj.name))
 
 		testObj.tester(testParams)
 		testParams.finalize()
@@ -267,7 +261,6 @@ local function doTest(testObj, testContext)
 	env.sleep = function(time)
 		getfenv(2).print('sleeping for ', time)
 	end
-	env.fs = vfs(testObj.name)
 	setmetatable(env, {__index = _G})
 	setfenv(testWrapper, env)
 	setfenv(testObj.tester, env)
@@ -293,6 +286,7 @@ local function doTest(testObj, testContext)
 			table.insert(errors, err)
 		end
 	)
+	fs.redirect(fs.native)
 
 	-- Restore printing functions
 	io.write = oldwrite
@@ -306,7 +300,7 @@ local function doTest(testObj, testContext)
 	if (testContext.logLevel > LOG_SOME) then
 		if (testContext.logLevel <= LOG_ALL and not success) then
 			if (not testContext.printedNamespace) then
-				col.print(col.blue .. '[' .. testObj.namespace .. ']\n')
+				cprint(cprint.blue .. '[' .. testObj.namespace .. ']\n')
 				testContext.printedNamespace = true
 			end
 
@@ -320,9 +314,9 @@ local function doTest(testObj, testContext)
 		end
 		if (testContext.logLevel > LOG_ALL or not success) then
 			if (success) then
-				col.print(col.green, 'O\n')
+				cprint(cprint.green, 'O\n')
 			else
-				col.print(col.red, 'X\n')
+				cprint(cprint.red, 'X\n')
 			end
 
 			-- Print all the buffered calls to io.write and print
@@ -336,7 +330,7 @@ local function doTest(testObj, testContext)
 
 			-- Print any errors
 			for _, errMsg in ipairs(errors) do
-				col.print(col.red, ' ' .. errMsg .. '\n')
+				cprint(cprint.red, ' ' .. errMsg .. '\n')
 				read()
 			end
 		end
@@ -504,7 +498,11 @@ local function loadAllTests()
 	for _, file in ipairs(files) do
 		pcall(
 			function()
-				dofileSandbox(file, env)
+				local chunk, err = loadfile(file, env)
+				if (chunk == nil) then
+					error('could not load test file: ' .. file .. ': ' .. err)
+				end
+				chunk()
 			end
 		)
 	end

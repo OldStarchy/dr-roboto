@@ -1,5 +1,4 @@
 include 'Core/hardTable'
-include 'Core/Class'
 include 'Core/Interface'
 include 'Core/Log'
 
@@ -11,6 +10,7 @@ include 'Core/StringBuffer'
 include 'Core/Queue'
 
 include 'Core/Graphics/ITerm'
+include 'Core/Graphics/Pixel'
 include 'Core/Graphics/Graphics'
 include 'Core/Graphics/Surface'
 
