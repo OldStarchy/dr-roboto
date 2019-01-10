@@ -49,6 +49,10 @@ function Surface:_prepareBlit(line, start, ed)
 	return tstr, fstr, bstr
 end
 
+function Surface:getCursorBlink()
+	return self._cursorBlink
+end
+
 function Surface:_onChange(lineNumbers)
 	if (self._mirror == nil) then
 		return
@@ -339,6 +343,9 @@ function Surface:asTerm()
 		end,
 		setCursorBlink = function(...)
 			return self:setCursorBlink(...)
+		end,
+		getCursorBlink = function(...)
+			return self:getCursorBlink(...)
 		end,
 		getCursorPos = function(...)
 			return self:getCursorPos(...)

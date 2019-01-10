@@ -96,4 +96,27 @@ if (not drRobotoIsLoaded) then
 	end
 
 	shell.exit()
+	return
 end
+
+--Normal startup here
+
+process.spawnProcess(
+	function()
+		local surf = Surface(term.getSize(), 7)
+		surf:startMirroring(term.native(), 1, 1)
+		local surfTerm = surf:asTerm()
+
+		while (true) do
+			local ev = {os.pullEvent()}
+
+			local cterm = term.current()
+			term.redirect(surfTerm)
+			term.clear()
+			term.setCursorPos(1, 1)
+			print(tableToString(ev))
+			term.redirect(cterm)
+			term.setCursorBlink(true)
+		end
+	end
+)
