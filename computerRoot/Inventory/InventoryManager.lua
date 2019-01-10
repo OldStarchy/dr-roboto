@@ -107,7 +107,7 @@ end
 function InventoryManager:pushSelection(newSel) --GOOD
 	self._selectionStack[#self._selectionStack + 1] = self._turtle.getSelectedSlot()
 	if (newSel ~= nil) then
-		self:select(newSel)
+		return self:select(newSel)
 	end
 end
 

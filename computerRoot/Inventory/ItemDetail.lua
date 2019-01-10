@@ -42,3 +42,7 @@ function ItemDetail:matches(selector)
 	end
 	return false
 end
+
+function ItemDetail:isLiquid()
+	return self:matches('lava') or self:matches('water')
+end

@@ -1,0 +1,82 @@
+local function tryRefuel(direction)
+	if (Inv:pushSelection('bucket')) then
+		if (Inv:hasEmpty()) then
+			if (turtle['place' .. direction]()) then
+				log.info('Refueled from lava source')
+				Inv:select('lava_bucket')
+				turtle.refuel(1)
+			end
+		else
+			log.info('No room to pick up lava for refueling')
+		end
+	end
+	Inv:popSelection()
+end
+
+local function digLayer()
+	for i = 1, 4 do
+		local itemInfront, detail = turtle.inspect()
+
+		if (itemInfront) then
+			if (detail:matches('lava')) then
+				if (detail.metadata == 0) then
+					-- source block
+					tryRefuel('Down')
+
+					itemInfront, detail = turtle.inspect()
+				end
+			end
+
+			if (itemInfront) then
+				if (detail:isLiquid()) then
+					if (Inv:push('cobblestone')) then
+						turtle.place()
+					end
+					Inv:pop()
+				else
+					turtle.dig()
+				end
+			end
+		end
+
+		Mov:turnRight()
+	end
+end
+
+local function descend()
+	local itemBelow, detail = turtle.inspectDown()
+	if (not itemBelow) then
+		return Mov:down()
+	end
+
+	if (detail:matches('obsidian')) then
+		return false
+	end
+
+	if (detail:matches('lava')) then
+		if (detail.metadata == 0) then
+			-- source block
+			tryRefuel('Down')
+		end
+	end
+
+	if (not detail:matches('water')) then
+		turtle.digDown()
+	end
+
+	return Mov:down()
+end
+
+local function needleMine()
+	local startHeight = Mov:getY()
+
+	while (descend()) do
+		digLayer()
+	end
+
+	Mov:push(true, true)
+	Nav:goToY(startHeight)
+	Mov:pop()
+end
+
+needleMine()
