@@ -36,6 +36,7 @@ if (isPc) then
 
 	lfs.chdir('computerRoot')
 	dofile 'roboto/os.lua'
+	return
 end
 
 local drRobotoIsLoaded = os.version and os.version():sub(1, 10) == 'Dr. Roboto'
