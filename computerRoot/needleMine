@@ -34,7 +34,17 @@ local function digLayer()
 					end
 					Inv:pop()
 				else
-					turtle.dig()
+					local dig = true
+
+					if (detail:matches('dirt') or detail:matches('grass')) then
+						dig = Inv:countItem('dirt') < 10
+					elseif (detail:matches('stone:0')) then
+						dig = Inv:countItem('cobblestone') < 10
+					end
+
+					if (dig) then
+						turtle.dig()
+					end
 				end
 			end
 		end
