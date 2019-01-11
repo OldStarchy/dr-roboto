@@ -43,6 +43,10 @@ function ItemDetail:matches(selector)
 	return false
 end
 
+function ItemDetail:getId()
+	return self.name .. ':' .. self.metadata
+end
+
 function ItemDetail:isLiquid()
 	return self:matches('lava') or self:matches('water')
 end

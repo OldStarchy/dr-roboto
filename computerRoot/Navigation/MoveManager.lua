@@ -351,6 +351,8 @@ function MoveManager:_afterPositionChanged()
 		print(self._position)
 	end
 
+	os.queueEvent('turtle_moved', self:getX(), self:getY(), self:getZ(), self:getDirection())
+
 	if (self._autoSaveFile) then
 		fs.writeTableToFile(self._autoSaveFile, self._position)
 	end

@@ -512,4 +512,24 @@ function InventoryManager:getLastEmpty() --GOOD
 	return self:getLast(self._delegateEmpty)
 end
 
+function InventoryManager:count()
+	local result = {}
+
+	for i = 1, 16 do
+		local data = self:getItemDetail(i)
+
+		if (data ~= nil) then
+			local id = data:getId()
+
+			if (result[id] == nil) then
+				result[id] = data.count
+			else
+				result[id] = result[id] + data.count
+			end
+		end
+	end
+
+	return result
+end
+
 Inv = InventoryManager(turtle)
