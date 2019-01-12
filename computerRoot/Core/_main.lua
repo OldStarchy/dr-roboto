@@ -1,5 +1,6 @@
 include 'Core/hardTable'
 include 'Core/Interface'
+include 'Core/EventManager'
 include 'Core/Log'
 
 include 'Core/Cli'
