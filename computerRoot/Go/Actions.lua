@@ -226,8 +226,8 @@ go:alias(
       g (ar)*
       g (attack right)*
     The Pain dance:
-      g L"Dancing"((fabrfabl)2L"ohh"u(ra)4dL"rocking it!"r4)*
-      g L"Dancing"((forward attack back right forward attack back left)2 L"ooh" up (right attack)4 down L"rocking it!" right4)*
+      g L'Dancing'((fabrfabl)2L'ohh'u(ra)4dL'rocking it!'r4)*
+      g L'Dancing'((forward attack back right forward attack back left)2 L'ooh' up (right attack)4 down L'rocking it!' right4)*
     Dig a 3x3 tunnel
       g (((Df)! Pv? l(D?f)!Pv?b (D^?u)! D? (D^?u)! D?r2 D? d D? d (Df)!Pv?b l)7 ((Df)! Pv?l(D?f)!Pv?b (D^?u)! D? #16P?#1 (D^?u)! D?r2 D? d D? d (Df)!Pv?b l))?*
 
