@@ -261,7 +261,23 @@ local function doTest(testObj, testContext)
 	env.sleep = function(time)
 		getfenv(2).print('sleeping for ', time)
 	end
-	setmetatable(env, {__index = _G})
+	setmetatable(
+		env,
+		{
+			__index = function(t, k)
+				local val = rawget(t, k)
+				if (val ~= nil) then
+					return val
+				end
+
+				if (k == 'process') then
+					error("can't access process api in tests", 2)
+				end
+
+				return _G[k]
+			end
+		}
+	)
 	setfenv(testWrapper, env)
 	setfenv(testObj.tester, env)
 
