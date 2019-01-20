@@ -80,25 +80,58 @@ function Crafter:getRawItems(itemName, amount, checked)
 end
 
 function Crafter:craft(item, amount)
+	if (turtle.craft == nil) then
+		if (Inv:pushSelection('crafting_table')) then
+			turtle.equipLeft()
+			Inv:popSelection()
+		end
+		if (turtle.craft == nil) then
+			error('Missing crafting bench!')
+		end
+	end
+
 	local recipe = nil
 
 	if (type(item) == 'string') then
-		RecipeBook.Instance:findCraftingRecipeByName(item)
+		recipe = RecipeBook.Instance:findCraftingRecipeByName(item)
 	elseif (isType(item, Recipe)) then
 		recipe = item
-	end
-
-	if (Inv:select('chest')) then
-		turtle.placeDown()
-	else
-		error('No crafting Chest')
 	end
 
 	if (recipe == nil) then
 		error('no recipe for ' .. item)
 	end
 
+	log.info('Trying to craft ' .. recipe.name .. ' ' .. tostring(amount) .. ' times')
+
 	local items = cloneTable(recipe.items)
+
+	local err = false
+	for _item, count in pairs(items) do
+		print('need "' .. _item .. '" * ' .. tostring(count * amount))
+		local _count = Inv:getUnlockedCount(_item)
+		print(_count)
+		if (_count < count * amount) then
+			err = true
+			print('missing ' .. tostring((count * amount) - _count) .. ' ' .. _item)
+		end
+	end
+
+	if (err) then
+		error()
+	end
+
+	if (Inv:select('chest')) then
+		if (turtle.inspectDown()) then
+			log.warn('digging down')
+			turtle.digDown()
+		end
+		if (not turtle.placeDown()) then
+			error('Could not place chest')
+		end
+	else
+		error('No crafting Chest')
+	end
 
 	for i = 1, 16 do
 		local itemStack = Inv:getItemDetail(i)
