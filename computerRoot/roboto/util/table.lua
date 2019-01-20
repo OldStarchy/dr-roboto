@@ -63,3 +63,14 @@ function tableToString(tbl, ind, printed)
 
 	return r
 end
+
+--[[
+	Counts the number of properties in a table
+]]
+function countKeys(tbl)
+	local count = 0
+	for _ in pairs(tbl) do
+		count = count + 1
+	end
+	return count
+end
