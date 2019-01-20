@@ -92,7 +92,7 @@ function isDefined(key)
 	return isDef
 end
 
-local function runWithLogging(func)
+function runWithLogging(func)
 	return xpcall(
 		func,
 		function(err)
