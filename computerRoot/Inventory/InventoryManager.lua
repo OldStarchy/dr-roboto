@@ -361,6 +361,26 @@ function InventoryManager:have(slot, item, count)
 	end
 end
 
+function InventoryManager:getUnlockedCount(item)
+	if (isType(item, 'int')) then
+		if (self._locked[item] == nil) then
+			return self._turtle.getItemCount(item)
+		else
+			return self._turtle.getItemCount(item) - self._locked[item][2]
+		end
+	end
+
+	local s = self:getFirstUnlockedContaining(item)
+
+	local count = 0
+	while (s ~= nil) do
+		count = count + self:getUnlockedCount(s)
+		s = self:getNextUnlockedContaining(item, s)
+	end
+
+	return count
+end
+
 function InventoryManager:hasEmpty() --GOOD
 	return not (not self:getFirstEmpty())
 end
