@@ -1,19 +1,91 @@
 -- Learns about items in the inventory by trying to craft them
 
+local args = {...}
+local strict = false
+
+if (#args == 1 and (args[1] == 's' or args[1] == 'strict')) then
+	strict = true
+end
+
 local grid = {}
 
+local minX = 3
+local maxX = 0
+local minY = 3
+local maxY = 0
+
+local largeGrid = {}
+
 for slot = 1, 16 do
+	local _x = ((slot - 1) % 4)
+	local _y = math.floor((slot - 1) / 4)
+
 	local item = turtle.getItemDetail(slot)
 
-	if (item ~= nil and slot % 4 >= 0) then
-		grid[slot - math.floor(slot / 4)] = item.name
+	if (item ~= nil) then
+		log.info('found ' .. item:getId() .. ' at' .. ' ' .. _x .. ' ' .. _y)
+		if (_x < minX) then
+			minX = _x
+		end
+		if (_y < minY) then
+			minY = _y
+		end
+		if (_x > maxX) then
+			maxX = _x
+		end
+		if (_y > maxY) then
+			maxY = _y
+		end
+
+		if (strict) then
+			largeGrid[slot] = item:getId()
+		else
+			largeGrid[slot] = item.name .. ':*'
+		end
 	end
+end
+
+if (maxX - minX + 1 > 3) then
+	error('too wide')
+end
+if (maxY - minY + 1 > 3) then
+	error('too tall')
+end
+
+for slot = 1, 9 do
+	local _x = ((slot - 1) % 3)
+	local _y = math.floor((slot - 1) / 3)
+
+	local _fx = _x + minX
+	local _fy = _y + minY
+
+	local item = largeGrid[_fy * 4 + _fx]
+	log.info('checking ' .. ' ' .. _fx .. ' ' .. _fy)
+
+	if (item ~= nil) then
+		log.info('found' .. ' ' .. item)
+		log.info('putting' .. ' ' .. _x .. ' ' .. _y)
+		grid[_y * 3 + _x] = item
+	end
+end
+
+if (not Inv:pushSelection(Inv:getFirstEmpty())) then
+	Inv:popSelection()
+	error('no empty slot to craft into')
 end
 
 if (turtle.craft(1)) then
 	local result = turtle.getItemDetail()
 
-	RecipeBook:add(CraftingRecipe(result.name, grid, result.count))
-
-	print('Added entry for ' .. result.name)
+	if (strict) then
+		RecipeBook.Instance:add(CraftingRecipe(result:getId(), grid, result.count))
+		log.info('Added entry for ' .. result:getId())
+	else
+		RecipeBook.Instance:add(CraftingRecipe(result.name, grid, result.count))
+		log.info('Added entry for ' .. result.name)
+	end
+else
+	log.info('no result')
 end
+
+Inv:popSelection()
