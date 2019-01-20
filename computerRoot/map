@@ -1,0 +1,60 @@
+-- global taskManager
+
+local cli = Cli('map', 'Map waypoint manager', 'list')
+
+cli:addAction(
+	'list',
+	function()
+		local tags = Map.Instance:getTags()
+
+		local count = countKeys(tags)
+		print(count .. ' tags:')
+		for i, task in pairs(tags) do
+			print(' ' .. i .. ': ' .. tostring(task))
+		end
+	end,
+	nil,
+	'Lists tags'
+)
+
+cli:addAction(
+	'add',
+	function(name, ...)
+		if (not isType(name, 'string')) then
+			print('Must specifiy name')
+			return
+		end
+
+		local args = {...}
+		local pos
+		if (#args > 0) then
+			pos = Position.fromArgs(args)
+		else
+			pos = Mov:getPosition()
+		end
+
+		print('Tagging ' .. pos:toString() .. ' with label "' .. name .. '"')
+
+		Map.Instance:setTag(pos, name)
+	end,
+	{'name', '[x y z [dir]]'},
+	'Sets the tag for a location'
+)
+
+cli:addAction(
+	'remove',
+	function(name)
+		if (not isType(name, 'string')) then
+			print('Must specifiy name')
+			return
+		end
+
+		print('Removing tag "' .. name .. '"')
+
+		Map.Instance:deleteTag(pos, name)
+	end,
+	{'name'},
+	'Removes a tag'
+)
+
+cli:run(...)
