@@ -24,7 +24,7 @@ while (wait) do
 	event, id = os.pullEvent()
 end
 
-runAndPrintErrLines(
+runWithLogging(
 	function()
 		log.info('Restoring location')
 		Mov:trackLocation('.mov.tbl')
@@ -44,6 +44,18 @@ runAndPrintErrLines(
 		log.info('Loading RecipeBook')
 		RecipeBook.Instance = RecipeBook.LoadFromFile('recipe.dictionary.tbl', true)
 		-- include 'Crafting/StandardRecipes'
+
+		if (fs.exists('data/Map.tbl')) then
+			Map.Instance = Map.Deserialize(fs.readTableFromFile('data/Map.tbl'))
+		else
+			Map.Instance = Map()
+		end
+		local function saveMap()
+			fs.writeTableToFile('data/Map.tbl', Map.Instance:serialize())
+		end
+		Map.Instance.ev:on('tag_added', saveMap)
+		Map.Instance.ev:on('tag_removed', saveMap)
+		--TODO: load tags from disc
 
 		if (fs.exists('mystartup.lua')) then
 			log.info('Running mystartup.lua')
