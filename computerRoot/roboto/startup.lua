@@ -56,12 +56,43 @@ runWithLogging(
 		Map.Instance.ev:on('tag_added', saveMap)
 		Map.Instance.ev:on('tag_removed', saveMap)
 		--TODO: load tags from disc
-
-		if (fs.exists('mystartup.lua')) then
-			log.info('Running mystartup.lua')
-			dofile('mystartup.lua')
-		end
 	end
+)
+
+process.spawnProcess(
+	function()
+		local surf = Surface(term.getSize(), 7)
+		surf:startMirroring(term.native(), 1, 1)
+		local surfTerm = surf:asTerm()
+
+		rednet.open('right')
+
+		while (true) do
+			local ev = {os.pullEventRaw()}
+
+			if (ev[1] == 'turtle_inventory' or ev[1] == 'turtle_moved') then
+				rednet.broadcast(
+					textutils.serialize(
+						{
+							inventory = Inv:count(),
+							location = Mov:getPosition():toString(),
+							fuel = turtle.getFuelLevel()
+						}
+					)
+				)
+				print(textutils.serialize(ev[1]))
+			end
+			-- local cterm = term.current()
+			-- term.redirect(surfTerm)
+			-- term.clear()
+			-- term.setCursorPos(1, 1)
+			-- print(tableToString(ev))
+			-- term.redirect(cterm)
+			-- term.setCursorBlink(true)
+		end
+	end,
+	'remote monitor',
+	true
 )
 
 -- Print call logging
