@@ -59,5 +59,14 @@ function Hud:start()
 	--TODO: copy the code from the monitor program and redirect the shell to the console
 
 	suppressMissingGlobalWarnings(true)
-	os.run({}, 'rom/programs/shell')
+
+	local shellProc =
+		process.spawnProcess(
+		function()
+			os.run({}, 'rom/programs/shell')
+		end,
+		'shell'
+	)
+
+	process.wait(shellProc)
 end

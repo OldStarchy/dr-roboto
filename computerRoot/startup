@@ -111,7 +111,7 @@ process.spawnProcess(
 		rednet.open('right')
 
 		while (true) do
-			local ev = {os.pullEvent()}
+			local ev = {os.pullEventRaw()}
 
 			if (ev[1] == 'turtle_inventory' or ev[1] == 'turtle_moved') then
 				rednet.broadcast(
@@ -133,5 +133,7 @@ process.spawnProcess(
 			-- term.redirect(cterm)
 			-- term.setCursorBlink(true)
 		end
-	end
+	end,
+	'remote monitor',
+	true
 )

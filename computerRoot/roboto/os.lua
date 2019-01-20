@@ -27,28 +27,37 @@ print('Loading utils...')
 local utils = fs.list('roboto/util')
 for _, util in ipairs(utils) do
 	if (util ~= '.' and util ~= '..') then
-		loadfile('roboto/util/' .. util, getfenv())()
+		loadfile('roboto/util/' .. util, _G)()
 	end
 end
 print('OK')
 
 local components = {
 	'debug',
-	'log',
 	'fs',
 	'vfs',
 	'loader',
 	'class',
-	'types'
+	'types',
+	'missingGlobals',
+	'log',
+	'runWithLogging',
+	'ProcessManager'
 }
 
 for _, component in ipairs(components) do
 	term.write('Loading ' .. component .. '...')
-	loadfile('roboto/component/' .. component .. '.lua', getfenv())()
+	loadfile('roboto/component/' .. component .. '.lua', _G)()
 	print('OK')
 end
 
-log.addWriter(loadfile('roboto/component/logPrintWriter.lua', getfenv())())
+local procMan = ProcessManager()
+_G.process = procMan:getAPI()
+
+--[[ Initialize the logger ]]
+log.addWriter(loadfile('roboto/component/logPrintWriter.lua', _G)())
+
+--shuffle log backups
 if (fs.exists('logs/latest.log')) then
 	if (fs.exists('logs/backup.log')) then
 		if (fs.exists('logs/backup2.log')) then
@@ -59,127 +68,34 @@ if (fs.exists('logs/latest.log')) then
 
 	fs.move('logs/latest.log', 'logs/backup.log')
 end
-log.addWriter(loadfile('roboto/component/logFileWriter.lua', getfenv())('logs/latest.log'))
+log.addWriter(loadfile('roboto/component/logFileWriter.lua', _G)('logs/latest.log'))
 
 log.info('Log initialized at ' .. tostring(os.time()))
 
-local ignoreMissingGlobal = false
-local ignoreMissingGlobals = {
-	_PROMPT = true,
-	_PROMPT2 = true,
-	multishell = true
-}
-setmetatable(
-	_G,
-	{
-		__index = function(t, v)
-			if (ignoreMissingGlobals[v] or ignoreMissingGlobal) then
-				return nil
-			end
-			print('Attempt to access missing global "' .. tostring(v) .. '"')
-			printStackTrace(2, 1)
-			return nil
-		end
-	}
-)
-function suppressMissingGlobalWarnings(suppress)
-	ignoreMissingGlobal = suppress
-end
-function isDefined(key)
-	ignoreMissingGlobal = true
-	local isDef = getfenv(2)[key] ~= nil
-	ignoreMissingGlobal = false
-	return isDef
-end
-
-function runWithLogging(func)
-	return xpcall(
-		func,
-		function(err)
-			local trace = getStackTrace(20, 2)
-			trace[1] = err
-
-			for _, err in pairs(trace) do
-				local frameInfo = getStackFrameInfo(err)
-
-				local errLine =
-					stringutil.join(
-					{
-						frameInfo.file,
-						frameInfo.line,
-						frameInfo.message
-					},
-					':'
-				) .. ':'
-
-				log.error(errLine)
-
-				if (frameInfo.file and frameInfo.line) then
-					errLine = getFileLines(frameInfo.file, frameInfo.line, 3)
-					if (errLine ~= nil) then
-						log.error('\t' .. string.gsub(errLine, '\n', '\n\t') .. '\n\n')
-					end
-				end
-			end
-		end
-	)
-end
-
---[[
-	Asks the user for input.
-	Loops forever until an acceptable answer is given.
-
-	if options is nil, any answer is returned
-	if options is a table, the question will loop until an answer in options is given
-	if default is not nil, an empty response will use the default value
-]]
-function ask(question, options, default)
-	while (true) do
-		print(question)
-		local answer = read()
-
-		if (answer == '' and default ~= nil) then
-			answer = default
-		end
-
-		if (options == nil) then
-			return answer
-		end
-		for _, v in ipairs(options) do
-			if (answer == v) then
-				return answer
-			end
-		end
-	end
-end
-
+--[[ Business logic starts here ]]
 if (isPc) then
 	log.info('Running on pc')
 
-	runWithLogging(loadfile('test.lua', getfenv()))
+	runWithLogging(loadfile('test.lua', _G))
 
 	return
 end
 
-runWithLogging(loadfile('roboto/startup.lua', getfenv()))
+runWithLogging(loadfile('roboto/startup.lua', _G))
+
+process.spawnProcess(
+	function()
+		hud = Hud()
+		hud:start()
+
+		-- process.sendTerminate(elpid)
+	end,
+	'hud'
+)
 
 local ok, err =
 	runWithLogging(
 	function()
-		local ProcessManager = include 'runtime/ProcessManager'
-		local procMan = ProcessManager()
-
-		_G.process = procMan:getAPI()
-
-		procMan:spawnProcess(
-			function()
-				hud = Hud()
-				hud:start()
-
-				-- procMan:sendTerminate(elpid)
-			end
-		)
-
 		procMan:run()
 	end
 )
