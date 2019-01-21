@@ -97,14 +97,19 @@ function RecipeBook:add(recipe)
 	return true
 end
 
-function RecipeBook:findCraftingRecipeByName(name)
+--TODO: rename to findCraftingRecipesBySelector
+function RecipeBook:findCraftingRecipeByName(selector)
+	local recipes = {}
+
 	for i = 1, #self._craftingRecipes do
-		if (self._craftingRecipes[i].name == name) then
-			return self._craftingRecipes[i]
+		local resultDetail = ItemDetail.FromId(self._craftingRecipes[i].name)
+
+		if (resultDetail:matches(selector)) then
+			table.insert(recipes, self._craftingRecipes[i])
 		end
 	end
 
-	return nil
+	return recipes
 end
 
 function RecipeBook:findFurnaceRecipeByName(name)

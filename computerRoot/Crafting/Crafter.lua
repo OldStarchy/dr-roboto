@@ -79,6 +79,23 @@ function Crafter:getRawItems(itemName, amount, checked)
 	return coreRequirements
 end
 
+function Crafter:_hasIngredientsToCraft(recipe, amount)
+	local items = cloneTable(recipe.items)
+
+	local err = false
+	for _item, count in pairs(items) do
+		log.info('need "' .. _item .. '" * ' .. tostring(count * amount))
+		local _count = Inv:getUnlockedCount(_item)
+		log.info('have ' .. tostring(_count))
+		if (_count < count * amount) then
+			err = true
+			log.info('missing ' .. tostring((count * amount) - _count) .. ' ' .. _item)
+		end
+	end
+
+	return not err
+end
+
 function Crafter:craft(item, amount)
 	if (turtle.craft == nil) then
 		if (Inv:pushSelection('crafting_table')) then
@@ -93,33 +110,27 @@ function Crafter:craft(item, amount)
 	local recipe = nil
 
 	if (type(item) == 'string') then
-		recipe = RecipeBook.Instance:findCraftingRecipeByName(item)
+		local recipes = RecipeBook.Instance:findCraftingRecipeByName(item)
+
+		if (#recipes == 0) then
+			error('no recipe for ' .. item)
+		end
+
+		for _, v in ipairs(recipes) do
+			if (self:_hasIngredientsToCraft(v, amount)) then
+				recipe = v
+				break
+			end
+		end
 	elseif (isType(item, Recipe)) then
 		recipe = item
 	end
 
 	if (recipe == nil) then
-		error('no recipe for ' .. item)
+		error('not enough resources to craft ' .. item)
 	end
 
 	log.info('Trying to craft ' .. recipe.name .. ' ' .. tostring(amount) .. ' times')
-
-	local items = cloneTable(recipe.items)
-
-	local err = false
-	for _item, count in pairs(items) do
-		print('need "' .. _item .. '" * ' .. tostring(count * amount))
-		local _count = Inv:getUnlockedCount(_item)
-		print(_count)
-		if (_count < count * amount) then
-			err = true
-			print('missing ' .. tostring((count * amount) - _count) .. ' ' .. _item)
-		end
-	end
-
-	if (err) then
-		error()
-	end
 
 	if (Inv:select('chest')) then
 		if (turtle.inspectDown()) then
@@ -132,6 +143,8 @@ function Crafter:craft(item, amount)
 	else
 		error('No crafting Chest')
 	end
+
+	local items = cloneTable(recipe.items)
 
 	for i = 1, 16 do
 		local itemStack = Inv:getItemDetail(i)
@@ -169,6 +182,7 @@ function Crafter:craft(item, amount)
 	end
 
 	turtle.craft(amount)
+	Inv:unlockAll()
 
 	while (turtle.suckDown()) do
 	end

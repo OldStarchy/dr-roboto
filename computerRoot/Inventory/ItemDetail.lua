@@ -1,13 +1,38 @@
 ItemDetail = Class()
 ItemDetail.ClassName = 'ItemDetail'
 
-function ItemDetail:constructor()
-	error("Can't construct items manually", 3)
+function ItemDetail:constructor(name, metadata)
+	self.name = name
+	self.metadata = metadata
 end
 
 function ItemDetail:conversionConstructor()
-	if (self:getType() == ItemDetail) then
-		error('Use either ItemStackDetail or ItemDetail', 3)
+	if (self.damage ~= nil) then
+		self.metadata = self.damage
+	elseif (self.metadata ~= nil) then
+		self.metadata = self.metadata
+	end
+end
+
+function ItemDetail.FromId(id)
+	local parts = stringutil.split(id, ':')
+
+	if (#parts == 1) then
+		return ItemDetail('minecraft:' .. id, 0)
+	elseif (#parts == 2) then
+		if (tonumber(parts[2]) == nil) then
+			return ItemDetail(id, 0)
+		else
+			return ItemDetail('minecraft:' .. parts[1], tonumber(parts[2]))
+		end
+	elseif (#parts == 3) then
+		if (tonumber(parts[3]) == nil) then
+			return ItemDetail(id, 0)
+		else
+			return ItemDetail(parts[1] .. ':' .. parts[2], tonumber(parts[3]))
+		end
+	else
+		error('invalid format for item id "' .. id .. '"', 2)
 	end
 end
 
