@@ -2,26 +2,28 @@ log.info('Loading libraries')
 include 'Core/_main'
 include 'UserFunctions/_main'
 
-suppressMissingGlobalWarnings(false)
+if (not os.isPc()) then
+	suppressMissingGlobalWarnings(false)
 
-print('Running startup in 2 seconds')
-term.write('Press enter to skip ... ')
+	print('Running startup in 2 seconds')
+	term.write('Press enter to skip ... ')
 
-term.setCursorBlink(true)
-local tid = os.startTimer(2)
+	term.setCursorBlink(true)
+	local tid = os.startTimer(2)
 
-local event, id = os.pullEvent()
-local wait = true
-while (wait) do
-	if (event == 'timer' and id == tid) then
-		print('running')
-		loadfile('less')('run', 'test')
-		break
-	elseif (event == 'key' and id == 28) then
-		print('skipping')
-		break
+	local event, id = os.pullEvent()
+	local wait = true
+	while (wait) do
+		if (event == 'timer' and id == tid) then
+			print('running')
+			loadfile('less')('run', 'test')
+			break
+		elseif (event == 'key' and id == 28) then
+			print('skipping')
+			break
+		end
+		event, id = os.pullEvent()
 	end
-	event, id = os.pullEvent()
 end
 
 runWithLogging(
@@ -59,6 +61,20 @@ runWithLogging(
 	end
 )
 
+if (os.isPc()) then
+	log.info('Running on pc')
+
+	runWithLogging(loadfile('test.lua', _G))
+
+	return
+end
+
+-- Print call logging
+-- local oldPrint = print
+-- _G.print = function(...)
+-- 	local st = getStackTrace(1, 2)[1]
+-- 	oldPrint(st, ...)
+-- end
 process.spawnProcess(
 	function()
 		local surf = Surface(term.getSize(), 7)
@@ -94,10 +110,3 @@ process.spawnProcess(
 	'remote monitor',
 	true
 )
-
--- Print call logging
--- local oldPrint = print
--- _G.print = function(...)
--- 	local st = getStackTrace(1, 2)[1]
--- 	oldPrint(st, ...)
--- end

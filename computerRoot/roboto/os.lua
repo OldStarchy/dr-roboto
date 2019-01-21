@@ -72,16 +72,12 @@ log.addWriter(loadfile('roboto/component/logFileWriter.lua', _G)('logs/latest.lo
 
 log.info('Log initialized at ' .. tostring(os.time()))
 
+runWithLogging(loadfile('roboto/startup.lua', _G))
+
 --[[ Business logic starts here ]]
 if (isPc) then
-	log.info('Running on pc')
-
-	runWithLogging(loadfile('test.lua', _G))
-
 	return
 end
-
-runWithLogging(loadfile('roboto/startup.lua', _G))
 
 process.spawnProcess(
 	function()

@@ -73,3 +73,6 @@ end
 function os.sleep(nTime)
 	sleep(nTime)
 end
+
+function os.queueEvent()
+end
