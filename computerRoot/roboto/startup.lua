@@ -27,7 +27,7 @@ end
 runWithLogging(
 	function()
 		log.info('Restoring location')
-		Mov:trackLocation('.mov.tbl')
+		Mov:trackLocation('data/position.tbl')
 
 		log.info('Loading skills')
 		skillSet = SkillSet.GetDefaultSkillSet()
@@ -39,10 +39,10 @@ runWithLogging(
 
 		log.info('Loading ItemInfo')
 		ItemInfo.Instance = ItemInfo()
-		ItemInfo.Instance:loadHardTable('item.dictionary')
+		ItemInfo.Instance:loadHardTable('data/item.dictionary')
 
 		log.info('Loading RecipeBook')
-		RecipeBook.Instance = RecipeBook.LoadFromFile('recipe.dictionary.tbl', true)
+		RecipeBook.Instance = RecipeBook.LoadFromFile('data/recipe.dictionary.tbl', true)
 		-- include 'Crafting/StandardRecipes'
 
 		if (fs.exists('data/Map.tbl')) then

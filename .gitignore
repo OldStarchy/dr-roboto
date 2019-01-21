@@ -1,3 +1,4 @@
+
 *.ht.txt
 *.tbl
 .mov.tbl
@@ -5,3 +6,5 @@
 mystartup.lua
 stacktrace.txt
 computerRoot/logs
+!computerRoot/data/item.dictionary.ht.txt
+!computerRoot/data/recipe.dictionary.tbl
