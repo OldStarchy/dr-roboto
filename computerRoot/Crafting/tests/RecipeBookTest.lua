@@ -15,7 +15,7 @@ test(
 			local recipe = CraftingRecipe('something', {}, 1)
 
 			book:add(recipe)
-			t.assertEqual(book:findCraftingRecipeByName(recipe.name), recipe)
+			t.assertTableEqual(book:findCraftingRecipeByName(recipe.name), {recipe})
 		end,
 		['crafting duplicate recipe'] = function(t)
 			local book = RecipeBook()
@@ -25,12 +25,12 @@ test(
 
 			t.assertEqual(book:add(recipe1), true)
 			t.assertEqual(book:add(recipe2), false)
-			t.assertEqual(book:findCraftingRecipeByName('anotherthing'), nil)
+			t.assertTableEqual(book:findCraftingRecipeByName('anotherthing'), {})
 		end,
 		['crafting find on empty'] = function(t)
 			local book = RecipeBook()
 
-			t.assertEqual(book:findCraftingRecipeByName('item1'), nil)
+			t.assertTableEqual(book:findCraftingRecipeByName('item1'), {})
 		end,
 		['crafting find with match'] = function(t)
 			local book = RecipeBook()
@@ -38,7 +38,7 @@ test(
 			local recipe = CraftingRecipe('item1', {}, 1)
 			book:add(recipe)
 
-			t.assertEqual(book:findCraftingRecipeByName('item1'), recipe)
+			t.assertTableEqual(book:findCraftingRecipeByName('item1'), {recipe})
 		end,
 		['crafting find without match'] = function(t)
 			local book = RecipeBook()
@@ -46,7 +46,7 @@ test(
 			local recipe = CraftingRecipe('item1', {}, 1)
 			book:add(recipe)
 
-			t.assertEqual(book:findCraftingRecipeByName('potatoes'), nil)
+			t.assertTableEqual(book:findCraftingRecipeByName('potatoes'), {})
 		end,
 		['smelting find by name'] = function(t)
 			local book = RecipeBook()
@@ -54,7 +54,7 @@ test(
 			local recipe = FurnaceRecipe('iron bars', 'iron ore', 4, 16)
 
 			book:add(recipe)
-			t.assertEqual(book:findFurnaceRecipeByName(recipe.name), recipe)
+			t.assertTableEqual(book:findFurnaceRecipeByName(recipe.name), recipe)
 		end,
 		['smelting duplicate recipe'] = function(t)
 			local book = RecipeBook()
