@@ -3,7 +3,7 @@ ChopTreeSkill.ClassName = 'ChopTreeSkill'
 ChopTreeSkill.description = 'Chops down a tree'
 
 function ChopTreeSkill:canHandleTask(task)
-	return isType(task, ChopTreeTask)
+	return false --isType(task, ChopTreeTask)
 end
 
 function ChopTreeSkill:completeTask(task)

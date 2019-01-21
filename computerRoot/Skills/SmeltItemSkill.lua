@@ -2,12 +2,15 @@ SmeltItemSkill = Class(Skill)
 SmeltItemSkill.ClassName = 'SmeltItemSkill'
 
 function SmeltItemSkill:canHandleTask(task)
-	if task.getType() == 'GatherItemTask' then
-		local recipe = RecipeBook:findCraftingRecipeByName(task.item.name)
+	print('SmeltItemSkill:canHandleTask(task)')
+	if isType(task, GatherItemTask) then
+		local recipe = RecipeBook.Instance:findFurnaceRecipeByName(task.item)
+		print(recipe)
 		if not recipe then
 			return false
 		end
-		if recipe.getType() == 'FurnaceRecipe' then
+		if isType(task, FurnaceRecipe) then
+			print('SmeltItemSkill:canHandleTask(task) true')
 			return true
 		end
 	end

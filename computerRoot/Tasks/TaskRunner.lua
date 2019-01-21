@@ -18,7 +18,7 @@ function TaskRunner:run()
 		end
 
 		if (self._verbose) then
-			print('Gathering requirements')
+			print('Gathering requirements for ' .. tostring(skill))
 		end
 
 		local requirements = skill:getRequirements(task)

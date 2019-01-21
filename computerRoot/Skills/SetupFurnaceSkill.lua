@@ -2,7 +2,7 @@ SetupFurnaceSkill = Class(Skill)
 SetupFurnaceSkill.ClassName = 'SetupFurnaceSkill'
 
 function SetupFurnaceSkill:canHandleTask(task)
-	return task.getType() == 'SetupTask' and task.itemType == Furnace.ClassName
+	return isType(task, SetupTask) and task.itemType == Furnace.ClassName
 end
 
 function SetupFurnaceSkill:getRequirements(task)

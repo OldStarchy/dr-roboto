@@ -23,7 +23,7 @@ RecipeBook.Instance:add(
 	)
 )
 
-RecipeBook.Instance:add(FurnaceRecipe('glass', 'sand', 1))
+RecipeBook.Instance:add(FurnaceRecipe('stone', 'cobblestone', 1))
 
 --complete list:
 --https://minecraft.gamepedia.com/Smelting

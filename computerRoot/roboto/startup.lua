@@ -31,7 +31,7 @@ runWithLogging(
 
 		log.info('Loading skills')
 		skillSet = SkillSet.GetDefaultSkillSet()
-		log.info(skillSet:getSkillCount() .. ' slills')
+		log.info(skillSet:getSkillCount() .. ' skills')
 
 		log.info('Loading TaskManager')
 		taskManager = TaskManager()

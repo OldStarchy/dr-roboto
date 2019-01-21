@@ -10,6 +10,8 @@ function SkillSet.GetDefaultSkillSet()
 	skillSet:addSkill(GatherSandSkill())
 	skillSet:addSkill(CraftItemSkill())
 	skillSet:addSkill(NeedleMineSkill())
+	skillSet:addSkill(SetupFurnaceSkill())
+	skillSet:addSkill(SmeltItemSkill())
 
 	return skillSet
 end

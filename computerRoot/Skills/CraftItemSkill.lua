@@ -16,14 +16,28 @@ end
 function CraftItemSkill:getRequirements(task)
 	local requirements = {}
 
-	local recipe = RecipeBook.Instance:findCraftingRecipeByName(task.item)
+	local recipes = RecipeBook.Instance:findCraftingRecipeByName(task.item)
+	if recipes == nil or #recipes == 0 then
+		error('no recipes found for ' .. task.item)
+	end
 
-	for item, count in pairs(recipe.items) do
-		local haveCount = Inv:countItem(item)
+	local bestRecipe = nil
+	local bestRecipeCount = 1000000
 
-		if (haveCount < count) then
-			table.insert(requirements, GatherItemTask(item, count - haveCount))
+	for k, recipe in ipairs(recipes) do
+		for item, count in pairs(recipe.items) do
+			local haveCount = Inv:countItem(item)
+			local itemsNeeded = count - haveCount
+
+			if (haveCount < count and itemsNeeded < bestRecipeCount) then
+				bestRecipe = recipe
+				bestRecipeCount = itemsNeeded
+			end
 		end
+	end
+
+	if (bestRecipe ~= nil) then
+		table.insert(requirements, GatherItemTask(bestRecipe, itemsNeeded))
 	end
 
 	return requirements
