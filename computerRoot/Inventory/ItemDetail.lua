@@ -2,7 +2,7 @@ ItemDetail = Class()
 ItemDetail.ClassName = 'ItemDetail'
 
 function ItemDetail:constructor(name, metadata)
-	self.name = name
+	self.name = name:lower()
 	self.metadata = metadata
 end
 
@@ -15,24 +15,25 @@ function ItemDetail:conversionConstructor()
 end
 
 function ItemDetail.FromId(id)
-	local parts = stringutil.split(id, ':')
+	local itemId = id:lower()
+	local parts = stringutil.split(itemId, ':')
 
 	if (#parts == 1) then
-		return ItemDetail('minecraft:' .. id, 0)
+		return ItemDetail('minecraft:' .. itemId, 0)
 	elseif (#parts == 2) then
 		if (tonumber(parts[2]) == nil) then
-			return ItemDetail(id, 0)
+			return ItemDetail(itemId, 0)
 		else
 			return ItemDetail('minecraft:' .. parts[1], tonumber(parts[2]))
 		end
 	elseif (#parts == 3) then
 		if (tonumber(parts[3]) == nil) then
-			return ItemDetail(id, 0)
+			return ItemDetail(itemId, 0)
 		else
 			return ItemDetail(parts[1] .. ':' .. parts[2], tonumber(parts[3]))
 		end
 	else
-		error('invalid format for item id "' .. id .. '"', 2)
+		error('invalid format for item id "' .. itemId .. '"', 2)
 	end
 end
 
@@ -48,7 +49,7 @@ function ItemDetail:matches(selector)
 	local name = self.name .. ':' .. self.metadata
 
 	local subSelectors = {}
-	for subSelector in selector:gmatch('[^,]*') do
+	for subSelector in selector:lower():gmatch('[^,]*') do
 		local colons = select(2, subSelector:gsub(':', ''))
 		if (colons == 0) then
 			subSelector = '*:' .. subSelector .. ':*'

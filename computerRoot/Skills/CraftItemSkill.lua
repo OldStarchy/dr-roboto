@@ -9,6 +9,10 @@ function CraftItemSkill:canHandleTask(task)
 	end
 
 	local recipes = RecipeBook.Instance:findCraftingRecipesBySelector(task.item)
+	print('CraftItemSkill .. ' .. task.item)
+	for item, count in pairs(recipes) do
+		print(item)
+	end
 
 	return recipes ~= nil and #recipes ~= 0
 end

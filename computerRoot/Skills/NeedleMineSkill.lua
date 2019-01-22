@@ -11,7 +11,22 @@ NeedleMineSkill.Things = {
 
 function NeedleMineSkill:canHandleTask(task)
 	--TODO: 'minecraft:sand:0' == 'sand'
-	return isType(task, GatherItemTask) and NeedleMineSkill.Things[task.item]
+	print('NeedleMineSkill:canHandleTask(task)')
+	if isType(task, GatherItemTask) then
+		for thing, accepted in pairs(NeedleMineSkill.Things) do
+			print(thing)
+			print(accepted)
+			if accepted then
+				local detail = ItemDetail.FromId(thing)
+				print(detail)
+				if detail:matches(task.item) then
+					return true
+				end
+			end
+		end
+	end
+
+	return false
 end
 
 function NeedleMineSkill:completeTask(task)

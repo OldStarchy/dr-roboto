@@ -138,6 +138,10 @@ function BlockMap:findNearest(blockType, toLocation)
 	local currentSmallest = nil
 	local smallestDistance = 99999999
 
+	if (self._blocks[blockType] == nil) then
+		return nil
+	end
+
 	for _, block in ipairs(self._blocks[blockType]) do
 		local distance = block.location:distanceTo(other)
 		if distance < smallestDistance then

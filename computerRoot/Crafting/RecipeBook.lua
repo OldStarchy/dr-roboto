@@ -101,7 +101,6 @@ function RecipeBook:findCraftingRecipesBySelector(selector)
 	local recipes = {}
 
 	for i = 1, #self._craftingRecipes do
-		print('name: ' .. self._craftingRecipes[i].name)
 		local resultDetail = ItemDetail.FromId(self._craftingRecipes[i].name)
 
 		if (resultDetail:matches(selector)) then
