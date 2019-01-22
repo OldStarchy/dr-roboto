@@ -97,11 +97,11 @@ function RecipeBook:add(recipe)
 	return true
 end
 
---TODO: rename to findCraftingRecipesBySelector
-function RecipeBook:findCraftingRecipeByName(selector)
+function RecipeBook:findCraftingRecipesBySelector(selector)
 	local recipes = {}
 
 	for i = 1, #self._craftingRecipes do
+		print('name: ' .. self._craftingRecipes[i].name)
 		local resultDetail = ItemDetail.FromId(self._craftingRecipes[i].name)
 
 		if (resultDetail:matches(selector)) then
@@ -112,9 +112,37 @@ function RecipeBook:findCraftingRecipeByName(selector)
 	return recipes
 end
 
-function RecipeBook:findFurnaceRecipeByName(name)
+function RecipeBook:findBestCraftingRecipeBySelector(selector)
+	local recipes = self:findCraftingRecipesBySelector(selector)
+	if #recipes == 0 then
+		return nil
+	end
+
+	local bestRecipe = nil
+	local bestRecipeCount = 9999999
+
+	for k, recipe in ipairs(recipes) do
+		local itemsNeeded = 0
+
+		for item, count in pairs(recipe.items) do
+			local haveCount = Inv:countItem(item)
+			itemsNeeded = itemsNeeded + count - haveCount
+		end
+
+		if (itemsNeeded < bestRecipeCount) then
+			bestRecipe = recipe
+			bestRecipeCount = itemsNeeded
+		end
+	end
+
+	return bestRecipe
+end
+
+function RecipeBook:findFurnaceRecipeBySelector(selector)
 	for i = 1, #self._furnaceRecipes do
-		if (self._furnaceRecipes[i].name == name) then
+		local resultDetail = ItemDetail.FromId(self._furnaceRecipes[i].name)
+
+		if (resultDetail:matches(selector)) then
 			return self._furnaceRecipes[i]
 		end
 	end
@@ -124,7 +152,9 @@ end
 
 function RecipeBook:findByIngredient(ingredient)
 	for i = 1, #self._furnaceRecipes do
-		if (self._furnaceRecipes[i].ingredient == ingredient) then
+		local resultDetail = ItemDetail.FromId(self._furnaceRecipes[i].ingredient)
+
+		if (resultDetail:matches(ingredient)) then
 			return self._furnaceRecipes[i]
 		end
 	end
@@ -136,9 +166,19 @@ function RecipeBook:findByGrid(recipe)
 	for i = 1, #self._craftingRecipes do
 		local match = true
 		for j = 1, 9 do
-			if (self._craftingRecipes[i].grid[j] ~= recipe[j]) then
-				match = false
-				break
+			local item = self._craftingRecipes[i].grid[j]
+			if item == nil then
+				if (recipe[j] ~= nil) then
+					match = false
+					break
+				end
+			else
+				local resultDetail = ItemDetail.FromId(item)
+
+				if (not resultDetail:matches(recipe[j])) then
+					match = false
+					break
+				end
 			end
 		end
 

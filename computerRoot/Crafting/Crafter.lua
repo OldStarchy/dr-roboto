@@ -48,7 +48,7 @@ function Crafter:getRawItems(itemName, amount, checked)
 
 	checked[itemName] = true
 
-	local recipes = self._book:findCraftingRecipeByName(itemName)
+	local recipes = self._book:findCraftingRecipesBySelector(itemName)
 
 	if (#recipes == 0) then
 		return {[itemName] = amount}
@@ -110,7 +110,7 @@ function Crafter:craft(item, amount)
 	local recipe = nil
 
 	if (type(item) == 'string') then
-		local recipes = RecipeBook.Instance:findCraftingRecipeByName(item)
+		local recipes = RecipeBook.Instance:findCraftingRecipesBySelector(item)
 
 		if (#recipes == 0) then
 			error('no recipe for ' .. item)

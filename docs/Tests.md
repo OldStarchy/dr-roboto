@@ -54,9 +54,9 @@ test(
 
             book:add(recipe)
 
-            local retrieved = book:findCraftingRecipeByName(recipeName)
+            local retrieved = book:findCraftingRecipesBySelector(recipeName)
 
-            t.assertEqual(retrieved, recipe)
+            t.assertEqual(retrieved, {recipe})
         end,
     }
 )
@@ -132,8 +132,8 @@ A short-cut function for creating a table with its metatable's `__index` and `__
 
 To run the tests, you should invoke the `test.lua` file, usually by running `dofile('test.lua')()`. The file takes two optional arguments, `logLevel`, and `filter`. A log level is any one of `0`, `1`, or `2`.
 
--   `0`: Only a summary is printed to the terminal
--   `1`: Tests that fail are logged to the terminal, along with a summary.
--   `2`: All tests are logged, along with a summary.
+- `0`: Only a summary is printed to the terminal
+- `1`: Tests that fail are logged to the terminal, along with a summary.
+- `2`: All tests are logged, along with a summary.
 
 The filter is pattern used to match against a tests full namespace. eg. `'*Block*Constructor'` will match `'FurnaceBlock.EmptyConstructor'` and `'Blocker.Constructor'` but not `'OtherThing.SomethingElse'`.

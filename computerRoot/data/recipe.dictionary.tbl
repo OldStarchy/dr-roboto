@@ -1,309 +1,315 @@
 {
-  crafting = {
-    {
-      grid = {
-        "minecraft:log:3",
-      },
-      name = "minecraft:planks:3",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:planks:*",
-        "minecraft:planks:*",
-        [ 4 ] = "minecraft:planks:*",
-        [ 5 ] = "minecraft:planks:*",
-      },
-      name = "minecraft:crafting_table",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:planks:1",
-        "minecraft:planks:1",
-        [ 7 ] = "minecraft:planks:1",
-        [ 8 ] = "minecraft:planks:1",
-        [ 4 ] = "minecraft:planks:1",
-        [ 5 ] = "minecraft:planks:1",
-      },
-      name = "minecraft:spruce_door:0",
-      produces = 3,
-    },
-    {
-      grid = {
-        "minecraft:planks:*",
-      },
-      name = "minecraft:wooden_button",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:log:2",
-      },
-      name = "minecraft:planks:2",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:planks:2",
-        "minecraft:planks:2",
-        [ 7 ] = "minecraft:planks:2",
-        [ 8 ] = "minecraft:planks:2",
-        [ 4 ] = "minecraft:planks:2",
-        [ 5 ] = "minecraft:planks:2",
-      },
-      name = "minecraft:birch_door:0",
-      produces = 3,
-    },
-    {
-      grid = {
-        "minecraft:log:1",
-      },
-      name = "minecraft:planks:1",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:log:0",
-      },
-      name = "minecraft:planks:0",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:planks:0",
-        "minecraft:planks:0",
-        [ 7 ] = "minecraft:planks:0",
-        [ 8 ] = "minecraft:planks:0",
-        [ 4 ] = "minecraft:planks:0",
-        [ 5 ] = "minecraft:planks:0",
-      },
-      name = "minecraft:wooden_door:0",
-      produces = 3,
-    },
-    {
-      grid = {
-        "minecraft:planks:3",
-        "minecraft:planks:3",
-        [ 7 ] = "minecraft:planks:3",
-        [ 8 ] = "minecraft:planks:3",
-        [ 4 ] = "minecraft:planks:3",
-        [ 5 ] = "minecraft:planks:3",
-      },
-      name = "minecraft:jungle_door:0",
-      produces = 3,
-    },
-    {
-      grid = {
-        "minecraft:planks:*",
-        "minecraft:planks:*",
-        [ 7 ] = "minecraft:planks:*",
-        [ 8 ] = "minecraft:planks:*",
-        [ 4 ] = "minecraft:planks:*",
-        [ 5 ] = "minecraft:planks:*",
-      },
-      name = "minecraft:wooden_door:0",
-      produces = 3,
-    },
-    {
-      grid = {
-        "minecraft:planks:*",
-        "minecraft:planks:*",
-      },
-      name = "minecraft:wooden_pressure_plate",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:cobblestone:*",
-        "minecraft:cobblestone:*",
-        [ 4 ] = "minecraft:cobblestone:*",
-        [ 8 ] = "minecraft:cobblestone:*",
-        [ 7 ] = "minecraft:cobblestone:*",
-      },
-      name = "minecraft:furnace",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:cobblestone:*",
-        [ 7 ] = "minecraft:cobblestone:*",
-        [ 8 ] = "minecraft:cobblestone:*",
-        [ 4 ] = "minecraft:cobblestone:*",
-        [ 5 ] = "minecraft:cobblestone:*",
-      },
-      name = "minecraft:stone_stairs",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:cobblestone:*",
-        "minecraft:cobblestone:*",
-        [ 4 ] = "minecraft:cobblestone:*",
-        [ 5 ] = "minecraft:cobblestone:*",
-      },
-      name = "minecraft:cobblestone_wall",
-      produces = 6,
-    },
-    {
-      grid = {
-        "minecraft:planks:*",
-        [ 4 ] = "minecraft:planks:*",
-      },
-      name = "minecraft:stick",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:cobblestone:*",
-        [ 4 ] = "minecraft:stick:*",
-        [ 7 ] = "minecraft:stick:*",
-      },
-      name = "minecraft:stone_shovel",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:cobblestone:*",
-        "minecraft:cobblestone:*",
-        [ 8 ] = "minecraft:stick:*",
-        [ 5 ] = "minecraft:stick:*",
-      },
-      name = "minecraft:stone_pickaxe",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:cobblestone:*",
-        "minecraft:cobblestone:*",
-        [ 4 ] = "minecraft:cobblestone:*",
-        [ 5 ] = "minecraft:stick:*",
-        [ 8 ] = "minecraft:stick:*",
-      },
-      name = "minecraft:stone_axe",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:log:*",
-      },
-      name = "minecraft:planks",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:planks:*",
-        "minecraft:planks:*",
-        [ 4 ] = "minecraft:planks:*",
-        [ 8 ] = "minecraft:planks:*",
-        [ 7 ] = "minecraft:planks:*",
-      },
-      name = "minecraft:chest",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:iron_block:*",
-      },
-      name = "minecraft:iron_ingot",
-      produces = 9,
-    },
-    {
-      grid = {
-        "minecraft:iron_ingot:*",
-        "minecraft:iron_ingot:*",
-        [ 7 ] = "minecraft:iron_ingot:*",
-        [ 8 ] = "minecraft:iron_ingot:*",
-        [ 4 ] = "minecraft:iron_ingot:*",
-        [ 5 ] = "minecraft:iron_ingot:*",
-      },
-      name = "minecraft:iron_block",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:glass:*",
-        "minecraft:glass:*",
-        [ 4 ] = "minecraft:glass:*",
-        [ 5 ] = "minecraft:glass:*",
-      },
-      name = "minecraft:glass_pane",
-      produces = 16,
-    },
-    {
-      grid = {
-        "minecraft:stone:3",
-        "minecraft:stone:3",
-        [ 4 ] = "minecraft:stone:3",
-        [ 5 ] = "minecraft:stone:3",
-      },
-      name = "minecraft:stone:4",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:stone:5",
-        "minecraft:stone:5",
-        [ 4 ] = "minecraft:stone:5",
-        [ 5 ] = "minecraft:stone:5",
-      },
-      name = "minecraft:stone:6",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:stone:1",
-        "minecraft:stone:1",
-        [ 4 ] = "minecraft:stone:1",
-        [ 5 ] = "minecraft:stone:1",
-      },
-      name = "minecraft:stone:2",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:planks:1",
-        [ 7 ] = "minecraft:planks:1",
-        [ 8 ] = "minecraft:planks:1",
-        [ 4 ] = "minecraft:planks:1",
-        [ 5 ] = "minecraft:planks:1",
-      },
-      name = "minecraft:spruce_stairs:0",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:planks:0",
-        [ 7 ] = "minecraft:planks:0",
-        [ 8 ] = "minecraft:planks:0",
-        [ 4 ] = "minecraft:planks:0",
-        [ 5 ] = "minecraft:planks:0",
-      },
-      name = "minecraft:oak_stairs:0",
-      produces = 4,
-    },
-    {
-      grid = {
-        "minecraft:stone:*",
-      },
-      name = "minecraft:stone_button",
-      produces = 1,
-    },
-    {
-      grid = {
-        "minecraft:stone:0",
-        "minecraft:stone:0",
-      },
-      name = "minecraft:stone_slab:0",
-      produces = 6,
-    },
-  },
   smelting = {
     {
       produces = 1,
       ingredient = "sand",
       name = "glass",
       burnTime = 12,
+    },
+    {
+      produces = 1,
+      ingredient = "cobblestone",
+      name = "stone",
+      burnTime = 12,
+    },
+  },
+  crafting = {
+    {
+      produces = 4,
+      name = "minecraft:planks:3",
+      grid = {
+        "minecraft:log:3",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:crafting_table",
+      grid = {
+        "minecraft:planks:*",
+        "minecraft:planks:*",
+        [ 4 ] = "minecraft:planks:*",
+        [ 5 ] = "minecraft:planks:*",
+      },
+    },
+    {
+      produces = 3,
+      name = "minecraft:spruce_door:0",
+      grid = {
+        "minecraft:planks:1",
+        "minecraft:planks:1",
+        [ 4 ] = "minecraft:planks:1",
+        [ 5 ] = "minecraft:planks:1",
+        [ 7 ] = "minecraft:planks:1",
+        [ 8 ] = "minecraft:planks:1",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:wooden_button",
+      grid = {
+        "minecraft:planks:*",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:planks:2",
+      grid = {
+        "minecraft:log:2",
+      },
+    },
+    {
+      produces = 3,
+      name = "minecraft:birch_door:0",
+      grid = {
+        "minecraft:planks:2",
+        "minecraft:planks:2",
+        [ 4 ] = "minecraft:planks:2",
+        [ 5 ] = "minecraft:planks:2",
+        [ 7 ] = "minecraft:planks:2",
+        [ 8 ] = "minecraft:planks:2",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:planks:1",
+      grid = {
+        "minecraft:log:1",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:planks:0",
+      grid = {
+        "minecraft:log:0",
+      },
+    },
+    {
+      produces = 3,
+      name = "minecraft:wooden_door:0",
+      grid = {
+        "minecraft:planks:0",
+        "minecraft:planks:0",
+        [ 4 ] = "minecraft:planks:0",
+        [ 5 ] = "minecraft:planks:0",
+        [ 7 ] = "minecraft:planks:0",
+        [ 8 ] = "minecraft:planks:0",
+      },
+    },
+    {
+      produces = 3,
+      name = "minecraft:jungle_door:0",
+      grid = {
+        "minecraft:planks:3",
+        "minecraft:planks:3",
+        [ 4 ] = "minecraft:planks:3",
+        [ 5 ] = "minecraft:planks:3",
+        [ 7 ] = "minecraft:planks:3",
+        [ 8 ] = "minecraft:planks:3",
+      },
+    },
+    {
+      produces = 3,
+      name = "minecraft:wooden_door:0",
+      grid = {
+        "minecraft:planks:*",
+        "minecraft:planks:*",
+        [ 4 ] = "minecraft:planks:*",
+        [ 5 ] = "minecraft:planks:*",
+        [ 7 ] = "minecraft:planks:*",
+        [ 8 ] = "minecraft:planks:*",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:wooden_pressure_plate",
+      grid = {
+        "minecraft:planks:*",
+        "minecraft:planks:*",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:furnace",
+      grid = {
+        "minecraft:cobblestone:*",
+        "minecraft:cobblestone:*",
+        [ 4 ] = "minecraft:cobblestone:*",
+        [ 7 ] = "minecraft:cobblestone:*",
+        [ 8 ] = "minecraft:cobblestone:*",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:stone_stairs",
+      grid = {
+        "minecraft:cobblestone:*",
+        [ 5 ] = "minecraft:cobblestone:*",
+        [ 8 ] = "minecraft:cobblestone:*",
+        [ 4 ] = "minecraft:cobblestone:*",
+        [ 7 ] = "minecraft:cobblestone:*",
+      },
+    },
+    {
+      produces = 6,
+      name = "minecraft:cobblestone_wall",
+      grid = {
+        "minecraft:cobblestone:*",
+        "minecraft:cobblestone:*",
+        [ 4 ] = "minecraft:cobblestone:*",
+        [ 5 ] = "minecraft:cobblestone:*",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:stick",
+      grid = {
+        "minecraft:planks:*",
+        [ 4 ] = "minecraft:planks:*",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:stone_shovel",
+      grid = {
+        "minecraft:cobblestone:*",
+        [ 4 ] = "minecraft:stick:*",
+        [ 7 ] = "minecraft:stick:*",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:stone_pickaxe",
+      grid = {
+        "minecraft:cobblestone:*",
+        "minecraft:cobblestone:*",
+        [ 8 ] = "minecraft:stick:*",
+        [ 5 ] = "minecraft:stick:*",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:stone_axe",
+      grid = {
+        "minecraft:cobblestone:*",
+        "minecraft:cobblestone:*",
+        [ 4 ] = "minecraft:cobblestone:*",
+        [ 5 ] = "minecraft:stick:*",
+        [ 8 ] = "minecraft:stick:*",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:planks",
+      grid = {
+        "minecraft:log:*",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:chest",
+      grid = {
+        "minecraft:planks:*",
+        "minecraft:planks:*",
+        [ 4 ] = "minecraft:planks:*",
+        [ 7 ] = "minecraft:planks:*",
+        [ 8 ] = "minecraft:planks:*",
+      },
+    },
+    {
+      produces = 9,
+      name = "minecraft:iron_ingot",
+      grid = {
+        "minecraft:iron_block:*",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:iron_block",
+      grid = {
+        "minecraft:iron_ingot:*",
+        "minecraft:iron_ingot:*",
+        [ 4 ] = "minecraft:iron_ingot:*",
+        [ 5 ] = "minecraft:iron_ingot:*",
+        [ 7 ] = "minecraft:iron_ingot:*",
+        [ 8 ] = "minecraft:iron_ingot:*",
+      },
+    },
+    {
+      produces = 16,
+      name = "minecraft:glass_pane",
+      grid = {
+        "minecraft:glass:*",
+        "minecraft:glass:*",
+        [ 4 ] = "minecraft:glass:*",
+        [ 5 ] = "minecraft:glass:*",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:stone:4",
+      grid = {
+        "minecraft:stone:3",
+        "minecraft:stone:3",
+        [ 4 ] = "minecraft:stone:3",
+        [ 5 ] = "minecraft:stone:3",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:stone:6",
+      grid = {
+        "minecraft:stone:5",
+        "minecraft:stone:5",
+        [ 4 ] = "minecraft:stone:5",
+        [ 5 ] = "minecraft:stone:5",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:stone:2",
+      grid = {
+        "minecraft:stone:1",
+        "minecraft:stone:1",
+        [ 4 ] = "minecraft:stone:1",
+        [ 5 ] = "minecraft:stone:1",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:spruce_stairs:0",
+      grid = {
+        "minecraft:planks:1",
+        [ 5 ] = "minecraft:planks:1",
+        [ 8 ] = "minecraft:planks:1",
+        [ 4 ] = "minecraft:planks:1",
+        [ 7 ] = "minecraft:planks:1",
+      },
+    },
+    {
+      produces = 4,
+      name = "minecraft:oak_stairs:0",
+      grid = {
+        "minecraft:planks:0",
+        [ 5 ] = "minecraft:planks:0",
+        [ 8 ] = "minecraft:planks:0",
+        [ 4 ] = "minecraft:planks:0",
+        [ 7 ] = "minecraft:planks:0",
+      },
+    },
+    {
+      produces = 1,
+      name = "minecraft:stone_button",
+      grid = {
+        "minecraft:stone:*",
+      },
+    },
+    {
+      produces = 6,
+      name = "minecraft:stone_slab:0",
+      grid = {
+        "minecraft:stone:0",
+        "minecraft:stone:0",
+      },
     },
   },
 }

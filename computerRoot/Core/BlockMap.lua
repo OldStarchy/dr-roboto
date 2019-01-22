@@ -10,12 +10,13 @@ BlockMap.ClassName = 'BlockMap'
 	where the direction provided in Position will be the approach direction
 	from the turtle to the block
 ]]
-function BlockMap:constructor()
+function BlockMap:constructor(filename)
 	self._blocks = {}
-end
 
-function BlockMap:GetDefaultBlockMap()
-	return BlockMap.LoadFromFile('default_blockmap.tbl', true)
+	if (filename ~= nil) then
+		assertType(filename, 'string')
+		self._saveToFilename = filename
+	end
 end
 
 function BlockMap.Deserialize(data)

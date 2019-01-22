@@ -4,7 +4,8 @@ SmeltItemSkill.ClassName = 'SmeltItemSkill'
 function SmeltItemSkill:canHandleTask(task)
 	print('SmeltItemSkill:canHandleTask(task)')
 	if isType(task, GatherItemTask) then
-		local recipe = RecipeBook.Instance:findFurnaceRecipeByName(task.item)
+		print(task.item)
+		local recipe = RecipeBook.Instance:findFurnaceRecipeBySelector(task.item)
 		print(recipe)
 		if not recipe then
 			return false
@@ -21,7 +22,7 @@ end
 
 function SmeltItemSkill:getRequirements(task)
 	-- if there is a furnace within x blocks then use that otherwise, return a SetupTask for a furnace
-	blockMap = BlockMap.GetDefaultBlockMap()
+	blockMap = BlockMap.Instance
 
 	local currentLocation = Mov:getPosition()
 	neareastFurnace = blockMap:findNearest(Furnace.ClassName, currentLocation)

@@ -2568,17 +2568,17 @@
 		],
 		"description": ""
 	},
-	"RecipeBook:findCraftingRecipeByName()": {
-		"prefix": "RecipeBook:findCraftingRecipeByName",
+	"RecipeBook:findCraftingRecipesBySelector()": {
+		"prefix": "RecipeBook:findCraftingRecipesBySelector",
 		"body": [
-			"RecipeBook:findCraftingRecipeByName($0)"
+			"RecipeBook:findCraftingRecipesBySelector($0)"
 		],
 		"description": ""
 	},
-	"RecipeBook:findFurnaceRecipeByName()": {
-		"prefix": "RecipeBook:findFurnaceRecipeByName",
+	"RecipeBook:findFurnaceRecipeBySelector()": {
+		"prefix": "RecipeBook:findFurnaceRecipeBySelector",
 		"body": [
-			"RecipeBook:findFurnaceRecipeByName($0)"
+			"RecipeBook:findFurnaceRecipeBySelector($0)"
 		],
 		"description": ""
 	},

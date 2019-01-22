@@ -17,6 +17,8 @@ turtle =
 						return false
 					end
 					depth = depth + 1
+				elseif (v == 'getItemDetail') then
+					return nil
 				end
 				print('called turtle.' .. v .. '(', unpack({...}), ')')
 				-- printStackTrace(5, 2)

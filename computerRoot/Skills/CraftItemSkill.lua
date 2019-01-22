@@ -8,36 +8,26 @@ function CraftItemSkill:canHandleTask(task)
 		return false
 	end
 
-	local recipe = RecipeBook.Instance:findCraftingRecipeByName(task.item)
+	local recipes = RecipeBook.Instance:findCraftingRecipesBySelector(task.item)
 
-	return recipe ~= nil
+	return recipes ~= nil and #recipes ~= 0
 end
 
 function CraftItemSkill:getRequirements(task)
 	local requirements = {}
 
-	local recipes = RecipeBook.Instance:findCraftingRecipeByName(task.item)
-	if recipes == nil or #recipes == 0 then
+	local recipe = RecipeBook.Instance:findBestCraftingRecipeBySelector(task.item)
+	if recipe == nil then
 		error('no recipes found for ' .. task.item)
 	end
 
-	local bestRecipe = nil
-	local bestRecipeCount = 1000000
+	for item, count in pairs(recipe.items) do
+		local haveCount = Inv:countItem(item)
+		local itemsNeeded = count - haveCount
 
-	for k, recipe in ipairs(recipes) do
-		for item, count in pairs(recipe.items) do
-			local haveCount = Inv:countItem(item)
-			local itemsNeeded = count - haveCount
-
-			if (haveCount < count and itemsNeeded < bestRecipeCount) then
-				bestRecipe = recipe
-				bestRecipeCount = itemsNeeded
-			end
+		if (haveCount < count) then
+			table.insert(requirements, GatherItemTask(item, itemsNeeded))
 		end
-	end
-
-	if (bestRecipe ~= nil) then
-		table.insert(requirements, GatherItemTask(bestRecipe, itemsNeeded))
 	end
 
 	return requirements

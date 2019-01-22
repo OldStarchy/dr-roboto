@@ -45,6 +45,9 @@ runWithLogging(
 
 		log.info('Loading RecipeBook')
 		RecipeBook.Instance = RecipeBook.LoadFromFile('data/recipe.dictionary.tbl', true)
+
+		log.info('Loading BlockMap')
+		BlockMap.Instance = BlockMap.LoadFromFile('data/blockmap.dictionary.tbl', true)
 		-- include 'Crafting/StandardRecipes'
 
 		if (fs.exists('data/Map.tbl')) then
@@ -64,7 +67,8 @@ runWithLogging(
 if (os.isPc()) then
 	log.info('Running on pc')
 
-	runWithLogging(loadfile('test.lua', _G))
+	-- runWithLogging(loadfile('test.lua', _G))
+	runWithLogging(loadfile('mystartup.lua', _G))
 
 	return
 end
