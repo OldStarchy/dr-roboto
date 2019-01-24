@@ -8,10 +8,32 @@ For running the code in Minecraft see how to [symlink the computerRoot folder](S
 
 For running on PC (or Mac) see [how to test without ComputerCraft](RunningOnPC.md)
 
-## Contributing
+## Topics
 
-Please read the [code conventions](Conventions.md) outline.
+### General
 
-## Running Tests
+-   Please read the [coding convention guidelines](Conventions.md) first.
+-   [Dr. Roboto OS overview](RobotoOS/index.md)
+-   [How to write and run tests](Tests.md)
 
-[Tests](Tests.md)
+### Core
+
+-   [How to use the Class framework](RobotoOS/Class.md)
+-   [Helper functions for dealing with classes](RobotoOS/helpers.md)
+-   [Interfaces](RobotoOS/Interface.md)
+
+### Misc
+
+-   [EventManager](Core/EventManager.md)
+
+### Inventory
+
+-   [InventoryManager](InventoryManager.md)
+
+### Navigation
+
+-   [Navigation](Navigation.md)
+
+### Tasks
+
+-   [Tasks](Tasks.md)
