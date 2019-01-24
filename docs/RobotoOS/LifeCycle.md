@@ -12,13 +12,14 @@ Write your code in `mystartup.lua` (in `computerRoot`) (you may have to create i
 4. The `startup` file checks to see if the code is running in ComputerCraft, or if its running on a PC natively.
 5. If its running natively
     1. PC only polyfills are loaded from the `_polyfills` directory.
-    2. The RobotoOS `roboto/os.lua` is run (Go to step 12)
+    2. The RobotoOS `roboto/os.lua` is run (Go to step 13)
 6. Otherwise, `startup` checks to see if `shell` or `multishell` is running. If it is `multishell`, it changes the settings to disable `multishell` then reboots. (Go to step 1)
 7. If Roboto is not already loaded (and it won't be the first time, see step 23)
 8. Roboto overwrites the `os.run` and `os.shutdown`
-   Rewriting `os.run` prevents the shutdown program from running [here](https://github.com/dan200/ComputerCraft/blob/e85cdacbc58dedacb7fcbb119efd2b44db4bcdd6/src/main/resources/assets/computercraft/lua/bios.lua#L864).
-9. Roboto then calls `shell.exit` This causes `parallel.waitForAny` to exit early preventing the `rednet.run` coroutine from starting.
-10. The bios then runs to completion, finally calling `os.shutdown` (which has been overwritten in step 5)
+    > Rewriting `os.run` prevents the shutdown program from running [here](https://github.com/dan200/ComputerCraft/blob/e85cdacbc58dedacb7fcbb119efd2b44db4bcdd6/src/main/resources/assets/computercraft/lua/bios.lua#L864).
+9. Roboto then calls `shell.exit`
+    > This causes `parallel.waitForAny` to exit early preventing the `rednet.run` coroutine from starting.
+10. The bios then runs to completion, finally calling `os.shutdown` (which has been overwritten in step 8)
 11. The original `os.run` and `os.shutdown` functions are restored.
 12. `roboto/os.lua` is loaded and run in a protected environment that allows for basic error logging.
 13. RobotoOS is now starting.
@@ -32,7 +33,7 @@ Write your code in `mystartup.lua` (in `computerRoot`) (you may have to create i
     6. The "missing global" warning thing.
     7. The `log` api
     8. The `runWithLogging` helper function
-    9. Finally, the `ProcessManager` class.
+    9. Finally, the `ProcessManager` class is loaded.
 16. The global `ProcessManager` instance `process` is created.
 17. The log files are initialized with the `log` api
 18. `roboto/startup.lua` is run
