@@ -40,7 +40,8 @@ function TaskManager:addTask(task, index)
 end
 
 function TaskManager:getTasks()
-	return cloneTable(self._tasks, 2)
+	--TODO: type-safe clone
+	return self._tasks
 end
 
 function TaskManager:getTask(index)

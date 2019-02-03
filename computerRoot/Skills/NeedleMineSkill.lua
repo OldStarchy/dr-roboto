@@ -2,26 +2,33 @@ NeedleMineSkill = Class(Skill)
 NeedleMineSkill.ClassName = 'NeedleMineSkill'
 NeedleMineSkill.description = 'Gets things from a needle mine'
 
-NeedleMineSkill.Things = {
-	cobblestone = true,
-	iron_ore = true,
-	coal = true
+NeedleMineSkill.MineableItems = {
+	'cobblestone',
+	'gold_ore',
+	'iron_ore',
+	'coal',
+	'dirt',
+	'lapis_lazuli',
+	'emerald',
+	'redstone',
+	'diamond',
+	'gravel',
+	--Could mine flint but its probably faster to mine gravel specifically then run a loop placing and digging that instead
+	'stone:1', --granite
+	'stone:3', --diorite
+	'stone:5' --andesite
+	--Could mine sand, but its probably faster to travel around looking for beaches
 	--TODO: etc
 }
 
 function NeedleMineSkill:canHandleTask(task)
 	--TODO: 'minecraft:sand:0' == 'sand'
-	print('NeedleMineSkill:canHandleTask(task)')
+
 	if isType(task, GatherItemTask) then
-		for thing, accepted in pairs(NeedleMineSkill.Things) do
-			print(thing)
-			print(accepted)
-			if accepted then
-				local detail = ItemDetail.FromId(thing)
-				print(detail)
-				if detail:matches(task.item) then
-					return true
-				end
+		for _, itemId in ipairs(NeedleMineSkill.MineableItems) do
+			local detail = ItemDetail.FromId(itemId)
+			if (detail:matches(task.item)) then
+				return true
 			end
 		end
 	end
@@ -30,8 +37,21 @@ function NeedleMineSkill:canHandleTask(task)
 end
 
 function NeedleMineSkill:completeTask(task)
-	--TODO: needlemine untill item count is enough
-	print('pls give ' .. task.amount .. ' ' .. task.item .. '(s)')
-	read()
+	local planner = Class.LoadOrNew('data/needleMines.tbl', NeedleMinePlanner, Mov:getPosition())
+	fs.writeTableToFile('data/needleMines.tbl', planner:serialise())
+
+	local needleMine = include 'api/needleMine'
+
+	while (Inv:countItem(task.item) < task.amount) do
+		local location = planner:getNextLocation()
+
+		Mov:push(true, true, true)
+		Nav:pathTo(location)
+		Mov:pop()
+		needleMine()
+
+		fs.writeTableToFile('data/needleMines.tbl', planner:serialise())
+	end
+
 	return true
 end

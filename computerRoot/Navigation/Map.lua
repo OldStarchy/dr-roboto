@@ -175,7 +175,7 @@ function Map:findPath(start, ed)
 	assertType(start, Position)
 	assertType(ed, Position)
 
-	if (self:isProtected(ed.x, ed.y, ed.z)) then
+	if (self:isProtected(ed)) then
 		error("can't navigate to protected location", 2)
 	end
 
@@ -198,7 +198,7 @@ function Map:findPath(start, ed)
 				break
 			end
 
-			if (not self:isProtected(step.position.x, step.position.y, step.position.z)) then
+			if (not self:isProtected(step.position)) then
 				self:_updateScore(step, ed)
 
 				local posHash = step.position:hash()

@@ -27,12 +27,16 @@ cli:addAction(
 		local task = nil
 		if (isDefined(name)) then
 			local typ = getfenv()[name]
+			print(typ)
 			assertType(typ, Task)
 
 			task = typ.fromArgs({...})
 		elseif (isDefined(name .. 'Task')) then
 			local typ = getfenv()[name .. 'Task']
 			assertType(typ, Task)
+			print(name .. 'Task')
+			print(typ == GatherItemTask)
+			print(typ)
 
 			task = typ.fromArgs({...})
 		else

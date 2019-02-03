@@ -116,11 +116,7 @@ function Navigator:goTo(x, y, z)
 				return false
 			else
 				if (type(x) == 'table') then
-					if (#x < 3) then
-						return
-					else
-						x, y, z = x.x or x[1], x.y or x[2], x.z or x[3]
-					end
+					x, y, z = x.x or x[1], x.y or x[2], x.z or x[3]
 				else
 					return self:goToY(x)
 				end
@@ -132,9 +128,50 @@ function Navigator:goTo(x, y, z)
 		end
 	end
 
+	if (x == nil or y == nil or z == nil) then
+		error('invalid coordinates', 2)
+	end
+
+	self:goToY(y)
 	self:goToX(x)
 	self:goToZ(z)
-	self:goToY(y)
+	return x == self:getX() and y == self:getY() and z == self:getZ()
+end
+
+function Navigator:pathTo(x, y, z)
+	if (type(z) == 'nil') then
+		if (type(y) == 'nil') then
+			if (type(x) == 'nil') then
+				return false
+			else
+				if (type(x) == 'table') then
+					x, y, z = x.x or x[1], x.y or x[2], x.z or x[3]
+				else
+					return self:goToY(x)
+				end
+			end
+		else
+			--x and y but not z, so assume they meen x, z
+			z = y
+			y = self:getY()
+		end
+	end
+
+	if (x == nil or y == nil or z == nil) then
+		error('invalid coordinates', 2)
+	end
+	print(self:getPosition())
+	print(Position(x, y, z))
+	local path = Map.Instance:findPath(self:getPosition(), Position(x, y, z))
+	if (not path) then
+		return false
+	end
+	for _, v in ipairs(path) do
+		if (not self:goTo(v)) then
+			return false
+		end
+	end
+
 	return x == self:getX() and y == self:getY() and z == self:getZ()
 end
 

@@ -1,6 +1,6 @@
 --[[
 	Creats a class. There aren't real classes in lua so these classes are just tables with some metatable voodoo
-	For detailed information on how classes work, check the readme.
+	For detailed information on how classes work, check the docs.
 
 	parent: the parent class which this one can inherit methods and default values from
 ]]
@@ -190,4 +190,17 @@ function classMeta.__call(_, parent, ...)
 	}
 	setmetatable(class, classMeta)
 	return class
+end
+
+function classIndex.LoadOrNew(file, class, ...)
+	if (fs.exists(file)) then
+		local tbl = fs.readTableFromFile(file)
+		if (tbl) then
+			return class.Deserialise(tbl)
+		else
+			error('Could not read from file "' .. file .. '"', 2)
+		end
+	end
+
+	return class(...)
 end

@@ -45,6 +45,19 @@ function Position.fromArgs(args)
 	return Position(unpack(numericArgs))
 end
 
+function Position:serialise()
+	return {
+		x = self.x,
+		y = self.y,
+		z = self.z,
+		direction = self.direction
+	}
+end
+
+function Position.Deserialise(tbl)
+	return Position(tbl.x, tbl.y, tbl.z, tbl.direction)
+end
+
 function Position:constructor(x, y, z, direction)
 	if (type(x) == 'table') then
 		Position.constructor(self, x.x, x.y, x.z, x.direction)

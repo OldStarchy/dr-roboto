@@ -1,4 +1,5 @@
 GatherItemTask = Class(Task)
+GatherItemTask.ClassName = 'GatherItemTask'
 
 function GatherItemTask:constructor(item, amount)
 	Task.constructor(self)
