@@ -62,6 +62,7 @@ function stringutil.split(str, pat)
 	return t
 end
 
+--TODO: just use table.concat
 function stringutil.join(tbl, glue)
 	if (tbl == nil) then
 		error('Table expected, got nil', 2)
@@ -108,4 +109,8 @@ function stringutil.trim(str, char)
 	end
 
 	return str:sub(start, ed)
+end
+
+function stringutil.matchesPattern(str, pattern)
+	return str:find(pattern) ~= nil
 end
