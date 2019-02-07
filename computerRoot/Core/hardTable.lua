@@ -124,7 +124,7 @@ function hardTable(filename)
 			local str = f.readAll()
 			f.close()
 
-			local tbl = textutils.unserialize(str)
+			local tbl = deserialize(str)
 
 			if (tbl == nil) then
 				-- String could not be parsed

@@ -49,7 +49,7 @@ function fs.readTableFromFile(filename)
 	local str = f.readAll()
 	f.close()
 
-	return textutils.unserialize(str)
+	return deserialize(str)
 end
 
 function fs.writeTableToFile(filename, tbl)

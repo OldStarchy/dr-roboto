@@ -309,6 +309,13 @@
 			name = 'minecraft:coal_block',
 			produces = 1,
 		},
+		[33] = {
+			grid = {
+				[1] = 'minecraft:coal_block:*',
+			},
+			name = 'minecraft:coal',
+			produces = 9,
+		},
 	},
 	smelting = {
 		[1] = {

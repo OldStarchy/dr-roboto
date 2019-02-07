@@ -280,7 +280,7 @@ end
 --TODO: make proper serialization / deserialization for class objects
 function load(filename)
 	local file = fs.open(filename, 'r')
-	local ch = textutils.unserialize(file:read())
+	local ch = deserialize(file:read())
 	file:close()
 
 	return setmetatable(ch, Chest)
