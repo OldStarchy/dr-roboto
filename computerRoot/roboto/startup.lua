@@ -92,7 +92,7 @@ process.spawnProcess(
 
 			if (ev[1] == 'turtle_inventory' or ev[1] == 'turtle_moved') then
 				rednet.broadcast(
-					textutils.serialize(
+					serialize(
 						{
 							inventory = Inv:count(),
 							location = Mov:getPosition():toString(),
@@ -100,7 +100,7 @@ process.spawnProcess(
 						}
 					)
 				)
-				print(textutils.serialize(ev[1]))
+				print(serialize(ev[1]))
 			end
 			-- local cterm = term.current()
 			-- term.redirect(surfTerm)

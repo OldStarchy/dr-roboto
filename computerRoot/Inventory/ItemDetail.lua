@@ -38,7 +38,7 @@ function ItemDetail.FromId(id)
 end
 
 function ItemDetail:toString()
-	return textutils.serialize(self)
+	return serialize(self)
 end
 
 function ItemDetail:matches(selector)

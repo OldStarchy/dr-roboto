@@ -57,6 +57,6 @@ function fs.writeTableToFile(filename, tbl)
 	if (f == nil) then
 		error('Could not open file "' .. filename .. '" for writing', 2)
 	end
-	f.write(textutils.serialize(tbl))
+	f.write(serialize(tbl))
 	f.close()
 end
