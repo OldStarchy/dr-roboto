@@ -146,6 +146,10 @@ function serialize(obj, indent, parents)
 		return "'" .. (obj:gsub("(['\\])", '\\%1')) .. "'"
 	end
 
+	if (typ == 'boolean') then
+		return tostring(obj)
+	end
+
 	if (typ == 'function') then
 		error("Can't serialize functions", 2)
 	end
@@ -231,7 +235,7 @@ function serialize(obj, indent, parents)
 		return table.concat(resultParts, '')
 	end
 
-	error('Unknown type to serialize', 2)
+	error('Unknown type to serialize "' .. typ .. '"', 2)
 end
 
 --[[
@@ -533,6 +537,22 @@ local function readClass(str, head)
 	end
 end
 
+local function readBoolean(str, head)
+	local st, ed = str:find('^true%W', head)
+
+	if (st ~= nil) then
+		return true, ed
+	end
+
+	st, ed = str:find('^false%W', head)
+
+	if (st ~= nil) then
+		return false, ed
+	end
+
+	return nil
+end
+
 readNext = function(str, head)
 	if (head > #str) then
 		return nil
@@ -542,15 +562,17 @@ readNext = function(str, head)
 	local r, n
 
 	local pats = {
-		['^{'] = 'table',
-		['^<'] = 'class',
-		['^%['] = 'indexer',
-		['^%d'] = 'number',
-		['^%.%d'] = 'number',
-		['^[%a_][%w_]*'] = 'identifier',
-		["^'"] = 'string',
-		['^"'] = 'string',
-		['^[ \t\n\r]'] = 'whitespace'
+		{pattern = '^{', typ = 'table'},
+		{pattern = '^<', typ = 'class'},
+		{pattern = '^%[', typ = 'indexer'},
+		{pattern = '^%d', typ = 'number'},
+		{pattern = '^%.%d', typ = 'number'},
+		{pattern = '^true%W', typ = 'boolean'},
+		{pattern = '^false%W', typ = 'boolean'},
+		{pattern = '^[%a_][%w_]*', typ = 'identifier'},
+		{pattern = "^'", typ = 'string'},
+		{pattern = '^"', typ = 'string'},
+		{pattern = '^[ \t\n\r]', typ = 'whitespace'}
 	}
 
 	local readers = {
@@ -560,14 +582,15 @@ readNext = function(str, head)
 		number = readNumber,
 		identifier = readIdentifier,
 		string = readString,
-		whitespace = readWhitespace
+		whitespace = readWhitespace,
+		boolean = readBoolean
 	}
 
 	local typ
 
-	for pat, ty in pairs(pats) do
-		if (str:find(pat, head)) then
-			typ = ty
+	for _, pat in ipairs(pats) do
+		if (str:find(pat.pattern, head)) then
+			typ = pat.typ
 			break
 		end
 	end
