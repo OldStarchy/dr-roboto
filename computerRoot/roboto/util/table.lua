@@ -326,6 +326,14 @@ local function readIndexer(str, head)
 
 	local typ, obj
 
+	local allowedIndexTypes = {
+		boolean = true,
+		class = true,
+		number = true,
+		string = true,
+		table = true
+	}
+
 	typ, obj, head = readNext(str, head)
 	while ((typ ~= nil) and (typ == 'whitespace')) do
 		typ, obj, head = readNext(str, head)
@@ -333,6 +341,10 @@ local function readIndexer(str, head)
 
 	if (typ == nil) then
 		error('could not read value of indexer at ' .. tostring(start))
+	end
+
+	if (not allowedIndexTypes[typ]) then
+		error('invalid indexer type ' .. typ .. ' at ' .. tostring(start))
 	end
 
 	local ed
