@@ -68,6 +68,11 @@ if (fs.exists('logs/latest.log')) then
 
 	fs.move('logs/latest.log', 'logs/backup.log')
 end
+
+if (not fs.exists('logs')) then
+	fs.makeDir('logs')
+end
+
 log.addWriter(loadfile('roboto/component/logFileWriter.lua', _G)('logs/latest.log'))
 
 log.info('Log initialized at ' .. tostring(os.time()))

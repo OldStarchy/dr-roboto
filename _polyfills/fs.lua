@@ -61,5 +61,8 @@ _G.fs = {
 		d.close()
 
 		fs.delete(source)
+	end,
+	makeDir = function(dest)
+		return lfs.mkdir(dest)
 	end
 }
