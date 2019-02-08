@@ -129,9 +129,12 @@ function sortedTableKeys(tbl)
 end
 
 --[[
-	Serializes things, doesn't handle class types. Try if you have one, obj:serialize()
+	Serializes things.
+
+	@param obj - thing to serialize
+	@param compact - make smaller (without formatting)
 ]]
-function serialize(obj, indent, parents)
+function serialize(obj, compact, indent, parents)
 	local typ = type(obj)
 
 	if (typ == 'nil') then
@@ -175,6 +178,10 @@ function serialize(obj, indent, parents)
 
 		local resultParts = {}
 		local newLine = '\n' .. indent
+		if (compact) then
+			newLine = ''
+			indent = ''
+		end
 
 		--TODO: maybe, someday
 		if (isClass) then
@@ -190,10 +197,12 @@ function serialize(obj, indent, parents)
 		if (#keys > 0) then
 			table.insert(resultParts, newLine)
 
-			for _, key in pairs(keys) do
+			for i, key in pairs(keys) do
 				local keyType = type(key)
 
-				table.insert(resultParts, '\t')
+				if (not compact) then
+					table.insert(resultParts, '\t')
+				end
 
 				if (keyType == 'string') then
 					local needsBraces = not stringutil.matchesPattern(key, '^[%a_][%w_]*$')
@@ -211,15 +220,21 @@ function serialize(obj, indent, parents)
 					table.insert(resultParts, ']')
 				elseif (keyType == 'table') then
 					table.insert(resultParts, '[')
-					table.insert(resultParts, serialize(key, indent .. '\t', parents))
+					table.insert(resultParts, serialize(key, compact, indent .. '\t', parents))
 					table.insert(resultParts, ']')
 				else
 					error("Can't serialize key of type " .. keyType, 2)
 				end
-				table.insert(resultParts, ' = ')
+				if (compact) then
+					table.insert(resultParts, '=')
+				else
+					table.insert(resultParts, ' = ')
+				end
 
-				table.insert(resultParts, serialize(data[key], indent .. '\t', parents))
-				table.insert(resultParts, ',')
+				table.insert(resultParts, serialize(data[key], compact, indent .. '\t', parents))
+				if (not compact or i < #keys) then
+					table.insert(resultParts, ',')
+				end
 				table.insert(resultParts, newLine)
 			end
 		end
