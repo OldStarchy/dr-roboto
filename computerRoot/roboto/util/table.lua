@@ -205,7 +205,7 @@ function serialize(obj, compact, indent, parents)
 				end
 
 				if (keyType == 'string') then
-					local needsBraces = not stringutil.matchesPattern(key, '^[%a_][%w_]*$')
+					local needsBraces = key:find('^[%a_][%w_]*$') == nil
 
 					if (needsBraces) then
 						table.insert(resultParts, '[')
