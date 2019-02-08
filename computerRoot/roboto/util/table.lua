@@ -128,6 +128,30 @@ function sortedTableKeys(tbl)
 	return sortTableKeys(tableKeys(tbl))
 end
 
+local reservedWords = {
+	['and'] = true,
+	['break'] = true,
+	['do'] = true,
+	['else'] = true,
+	['elseif'] = true,
+	['end'] = true,
+	['false'] = true,
+	['for'] = true,
+	['function'] = true,
+	['if'] = true,
+	['in'] = true,
+	['local'] = true,
+	['nil'] = true,
+	['not'] = true,
+	['or'] = true,
+	['repeat'] = true,
+	['return'] = true,
+	['then'] = true,
+	['true'] = true,
+	['until'] = true,
+	['while'] = true
+}
+
 --[[
 	Serializes things.
 
@@ -205,7 +229,7 @@ function serialize(obj, compact, indent, parents)
 				end
 
 				if (keyType == 'string') then
-					local needsBraces = key:find('^[%a_][%w_]*$') == nil
+					local needsBraces = (key:find('^[%a_][%w_]*$') == nil) or (reservedWords[key] == true)
 
 					if (needsBraces) then
 						table.insert(resultParts, '[')
