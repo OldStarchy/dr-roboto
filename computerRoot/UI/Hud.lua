@@ -36,7 +36,7 @@ function Hud:start()
 		graphics:drawText(w - 3, 1, stringutil.lPad(tostring(pos.x), 4))
 		graphics:drawText(w - 3, 2, stringutil.lPad(tostring(pos.y), 4))
 		graphics:drawText(w - 3, 3, stringutil.lPad(tostring(pos.z), 4))
-		graphics:drawText(w - 4, 4, stringutil.lPad(Position.directionNames[pos.direction], 5))
+		graphics:drawText(w - 4, 4, stringutil.lPad(Position.DirectionNames[pos.direction], 5))
 	end
 
 	Mov:onPositionChanged(positionChangedHdlr)

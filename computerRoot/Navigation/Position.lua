@@ -6,7 +6,7 @@ Position.NORTH = 1
 Position.WEST = 2
 Position.SOUTH = 3
 
-Position.directionNames = {
+Position.DirectionNames = {
 	[0] = 'EAST',
 	[1] = 'NORTH',
 	[2] = 'WEST',
@@ -123,7 +123,7 @@ end
 
 function Position:toString()
 	return 'x: ' ..
-		self.x .. ', y: ' .. self.y .. ', z: ' .. self.z .. ', f: ' .. Position.directionNames[self.direction]:sub(1, 1)
+		self.x .. ', y: ' .. self.y .. ', z: ' .. self.z .. ', f: ' .. Position.DirectionNames[self.direction]:sub(1, 1)
 end
 
 function Position:posEquals(other)
