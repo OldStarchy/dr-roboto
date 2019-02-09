@@ -11,8 +11,12 @@ setmetatable(
 			if (ignoreMissingGlobals[v] or ignoreMissingGlobal) then
 				return nil
 			end
-			print('Attempt to access missing global "' .. tostring(v) .. '"')
-			printStackTrace(2, 1)
+			log.warn('Attempt to access missing global "' .. tostring(v) .. '"')
+			local trace = getStackTrace(2, 2)
+
+			for i, v in pairs(trace) do
+				log.warn(v)
+			end
 			return nil
 		end
 	}
