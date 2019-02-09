@@ -63,7 +63,7 @@ function assertType(obj, typ, err, frame)
 	end
 
 	if (type(frame) ~= 'number') then
-		frame = 1
+		frame = 2
 	end
 
 	if (type(typ) == 'table' and typ.isInterface) then
