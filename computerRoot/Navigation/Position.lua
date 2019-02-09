@@ -45,7 +45,7 @@ function Position.FromArgs(args)
 	return Position(unpack(numericArgs))
 end
 
-function Position:serialise()
+function Position:serialize()
 	return {
 		x = self.x,
 		y = self.y,
@@ -54,7 +54,7 @@ function Position:serialise()
 	}
 end
 
-function Position.Deserialise(tbl)
+function Position.Deserialize(tbl)
 	return Position(tbl.x, tbl.y, tbl.z, tbl.direction)
 end
 

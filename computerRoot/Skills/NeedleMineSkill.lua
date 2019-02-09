@@ -38,7 +38,7 @@ end
 
 function NeedleMineSkill:completeTask(task)
 	local planner = Class.LoadOrNew('data/needleMines.tbl', NeedleMinePlanner, mov:getPosition())
-	fs.writeTableToFile('data/needleMines.tbl', planner:serialise())
+	fs.writeTableToFile('data/needleMines.tbl', planner:serialize())
 
 	local needleMine = include 'api/needleMine'
 
@@ -50,7 +50,7 @@ function NeedleMineSkill:completeTask(task)
 		mov:pop()
 		needleMine()
 
-		fs.writeTableToFile('data/needleMines.tbl', planner:serialise())
+		fs.writeTableToFile('data/needleMines.tbl', planner:serialize())
 	end
 
 	return true

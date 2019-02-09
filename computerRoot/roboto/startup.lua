@@ -29,7 +29,10 @@ end
 runWithLogging(
 	function()
 		log.info('Restoring location')
-		mov:trackLocation('data/position.tbl')
+		mov = Class.LoadOrNew('data/mov.tbl', MoveManager, turtle)
+		StateSaver.BindToFile(mov, 'data/mov.tbl', 'turtle_moved')
+
+		nav = Navigator(mov)
 
 		log.info('Loading skills')
 		skillSet = SkillSet.GetDefaultSkillSet()
@@ -75,44 +78,5 @@ if (os.isPc()) then
 	return
 end
 
--- Print call logging
--- local oldPrint = print
--- _G.print = function(...)
--- 	local st = getStackTrace(1, 2)[1]
--- 	oldPrint(st, ...)
--- end
-process.spawnProcess(
-	function()
-		local surf = Surface(term.getSize(), 7)
-		surf:startMirroring(term.native(), 1, 1)
-		local surfTerm = surf:asTerm()
-
-		rednet.open('right')
-
-		while (true) do
-			local ev = {os.pullEventRaw()}
-
-			if (ev[1] == 'turtle_inventory' or ev[1] == 'turtle_moved') then
-				rednet.broadcast(
-					serialize(
-						{
-							inventory = inv:count(),
-							location = mov:getPosition():toString(),
-							fuel = turtle.getFuelLevel()
-						}
-					)
-				)
-				print(serialize(ev[1]))
-			end
-			-- local cterm = term.current()
-			-- term.redirect(surfTerm)
-			-- term.clear()
-			-- term.setCursorPos(1, 1)
-			-- print(tableToString(ev))
-			-- term.redirect(cterm)
-			-- term.setCursorBlink(true)
-		end
-	end,
-	'remote monitor',
-	true
-)
+process.spawnProcess(loadfile('services/CrashMonitor.lua', _G), 'crash monitor', true)
+process.spawnProcess(loadfile('services/RemoteMonitorClient.lua'), 'remote monitor', true)

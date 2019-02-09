@@ -38,7 +38,34 @@ function MoveManager:constructor(turtle, verbose)
 	self._verbose = assertType(coalesce(verbose, false), 'boolean')
 	self._afterPositionChangedListeners = {}
 
+	self.ev = EventManager()
 	self:_attach()
+end
+
+function MoveManager.Deserialize(tbl)
+	local obj = MoveManager(turtle, tbl.verbose)
+
+	obj.autoDig = not (not tbl.autoDig)
+	obj.autoAttack = not (not tbl.autoAttack)
+	obj.autoFuel = not (not tbl.autoFuel)
+
+	if (tbl.position) then
+		obj:setPosition(tbl.position)
+	end
+
+	return obj
+end
+
+function MoveManager:serialize()
+	local tbl = {}
+
+	tbl.verbose = self._verbose
+	tbl.autoDig = self.autoDig
+	tbl.autoAttack = self.autoAttack
+	tbl.autoFuel = self.autoFuel
+	tbl.position = self._position
+
+	return tbl
 end
 
 MoveManager.UNKNOWN_FAILURE = 0
@@ -82,7 +109,7 @@ function MoveManager:pop()
 end
 
 function MoveManager:setPosition(position)
-	assert(position.isType(Position))
+	assertType(position, Position)
 	self._position = position
 end
 
@@ -351,6 +378,7 @@ function MoveManager:_afterPositionChanged()
 		print(self._position)
 	end
 
+	self.ev:trigger('turtle_moved', self:getX(), self:getY(), self:getZ(), self:getDirection())
 	os.queueEvent('turtle_moved', self:getX(), self:getY(), self:getZ(), self:getDirection())
 
 	if (self._autoSaveFile) then
@@ -370,5 +398,3 @@ end
 function MoveManager:offPositionChanged(func)
 	self._afterPositionChangedListeners[func] = nil
 end
-
-mov = MoveManager(turtle)

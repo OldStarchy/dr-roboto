@@ -198,12 +198,11 @@ end
 
 function classIndex.LoadOrNew(file, class, ...)
 	if (fs.exists(file)) then
-		local tbl = fs.readTableFromFile(file)
-		if (tbl) then
-			return class.Deserialise(tbl)
-		else
-			error('Could not read from file "' .. file .. '"', 2)
-		end
+		local obj = fs.readTableFromFile(file)
+
+		assertType(obj, class)
+
+		return obj
 	end
 
 	return class(...)

@@ -8,19 +8,19 @@ function NeedleMinePlanner:constructor(offset)
 	self._lastLocationZ = nil
 end
 
-function NeedleMinePlanner.Deserialise(obj)
+function NeedleMinePlanner.Deserialize(obj)
 	local np = NeedleMinePlanner()
-	np._offset = Position.Deserialise(obj.offset)
+	np._offset = Position.Deserialize(obj.offset)
 	np._lastLocationX = obj.x
 	np._lastLocationZ = obj.z
 	return np
 end
 
-function NeedleMinePlanner:serialise()
+function NeedleMinePlanner:serialize()
 	return {
 		x = self._lastLocationX,
 		z = self._lastLocationZ,
-		offset = self._offset:serialise()
+		offset = self._offset:serialize()
 	}
 end
 
