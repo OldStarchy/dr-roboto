@@ -1,4426 +1,3162 @@
 {
 	"Block()": {
 		"prefix": "Block",
-		"body": [
-			"Block($0)"
-		],
+		"body": ["Block($0)"],
 		"description": ""
 	},
 	"Block:assertImplementation()": {
 		"prefix": "Block:assertImplementation",
-		"body": [
-			"Block:assertImplementation($0)"
-		],
+		"body": ["Block:assertImplementation($0)"],
 		"description": ""
 	},
 	"Block:conversionConstructor()": {
 		"prefix": "Block:conversionConstructor",
-		"body": [
-			"Block:conversionConstructor($0)"
-		],
+		"body": ["Block:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Block:getType()": {
 		"prefix": "Block:getType",
-		"body": [
-			"Block:getType($0)"
-		],
+		"body": ["Block:getType($0)"],
 		"description": ""
 	},
 	"Block:isOrInherits()": {
 		"prefix": "Block:isOrInherits",
-		"body": [
-			"Block:isOrInherits($0)"
-		],
+		"body": ["Block:isOrInherits($0)"],
 		"description": ""
 	},
 	"Block:isType()": {
 		"prefix": "Block:isType",
-		"body": [
-			"Block:isType($0)"
-		],
+		"body": ["Block:isType($0)"],
 		"description": ""
 	},
 	"Block:navigateTo()": {
 		"prefix": "Block:navigateTo",
-		"body": [
-			"Block:navigateTo($0)"
-		],
+		"body": ["Block:navigateTo($0)"],
 		"description": ""
 	},
 	"Block:place()": {
 		"prefix": "Block:place",
-		"body": [
-			"Block:place($0)"
-		],
+		"body": ["Block:place($0)"],
 		"description": ""
 	},
 	"Block:toString()": {
 		"prefix": "Block:toString",
-		"body": [
-			"Block:toString($0)"
-		],
+		"body": ["Block:toString($0)"],
 		"description": ""
 	},
 	"BlockDetail()": {
 		"prefix": "BlockDetail",
-		"body": [
-			"BlockDetail($0)"
-		],
+		"body": ["BlockDetail($0)"],
 		"description": ""
 	},
 	"BlockDetail:assertImplementation()": {
 		"prefix": "BlockDetail:assertImplementation",
-		"body": [
-			"BlockDetail:assertImplementation($0)"
-		],
+		"body": ["BlockDetail:assertImplementation($0)"],
 		"description": ""
 	},
 	"BlockDetail:conversionConstructor()": {
 		"prefix": "BlockDetail:conversionConstructor",
-		"body": [
-			"BlockDetail:conversionConstructor($0)"
-		],
+		"body": ["BlockDetail:conversionConstructor($0)"],
 		"description": ""
 	},
 	"BlockDetail:getType()": {
 		"prefix": "BlockDetail:getType",
-		"body": [
-			"BlockDetail:getType($0)"
-		],
+		"body": ["BlockDetail:getType($0)"],
 		"description": ""
 	},
 	"BlockDetail:isOrInherits()": {
 		"prefix": "BlockDetail:isOrInherits",
-		"body": [
-			"BlockDetail:isOrInherits($0)"
-		],
+		"body": ["BlockDetail:isOrInherits($0)"],
 		"description": ""
 	},
 	"BlockDetail:isType()": {
 		"prefix": "BlockDetail:isType",
-		"body": [
-			"BlockDetail:isType($0)"
-		],
+		"body": ["BlockDetail:isType($0)"],
 		"description": ""
 	},
 	"Buffer()": {
 		"prefix": "Buffer",
-		"body": [
-			"Buffer($0)"
-		],
+		"body": ["Buffer($0)"],
 		"description": ""
 	},
 	"Buffer:assertImplementation()": {
 		"prefix": "Buffer:assertImplementation",
-		"body": [
-			"Buffer:assertImplementation($0)"
-		],
+		"body": ["Buffer:assertImplementation($0)"],
 		"description": ""
 	},
 	"Buffer:conversionConstructor()": {
 		"prefix": "Buffer:conversionConstructor",
-		"body": [
-			"Buffer:conversionConstructor($0)"
-		],
+		"body": ["Buffer:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Buffer:fill()": {
 		"prefix": "Buffer:fill",
-		"body": [
-			"Buffer:fill($0)"
-		],
+		"body": ["Buffer:fill($0)"],
 		"description": ""
 	},
 	"Buffer:getType()": {
 		"prefix": "Buffer:getType",
-		"body": [
-			"Buffer:getType($0)"
-		],
+		"body": ["Buffer:getType($0)"],
 		"description": ""
 	},
 	"Buffer:isOrInherits()": {
 		"prefix": "Buffer:isOrInherits",
-		"body": [
-			"Buffer:isOrInherits($0)"
-		],
+		"body": ["Buffer:isOrInherits($0)"],
 		"description": ""
 	},
 	"Buffer:isType()": {
 		"prefix": "Buffer:isType",
-		"body": [
-			"Buffer:isType($0)"
-		],
+		"body": ["Buffer:isType($0)"],
 		"description": ""
 	},
 	"Buffer:read()": {
 		"prefix": "Buffer:read",
-		"body": [
-			"Buffer:read($0)"
-		],
+		"body": ["Buffer:read($0)"],
 		"description": ""
 	},
 	"Buffer:write()": {
 		"prefix": "Buffer:write",
-		"body": [
-			"Buffer:write($0)"
-		],
+		"body": ["Buffer:write($0)"],
 		"description": ""
 	},
 	"Chest()": {
 		"prefix": "Chest",
-		"body": [
-			"Chest($0)"
-		],
+		"body": ["Chest($0)"],
 		"description": ""
 	},
 	"Chest:assertImplementation()": {
 		"prefix": "Chest:assertImplementation",
-		"body": [
-			"Chest:assertImplementation($0)"
-		],
+		"body": ["Chest:assertImplementation($0)"],
 		"description": ""
 	},
 	"Chest:canPush()": {
 		"prefix": "Chest:canPush",
-		"body": [
-			"Chest:canPush($0)"
-		],
+		"body": ["Chest:canPush($0)"],
 		"description": ""
 	},
 	"Chest:clear()": {
 		"prefix": "Chest:clear",
-		"body": [
-			"Chest:clear($0)"
-		],
+		"body": ["Chest:clear($0)"],
 		"description": ""
 	},
 	"Chest:conversionConstructor()": {
 		"prefix": "Chest:conversionConstructor",
-		"body": [
-			"Chest:conversionConstructor($0)"
-		],
+		"body": ["Chest:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Chest:firstAvailable()": {
 		"prefix": "Chest:firstAvailable",
-		"body": [
-			"Chest:firstAvailable($0)"
-		],
+		"body": ["Chest:firstAvailable($0)"],
 		"description": ""
 	},
 	"Chest:getFirst()": {
 		"prefix": "Chest:getFirst",
-		"body": [
-			"Chest:getFirst($0)"
-		],
+		"body": ["Chest:getFirst($0)"],
 		"description": ""
 	},
 	"Chest:getItemAt()": {
 		"prefix": "Chest:getItemAt",
-		"body": [
-			"Chest:getItemAt($0)"
-		],
+		"body": ["Chest:getItemAt($0)"],
 		"description": ""
 	},
 	"Chest:getItemCount()": {
 		"prefix": "Chest:getItemCount",
-		"body": [
-			"Chest:getItemCount($0)"
-		],
+		"body": ["Chest:getItemCount($0)"],
 		"description": ""
 	},
 	"Chest:getItemSpace()": {
 		"prefix": "Chest:getItemSpace",
-		"body": [
-			"Chest:getItemSpace($0)"
-		],
+		"body": ["Chest:getItemSpace($0)"],
 		"description": ""
 	},
 	"Chest:getLast()": {
 		"prefix": "Chest:getLast",
-		"body": [
-			"Chest:getLast($0)"
-		],
+		"body": ["Chest:getLast($0)"],
 		"description": ""
 	},
 	"Chest:getNext()": {
 		"prefix": "Chest:getNext",
-		"body": [
-			"Chest:getNext($0)"
-		],
+		"body": ["Chest:getNext($0)"],
 		"description": ""
 	},
 	"Chest:getPrevious()": {
 		"prefix": "Chest:getPrevious",
-		"body": [
-			"Chest:getPrevious($0)"
-		],
+		"body": ["Chest:getPrevious($0)"],
 		"description": ""
 	},
 	"Chest:getTotalSpaceFor()": {
 		"prefix": "Chest:getTotalSpaceFor",
-		"body": [
-			"Chest:getTotalSpaceFor($0)"
-		],
+		"body": ["Chest:getTotalSpaceFor($0)"],
 		"description": ""
 	},
 	"Chest:getType()": {
 		"prefix": "Chest:getType",
-		"body": [
-			"Chest:getType($0)"
-		],
+		"body": ["Chest:getType($0)"],
 		"description": ""
 	},
 	"Chest:has()": {
 		"prefix": "Chest:has",
-		"body": [
-			"Chest:has($0)"
-		],
+		"body": ["Chest:has($0)"],
 		"description": ""
 	},
 	"Chest:isEmpty()": {
 		"prefix": "Chest:isEmpty",
-		"body": [
-			"Chest:isEmpty($0)"
-		],
+		"body": ["Chest:isEmpty($0)"],
 		"description": ""
 	},
 	"Chest:isOrInherits()": {
 		"prefix": "Chest:isOrInherits",
-		"body": [
-			"Chest:isOrInherits($0)"
-		],
+		"body": ["Chest:isOrInherits($0)"],
 		"description": ""
 	},
 	"Chest:isType()": {
 		"prefix": "Chest:isType",
-		"body": [
-			"Chest:isType($0)"
-		],
+		"body": ["Chest:isType($0)"],
 		"description": ""
 	},
 	"Chest:nextAvailable()": {
 		"prefix": "Chest:nextAvailable",
-		"body": [
-			"Chest:nextAvailable($0)"
-		],
+		"body": ["Chest:nextAvailable($0)"],
 		"description": ""
 	},
 	"Chest:peek()": {
 		"prefix": "Chest:peek",
-		"body": [
-			"Chest:peek($0)"
-		],
+		"body": ["Chest:peek($0)"],
 		"description": ""
 	},
 	"Chest:pop()": {
 		"prefix": "Chest:pop",
-		"body": [
-			"Chest:pop($0)"
-		],
+		"body": ["Chest:pop($0)"],
 		"description": ""
 	},
 	"Chest:print()": {
 		"prefix": "Chest:print",
-		"body": [
-			"Chest:print($0)"
-		],
+		"body": ["Chest:print($0)"],
 		"description": ""
 	},
 	"Chest:push()": {
 		"prefix": "Chest:push",
-		"body": [
-			"Chest:push($0)"
-		],
+		"body": ["Chest:push($0)"],
 		"description": ""
 	},
 	"Chest:remove()": {
 		"prefix": "Chest:remove",
-		"body": [
-			"Chest:remove($0)"
-		],
+		"body": ["Chest:remove($0)"],
 		"description": ""
 	},
 	"Chest:size()": {
 		"prefix": "Chest:size",
-		"body": [
-			"Chest:size($0)"
-		],
+		"body": ["Chest:size($0)"],
 		"description": ""
 	},
 	"Chest:toString()": {
 		"prefix": "Chest:toString",
-		"body": [
-			"Chest:toString($0)"
-		],
+		"body": ["Chest:toString($0)"],
 		"description": ""
 	},
 	"ChopTreeSkill()": {
 		"prefix": "ChopTreeSkill",
-		"body": [
-			"ChopTreeSkill($0)"
-		],
+		"body": ["ChopTreeSkill($0)"],
 		"description": ""
 	},
 	"ChopTreeSkill:assertImplementation()": {
 		"prefix": "ChopTreeSkill:assertImplementation",
-		"body": [
-			"ChopTreeSkill:assertImplementation($0)"
-		],
+		"body": ["ChopTreeSkill:assertImplementation($0)"],
 		"description": ""
 	},
 	"ChopTreeSkill:canHandleTask()": {
 		"prefix": "ChopTreeSkill:canHandleTask",
-		"body": [
-			"ChopTreeSkill:canHandleTask($0)"
-		],
+		"body": ["ChopTreeSkill:canHandleTask($0)"],
 		"description": ""
 	},
 	"ChopTreeSkill:completeTask()": {
 		"prefix": "ChopTreeSkill:completeTask",
-		"body": [
-			"ChopTreeSkill:completeTask($0)"
-		],
+		"body": ["ChopTreeSkill:completeTask($0)"],
 		"description": ""
 	},
 	"ChopTreeSkill:conversionConstructor()": {
 		"prefix": "ChopTreeSkill:conversionConstructor",
-		"body": [
-			"ChopTreeSkill:conversionConstructor($0)"
-		],
+		"body": ["ChopTreeSkill:conversionConstructor($0)"],
 		"description": ""
 	},
 	"ChopTreeSkill:getType()": {
 		"prefix": "ChopTreeSkill:getType",
-		"body": [
-			"ChopTreeSkill:getType($0)"
-		],
+		"body": ["ChopTreeSkill:getType($0)"],
 		"description": ""
 	},
 	"ChopTreeSkill:isOrInherits()": {
 		"prefix": "ChopTreeSkill:isOrInherits",
-		"body": [
-			"ChopTreeSkill:isOrInherits($0)"
-		],
+		"body": ["ChopTreeSkill:isOrInherits($0)"],
 		"description": ""
 	},
 	"ChopTreeSkill:isType()": {
 		"prefix": "ChopTreeSkill:isType",
-		"body": [
-			"ChopTreeSkill:isType($0)"
-		],
+		"body": ["ChopTreeSkill:isType($0)"],
 		"description": ""
 	},
 	"ChopTreeTask()": {
 		"prefix": "ChopTreeTask",
-		"body": [
-			"ChopTreeTask($0)"
-		],
+		"body": ["ChopTreeTask($0)"],
 		"description": ""
 	},
 	"ChopTreeTask:assertImplementation()": {
 		"prefix": "ChopTreeTask:assertImplementation",
-		"body": [
-			"ChopTreeTask:assertImplementation($0)"
-		],
+		"body": ["ChopTreeTask:assertImplementation($0)"],
 		"description": ""
 	},
 	"ChopTreeTask:conversionConstructor()": {
 		"prefix": "ChopTreeTask:conversionConstructor",
-		"body": [
-			"ChopTreeTask:conversionConstructor($0)"
-		],
+		"body": ["ChopTreeTask:conversionConstructor($0)"],
 		"description": ""
 	},
 	"ChopTreeTask:fromArgs()": {
 		"prefix": "ChopTreeTask:fromArgs",
-		"body": [
-			"ChopTreeTask:fromArgs($0)"
-		],
+		"body": ["ChopTreeTask:fromArgs($0)"],
 		"description": ""
 	},
 	"ChopTreeTask:getType()": {
 		"prefix": "ChopTreeTask:getType",
-		"body": [
-			"ChopTreeTask:getType($0)"
-		],
+		"body": ["ChopTreeTask:getType($0)"],
 		"description": ""
 	},
 	"ChopTreeTask:isOrInherits()": {
 		"prefix": "ChopTreeTask:isOrInherits",
-		"body": [
-			"ChopTreeTask:isOrInherits($0)"
-		],
+		"body": ["ChopTreeTask:isOrInherits($0)"],
 		"description": ""
 	},
 	"ChopTreeTask:isType()": {
 		"prefix": "ChopTreeTask:isType",
-		"body": [
-			"ChopTreeTask:isType($0)"
-		],
+		"body": ["ChopTreeTask:isType($0)"],
 		"description": ""
 	},
 	"ChopTreeTask:toString()": {
 		"prefix": "ChopTreeTask:toString",
-		"body": [
-			"ChopTreeTask:toString($0)"
-		],
+		"body": ["ChopTreeTask:toString($0)"],
 		"description": ""
 	},
 	"Cli()": {
 		"prefix": "Cli",
-		"body": [
-			"Cli($0)"
-		],
+		"body": ["Cli($0)"],
 		"description": ""
 	},
 	"Cli:addAction()": {
 		"prefix": "Cli:addAction",
-		"body": [
-			"Cli:addAction($0)"
-		],
+		"body": ["Cli:addAction($0)"],
 		"description": ""
 	},
 	"Cli:assertImplementation()": {
 		"prefix": "Cli:assertImplementation",
-		"body": [
-			"Cli:assertImplementation($0)"
-		],
+		"body": ["Cli:assertImplementation($0)"],
 		"description": ""
 	},
 	"Cli:conversionConstructor()": {
 		"prefix": "Cli:conversionConstructor",
-		"body": [
-			"Cli:conversionConstructor($0)"
-		],
+		"body": ["Cli:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Cli:getType()": {
 		"prefix": "Cli:getType",
-		"body": [
-			"Cli:getType($0)"
-		],
+		"body": ["Cli:getType($0)"],
 		"description": ""
 	},
 	"Cli:isOrInherits()": {
 		"prefix": "Cli:isOrInherits",
-		"body": [
-			"Cli:isOrInherits($0)"
-		],
+		"body": ["Cli:isOrInherits($0)"],
 		"description": ""
 	},
 	"Cli:isType()": {
 		"prefix": "Cli:isType",
-		"body": [
-			"Cli:isType($0)"
-		],
+		"body": ["Cli:isType($0)"],
 		"description": ""
 	},
 	"Cli:printUsage()": {
 		"prefix": "Cli:printUsage",
-		"body": [
-			"Cli:printUsage($0)"
-		],
+		"body": ["Cli:printUsage($0)"],
 		"description": ""
 	},
 	"Cli:run()": {
 		"prefix": "Cli:run",
-		"body": [
-			"Cli:run($0)"
-		],
+		"body": ["Cli:run($0)"],
 		"description": ""
 	},
 	"CraftItemSkill()": {
 		"prefix": "CraftItemSkill",
-		"body": [
-			"CraftItemSkill($0)"
-		],
+		"body": ["CraftItemSkill($0)"],
 		"description": ""
 	},
 	"CraftItemSkill:assertImplementation()": {
 		"prefix": "CraftItemSkill:assertImplementation",
-		"body": [
-			"CraftItemSkill:assertImplementation($0)"
-		],
+		"body": ["CraftItemSkill:assertImplementation($0)"],
 		"description": ""
 	},
 	"CraftItemSkill:canHandleTask()": {
 		"prefix": "CraftItemSkill:canHandleTask",
-		"body": [
-			"CraftItemSkill:canHandleTask($0)"
-		],
+		"body": ["CraftItemSkill:canHandleTask($0)"],
 		"description": ""
 	},
 	"CraftItemSkill:completeTask()": {
 		"prefix": "CraftItemSkill:completeTask",
-		"body": [
-			"CraftItemSkill:completeTask($0)"
-		],
+		"body": ["CraftItemSkill:completeTask($0)"],
 		"description": ""
 	},
 	"CraftItemSkill:conversionConstructor()": {
 		"prefix": "CraftItemSkill:conversionConstructor",
-		"body": [
-			"CraftItemSkill:conversionConstructor($0)"
-		],
+		"body": ["CraftItemSkill:conversionConstructor($0)"],
 		"description": ""
 	},
 	"CraftItemSkill:getRequirements()": {
 		"prefix": "CraftItemSkill:getRequirements",
-		"body": [
-			"CraftItemSkill:getRequirements($0)"
-		],
+		"body": ["CraftItemSkill:getRequirements($0)"],
 		"description": ""
 	},
 	"CraftItemSkill:getType()": {
 		"prefix": "CraftItemSkill:getType",
-		"body": [
-			"CraftItemSkill:getType($0)"
-		],
+		"body": ["CraftItemSkill:getType($0)"],
 		"description": ""
 	},
 	"CraftItemSkill:isOrInherits()": {
 		"prefix": "CraftItemSkill:isOrInherits",
-		"body": [
-			"CraftItemSkill:isOrInherits($0)"
-		],
+		"body": ["CraftItemSkill:isOrInherits($0)"],
 		"description": ""
 	},
 	"CraftItemSkill:isType()": {
 		"prefix": "CraftItemSkill:isType",
-		"body": [
-			"CraftItemSkill:isType($0)"
-		],
+		"body": ["CraftItemSkill:isType($0)"],
 		"description": ""
 	},
 	"Crafter()": {
 		"prefix": "Crafter",
-		"body": [
-			"Crafter($0)"
-		],
+		"body": ["Crafter($0)"],
 		"description": ""
 	},
 	"Crafter:assertImplementation()": {
 		"prefix": "Crafter:assertImplementation",
-		"body": [
-			"Crafter:assertImplementation($0)"
-		],
+		"body": ["Crafter:assertImplementation($0)"],
 		"description": ""
 	},
 	"Crafter:conversionConstructor()": {
 		"prefix": "Crafter:conversionConstructor",
-		"body": [
-			"Crafter:conversionConstructor($0)"
-		],
+		"body": ["Crafter:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Crafter:craft()": {
 		"prefix": "Crafter:craft",
-		"body": [
-			"Crafter:craft($0)"
-		],
+		"body": ["Crafter:craft($0)"],
 		"description": ""
 	},
 	"Crafter:craftFromGraph()": {
 		"prefix": "Crafter:craftFromGraph",
-		"body": [
-			"Crafter:craftFromGraph($0)"
-		],
+		"body": ["Crafter:craftFromGraph($0)"],
 		"description": ""
 	},
 	"Crafter:getRawItems()": {
 		"prefix": "Crafter:getRawItems",
-		"body": [
-			"Crafter:getRawItems($0)"
-		],
+		"body": ["Crafter:getRawItems($0)"],
 		"description": ""
 	},
 	"Crafter:getType()": {
 		"prefix": "Crafter:getType",
-		"body": [
-			"Crafter:getType($0)"
-		],
+		"body": ["Crafter:getType($0)"],
 		"description": ""
 	},
 	"Crafter:isOrInherits()": {
 		"prefix": "Crafter:isOrInherits",
-		"body": [
-			"Crafter:isOrInherits($0)"
-		],
+		"body": ["Crafter:isOrInherits($0)"],
 		"description": ""
 	},
 	"Crafter:isType()": {
 		"prefix": "Crafter:isType",
-		"body": [
-			"Crafter:isType($0)"
-		],
+		"body": ["Crafter:isType($0)"],
 		"description": ""
 	},
 	"Crafter:setRecipeBook()": {
 		"prefix": "Crafter:setRecipeBook",
-		"body": [
-			"Crafter:setRecipeBook($0)"
-		],
+		"body": ["Crafter:setRecipeBook($0)"],
 		"description": ""
 	},
 	"Crafting()": {
 		"prefix": "Crafting",
-		"body": [
-			"Crafting($0)"
-		],
+		"body": ["Crafting($0)"],
 		"description": ""
 	},
 	"CraftingRecipe()": {
 		"prefix": "CraftingRecipe",
-		"body": [
-			"CraftingRecipe($0)"
-		],
+		"body": ["CraftingRecipe($0)"],
 		"description": ""
 	},
 	"CraftingRecipe:assertImplementation()": {
 		"prefix": "CraftingRecipe:assertImplementation",
-		"body": [
-			"CraftingRecipe:assertImplementation($0)"
-		],
+		"body": ["CraftingRecipe:assertImplementation($0)"],
 		"description": ""
 	},
 	"CraftingRecipe:conversionConstructor()": {
 		"prefix": "CraftingRecipe:conversionConstructor",
-		"body": [
-			"CraftingRecipe:conversionConstructor($0)"
-		],
+		"body": ["CraftingRecipe:conversionConstructor($0)"],
 		"description": ""
 	},
 	"CraftingRecipe:getType()": {
 		"prefix": "CraftingRecipe:getType",
-		"body": [
-			"CraftingRecipe:getType($0)"
-		],
+		"body": ["CraftingRecipe:getType($0)"],
 		"description": ""
 	},
 	"CraftingRecipe:isOrInherits()": {
 		"prefix": "CraftingRecipe:isOrInherits",
-		"body": [
-			"CraftingRecipe:isOrInherits($0)"
-		],
+		"body": ["CraftingRecipe:isOrInherits($0)"],
 		"description": ""
 	},
 	"CraftingRecipe:isType()": {
 		"prefix": "CraftingRecipe:isType",
-		"body": [
-			"CraftingRecipe:isType($0)"
-		],
+		"body": ["CraftingRecipe:isType($0)"],
 		"description": ""
 	},
 	"DanceSkill()": {
 		"prefix": "DanceSkill",
-		"body": [
-			"DanceSkill($0)"
-		],
+		"body": ["DanceSkill($0)"],
 		"description": ""
 	},
 	"DanceSkill:assertImplementation()": {
 		"prefix": "DanceSkill:assertImplementation",
-		"body": [
-			"DanceSkill:assertImplementation($0)"
-		],
+		"body": ["DanceSkill:assertImplementation($0)"],
 		"description": ""
 	},
 	"DanceSkill:canHandleTask()": {
 		"prefix": "DanceSkill:canHandleTask",
-		"body": [
-			"DanceSkill:canHandleTask($0)"
-		],
+		"body": ["DanceSkill:canHandleTask($0)"],
 		"description": ""
 	},
 	"DanceSkill:completeTask()": {
 		"prefix": "DanceSkill:completeTask",
-		"body": [
-			"DanceSkill:completeTask($0)"
-		],
+		"body": ["DanceSkill:completeTask($0)"],
 		"description": ""
 	},
 	"DanceSkill:conversionConstructor()": {
 		"prefix": "DanceSkill:conversionConstructor",
-		"body": [
-			"DanceSkill:conversionConstructor($0)"
-		],
+		"body": ["DanceSkill:conversionConstructor($0)"],
 		"description": ""
 	},
 	"DanceSkill:getType()": {
 		"prefix": "DanceSkill:getType",
-		"body": [
-			"DanceSkill:getType($0)"
-		],
+		"body": ["DanceSkill:getType($0)"],
 		"description": ""
 	},
 	"DanceSkill:isOrInherits()": {
 		"prefix": "DanceSkill:isOrInherits",
-		"body": [
-			"DanceSkill:isOrInherits($0)"
-		],
+		"body": ["DanceSkill:isOrInherits($0)"],
 		"description": ""
 	},
 	"DanceSkill:isType()": {
 		"prefix": "DanceSkill:isType",
-		"body": [
-			"DanceSkill:isType($0)"
-		],
+		"body": ["DanceSkill:isType($0)"],
 		"description": ""
 	},
 	"DefaultSkill()": {
 		"prefix": "DefaultSkill",
-		"body": [
-			"DefaultSkill($0)"
-		],
+		"body": ["DefaultSkill($0)"],
 		"description": ""
 	},
 	"DefaultSkill:assertImplementation()": {
 		"prefix": "DefaultSkill:assertImplementation",
-		"body": [
-			"DefaultSkill:assertImplementation($0)"
-		],
+		"body": ["DefaultSkill:assertImplementation($0)"],
 		"description": ""
 	},
 	"DefaultSkill:canHandleTask()": {
 		"prefix": "DefaultSkill:canHandleTask",
-		"body": [
-			"DefaultSkill:canHandleTask($0)"
-		],
+		"body": ["DefaultSkill:canHandleTask($0)"],
 		"description": ""
 	},
 	"DefaultSkill:completeTask()": {
 		"prefix": "DefaultSkill:completeTask",
-		"body": [
-			"DefaultSkill:completeTask($0)"
-		],
+		"body": ["DefaultSkill:completeTask($0)"],
 		"description": ""
 	},
 	"DefaultSkill:conversionConstructor()": {
 		"prefix": "DefaultSkill:conversionConstructor",
-		"body": [
-			"DefaultSkill:conversionConstructor($0)"
-		],
+		"body": ["DefaultSkill:conversionConstructor($0)"],
 		"description": ""
 	},
 	"DefaultSkill:getRequirements()": {
 		"prefix": "DefaultSkill:getRequirements",
-		"body": [
-			"DefaultSkill:getRequirements($0)"
-		],
+		"body": ["DefaultSkill:getRequirements($0)"],
 		"description": ""
 	},
 	"DefaultSkill:getType()": {
 		"prefix": "DefaultSkill:getType",
-		"body": [
-			"DefaultSkill:getType($0)"
-		],
+		"body": ["DefaultSkill:getType($0)"],
 		"description": ""
 	},
 	"DefaultSkill:isOrInherits()": {
 		"prefix": "DefaultSkill:isOrInherits",
-		"body": [
-			"DefaultSkill:isOrInherits($0)"
-		],
+		"body": ["DefaultSkill:isOrInherits($0)"],
 		"description": ""
 	},
 	"DefaultSkill:isType()": {
 		"prefix": "DefaultSkill:isType",
-		"body": [
-			"DefaultSkill:isType($0)"
-		],
+		"body": ["DefaultSkill:isType($0)"],
 		"description": ""
 	},
 	"Furnace()": {
 		"prefix": "Furnace",
-		"body": [
-			"Furnace($0)"
-		],
+		"body": ["Furnace($0)"],
 		"description": ""
 	},
 	"Furnace:assertImplementation()": {
 		"prefix": "Furnace:assertImplementation",
-		"body": [
-			"Furnace:assertImplementation($0)"
-		],
+		"body": ["Furnace:assertImplementation($0)"],
 		"description": ""
 	},
 	"Furnace:conversionConstructor()": {
 		"prefix": "Furnace:conversionConstructor",
-		"body": [
-			"Furnace:conversionConstructor($0)"
-		],
+		"body": ["Furnace:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Furnace:getType()": {
 		"prefix": "Furnace:getType",
-		"body": [
-			"Furnace:getType($0)"
-		],
+		"body": ["Furnace:getType($0)"],
 		"description": ""
 	},
 	"Furnace:gotoBottom()": {
 		"prefix": "Furnace:gotoBottom",
-		"body": [
-			"Furnace:gotoBottom($0)"
-		],
+		"body": ["Furnace:gotoBottom($0)"],
 		"description": ""
 	},
 	"Furnace:gotoFront()": {
 		"prefix": "Furnace:gotoFront",
-		"body": [
-			"Furnace:gotoFront($0)"
-		],
+		"body": ["Furnace:gotoFront($0)"],
 		"description": ""
 	},
 	"Furnace:gotoTop()": {
 		"prefix": "Furnace:gotoTop",
-		"body": [
-			"Furnace:gotoTop($0)"
-		],
+		"body": ["Furnace:gotoTop($0)"],
 		"description": ""
 	},
 	"Furnace:isOrInherits()": {
 		"prefix": "Furnace:isOrInherits",
-		"body": [
-			"Furnace:isOrInherits($0)"
-		],
+		"body": ["Furnace:isOrInherits($0)"],
 		"description": ""
 	},
 	"Furnace:isType()": {
 		"prefix": "Furnace:isType",
-		"body": [
-			"Furnace:isType($0)"
-		],
+		"body": ["Furnace:isType($0)"],
 		"description": ""
 	},
 	"Furnace:setRecipeBook()": {
 		"prefix": "Furnace:setRecipeBook",
-		"body": [
-			"Furnace:setRecipeBook($0)"
-		],
+		"body": ["Furnace:setRecipeBook($0)"],
 		"description": ""
 	},
 	"Furnace:smelt()": {
 		"prefix": "Furnace:smelt",
-		"body": [
-			"Furnace:smelt($0)"
-		],
+		"body": ["Furnace:smelt($0)"],
 		"description": ""
 	},
 	"FurnaceRecipe()": {
 		"prefix": "FurnaceRecipe",
-		"body": [
-			"FurnaceRecipe($0)"
-		],
+		"body": ["FurnaceRecipe($0)"],
 		"description": ""
 	},
 	"FurnaceRecipe:assertImplementation()": {
 		"prefix": "FurnaceRecipe:assertImplementation",
-		"body": [
-			"FurnaceRecipe:assertImplementation($0)"
-		],
+		"body": ["FurnaceRecipe:assertImplementation($0)"],
 		"description": ""
 	},
 	"FurnaceRecipe:conversionConstructor()": {
 		"prefix": "FurnaceRecipe:conversionConstructor",
-		"body": [
-			"FurnaceRecipe:conversionConstructor($0)"
-		],
+		"body": ["FurnaceRecipe:conversionConstructor($0)"],
 		"description": ""
 	},
 	"FurnaceRecipe:getType()": {
 		"prefix": "FurnaceRecipe:getType",
-		"body": [
-			"FurnaceRecipe:getType($0)"
-		],
+		"body": ["FurnaceRecipe:getType($0)"],
 		"description": ""
 	},
 	"FurnaceRecipe:isOrInherits()": {
 		"prefix": "FurnaceRecipe:isOrInherits",
-		"body": [
-			"FurnaceRecipe:isOrInherits($0)"
-		],
+		"body": ["FurnaceRecipe:isOrInherits($0)"],
 		"description": ""
 	},
 	"FurnaceRecipe:isType()": {
 		"prefix": "FurnaceRecipe:isType",
-		"body": [
-			"FurnaceRecipe:isType($0)"
-		],
+		"body": ["FurnaceRecipe:isType($0)"],
 		"description": ""
 	},
 	"GatherItemTask()": {
 		"prefix": "GatherItemTask",
-		"body": [
-			"GatherItemTask($0)"
-		],
+		"body": ["GatherItemTask($0)"],
 		"description": ""
 	},
 	"GatherItemTask:assertImplementation()": {
 		"prefix": "GatherItemTask:assertImplementation",
-		"body": [
-			"GatherItemTask:assertImplementation($0)"
-		],
+		"body": ["GatherItemTask:assertImplementation($0)"],
 		"description": ""
 	},
 	"GatherItemTask:conversionConstructor()": {
 		"prefix": "GatherItemTask:conversionConstructor",
-		"body": [
-			"GatherItemTask:conversionConstructor($0)"
-		],
+		"body": ["GatherItemTask:conversionConstructor($0)"],
 		"description": ""
 	},
 	"GatherItemTask:fromArgs()": {
 		"prefix": "GatherItemTask:fromArgs",
-		"body": [
-			"GatherItemTask:fromArgs($0)"
-		],
+		"body": ["GatherItemTask:fromArgs($0)"],
 		"description": ""
 	},
 	"GatherItemTask:getType()": {
 		"prefix": "GatherItemTask:getType",
-		"body": [
-			"GatherItemTask:getType($0)"
-		],
+		"body": ["GatherItemTask:getType($0)"],
 		"description": ""
 	},
 	"GatherItemTask:isOrInherits()": {
 		"prefix": "GatherItemTask:isOrInherits",
-		"body": [
-			"GatherItemTask:isOrInherits($0)"
-		],
+		"body": ["GatherItemTask:isOrInherits($0)"],
 		"description": ""
 	},
 	"GatherItemTask:isType()": {
 		"prefix": "GatherItemTask:isType",
-		"body": [
-			"GatherItemTask:isType($0)"
-		],
+		"body": ["GatherItemTask:isType($0)"],
 		"description": ""
 	},
 	"GatherItemTask:toString()": {
 		"prefix": "GatherItemTask:toString",
-		"body": [
-			"GatherItemTask:toString($0)"
-		],
+		"body": ["GatherItemTask:toString($0)"],
 		"description": ""
 	},
 	"GatherSandSkill()": {
 		"prefix": "GatherSandSkill",
-		"body": [
-			"GatherSandSkill($0)"
-		],
+		"body": ["GatherSandSkill($0)"],
 		"description": ""
 	},
 	"GatherSandSkill:assertImplementation()": {
 		"prefix": "GatherSandSkill:assertImplementation",
-		"body": [
-			"GatherSandSkill:assertImplementation($0)"
-		],
+		"body": ["GatherSandSkill:assertImplementation($0)"],
 		"description": ""
 	},
 	"GatherSandSkill:canHandleTask()": {
 		"prefix": "GatherSandSkill:canHandleTask",
-		"body": [
-			"GatherSandSkill:canHandleTask($0)"
-		],
+		"body": ["GatherSandSkill:canHandleTask($0)"],
 		"description": ""
 	},
 	"GatherSandSkill:completeTask()": {
 		"prefix": "GatherSandSkill:completeTask",
-		"body": [
-			"GatherSandSkill:completeTask($0)"
-		],
+		"body": ["GatherSandSkill:completeTask($0)"],
 		"description": ""
 	},
 	"GatherSandSkill:conversionConstructor()": {
 		"prefix": "GatherSandSkill:conversionConstructor",
-		"body": [
-			"GatherSandSkill:conversionConstructor($0)"
-		],
+		"body": ["GatherSandSkill:conversionConstructor($0)"],
 		"description": ""
 	},
 	"GatherSandSkill:getType()": {
 		"prefix": "GatherSandSkill:getType",
-		"body": [
-			"GatherSandSkill:getType($0)"
-		],
+		"body": ["GatherSandSkill:getType($0)"],
 		"description": ""
 	},
 	"GatherSandSkill:isOrInherits()": {
 		"prefix": "GatherSandSkill:isOrInherits",
-		"body": [
-			"GatherSandSkill:isOrInherits($0)"
-		],
+		"body": ["GatherSandSkill:isOrInherits($0)"],
 		"description": ""
 	},
 	"GatherSandSkill:isType()": {
 		"prefix": "GatherSandSkill:isType",
-		"body": [
-			"GatherSandSkill:isType($0)"
-		],
+		"body": ["GatherSandSkill:isType($0)"],
 		"description": ""
 	},
 	"GenericTask()": {
 		"prefix": "GenericTask",
-		"body": [
-			"GenericTask($0)"
-		],
+		"body": ["GenericTask($0)"],
 		"description": ""
 	},
 	"GenericTask:assertImplementation()": {
 		"prefix": "GenericTask:assertImplementation",
-		"body": [
-			"GenericTask:assertImplementation($0)"
-		],
+		"body": ["GenericTask:assertImplementation($0)"],
 		"description": ""
 	},
 	"GenericTask:conversionConstructor()": {
 		"prefix": "GenericTask:conversionConstructor",
-		"body": [
-			"GenericTask:conversionConstructor($0)"
-		],
+		"body": ["GenericTask:conversionConstructor($0)"],
 		"description": ""
 	},
 	"GenericTask:fromArgs()": {
 		"prefix": "GenericTask:fromArgs",
-		"body": [
-			"GenericTask:fromArgs($0)"
-		],
+		"body": ["GenericTask:fromArgs($0)"],
 		"description": ""
 	},
 	"GenericTask:getType()": {
 		"prefix": "GenericTask:getType",
-		"body": [
-			"GenericTask:getType($0)"
-		],
+		"body": ["GenericTask:getType($0)"],
 		"description": ""
 	},
 	"GenericTask:isOrInherits()": {
 		"prefix": "GenericTask:isOrInherits",
-		"body": [
-			"GenericTask:isOrInherits($0)"
-		],
+		"body": ["GenericTask:isOrInherits($0)"],
 		"description": ""
 	},
 	"GenericTask:isType()": {
 		"prefix": "GenericTask:isType",
-		"body": [
-			"GenericTask:isType($0)"
-		],
+		"body": ["GenericTask:isType($0)"],
 		"description": ""
 	},
 	"Gps.getPosition()": {
 		"prefix": "Gps.getPosition",
-		"body": [
-			"Gps.getPosition($0)"
-		],
+		"body": ["Gps.getPosition($0)"],
 		"description": ""
 	},
 	"Graphics()": {
 		"prefix": "Graphics",
-		"body": [
-			"Graphics($0)"
-		],
+		"body": ["Graphics($0)"],
 		"description": ""
 	},
 	"Graphics:assertImplementation()": {
 		"prefix": "Graphics:assertImplementation",
-		"body": [
-			"Graphics:assertImplementation($0)"
-		],
+		"body": ["Graphics:assertImplementation($0)"],
 		"description": ""
 	},
 	"Graphics:clear()": {
 		"prefix": "Graphics:clear",
-		"body": [
-			"Graphics:clear($0)"
-		],
+		"body": ["Graphics:clear($0)"],
 		"description": ""
 	},
 	"Graphics:conversionConstructor()": {
 		"prefix": "Graphics:conversionConstructor",
-		"body": [
-			"Graphics:conversionConstructor($0)"
-		],
+		"body": ["Graphics:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Graphics:drawRect()": {
 		"prefix": "Graphics:drawRect",
-		"body": [
-			"Graphics:drawRect($0)"
-		],
+		"body": ["Graphics:drawRect($0)"],
 		"description": ""
 	},
 	"Graphics:drawSurface()": {
 		"prefix": "Graphics:drawSurface",
-		"body": [
-			"Graphics:drawSurface($0)"
-		],
+		"body": ["Graphics:drawSurface($0)"],
 		"description": ""
 	},
 	"Graphics:drawText()": {
 		"prefix": "Graphics:drawText",
-		"body": [
-			"Graphics:drawText($0)"
-		],
+		"body": ["Graphics:drawText($0)"],
 		"description": ""
 	},
 	"Graphics:fillRect()": {
 		"prefix": "Graphics:fillRect",
-		"body": [
-			"Graphics:fillRect($0)"
-		],
+		"body": ["Graphics:fillRect($0)"],
 		"description": ""
 	},
 	"Graphics:getColours()": {
 		"prefix": "Graphics:getColours",
-		"body": [
-			"Graphics:getColours($0)"
-		],
+		"body": ["Graphics:getColours($0)"],
 		"description": ""
 	},
 	"Graphics:getType()": {
 		"prefix": "Graphics:getType",
-		"body": [
-			"Graphics:getType($0)"
-		],
+		"body": ["Graphics:getType($0)"],
 		"description": ""
 	},
 	"Graphics:invertColours()": {
 		"prefix": "Graphics:invertColours",
-		"body": [
-			"Graphics:invertColours($0)"
-		],
+		"body": ["Graphics:invertColours($0)"],
 		"description": ""
 	},
 	"Graphics:isOrInherits()": {
 		"prefix": "Graphics:isOrInherits",
-		"body": [
-			"Graphics:isOrInherits($0)"
-		],
+		"body": ["Graphics:isOrInherits($0)"],
 		"description": ""
 	},
 	"Graphics:isType()": {
 		"prefix": "Graphics:isType",
-		"body": [
-			"Graphics:isType($0)"
-		],
+		"body": ["Graphics:isType($0)"],
 		"description": ""
 	},
 	"Graphics:progressBar()": {
 		"prefix": "Graphics:progressBar",
-		"body": [
-			"Graphics:progressBar($0)"
-		],
+		"body": ["Graphics:progressBar($0)"],
 		"description": ""
 	},
 	"Graphics:setColours()": {
 		"prefix": "Graphics:setColours",
-		"body": [
-			"Graphics:setColours($0)"
-		],
+		"body": ["Graphics:setColours($0)"],
 		"description": ""
 	},
 	"Hud()": {
 		"prefix": "Hud",
-		"body": [
-			"Hud($0)"
-		],
+		"body": ["Hud($0)"],
 		"description": ""
 	},
 	"Hud:assertImplementation()": {
 		"prefix": "Hud:assertImplementation",
-		"body": [
-			"Hud:assertImplementation($0)"
-		],
+		"body": ["Hud:assertImplementation($0)"],
 		"description": ""
 	},
 	"Hud:conversionConstructor()": {
 		"prefix": "Hud:conversionConstructor",
-		"body": [
-			"Hud:conversionConstructor($0)"
-		],
+		"body": ["Hud:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Hud:getType()": {
 		"prefix": "Hud:getType",
-		"body": [
-			"Hud:getType($0)"
-		],
+		"body": ["Hud:getType($0)"],
 		"description": ""
 	},
 	"Hud:isOrInherits()": {
 		"prefix": "Hud:isOrInherits",
-		"body": [
-			"Hud:isOrInherits($0)"
-		],
+		"body": ["Hud:isOrInherits($0)"],
 		"description": ""
 	},
 	"Hud:isType()": {
 		"prefix": "Hud:isType",
-		"body": [
-			"Hud:isType($0)"
-		],
+		"body": ["Hud:isType($0)"],
 		"description": ""
 	},
 	"Hud:start()": {
 		"prefix": "Hud:start",
-		"body": [
-			"Hud:start($0)"
-		],
+		"body": ["Hud:start($0)"],
 		"description": ""
 	},
 	"Interface.FromObject()": {
 		"prefix": "Interface.FromObject",
-		"body": [
-			"Interface.FromObject($0)"
-		],
+		"body": ["Interface.FromObject($0)"],
 		"description": ""
 	},
 	"Inv()": {
 		"prefix": "Inv",
-		"body": [
-			"Inv($0)"
-		],
+		"body": ["Inv($0)"],
 		"description": ""
 	},
 	"InventoryManager()": {
 		"prefix": "InventoryManager",
-		"body": [
-			"InventoryManager($0)"
-		],
+		"body": ["InventoryManager($0)"],
 		"description": ""
 	},
 	"InventoryManager.ItemIs()": {
 		"prefix": "InventoryManager.ItemIs",
-		"body": [
-			"InventoryManager.ItemIs($0)"
-		],
+		"body": ["InventoryManager.ItemIs($0)"],
 		"description": ""
 	},
 	"InventoryManager:assertImplementation()": {
 		"prefix": "InventoryManager:assertImplementation",
-		"body": [
-			"InventoryManager:assertImplementation($0)"
-		],
+		"body": ["InventoryManager:assertImplementation($0)"],
 		"description": ""
 	},
 	"InventoryManager:conversionConstructor()": {
 		"prefix": "InventoryManager:conversionConstructor",
-		"body": [
-			"InventoryManager:conversionConstructor($0)"
-		],
+		"body": ["InventoryManager:conversionConstructor($0)"],
 		"description": ""
 	},
 	"InventoryManager:countItem()": {
 		"prefix": "InventoryManager:countItem",
-		"body": [
-			"InventoryManager:countItem($0)"
-		],
+		"body": ["InventoryManager:countItem($0)"],
 		"description": ""
 	},
 	"InventoryManager:drop()": {
 		"prefix": "InventoryManager:drop",
-		"body": [
-			"InventoryManager:drop($0)"
-		],
+		"body": ["InventoryManager:drop($0)"],
 		"description": ""
 	},
 	"InventoryManager:dropDown()": {
 		"prefix": "InventoryManager:dropDown",
-		"body": [
-			"InventoryManager:dropDown($0)"
-		],
+		"body": ["InventoryManager:dropDown($0)"],
 		"description": ""
 	},
 	"InventoryManager:dropUp()": {
 		"prefix": "InventoryManager:dropUp",
-		"body": [
-			"InventoryManager:dropUp($0)"
-		],
+		"body": ["InventoryManager:dropUp($0)"],
 		"description": ""
 	},
 	"InventoryManager:findItemSlot()": {
 		"prefix": "InventoryManager:findItemSlot",
-		"body": [
-			"InventoryManager:findItemSlot($0)"
-		],
+		"body": ["InventoryManager:findItemSlot($0)"],
 		"description": ""
 	},
 	"InventoryManager:getAll()": {
 		"prefix": "InventoryManager:getAll",
-		"body": [
-			"InventoryManager:getAll($0)"
-		],
+		"body": ["InventoryManager:getAll($0)"],
 		"description": ""
 	},
 	"InventoryManager:getAllContaining()": {
 		"prefix": "InventoryManager:getAllContaining",
-		"body": [
-			"InventoryManager:getAllContaining($0)"
-		],
+		"body": ["InventoryManager:getAllContaining($0)"],
 		"description": ""
 	},
 	"InventoryManager:getAllEmpty()": {
 		"prefix": "InventoryManager:getAllEmpty",
-		"body": [
-			"InventoryManager:getAllEmpty($0)"
-		],
+		"body": ["InventoryManager:getAllEmpty($0)"],
 		"description": ""
 	},
 	"InventoryManager:getAllSameAs()": {
 		"prefix": "InventoryManager:getAllSameAs",
-		"body": [
-			"InventoryManager:getAllSameAs($0)"
-		],
+		"body": ["InventoryManager:getAllSameAs($0)"],
 		"description": ""
 	},
 	"InventoryManager:getAllUnlockedContaining()": {
 		"prefix": "InventoryManager:getAllUnlockedContaining",
-		"body": [
-			"InventoryManager:getAllUnlockedContaining($0)"
-		],
+		"body": ["InventoryManager:getAllUnlockedContaining($0)"],
 		"description": ""
 	},
 	"InventoryManager:getFirst()": {
 		"prefix": "InventoryManager:getFirst",
-		"body": [
-			"InventoryManager:getFirst($0)"
-		],
+		"body": ["InventoryManager:getFirst($0)"],
 		"description": ""
 	},
 	"InventoryManager:getFirstContaining()": {
 		"prefix": "InventoryManager:getFirstContaining",
-		"body": [
-			"InventoryManager:getFirstContaining($0)"
-		],
+		"body": ["InventoryManager:getFirstContaining($0)"],
 		"description": ""
 	},
 	"InventoryManager:getFirstEmpty()": {
 		"prefix": "InventoryManager:getFirstEmpty",
-		"body": [
-			"InventoryManager:getFirstEmpty($0)"
-		],
+		"body": ["InventoryManager:getFirstEmpty($0)"],
 		"description": ""
 	},
 	"InventoryManager:getFirstSameAs()": {
 		"prefix": "InventoryManager:getFirstSameAs",
-		"body": [
-			"InventoryManager:getFirstSameAs($0)"
-		],
+		"body": ["InventoryManager:getFirstSameAs($0)"],
 		"description": ""
 	},
 	"InventoryManager:getFirstUnlockedContaining()": {
 		"prefix": "InventoryManager:getFirstUnlockedContaining",
-		"body": [
-			"InventoryManager:getFirstUnlockedContaining($0)"
-		],
+		"body": ["InventoryManager:getFirstUnlockedContaining($0)"],
 		"description": ""
 	},
 	"InventoryManager:getFreeItemCount()": {
 		"prefix": "InventoryManager:getFreeItemCount",
-		"body": [
-			"InventoryManager:getFreeItemCount($0)"
-		],
+		"body": ["InventoryManager:getFreeItemCount($0)"],
 		"description": ""
 	},
 	"InventoryManager:getItemDetail()": {
 		"prefix": "InventoryManager:getItemDetail",
-		"body": [
-			"InventoryManager:getItemDetail($0)"
-		],
+		"body": ["InventoryManager:getItemDetail($0)"],
 		"description": ""
 	},
 	"InventoryManager:getLast()": {
 		"prefix": "InventoryManager:getLast",
-		"body": [
-			"InventoryManager:getLast($0)"
-		],
+		"body": ["InventoryManager:getLast($0)"],
 		"description": ""
 	},
 	"InventoryManager:getLastEmpty()": {
 		"prefix": "InventoryManager:getLastEmpty",
-		"body": [
-			"InventoryManager:getLastEmpty($0)"
-		],
+		"body": ["InventoryManager:getLastEmpty($0)"],
 		"description": ""
 	},
 	"InventoryManager:getLock()": {
 		"prefix": "InventoryManager:getLock",
-		"body": [
-			"InventoryManager:getLock($0)"
-		],
+		"body": ["InventoryManager:getLock($0)"],
 		"description": ""
 	},
 	"InventoryManager:getNext()": {
 		"prefix": "InventoryManager:getNext",
-		"body": [
-			"InventoryManager:getNext($0)"
-		],
+		"body": ["InventoryManager:getNext($0)"],
 		"description": ""
 	},
 	"InventoryManager:getNextContaining()": {
 		"prefix": "InventoryManager:getNextContaining",
-		"body": [
-			"InventoryManager:getNextContaining($0)"
-		],
+		"body": ["InventoryManager:getNextContaining($0)"],
 		"description": ""
 	},
 	"InventoryManager:getNextEmpty()": {
 		"prefix": "InventoryManager:getNextEmpty",
-		"body": [
-			"InventoryManager:getNextEmpty($0)"
-		],
+		"body": ["InventoryManager:getNextEmpty($0)"],
 		"description": ""
 	},
 	"InventoryManager:getNextSameAs()": {
 		"prefix": "InventoryManager:getNextSameAs",
-		"body": [
-			"InventoryManager:getNextSameAs($0)"
-		],
+		"body": ["InventoryManager:getNextSameAs($0)"],
 		"description": ""
 	},
 	"InventoryManager:getNextUnlockedContaining()": {
 		"prefix": "InventoryManager:getNextUnlockedContaining",
-		"body": [
-			"InventoryManager:getNextUnlockedContaining($0)"
-		],
+		"body": ["InventoryManager:getNextUnlockedContaining($0)"],
 		"description": ""
 	},
 	"InventoryManager:getPrevious()": {
 		"prefix": "InventoryManager:getPrevious",
-		"body": [
-			"InventoryManager:getPrevious($0)"
-		],
+		"body": ["InventoryManager:getPrevious($0)"],
 		"description": ""
 	},
 	"InventoryManager:getTotalFreeItemCount()": {
 		"prefix": "InventoryManager:getTotalFreeItemCount",
-		"body": [
-			"InventoryManager:getTotalFreeItemCount($0)"
-		],
+		"body": ["InventoryManager:getTotalFreeItemCount($0)"],
 		"description": ""
 	},
 	"InventoryManager:getType()": {
 		"prefix": "InventoryManager:getType",
-		"body": [
-			"InventoryManager:getType($0)"
-		],
+		"body": ["InventoryManager:getType($0)"],
 		"description": ""
 	},
 	"InventoryManager:hasEmpty()": {
 		"prefix": "InventoryManager:hasEmpty",
-		"body": [
-			"InventoryManager:hasEmpty($0)"
-		],
+		"body": ["InventoryManager:hasEmpty($0)"],
 		"description": ""
 	},
 	"InventoryManager:hasItem()": {
 		"prefix": "InventoryManager:hasItem",
-		"body": [
-			"InventoryManager:hasItem($0)"
-		],
+		"body": ["InventoryManager:hasItem($0)"],
 		"description": ""
 	},
 	"InventoryManager:have()": {
 		"prefix": "InventoryManager:have",
-		"body": [
-			"InventoryManager:have($0)"
-		],
+		"body": ["InventoryManager:have($0)"],
 		"description": ""
 	},
 	"InventoryManager:inspect()": {
 		"prefix": "InventoryManager:inspect",
-		"body": [
-			"InventoryManager:inspect($0)"
-		],
+		"body": ["InventoryManager:inspect($0)"],
 		"description": ""
 	},
 	"InventoryManager:isLocked()": {
 		"prefix": "InventoryManager:isLocked",
-		"body": [
-			"InventoryManager:isLocked($0)"
-		],
+		"body": ["InventoryManager:isLocked($0)"],
 		"description": ""
 	},
 	"InventoryManager:isOrInherits()": {
 		"prefix": "InventoryManager:isOrInherits",
-		"body": [
-			"InventoryManager:isOrInherits($0)"
-		],
+		"body": ["InventoryManager:isOrInherits($0)"],
 		"description": ""
 	},
 	"InventoryManager:isType()": {
 		"prefix": "InventoryManager:isType",
-		"body": [
-			"InventoryManager:isType($0)"
-		],
+		"body": ["InventoryManager:isType($0)"],
 		"description": ""
 	},
 	"InventoryManager:isUnlocked()": {
 		"prefix": "InventoryManager:isUnlocked",
-		"body": [
-			"InventoryManager:isUnlocked($0)"
-		],
+		"body": ["InventoryManager:isUnlocked($0)"],
 		"description": ""
 	},
 	"InventoryManager:lock()": {
 		"prefix": "InventoryManager:lock",
-		"body": [
-			"InventoryManager:lock($0)"
-		],
+		"body": ["InventoryManager:lock($0)"],
 		"description": ""
 	},
 	"InventoryManager:popSelection()": {
 		"prefix": "InventoryManager:popSelection",
-		"body": [
-			"InventoryManager:popSelection($0)"
-		],
+		"body": ["InventoryManager:popSelection($0)"],
 		"description": ""
 	},
 	"InventoryManager:pushSelection()": {
 		"prefix": "InventoryManager:pushSelection",
-		"body": [
-			"InventoryManager:pushSelection($0)"
-		],
+		"body": ["InventoryManager:pushSelection($0)"],
 		"description": ""
 	},
 	"InventoryManager:select()": {
 		"prefix": "InventoryManager:select",
-		"body": [
-			"InventoryManager:select($0)"
-		],
+		"body": ["InventoryManager:select($0)"],
 		"description": ""
 	},
 	"InventoryManager:suck()": {
 		"prefix": "InventoryManager:suck",
-		"body": [
-			"InventoryManager:suck($0)"
-		],
+		"body": ["InventoryManager:suck($0)"],
 		"description": ""
 	},
 	"InventoryManager:suckDown()": {
 		"prefix": "InventoryManager:suckDown",
-		"body": [
-			"InventoryManager:suckDown($0)"
-		],
+		"body": ["InventoryManager:suckDown($0)"],
 		"description": ""
 	},
 	"InventoryManager:suckUp()": {
 		"prefix": "InventoryManager:suckUp",
-		"body": [
-			"InventoryManager:suckUp($0)"
-		],
+		"body": ["InventoryManager:suckUp($0)"],
 		"description": ""
 	},
 	"InventoryManager:transferTo()": {
 		"prefix": "InventoryManager:transferTo",
-		"body": [
-			"InventoryManager:transferTo($0)"
-		],
+		"body": ["InventoryManager:transferTo($0)"],
 		"description": ""
 	},
 	"InventoryManager:unlock()": {
 		"prefix": "InventoryManager:unlock",
-		"body": [
-			"InventoryManager:unlock($0)"
-		],
+		"body": ["InventoryManager:unlock($0)"],
 		"description": ""
 	},
 	"InventoryManager:unlockAll()": {
 		"prefix": "InventoryManager:unlockAll",
-		"body": [
-			"InventoryManager:unlockAll($0)"
-		],
+		"body": ["InventoryManager:unlockAll($0)"],
 		"description": ""
 	},
 	"ItemDetail()": {
 		"prefix": "ItemDetail",
-		"body": [
-			"ItemDetail($0)"
-		],
+		"body": ["ItemDetail($0)"],
 		"description": ""
 	},
 	"ItemDetail:assertImplementation()": {
 		"prefix": "ItemDetail:assertImplementation",
-		"body": [
-			"ItemDetail:assertImplementation($0)"
-		],
+		"body": ["ItemDetail:assertImplementation($0)"],
 		"description": ""
 	},
 	"ItemDetail:conversionConstructor()": {
 		"prefix": "ItemDetail:conversionConstructor",
-		"body": [
-			"ItemDetail:conversionConstructor($0)"
-		],
+		"body": ["ItemDetail:conversionConstructor($0)"],
 		"description": ""
 	},
 	"ItemDetail:getType()": {
 		"prefix": "ItemDetail:getType",
-		"body": [
-			"ItemDetail:getType($0)"
-		],
+		"body": ["ItemDetail:getType($0)"],
 		"description": ""
 	},
 	"ItemDetail:isOrInherits()": {
 		"prefix": "ItemDetail:isOrInherits",
-		"body": [
-			"ItemDetail:isOrInherits($0)"
-		],
+		"body": ["ItemDetail:isOrInherits($0)"],
 		"description": ""
 	},
 	"ItemDetail:isType()": {
 		"prefix": "ItemDetail:isType",
-		"body": [
-			"ItemDetail:isType($0)"
-		],
+		"body": ["ItemDetail:isType($0)"],
 		"description": ""
 	},
 	"ItemDetail:matches()": {
 		"prefix": "ItemDetail:matches",
-		"body": [
-			"ItemDetail:matches($0)"
-		],
+		"body": ["ItemDetail:matches($0)"],
 		"description": ""
 	},
 	"ItemDetail:toString()": {
 		"prefix": "ItemDetail:toString",
-		"body": [
-			"ItemDetail:toString($0)"
-		],
+		"body": ["ItemDetail:toString($0)"],
 		"description": ""
 	},
 	"ItemInfo()": {
 		"prefix": "ItemInfo",
-		"body": [
-			"ItemInfo($0)"
-		],
+		"body": ["ItemInfo($0)"],
 		"description": ""
 	},
 	"ItemInfo:assertImplementation()": {
 		"prefix": "ItemInfo:assertImplementation",
-		"body": [
-			"ItemInfo:assertImplementation($0)"
-		],
+		"body": ["ItemInfo:assertImplementation($0)"],
 		"description": ""
 	},
 	"ItemInfo:conversionConstructor()": {
 		"prefix": "ItemInfo:conversionConstructor",
-		"body": [
-			"ItemInfo:conversionConstructor($0)"
-		],
+		"body": ["ItemInfo:conversionConstructor($0)"],
 		"description": ""
 	},
 	"ItemInfo:getStackSize()": {
 		"prefix": "ItemInfo:getStackSize",
-		"body": [
-			"ItemInfo:getStackSize($0)"
-		],
+		"body": ["ItemInfo:getStackSize($0)"],
 		"description": ""
 	},
 	"ItemInfo:getType()": {
 		"prefix": "ItemInfo:getType",
-		"body": [
-			"ItemInfo:getType($0)"
-		],
+		"body": ["ItemInfo:getType($0)"],
 		"description": ""
 	},
 	"ItemInfo:isOrInherits()": {
 		"prefix": "ItemInfo:isOrInherits",
-		"body": [
-			"ItemInfo:isOrInherits($0)"
-		],
+		"body": ["ItemInfo:isOrInherits($0)"],
 		"description": ""
 	},
 	"ItemInfo:isType()": {
 		"prefix": "ItemInfo:isType",
-		"body": [
-			"ItemInfo:isType($0)"
-		],
+		"body": ["ItemInfo:isType($0)"],
 		"description": ""
 	},
 	"ItemInfo:loadHardTable()": {
 		"prefix": "ItemInfo:loadHardTable",
-		"body": [
-			"ItemInfo:loadHardTable($0)"
-		],
+		"body": ["ItemInfo:loadHardTable($0)"],
 		"description": ""
 	},
 	"ItemInfo:setStackSize()": {
 		"prefix": "ItemInfo:setStackSize",
-		"body": [
-			"ItemInfo:setStackSize($0)"
-		],
+		"body": ["ItemInfo:setStackSize($0)"],
 		"description": ""
 	},
 	"ItemStackDetail()": {
 		"prefix": "ItemStackDetail",
-		"body": [
-			"ItemStackDetail($0)"
-		],
+		"body": ["ItemStackDetail($0)"],
 		"description": ""
 	},
 	"ItemStackDetail:assertImplementation()": {
 		"prefix": "ItemStackDetail:assertImplementation",
-		"body": [
-			"ItemStackDetail:assertImplementation($0)"
-		],
+		"body": ["ItemStackDetail:assertImplementation($0)"],
 		"description": ""
 	},
 	"ItemStackDetail:conversionConstructor()": {
 		"prefix": "ItemStackDetail:conversionConstructor",
-		"body": [
-			"ItemStackDetail:conversionConstructor($0)"
-		],
+		"body": ["ItemStackDetail:conversionConstructor($0)"],
 		"description": ""
 	},
 	"ItemStackDetail:getType()": {
 		"prefix": "ItemStackDetail:getType",
-		"body": [
-			"ItemStackDetail:getType($0)"
-		],
+		"body": ["ItemStackDetail:getType($0)"],
 		"description": ""
 	},
 	"ItemStackDetail:isOrInherits()": {
 		"prefix": "ItemStackDetail:isOrInherits",
-		"body": [
-			"ItemStackDetail:isOrInherits($0)"
-		],
+		"body": ["ItemStackDetail:isOrInherits($0)"],
 		"description": ""
 	},
 	"ItemStackDetail:isType()": {
 		"prefix": "ItemStackDetail:isType",
-		"body": [
-			"ItemStackDetail:isType($0)"
-		],
+		"body": ["ItemStackDetail:isType($0)"],
 		"description": ""
 	},
 	"ItemStorage.itemCount()": {
 		"prefix": "ItemStorage.itemCount",
-		"body": [
-			"ItemStorage.itemCount($0)"
-		],
+		"body": ["ItemStorage.itemCount($0)"],
 		"description": ""
 	},
 	"ItemStore()": {
 		"prefix": "ItemStore",
-		"body": [
-			"ItemStore($0)"
-		],
+		"body": ["ItemStore($0)"],
 		"description": ""
 	},
 	"ItemStore:add()": {
 		"prefix": "ItemStore:add",
-		"body": [
-			"ItemStore:add($0)"
-		],
+		"body": ["ItemStore:add($0)"],
 		"description": ""
 	},
 	"ItemStore:assertImplementation()": {
 		"prefix": "ItemStore:assertImplementation",
-		"body": [
-			"ItemStore:assertImplementation($0)"
-		],
+		"body": ["ItemStore:assertImplementation($0)"],
 		"description": ""
 	},
 	"ItemStore:conversionConstructor()": {
 		"prefix": "ItemStore:conversionConstructor",
-		"body": [
-			"ItemStore:conversionConstructor($0)"
-		],
+		"body": ["ItemStore:conversionConstructor($0)"],
 		"description": ""
 	},
 	"ItemStore:getType()": {
 		"prefix": "ItemStore:getType",
-		"body": [
-			"ItemStore:getType($0)"
-		],
+		"body": ["ItemStore:getType($0)"],
 		"description": ""
 	},
 	"ItemStore:isOrInherits()": {
 		"prefix": "ItemStore:isOrInherits",
-		"body": [
-			"ItemStore:isOrInherits($0)"
-		],
+		"body": ["ItemStore:isOrInherits($0)"],
 		"description": ""
 	},
 	"ItemStore:isType()": {
 		"prefix": "ItemStore:isType",
-		"body": [
-			"ItemStore:isType($0)"
-		],
+		"body": ["ItemStore:isType($0)"],
 		"description": ""
 	},
 	"ItemStore:pop()": {
 		"prefix": "ItemStore:pop",
-		"body": [
-			"ItemStore:pop($0)"
-		],
+		"body": ["ItemStore:pop($0)"],
 		"description": ""
 	},
 	"ItemStore:push()": {
 		"prefix": "ItemStore:push",
-		"body": [
-			"ItemStore:push($0)"
-		],
+		"body": ["ItemStore:push($0)"],
 		"description": ""
 	},
 	"ItemStore:remove()": {
 		"prefix": "ItemStore:remove",
-		"body": [
-			"ItemStore:remove($0)"
-		],
+		"body": ["ItemStore:remove($0)"],
 		"description": ""
 	},
 	"Log()": {
 		"prefix": "Log",
-		"body": [
-			"Log($0)"
-		],
+		"body": ["Log($0)"],
 		"description": ""
 	},
 	"Log:assertImplementation()": {
 		"prefix": "Log:assertImplementation",
-		"body": [
-			"Log:assertImplementation($0)"
-		],
+		"body": ["Log:assertImplementation($0)"],
 		"description": ""
 	},
 	"Log:conversionConstructor()": {
 		"prefix": "Log:conversionConstructor",
-		"body": [
-			"Log:conversionConstructor($0)"
-		],
+		"body": ["Log:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Log:error()": {
 		"prefix": "Log:error",
-		"body": [
-			"Log:error($0)"
-		],
+		"body": ["Log:error($0)"],
 		"description": ""
 	},
 	"Log:getType()": {
 		"prefix": "Log:getType",
-		"body": [
-			"Log:getType($0)"
-		],
+		"body": ["Log:getType($0)"],
 		"description": ""
 	},
 	"Log:info()": {
 		"prefix": "Log:info",
-		"body": [
-			"Log:info($0)"
-		],
+		"body": ["Log:info($0)"],
 		"description": ""
 	},
 	"Log:isOrInherits()": {
 		"prefix": "Log:isOrInherits",
-		"body": [
-			"Log:isOrInherits($0)"
-		],
+		"body": ["Log:isOrInherits($0)"],
 		"description": ""
 	},
 	"Log:isType()": {
 		"prefix": "Log:isType",
-		"body": [
-			"Log:isType($0)"
-		],
+		"body": ["Log:isType($0)"],
 		"description": ""
 	},
 	"Log:log()": {
 		"prefix": "Log:log",
-		"body": [
-			"Log:log($0)"
-		],
+		"body": ["Log:log($0)"],
 		"description": ""
 	},
 	"Log:warning()": {
 		"prefix": "Log:warning",
-		"body": [
-			"Log:warning($0)"
-		],
+		"body": ["Log:warning($0)"],
 		"description": ""
 	},
 	"Mov()": {
 		"prefix": "Mov",
-		"body": [
-			"Mov($0)"
-		],
+		"body": ["Mov($0)"],
 		"description": ""
 	},
 	"MoveManager()": {
 		"prefix": "MoveManager",
-		"body": [
-			"MoveManager($0)"
-		],
+		"body": ["MoveManager($0)"],
 		"description": ""
 	},
 	"MoveManager:assertImplementation()": {
 		"prefix": "MoveManager:assertImplementation",
-		"body": [
-			"MoveManager:assertImplementation($0)"
-		],
+		"body": ["MoveManager:assertImplementation($0)"],
 		"description": ""
 	},
 	"MoveManager:back()": {
 		"prefix": "MoveManager:back",
-		"body": [
-			"MoveManager:back($0)"
-		],
+		"body": ["MoveManager:back($0)"],
 		"description": ""
 	},
 	"MoveManager:conversionConstructor()": {
 		"prefix": "MoveManager:conversionConstructor",
-		"body": [
-			"MoveManager:conversionConstructor($0)"
-		],
+		"body": ["MoveManager:conversionConstructor($0)"],
 		"description": ""
 	},
 	"MoveManager:down()": {
 		"prefix": "MoveManager:down",
-		"body": [
-			"MoveManager:down($0)"
-		],
+		"body": ["MoveManager:down($0)"],
 		"description": ""
 	},
 	"MoveManager:face()": {
 		"prefix": "MoveManager:face",
-		"body": [
-			"MoveManager:face($0)"
-		],
+		"body": ["MoveManager:face($0)"],
 		"description": ""
 	},
 	"MoveManager:forward()": {
 		"prefix": "MoveManager:forward",
-		"body": [
-			"MoveManager:forward($0)"
-		],
+		"body": ["MoveManager:forward($0)"],
 		"description": ""
 	},
 	"MoveManager:getDirection()": {
 		"prefix": "MoveManager:getDirection",
-		"body": [
-			"MoveManager:getDirection($0)"
-		],
+		"body": ["MoveManager:getDirection($0)"],
 		"description": ""
 	},
 	"MoveManager:getPosition()": {
 		"prefix": "MoveManager:getPosition",
-		"body": [
-			"MoveManager:getPosition($0)"
-		],
+		"body": ["MoveManager:getPosition($0)"],
 		"description": ""
 	},
 	"MoveManager:getType()": {
 		"prefix": "MoveManager:getType",
-		"body": [
-			"MoveManager:getType($0)"
-		],
+		"body": ["MoveManager:getType($0)"],
 		"description": ""
 	},
 	"MoveManager:getX()": {
 		"prefix": "MoveManager:getX",
-		"body": [
-			"MoveManager:getX($0)"
-		],
+		"body": ["MoveManager:getX($0)"],
 		"description": ""
 	},
 	"MoveManager:getY()": {
 		"prefix": "MoveManager:getY",
-		"body": [
-			"MoveManager:getY($0)"
-		],
+		"body": ["MoveManager:getY($0)"],
 		"description": ""
 	},
 	"MoveManager:getZ()": {
 		"prefix": "MoveManager:getZ",
-		"body": [
-			"MoveManager:getZ($0)"
-		],
+		"body": ["MoveManager:getZ($0)"],
 		"description": ""
 	},
 	"MoveManager:isOrInherits()": {
 		"prefix": "MoveManager:isOrInherits",
-		"body": [
-			"MoveManager:isOrInherits($0)"
-		],
+		"body": ["MoveManager:isOrInherits($0)"],
 		"description": ""
 	},
 	"MoveManager:isType()": {
 		"prefix": "MoveManager:isType",
-		"body": [
-			"MoveManager:isType($0)"
-		],
+		"body": ["MoveManager:isType($0)"],
 		"description": ""
 	},
 	"MoveManager:move()": {
 		"prefix": "MoveManager:move",
-		"body": [
-			"MoveManager:move($0)"
-		],
+		"body": ["MoveManager:move($0)"],
 		"description": ""
 	},
 	"MoveManager:offPositionChanged()": {
 		"prefix": "MoveManager:offPositionChanged",
-		"body": [
-			"MoveManager:offPositionChanged($0)"
-		],
+		"body": ["MoveManager:offPositionChanged($0)"],
 		"description": ""
 	},
 	"MoveManager:onPositionChanged()": {
 		"prefix": "MoveManager:onPositionChanged",
-		"body": [
-			"MoveManager:onPositionChanged($0)"
-		],
+		"body": ["MoveManager:onPositionChanged($0)"],
 		"description": ""
 	},
 	"MoveManager:pop()": {
 		"prefix": "MoveManager:pop",
-		"body": [
-			"MoveManager:pop($0)"
-		],
+		"body": ["MoveManager:pop($0)"],
 		"description": ""
 	},
 	"MoveManager:push()": {
 		"prefix": "MoveManager:push",
-		"body": [
-			"MoveManager:push($0)"
-		],
+		"body": ["MoveManager:push($0)"],
 		"description": ""
 	},
 	"MoveManager:setPosition()": {
 		"prefix": "MoveManager:setPosition",
-		"body": [
-			"MoveManager:setPosition($0)"
-		],
+		"body": ["MoveManager:setPosition($0)"],
 		"description": ""
 	},
 	"MoveManager:trackLocation()": {
 		"prefix": "MoveManager:trackLocation",
-		"body": [
-			"MoveManager:trackLocation($0)"
-		],
+		"body": ["MoveManager:trackLocation($0)"],
 		"description": ""
 	},
 	"MoveManager:turn()": {
 		"prefix": "MoveManager:turn",
-		"body": [
-			"MoveManager:turn($0)"
-		],
+		"body": ["MoveManager:turn($0)"],
 		"description": ""
 	},
 	"MoveManager:turnLeft()": {
 		"prefix": "MoveManager:turnLeft",
-		"body": [
-			"MoveManager:turnLeft($0)"
-		],
+		"body": ["MoveManager:turnLeft($0)"],
 		"description": ""
 	},
 	"MoveManager:turnRight()": {
 		"prefix": "MoveManager:turnRight",
-		"body": [
-			"MoveManager:turnRight($0)"
-		],
+		"body": ["MoveManager:turnRight($0)"],
 		"description": ""
 	},
 	"MoveManager:up()": {
 		"prefix": "MoveManager:up",
-		"body": [
-			"MoveManager:up($0)"
-		],
+		"body": ["MoveManager:up($0)"],
 		"description": ""
 	},
 	"Nav()": {
 		"prefix": "Nav",
-		"body": [
-			"Nav($0)"
-		],
+		"body": ["Nav($0)"],
 		"description": ""
 	},
 	"Navigator()": {
 		"prefix": "Navigator",
-		"body": [
-			"Navigator($0)"
-		],
+		"body": ["Navigator($0)"],
 		"description": ""
 	},
 	"Navigator:assertImplementation()": {
 		"prefix": "Navigator:assertImplementation",
-		"body": [
-			"Navigator:assertImplementation($0)"
-		],
+		"body": ["Navigator:assertImplementation($0)"],
 		"description": ""
 	},
 	"Navigator:conversionConstructor()": {
 		"prefix": "Navigator:conversionConstructor",
-		"body": [
-			"Navigator:conversionConstructor($0)"
-		],
+		"body": ["Navigator:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Navigator:getDirection()": {
 		"prefix": "Navigator:getDirection",
-		"body": [
-			"Navigator:getDirection($0)"
-		],
+		"body": ["Navigator:getDirection($0)"],
 		"description": ""
 	},
 	"Navigator:getPosition()": {
 		"prefix": "Navigator:getPosition",
-		"body": [
-			"Navigator:getPosition($0)"
-		],
+		"body": ["Navigator:getPosition($0)"],
 		"description": ""
 	},
 	"Navigator:getType()": {
 		"prefix": "Navigator:getType",
-		"body": [
-			"Navigator:getType($0)"
-		],
+		"body": ["Navigator:getType($0)"],
 		"description": ""
 	},
 	"Navigator:getX()": {
 		"prefix": "Navigator:getX",
-		"body": [
-			"Navigator:getX($0)"
-		],
+		"body": ["Navigator:getX($0)"],
 		"description": ""
 	},
 	"Navigator:getY()": {
 		"prefix": "Navigator:getY",
-		"body": [
-			"Navigator:getY($0)"
-		],
+		"body": ["Navigator:getY($0)"],
 		"description": ""
 	},
 	"Navigator:getZ()": {
 		"prefix": "Navigator:getZ",
-		"body": [
-			"Navigator:getZ($0)"
-		],
+		"body": ["Navigator:getZ($0)"],
 		"description": ""
 	},
 	"Navigator:goTo()": {
 		"prefix": "Navigator:goTo",
-		"body": [
-			"Navigator:goTo($0)"
-		],
+		"body": ["Navigator:goTo($0)"],
 		"description": ""
 	},
 	"Navigator:goToX()": {
 		"prefix": "Navigator:goToX",
-		"body": [
-			"Navigator:goToX($0)"
-		],
+		"body": ["Navigator:goToX($0)"],
 		"description": ""
 	},
 	"Navigator:goToY()": {
 		"prefix": "Navigator:goToY",
-		"body": [
-			"Navigator:goToY($0)"
-		],
+		"body": ["Navigator:goToY($0)"],
 		"description": ""
 	},
 	"Navigator:goToZ()": {
 		"prefix": "Navigator:goToZ",
-		"body": [
-			"Navigator:goToZ($0)"
-		],
+		"body": ["Navigator:goToZ($0)"],
 		"description": ""
 	},
 	"Navigator:isOrInherits()": {
 		"prefix": "Navigator:isOrInherits",
-		"body": [
-			"Navigator:isOrInherits($0)"
-		],
+		"body": ["Navigator:isOrInherits($0)"],
 		"description": ""
 	},
 	"Navigator:isType()": {
 		"prefix": "Navigator:isType",
-		"body": [
-			"Navigator:isType($0)"
-		],
+		"body": ["Navigator:isType($0)"],
 		"description": ""
 	},
 	"Navigator:popPosition()": {
 		"prefix": "Navigator:popPosition",
-		"body": [
-			"Navigator:popPosition($0)"
-		],
+		"body": ["Navigator:popPosition($0)"],
 		"description": ""
 	},
 	"Navigator:pushPosition()": {
 		"prefix": "Navigator:pushPosition",
-		"body": [
-			"Navigator:pushPosition($0)"
-		],
+		"body": ["Navigator:pushPosition($0)"],
 		"description": ""
 	},
 	"NeedleMineSkill()": {
 		"prefix": "NeedleMineSkill",
-		"body": [
-			"NeedleMineSkill($0)"
-		],
+		"body": ["NeedleMineSkill($0)"],
 		"description": ""
 	},
 	"NeedleMineSkill:assertImplementation()": {
 		"prefix": "NeedleMineSkill:assertImplementation",
-		"body": [
-			"NeedleMineSkill:assertImplementation($0)"
-		],
+		"body": ["NeedleMineSkill:assertImplementation($0)"],
 		"description": ""
 	},
 	"NeedleMineSkill:canHandleTask()": {
 		"prefix": "NeedleMineSkill:canHandleTask",
-		"body": [
-			"NeedleMineSkill:canHandleTask($0)"
-		],
+		"body": ["NeedleMineSkill:canHandleTask($0)"],
 		"description": ""
 	},
 	"NeedleMineSkill:completeTask()": {
 		"prefix": "NeedleMineSkill:completeTask",
-		"body": [
-			"NeedleMineSkill:completeTask($0)"
-		],
+		"body": ["NeedleMineSkill:completeTask($0)"],
 		"description": ""
 	},
 	"NeedleMineSkill:conversionConstructor()": {
 		"prefix": "NeedleMineSkill:conversionConstructor",
-		"body": [
-			"NeedleMineSkill:conversionConstructor($0)"
-		],
+		"body": ["NeedleMineSkill:conversionConstructor($0)"],
 		"description": ""
 	},
 	"NeedleMineSkill:getType()": {
 		"prefix": "NeedleMineSkill:getType",
-		"body": [
-			"NeedleMineSkill:getType($0)"
-		],
+		"body": ["NeedleMineSkill:getType($0)"],
 		"description": ""
 	},
 	"NeedleMineSkill:isOrInherits()": {
 		"prefix": "NeedleMineSkill:isOrInherits",
-		"body": [
-			"NeedleMineSkill:isOrInherits($0)"
-		],
+		"body": ["NeedleMineSkill:isOrInherits($0)"],
 		"description": ""
 	},
 	"NeedleMineSkill:isType()": {
 		"prefix": "NeedleMineSkill:isType",
-		"body": [
-			"NeedleMineSkill:isType($0)"
-		],
+		"body": ["NeedleMineSkill:isType($0)"],
 		"description": ""
 	},
-	"Pixel.compile()": {
-		"prefix": "Pixel.compile",
-		"body": [
-			"Pixel.compile($0)"
-		],
+	"Pixel.Compile()": {
+		"prefix": "Pixel.Compile",
+		"body": ["Pixel.Compile($0)"],
 		"description": ""
 	},
 	"Position()": {
 		"prefix": "Position",
-		"body": [
-			"Position($0)"
-		],
+		"body": ["Position($0)"],
 		"description": ""
 	},
 	"Position:add()": {
 		"prefix": "Position:add",
-		"body": [
-			"Position:add($0)"
-		],
+		"body": ["Position:add($0)"],
 		"description": ""
 	},
 	"Position:assertImplementation()": {
 		"prefix": "Position:assertImplementation",
-		"body": [
-			"Position:assertImplementation($0)"
-		],
+		"body": ["Position:assertImplementation($0)"],
 		"description": ""
 	},
 	"Position:conversionConstructor()": {
 		"prefix": "Position:conversionConstructor",
-		"body": [
-			"Position:conversionConstructor($0)"
-		],
+		"body": ["Position:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Position:fromArgs()": {
 		"prefix": "Position:fromArgs",
-		"body": [
-			"Position:fromArgs($0)"
-		],
+		"body": ["Position:fromArgs($0)"],
 		"description": ""
 	},
 	"Position:getDirectionOffset()": {
 		"prefix": "Position:getDirectionOffset",
-		"body": [
-			"Position:getDirectionOffset($0)"
-		],
+		"body": ["Position:getDirectionOffset($0)"],
 		"description": ""
 	},
 	"Position:getType()": {
 		"prefix": "Position:getType",
-		"body": [
-			"Position:getType($0)"
-		],
+		"body": ["Position:getType($0)"],
 		"description": ""
 	},
 	"Position:isOrInherits()": {
 		"prefix": "Position:isOrInherits",
-		"body": [
-			"Position:isOrInherits($0)"
-		],
+		"body": ["Position:isOrInherits($0)"],
 		"description": ""
 	},
 	"Position:isType()": {
 		"prefix": "Position:isType",
-		"body": [
-			"Position:isType($0)"
-		],
+		"body": ["Position:isType($0)"],
 		"description": ""
 	},
 	"Position:rotate()": {
 		"prefix": "Position:rotate",
-		"body": [
-			"Position:rotate($0)"
-		],
+		"body": ["Position:rotate($0)"],
 		"description": ""
 	},
 	"Position:sub()": {
 		"prefix": "Position:sub",
-		"body": [
-			"Position:sub($0)"
-		],
+		"body": ["Position:sub($0)"],
 		"description": ""
 	},
 	"Position:toString()": {
 		"prefix": "Position:toString",
-		"body": [
-			"Position:toString($0)"
-		],
+		"body": ["Position:toString($0)"],
 		"description": ""
 	},
 	"Position:wrapDirection()": {
 		"prefix": "Position:wrapDirection",
-		"body": [
-			"Position:wrapDirection($0)"
-		],
+		"body": ["Position:wrapDirection($0)"],
 		"description": ""
 	},
 	"Queue()": {
 		"prefix": "Queue",
-		"body": [
-			"Queue($0)"
-		],
+		"body": ["Queue($0)"],
 		"description": ""
 	},
 	"Queue:assertImplementation()": {
 		"prefix": "Queue:assertImplementation",
-		"body": [
-			"Queue:assertImplementation($0)"
-		],
+		"body": ["Queue:assertImplementation($0)"],
 		"description": ""
 	},
 	"Queue:conversionConstructor()": {
 		"prefix": "Queue:conversionConstructor",
-		"body": [
-			"Queue:conversionConstructor($0)"
-		],
+		"body": ["Queue:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Queue:dequeue()": {
 		"prefix": "Queue:dequeue",
-		"body": [
-			"Queue:dequeue($0)"
-		],
+		"body": ["Queue:dequeue($0)"],
 		"description": ""
 	},
 	"Queue:enqueue()": {
 		"prefix": "Queue:enqueue",
-		"body": [
-			"Queue:enqueue($0)"
-		],
+		"body": ["Queue:enqueue($0)"],
 		"description": ""
 	},
 	"Queue:getItems()": {
 		"prefix": "Queue:getItems",
-		"body": [
-			"Queue:getItems($0)"
-		],
+		"body": ["Queue:getItems($0)"],
 		"description": ""
 	},
 	"Queue:getType()": {
 		"prefix": "Queue:getType",
-		"body": [
-			"Queue:getType($0)"
-		],
+		"body": ["Queue:getType($0)"],
 		"description": ""
 	},
 	"Queue:isOrInherits()": {
 		"prefix": "Queue:isOrInherits",
-		"body": [
-			"Queue:isOrInherits($0)"
-		],
+		"body": ["Queue:isOrInherits($0)"],
 		"description": ""
 	},
 	"Queue:isType()": {
 		"prefix": "Queue:isType",
-		"body": [
-			"Queue:isType($0)"
-		],
+		"body": ["Queue:isType($0)"],
 		"description": ""
 	},
 	"Queue:remove()": {
 		"prefix": "Queue:remove",
-		"body": [
-			"Queue:remove($0)"
-		],
+		"body": ["Queue:remove($0)"],
 		"description": ""
 	},
 	"Recipe()": {
 		"prefix": "Recipe",
-		"body": [
-			"Recipe($0)"
-		],
+		"body": ["Recipe($0)"],
 		"description": ""
 	},
 	"Recipe:assertImplementation()": {
 		"prefix": "Recipe:assertImplementation",
-		"body": [
-			"Recipe:assertImplementation($0)"
-		],
+		"body": ["Recipe:assertImplementation($0)"],
 		"description": ""
 	},
 	"Recipe:conversionConstructor()": {
 		"prefix": "Recipe:conversionConstructor",
-		"body": [
-			"Recipe:conversionConstructor($0)"
-		],
+		"body": ["Recipe:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Recipe:getType()": {
 		"prefix": "Recipe:getType",
-		"body": [
-			"Recipe:getType($0)"
-		],
+		"body": ["Recipe:getType($0)"],
 		"description": ""
 	},
 	"Recipe:isOrInherits()": {
 		"prefix": "Recipe:isOrInherits",
-		"body": [
-			"Recipe:isOrInherits($0)"
-		],
+		"body": ["Recipe:isOrInherits($0)"],
 		"description": ""
 	},
 	"Recipe:isType()": {
 		"prefix": "Recipe:isType",
-		"body": [
-			"Recipe:isType($0)"
-		],
+		"body": ["Recipe:isType($0)"],
 		"description": ""
 	},
 	"RecipeBook()": {
 		"prefix": "RecipeBook",
-		"body": [
-			"RecipeBook($0)"
-		],
+		"body": ["RecipeBook($0)"],
 		"description": ""
 	},
 	"RecipeBook:add()": {
 		"prefix": "RecipeBook:add",
-		"body": [
-			"RecipeBook:add($0)"
-		],
+		"body": ["RecipeBook:add($0)"],
 		"description": ""
 	},
 	"RecipeBook:assertImplementation()": {
 		"prefix": "RecipeBook:assertImplementation",
-		"body": [
-			"RecipeBook:assertImplementation($0)"
-		],
+		"body": ["RecipeBook:assertImplementation($0)"],
 		"description": ""
 	},
 	"RecipeBook:conversionConstructor()": {
 		"prefix": "RecipeBook:conversionConstructor",
-		"body": [
-			"RecipeBook:conversionConstructor($0)"
-		],
+		"body": ["RecipeBook:conversionConstructor($0)"],
 		"description": ""
 	},
 	"RecipeBook:findByGrid()": {
 		"prefix": "RecipeBook:findByGrid",
-		"body": [
-			"RecipeBook:findByGrid($0)"
-		],
+		"body": ["RecipeBook:findByGrid($0)"],
 		"description": ""
 	},
 	"RecipeBook:findByIngredient()": {
 		"prefix": "RecipeBook:findByIngredient",
-		"body": [
-			"RecipeBook:findByIngredient($0)"
-		],
+		"body": ["RecipeBook:findByIngredient($0)"],
 		"description": ""
 	},
 	"RecipeBook:findCraftingRecipesBySelector()": {
 		"prefix": "RecipeBook:findCraftingRecipesBySelector",
-		"body": [
-			"RecipeBook:findCraftingRecipesBySelector($0)"
-		],
+		"body": ["RecipeBook:findCraftingRecipesBySelector($0)"],
 		"description": ""
 	},
 	"RecipeBook:findFurnaceRecipeBySelector()": {
 		"prefix": "RecipeBook:findFurnaceRecipeBySelector",
-		"body": [
-			"RecipeBook:findFurnaceRecipeBySelector($0)"
-		],
+		"body": ["RecipeBook:findFurnaceRecipeBySelector($0)"],
 		"description": ""
 	},
 	"RecipeBook:getType()": {
 		"prefix": "RecipeBook:getType",
-		"body": [
-			"RecipeBook:getType($0)"
-		],
+		"body": ["RecipeBook:getType($0)"],
 		"description": ""
 	},
 	"RecipeBook:isOrInherits()": {
 		"prefix": "RecipeBook:isOrInherits",
-		"body": [
-			"RecipeBook:isOrInherits($0)"
-		],
+		"body": ["RecipeBook:isOrInherits($0)"],
 		"description": ""
 	},
 	"RecipeBook:isType()": {
 		"prefix": "RecipeBook:isType",
-		"body": [
-			"RecipeBook:isType($0)"
-		],
+		"body": ["RecipeBook:isType($0)"],
 		"description": ""
 	},
 	"RecipeBook:loadHardTable()": {
 		"prefix": "RecipeBook:loadHardTable",
-		"body": [
-			"RecipeBook:loadHardTable($0)"
-		],
+		"body": ["RecipeBook:loadHardTable($0)"],
 		"description": ""
 	},
 	"Skill()": {
 		"prefix": "Skill",
-		"body": [
-			"Skill($0)"
-		],
+		"body": ["Skill($0)"],
 		"description": ""
 	},
 	"Skill:assertImplementation()": {
 		"prefix": "Skill:assertImplementation",
-		"body": [
-			"Skill:assertImplementation($0)"
-		],
+		"body": ["Skill:assertImplementation($0)"],
 		"description": ""
 	},
 	"Skill:canHandleTask()": {
 		"prefix": "Skill:canHandleTask",
-		"body": [
-			"Skill:canHandleTask($0)"
-		],
+		"body": ["Skill:canHandleTask($0)"],
 		"description": ""
 	},
 	"Skill:completeTask()": {
 		"prefix": "Skill:completeTask",
-		"body": [
-			"Skill:completeTask($0)"
-		],
+		"body": ["Skill:completeTask($0)"],
 		"description": ""
 	},
 	"Skill:conversionConstructor()": {
 		"prefix": "Skill:conversionConstructor",
-		"body": [
-			"Skill:conversionConstructor($0)"
-		],
+		"body": ["Skill:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Skill:getType()": {
 		"prefix": "Skill:getType",
-		"body": [
-			"Skill:getType($0)"
-		],
+		"body": ["Skill:getType($0)"],
 		"description": ""
 	},
 	"Skill:isOrInherits()": {
 		"prefix": "Skill:isOrInherits",
-		"body": [
-			"Skill:isOrInherits($0)"
-		],
+		"body": ["Skill:isOrInherits($0)"],
 		"description": ""
 	},
 	"Skill:isType()": {
 		"prefix": "Skill:isType",
-		"body": [
-			"Skill:isType($0)"
-		],
+		"body": ["Skill:isType($0)"],
 		"description": ""
 	},
 	"SkillSet()": {
 		"prefix": "SkillSet",
-		"body": [
-			"SkillSet($0)"
-		],
+		"body": ["SkillSet($0)"],
 		"description": ""
 	},
 	"SkillSet.GetDefaultSkillSet()": {
 		"prefix": "SkillSet.GetDefaultSkillSet",
-		"body": [
-			"SkillSet.GetDefaultSkillSet($0)"
-		],
+		"body": ["SkillSet.GetDefaultSkillSet($0)"],
 		"description": ""
 	},
 	"SkillSet:addSkill()": {
 		"prefix": "SkillSet:addSkill",
-		"body": [
-			"SkillSet:addSkill($0)"
-		],
+		"body": ["SkillSet:addSkill($0)"],
 		"description": ""
 	},
 	"SkillSet:assertImplementation()": {
 		"prefix": "SkillSet:assertImplementation",
-		"body": [
-			"SkillSet:assertImplementation($0)"
-		],
+		"body": ["SkillSet:assertImplementation($0)"],
 		"description": ""
 	},
 	"SkillSet:conversionConstructor()": {
 		"prefix": "SkillSet:conversionConstructor",
-		"body": [
-			"SkillSet:conversionConstructor($0)"
-		],
+		"body": ["SkillSet:conversionConstructor($0)"],
 		"description": ""
 	},
 	"SkillSet:getSkillCount()": {
 		"prefix": "SkillSet:getSkillCount",
-		"body": [
-			"SkillSet:getSkillCount($0)"
-		],
+		"body": ["SkillSet:getSkillCount($0)"],
 		"description": ""
 	},
 	"SkillSet:getSkillForTask()": {
 		"prefix": "SkillSet:getSkillForTask",
-		"body": [
-			"SkillSet:getSkillForTask($0)"
-		],
+		"body": ["SkillSet:getSkillForTask($0)"],
 		"description": ""
 	},
 	"SkillSet:getSkills()": {
 		"prefix": "SkillSet:getSkills",
-		"body": [
-			"SkillSet:getSkills($0)"
-		],
+		"body": ["SkillSet:getSkills($0)"],
 		"description": ""
 	},
 	"SkillSet:getType()": {
 		"prefix": "SkillSet:getType",
-		"body": [
-			"SkillSet:getType($0)"
-		],
+		"body": ["SkillSet:getType($0)"],
 		"description": ""
 	},
 	"SkillSet:isOrInherits()": {
 		"prefix": "SkillSet:isOrInherits",
-		"body": [
-			"SkillSet:isOrInherits($0)"
-		],
+		"body": ["SkillSet:isOrInherits($0)"],
 		"description": ""
 	},
 	"SkillSet:isType()": {
 		"prefix": "SkillSet:isType",
-		"body": [
-			"SkillSet:isType($0)"
-		],
+		"body": ["SkillSet:isType($0)"],
 		"description": ""
 	},
 	"StringBuffer()": {
 		"prefix": "StringBuffer",
-		"body": [
-			"StringBuffer($0)"
-		],
+		"body": ["StringBuffer($0)"],
 		"description": ""
 	},
 	"StringBuffer:assertImplementation()": {
 		"prefix": "StringBuffer:assertImplementation",
-		"body": [
-			"StringBuffer:assertImplementation($0)"
-		],
+		"body": ["StringBuffer:assertImplementation($0)"],
 		"description": ""
 	},
 	"StringBuffer:conversionConstructor()": {
 		"prefix": "StringBuffer:conversionConstructor",
-		"body": [
-			"StringBuffer:conversionConstructor($0)"
-		],
+		"body": ["StringBuffer:conversionConstructor($0)"],
 		"description": ""
 	},
 	"StringBuffer:fill()": {
 		"prefix": "StringBuffer:fill",
-		"body": [
-			"StringBuffer:fill($0)"
-		],
+		"body": ["StringBuffer:fill($0)"],
 		"description": ""
 	},
 	"StringBuffer:getType()": {
 		"prefix": "StringBuffer:getType",
-		"body": [
-			"StringBuffer:getType($0)"
-		],
+		"body": ["StringBuffer:getType($0)"],
 		"description": ""
 	},
 	"StringBuffer:isOrInherits()": {
 		"prefix": "StringBuffer:isOrInherits",
-		"body": [
-			"StringBuffer:isOrInherits($0)"
-		],
+		"body": ["StringBuffer:isOrInherits($0)"],
 		"description": ""
 	},
 	"StringBuffer:isType()": {
 		"prefix": "StringBuffer:isType",
-		"body": [
-			"StringBuffer:isType($0)"
-		],
+		"body": ["StringBuffer:isType($0)"],
 		"description": ""
 	},
 	"StringBuffer:read()": {
 		"prefix": "StringBuffer:read",
-		"body": [
-			"StringBuffer:read($0)"
-		],
+		"body": ["StringBuffer:read($0)"],
 		"description": ""
 	},
 	"StringBuffer:write()": {
 		"prefix": "StringBuffer:write",
-		"body": [
-			"StringBuffer:write($0)"
-		],
+		"body": ["StringBuffer:write($0)"],
 		"description": ""
 	},
 	"Surface()": {
 		"prefix": "Surface",
-		"body": [
-			"Surface($0)"
-		],
+		"body": ["Surface($0)"],
 		"description": ""
 	},
 	"Surface:asTerm()": {
 		"prefix": "Surface:asTerm",
-		"body": [
-			"Surface:asTerm($0)"
-		],
+		"body": ["Surface:asTerm($0)"],
 		"description": ""
 	},
 	"Surface:assertImplementation()": {
 		"prefix": "Surface:assertImplementation",
-		"body": [
-			"Surface:assertImplementation($0)"
-		],
+		"body": ["Surface:assertImplementation($0)"],
 		"description": ""
 	},
 	"Surface:blit()": {
 		"prefix": "Surface:blit",
-		"body": [
-			"Surface:blit($0)"
-		],
+		"body": ["Surface:blit($0)"],
 		"description": ""
 	},
 	"Surface:blitTo()": {
 		"prefix": "Surface:blitTo",
-		"body": [
-			"Surface:blitTo($0)"
-		],
+		"body": ["Surface:blitTo($0)"],
 		"description": ""
 	},
 	"Surface:clear()": {
 		"prefix": "Surface:clear",
-		"body": [
-			"Surface:clear($0)"
-		],
+		"body": ["Surface:clear($0)"],
 		"description": ""
 	},
 	"Surface:clearLine()": {
 		"prefix": "Surface:clearLine",
-		"body": [
-			"Surface:clearLine($0)"
-		],
+		"body": ["Surface:clearLine($0)"],
 		"description": ""
 	},
 	"Surface:conversionConstructor()": {
 		"prefix": "Surface:conversionConstructor",
-		"body": [
-			"Surface:conversionConstructor($0)"
-		],
+		"body": ["Surface:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Surface:getBackgroundColor()": {
 		"prefix": "Surface:getBackgroundColor",
-		"body": [
-			"Surface:getBackgroundColor($0)"
-		],
+		"body": ["Surface:getBackgroundColor($0)"],
 		"description": ""
 	},
 	"Surface:getBackgroundColour()": {
 		"prefix": "Surface:getBackgroundColour",
-		"body": [
-			"Surface:getBackgroundColour($0)"
-		],
+		"body": ["Surface:getBackgroundColour($0)"],
 		"description": ""
 	},
 	"Surface:getCursorPos()": {
 		"prefix": "Surface:getCursorPos",
-		"body": [
-			"Surface:getCursorPos($0)"
-		],
+		"body": ["Surface:getCursorPos($0)"],
 		"description": ""
 	},
 	"Surface:getLastLine()": {
 		"prefix": "Surface:getLastLine",
-		"body": [
-			"Surface:getLastLine($0)"
-		],
+		"body": ["Surface:getLastLine($0)"],
 		"description": ""
 	},
 	"Surface:getSize()": {
 		"prefix": "Surface:getSize",
-		"body": [
-			"Surface:getSize($0)"
-		],
+		"body": ["Surface:getSize($0)"],
 		"description": ""
 	},
 	"Surface:getTextColor()": {
 		"prefix": "Surface:getTextColor",
-		"body": [
-			"Surface:getTextColor($0)"
-		],
+		"body": ["Surface:getTextColor($0)"],
 		"description": ""
 	},
 	"Surface:getTextColour()": {
 		"prefix": "Surface:getTextColour",
-		"body": [
-			"Surface:getTextColour($0)"
-		],
+		"body": ["Surface:getTextColour($0)"],
 		"description": ""
 	},
 	"Surface:getType()": {
 		"prefix": "Surface:getType",
-		"body": [
-			"Surface:getType($0)"
-		],
+		"body": ["Surface:getType($0)"],
 		"description": ""
 	},
 	"Surface:isColor()": {
 		"prefix": "Surface:isColor",
-		"body": [
-			"Surface:isColor($0)"
-		],
+		"body": ["Surface:isColor($0)"],
 		"description": ""
 	},
 	"Surface:isColour()": {
 		"prefix": "Surface:isColour",
-		"body": [
-			"Surface:isColour($0)"
-		],
+		"body": ["Surface:isColour($0)"],
 		"description": ""
 	},
 	"Surface:isOrInherits()": {
 		"prefix": "Surface:isOrInherits",
-		"body": [
-			"Surface:isOrInherits($0)"
-		],
+		"body": ["Surface:isOrInherits($0)"],
 		"description": ""
 	},
 	"Surface:isType()": {
 		"prefix": "Surface:isType",
-		"body": [
-			"Surface:isType($0)"
-		],
+		"body": ["Surface:isType($0)"],
 		"description": ""
 	},
 	"Surface:mirrorTo()": {
 		"prefix": "Surface:mirrorTo",
-		"body": [
-			"Surface:mirrorTo($0)"
-		],
+		"body": ["Surface:mirrorTo($0)"],
 		"description": ""
 	},
 	"Surface:scroll()": {
 		"prefix": "Surface:scroll",
-		"body": [
-			"Surface:scroll($0)"
-		],
+		"body": ["Surface:scroll($0)"],
 		"description": ""
 	},
 	"Surface:setBackgroundColor()": {
 		"prefix": "Surface:setBackgroundColor",
-		"body": [
-			"Surface:setBackgroundColor($0)"
-		],
+		"body": ["Surface:setBackgroundColor($0)"],
 		"description": ""
 	},
 	"Surface:setBackgroundColour()": {
 		"prefix": "Surface:setBackgroundColour",
-		"body": [
-			"Surface:setBackgroundColour($0)"
-		],
+		"body": ["Surface:setBackgroundColour($0)"],
 		"description": ""
 	},
 	"Surface:setCursorBlink()": {
 		"prefix": "Surface:setCursorBlink",
-		"body": [
-			"Surface:setCursorBlink($0)"
-		],
+		"body": ["Surface:setCursorBlink($0)"],
 		"description": ""
 	},
 	"Surface:setCursorPos()": {
 		"prefix": "Surface:setCursorPos",
-		"body": [
-			"Surface:setCursorPos($0)"
-		],
+		"body": ["Surface:setCursorPos($0)"],
 		"description": ""
 	},
 	"Surface:setTextColor()": {
 		"prefix": "Surface:setTextColor",
-		"body": [
-			"Surface:setTextColor($0)"
-		],
+		"body": ["Surface:setTextColor($0)"],
 		"description": ""
 	},
 	"Surface:setTextColour()": {
 		"prefix": "Surface:setTextColour",
-		"body": [
-			"Surface:setTextColour($0)"
-		],
+		"body": ["Surface:setTextColour($0)"],
 		"description": ""
 	},
 	"Surface:startMirroring()": {
 		"prefix": "Surface:startMirroring",
-		"body": [
-			"Surface:startMirroring($0)"
-		],
+		"body": ["Surface:startMirroring($0)"],
 		"description": ""
 	},
 	"Surface:write()": {
 		"prefix": "Surface:write",
-		"body": [
-			"Surface:write($0)"
-		],
+		"body": ["Surface:write($0)"],
 		"description": ""
 	},
 	"Task()": {
 		"prefix": "Task",
-		"body": [
-			"Task($0)"
-		],
+		"body": ["Task($0)"],
 		"description": ""
 	},
 	"Task:assertImplementation()": {
 		"prefix": "Task:assertImplementation",
-		"body": [
-			"Task:assertImplementation($0)"
-		],
+		"body": ["Task:assertImplementation($0)"],
 		"description": ""
 	},
 	"Task:conversionConstructor()": {
 		"prefix": "Task:conversionConstructor",
-		"body": [
-			"Task:conversionConstructor($0)"
-		],
+		"body": ["Task:conversionConstructor($0)"],
 		"description": ""
 	},
 	"Task:getType()": {
 		"prefix": "Task:getType",
-		"body": [
-			"Task:getType($0)"
-		],
+		"body": ["Task:getType($0)"],
 		"description": ""
 	},
 	"Task:isOrInherits()": {
 		"prefix": "Task:isOrInherits",
-		"body": [
-			"Task:isOrInherits($0)"
-		],
+		"body": ["Task:isOrInherits($0)"],
 		"description": ""
 	},
 	"Task:isType()": {
 		"prefix": "Task:isType",
-		"body": [
-			"Task:isType($0)"
-		],
+		"body": ["Task:isType($0)"],
 		"description": ""
 	},
 	"Task:toString()": {
 		"prefix": "Task:toString",
-		"body": [
-			"Task:toString($0)"
-		],
+		"body": ["Task:toString($0)"],
 		"description": ""
 	},
 	"TaskManager()": {
 		"prefix": "TaskManager",
-		"body": [
-			"TaskManager($0)"
-		],
+		"body": ["TaskManager($0)"],
 		"description": ""
 	},
 	"TaskManager:addTask()": {
 		"prefix": "TaskManager:addTask",
-		"body": [
-			"TaskManager:addTask($0)"
-		],
+		"body": ["TaskManager:addTask($0)"],
 		"description": ""
 	},
 	"TaskManager:assertImplementation()": {
 		"prefix": "TaskManager:assertImplementation",
-		"body": [
-			"TaskManager:assertImplementation($0)"
-		],
+		"body": ["TaskManager:assertImplementation($0)"],
 		"description": ""
 	},
 	"TaskManager:conversionConstructor()": {
 		"prefix": "TaskManager:conversionConstructor",
-		"body": [
-			"TaskManager:conversionConstructor($0)"
-		],
+		"body": ["TaskManager:conversionConstructor($0)"],
 		"description": ""
 	},
 	"TaskManager:count()": {
 		"prefix": "TaskManager:count",
-		"body": [
-			"TaskManager:count($0)"
-		],
+		"body": ["TaskManager:count($0)"],
 		"description": ""
 	},
 	"TaskManager:getTask()": {
 		"prefix": "TaskManager:getTask",
-		"body": [
-			"TaskManager:getTask($0)"
-		],
+		"body": ["TaskManager:getTask($0)"],
 		"description": ""
 	},
 	"TaskManager:getTasks()": {
 		"prefix": "TaskManager:getTasks",
-		"body": [
-			"TaskManager:getTasks($0)"
-		],
+		"body": ["TaskManager:getTasks($0)"],
 		"description": ""
 	},
 	"TaskManager:getType()": {
 		"prefix": "TaskManager:getType",
-		"body": [
-			"TaskManager:getType($0)"
-		],
+		"body": ["TaskManager:getType($0)"],
 		"description": ""
 	},
 	"TaskManager:isOrInherits()": {
 		"prefix": "TaskManager:isOrInherits",
-		"body": [
-			"TaskManager:isOrInherits($0)"
-		],
+		"body": ["TaskManager:isOrInherits($0)"],
 		"description": ""
 	},
 	"TaskManager:isType()": {
 		"prefix": "TaskManager:isType",
-		"body": [
-			"TaskManager:isType($0)"
-		],
+		"body": ["TaskManager:isType($0)"],
 		"description": ""
 	},
 	"TaskManager:load()": {
 		"prefix": "TaskManager:load",
-		"body": [
-			"TaskManager:load($0)"
-		],
+		"body": ["TaskManager:load($0)"],
 		"description": ""
 	},
 	"TaskManager:removeTask()": {
 		"prefix": "TaskManager:removeTask",
-		"body": [
-			"TaskManager:removeTask($0)"
-		],
+		"body": ["TaskManager:removeTask($0)"],
 		"description": ""
 	},
 	"TaskManager:save()": {
 		"prefix": "TaskManager:save",
-		"body": [
-			"TaskManager:save($0)"
-		],
+		"body": ["TaskManager:save($0)"],
 		"description": ""
 	},
 	"TaskRunner()": {
 		"prefix": "TaskRunner",
-		"body": [
-			"TaskRunner($0)"
-		],
+		"body": ["TaskRunner($0)"],
 		"description": ""
 	},
 	"TaskRunner:assertImplementation()": {
 		"prefix": "TaskRunner:assertImplementation",
-		"body": [
-			"TaskRunner:assertImplementation($0)"
-		],
+		"body": ["TaskRunner:assertImplementation($0)"],
 		"description": ""
 	},
 	"TaskRunner:conversionConstructor()": {
 		"prefix": "TaskRunner:conversionConstructor",
-		"body": [
-			"TaskRunner:conversionConstructor($0)"
-		],
+		"body": ["TaskRunner:conversionConstructor($0)"],
 		"description": ""
 	},
 	"TaskRunner:getType()": {
 		"prefix": "TaskRunner:getType",
-		"body": [
-			"TaskRunner:getType($0)"
-		],
+		"body": ["TaskRunner:getType($0)"],
 		"description": ""
 	},
 	"TaskRunner:isOrInherits()": {
 		"prefix": "TaskRunner:isOrInherits",
-		"body": [
-			"TaskRunner:isOrInherits($0)"
-		],
+		"body": ["TaskRunner:isOrInherits($0)"],
 		"description": ""
 	},
 	"TaskRunner:isType()": {
 		"prefix": "TaskRunner:isType",
-		"body": [
-			"TaskRunner:isType($0)"
-		],
+		"body": ["TaskRunner:isType($0)"],
 		"description": ""
 	},
 	"TaskRunner:run()": {
 		"prefix": "TaskRunner:run",
-		"body": [
-			"TaskRunner:run($0)"
-		],
+		"body": ["TaskRunner:run($0)"],
 		"description": ""
 	},
 	"TreeFarmSkill()": {
 		"prefix": "TreeFarmSkill",
-		"body": [
-			"TreeFarmSkill($0)"
-		],
+		"body": ["TreeFarmSkill($0)"],
 		"description": ""
 	},
 	"TreeFarmSkill:assertImplementation()": {
 		"prefix": "TreeFarmSkill:assertImplementation",
-		"body": [
-			"TreeFarmSkill:assertImplementation($0)"
-		],
+		"body": ["TreeFarmSkill:assertImplementation($0)"],
 		"description": ""
 	},
 	"TreeFarmSkill:canHandleTask()": {
 		"prefix": "TreeFarmSkill:canHandleTask",
-		"body": [
-			"TreeFarmSkill:canHandleTask($0)"
-		],
+		"body": ["TreeFarmSkill:canHandleTask($0)"],
 		"description": ""
 	},
 	"TreeFarmSkill:conversionConstructor()": {
 		"prefix": "TreeFarmSkill:conversionConstructor",
-		"body": [
-			"TreeFarmSkill:conversionConstructor($0)"
-		],
+		"body": ["TreeFarmSkill:conversionConstructor($0)"],
 		"description": ""
 	},
 	"TreeFarmSkill:getType()": {
 		"prefix": "TreeFarmSkill:getType",
-		"body": [
-			"TreeFarmSkill:getType($0)"
-		],
+		"body": ["TreeFarmSkill:getType($0)"],
 		"description": ""
 	},
 	"TreeFarmSkill:isOrInherits()": {
 		"prefix": "TreeFarmSkill:isOrInherits",
-		"body": [
-			"TreeFarmSkill:isOrInherits($0)"
-		],
+		"body": ["TreeFarmSkill:isOrInherits($0)"],
 		"description": ""
 	},
 	"TreeFarmSkill:isType()": {
 		"prefix": "TreeFarmSkill:isType",
-		"body": [
-			"TreeFarmSkill:isType($0)"
-		],
+		"body": ["TreeFarmSkill:isType($0)"],
 		"description": ""
 	},
 	"TreeFarmSkill:performNextAction()": {
 		"prefix": "TreeFarmSkill:performNextAction",
-		"body": [
-			"TreeFarmSkill:performNextAction($0)"
-		],
+		"body": ["TreeFarmSkill:performNextAction($0)"],
 		"description": ""
 	},
 	"assert()": {
 		"prefix": "assert",
-		"body": [
-			"assert($0)"
-		],
+		"body": ["assert($0)"],
 		"description": ""
 	},
 	"assertType()": {
 		"prefix": "assertType",
-		"body": [
-			"assertType($0)"
-		],
+		"body": ["assertType($0)"],
 		"description": ""
 	},
 	"bit.blshift()": {
 		"prefix": "bit.blshift",
-		"body": [
-			"bit.blshift($0)"
-		],
+		"body": ["bit.blshift($0)"],
 		"description": ""
 	},
 	"cloneTable()": {
 		"prefix": "cloneTable",
-		"body": [
-			"cloneTable($0)"
-		],
+		"body": ["cloneTable($0)"],
 		"description": ""
 	},
 	"coalesce()": {
 		"prefix": "coalesce",
-		"body": [
-			"coalesce($0)"
-		],
+		"body": ["coalesce($0)"],
 		"description": ""
 	},
 	"collectgarbage()": {
 		"prefix": "collectgarbage",
-		"body": [
-			"collectgarbage($0)"
-		],
+		"body": ["collectgarbage($0)"],
 		"description": ""
 	},
 	"coroutine.create()": {
 		"prefix": "coroutine.create",
-		"body": [
-			"coroutine.create($0)"
-		],
+		"body": ["coroutine.create($0)"],
 		"description": ""
 	},
 	"coroutine.resume()": {
 		"prefix": "coroutine.resume",
-		"body": [
-			"coroutine.resume($0)"
-		],
+		"body": ["coroutine.resume($0)"],
 		"description": ""
 	},
 	"coroutine.running()": {
 		"prefix": "coroutine.running",
-		"body": [
-			"coroutine.running($0)"
-		],
+		"body": ["coroutine.running($0)"],
 		"description": ""
 	},
 	"coroutine.status()": {
 		"prefix": "coroutine.status",
-		"body": [
-			"coroutine.status($0)"
-		],
+		"body": ["coroutine.status($0)"],
 		"description": ""
 	},
 	"coroutine.wrap()": {
 		"prefix": "coroutine.wrap",
-		"body": [
-			"coroutine.wrap($0)"
-		],
+		"body": ["coroutine.wrap($0)"],
 		"description": ""
 	},
 	"coroutine.yield()": {
 		"prefix": "coroutine.yield",
-		"body": [
-			"coroutine.yield($0)"
-		],
+		"body": ["coroutine.yield($0)"],
 		"description": ""
 	},
 	"dofile()": {
 		"prefix": "dofile",
-		"body": [
-			"dofile($0)"
-		],
+		"body": ["dofile($0)"],
 		"description": ""
 	},
 	"dofileSandbox()": {
 		"prefix": "dofileSandbox",
-		"body": [
-			"dofileSandbox($0)"
-		],
+		"body": ["dofileSandbox($0)"],
 		"description": ""
 	},
 	"error()": {
 		"prefix": "error",
-		"body": [
-			"error($0)"
-		],
+		"body": ["error($0)"],
 		"description": ""
 	},
 	"fs.delete()": {
 		"prefix": "fs.delete",
-		"body": [
-			"fs.delete($0)"
-		],
+		"body": ["fs.delete($0)"],
 		"description": ""
 	},
 	"fs.exists()": {
 		"prefix": "fs.exists",
-		"body": [
-			"fs.exists($0)"
-		],
+		"body": ["fs.exists($0)"],
 		"description": ""
 	},
 	"fs.getName()": {
 		"prefix": "fs.getName",
-		"body": [
-			"fs.getName($0)"
-		],
+		"body": ["fs.getName($0)"],
 		"description": ""
 	},
 	"fs.isDir()": {
 		"prefix": "fs.isDir",
-		"body": [
-			"fs.isDir($0)"
-		],
+		"body": ["fs.isDir($0)"],
 		"description": ""
 	},
 	"fs.list()": {
 		"prefix": "fs.list",
-		"body": [
-			"fs.list($0)"
-		],
+		"body": ["fs.list($0)"],
 		"description": ""
 	},
 	"fs.listRecursive()": {
 		"prefix": "fs.listRecursive",
-		"body": [
-			"fs.listRecursive($0)"
-		],
+		"body": ["fs.listRecursive($0)"],
 		"description": ""
 	},
 	"fs.open()": {
 		"prefix": "fs.open",
-		"body": [
-			"fs.open($0)"
-		],
+		"body": ["fs.open($0)"],
 		"description": ""
 	},
 	"fs.readTableFromFile()": {
 		"prefix": "fs.readTableFromFile",
-		"body": [
-			"fs.readTableFromFile($0)"
-		],
+		"body": ["fs.readTableFromFile($0)"],
 		"description": ""
 	},
 	"fs.writeTableToFile()": {
 		"prefix": "fs.writeTableToFile",
-		"body": [
-			"fs.writeTableToFile($0)"
-		],
+		"body": ["fs.writeTableToFile($0)"],
 		"description": ""
 	},
 	"gcinfo()": {
 		"prefix": "gcinfo",
-		"body": [
-			"gcinfo($0)"
-		],
+		"body": ["gcinfo($0)"],
 		"description": ""
 	},
 	"getStackTrace()": {
 		"prefix": "getStackTrace",
-		"body": [
-			"getStackTrace($0)"
-		],
+		"body": ["getStackTrace($0)"],
 		"description": ""
 	},
 	"getfenv()": {
 		"prefix": "getfenv",
-		"body": [
-			"getfenv($0)"
-		],
+		"body": ["getfenv($0)"],
 		"description": ""
 	},
 	"getmetatable()": {
 		"prefix": "getmetatable",
-		"body": [
-			"getmetatable($0)"
-		],
+		"body": ["getmetatable($0)"],
 		"description": ""
 	},
 	"hardTable()": {
 		"prefix": "hardTable",
-		"body": [
-			"hardTable($0)"
-		],
+		"body": ["hardTable($0)"],
 		"description": ""
 	},
 	"hardTableExport()": {
 		"prefix": "hardTableExport",
-		"body": [
-			"hardTableExport($0)"
-		],
+		"body": ["hardTableExport($0)"],
 		"description": ""
 	},
 	"include()": {
 		"prefix": "include",
-		"body": [
-			"include($0)"
-		],
+		"body": ["include($0)"],
 		"description": ""
 	},
 	"includeAll()": {
 		"prefix": "includeAll",
-		"body": [
-			"includeAll($0)"
-		],
+		"body": ["includeAll($0)"],
 		"description": ""
 	},
 	"info()": {
 		"prefix": "info",
-		"body": [
-			"info($0)"
-		],
+		"body": ["info($0)"],
 		"description": ""
 	},
 	"io.close()": {
 		"prefix": "io.close",
-		"body": [
-			"io.close($0)"
-		],
+		"body": ["io.close($0)"],
 		"description": ""
 	},
 	"io.flush()": {
 		"prefix": "io.flush",
-		"body": [
-			"io.flush($0)"
-		],
+		"body": ["io.flush($0)"],
 		"description": ""
 	},
 	"io.input()": {
 		"prefix": "io.input",
-		"body": [
-			"io.input($0)"
-		],
+		"body": ["io.input($0)"],
 		"description": ""
 	},
 	"io.lines()": {
 		"prefix": "io.lines",
-		"body": [
-			"io.lines($0)"
-		],
+		"body": ["io.lines($0)"],
 		"description": ""
 	},
 	"io.open()": {
 		"prefix": "io.open",
-		"body": [
-			"io.open($0)"
-		],
+		"body": ["io.open($0)"],
 		"description": ""
 	},
 	"io.output()": {
 		"prefix": "io.output",
-		"body": [
-			"io.output($0)"
-		],
+		"body": ["io.output($0)"],
 		"description": ""
 	},
 	"io.popen()": {
 		"prefix": "io.popen",
-		"body": [
-			"io.popen($0)"
-		],
+		"body": ["io.popen($0)"],
 		"description": ""
 	},
 	"io.read()": {
 		"prefix": "io.read",
-		"body": [
-			"io.read($0)"
-		],
+		"body": ["io.read($0)"],
 		"description": ""
 	},
 	"io.tmpfile()": {
 		"prefix": "io.tmpfile",
-		"body": [
-			"io.tmpfile($0)"
-		],
+		"body": ["io.tmpfile($0)"],
 		"description": ""
 	},
 	"io.type()": {
 		"prefix": "io.type",
-		"body": [
-			"io.type($0)"
-		],
+		"body": ["io.type($0)"],
 		"description": ""
 	},
 	"io.write()": {
 		"prefix": "io.write",
-		"body": [
-			"io.write($0)"
-		],
+		"body": ["io.write($0)"],
 		"description": ""
 	},
 	"ipairs()": {
 		"prefix": "ipairs",
-		"body": [
-			"ipairs($0)"
-		],
+		"body": ["ipairs($0)"],
 		"description": ""
 	},
 	"isDefined()": {
 		"prefix": "isDefined",
-		"body": [
-			"isDefined($0)"
-		],
+		"body": ["isDefined($0)"],
 		"description": ""
 	},
 	"isHardTable()": {
 		"prefix": "isHardTable",
-		"body": [
-			"isHardTable($0)"
-		],
+		"body": ["isHardTable($0)"],
 		"description": ""
 	},
 	"isType()": {
 		"prefix": "isType",
-		"body": [
-			"isType($0)"
-		],
+		"body": ["isType($0)"],
 		"description": ""
 	},
 	"load()": {
 		"prefix": "load",
-		"body": [
-			"load($0)"
-		],
+		"body": ["load($0)"],
 		"description": ""
 	},
 	"loadfile()": {
 		"prefix": "loadfile",
-		"body": [
-			"loadfile($0)"
-		],
+		"body": ["loadfile($0)"],
 		"description": ""
 	},
 	"loadstring()": {
 		"prefix": "loadstring",
-		"body": [
-			"loadstring($0)"
-		],
+		"body": ["loadstring($0)"],
 		"description": ""
 	},
 	"math.abs()": {
 		"prefix": "math.abs",
-		"body": [
-			"math.abs($0)"
-		],
+		"body": ["math.abs($0)"],
 		"description": ""
 	},
 	"math.acos()": {
 		"prefix": "math.acos",
-		"body": [
-			"math.acos($0)"
-		],
+		"body": ["math.acos($0)"],
 		"description": ""
 	},
 	"math.asin()": {
 		"prefix": "math.asin",
-		"body": [
-			"math.asin($0)"
-		],
+		"body": ["math.asin($0)"],
 		"description": ""
 	},
 	"math.atan()": {
 		"prefix": "math.atan",
-		"body": [
-			"math.atan($0)"
-		],
+		"body": ["math.atan($0)"],
 		"description": ""
 	},
 	"math.atan2()": {
 		"prefix": "math.atan2",
-		"body": [
-			"math.atan2($0)"
-		],
+		"body": ["math.atan2($0)"],
 		"description": ""
 	},
 	"math.ceil()": {
 		"prefix": "math.ceil",
-		"body": [
-			"math.ceil($0)"
-		],
+		"body": ["math.ceil($0)"],
 		"description": ""
 	},
 	"math.clamp()": {
 		"prefix": "math.clamp",
-		"body": [
-			"math.clamp($0)"
-		],
+		"body": ["math.clamp($0)"],
 		"description": ""
 	},
 	"math.cos()": {
 		"prefix": "math.cos",
-		"body": [
-			"math.cos($0)"
-		],
+		"body": ["math.cos($0)"],
 		"description": ""
 	},
 	"math.cosh()": {
 		"prefix": "math.cosh",
-		"body": [
-			"math.cosh($0)"
-		],
+		"body": ["math.cosh($0)"],
 		"description": ""
 	},
 	"math.deg()": {
 		"prefix": "math.deg",
-		"body": [
-			"math.deg($0)"
-		],
+		"body": ["math.deg($0)"],
 		"description": ""
 	},
 	"math.exp()": {
 		"prefix": "math.exp",
-		"body": [
-			"math.exp($0)"
-		],
+		"body": ["math.exp($0)"],
 		"description": ""
 	},
 	"math.floor()": {
 		"prefix": "math.floor",
-		"body": [
-			"math.floor($0)"
-		],
+		"body": ["math.floor($0)"],
 		"description": ""
 	},
 	"math.fmod()": {
 		"prefix": "math.fmod",
-		"body": [
-			"math.fmod($0)"
-		],
+		"body": ["math.fmod($0)"],
 		"description": ""
 	},
 	"math.frexp()": {
 		"prefix": "math.frexp",
-		"body": [
-			"math.frexp($0)"
-		],
+		"body": ["math.frexp($0)"],
 		"description": ""
 	},
 	"math.ldexp()": {
 		"prefix": "math.ldexp",
-		"body": [
-			"math.ldexp($0)"
-		],
+		"body": ["math.ldexp($0)"],
 		"description": ""
 	},
 	"math.log()": {
 		"prefix": "math.log",
-		"body": [
-			"math.log($0)"
-		],
+		"body": ["math.log($0)"],
 		"description": ""
 	},
 	"math.log10()": {
 		"prefix": "math.log10",
-		"body": [
-			"math.log10($0)"
-		],
+		"body": ["math.log10($0)"],
 		"description": ""
 	},
 	"math.logn()": {
 		"prefix": "math.logn",
-		"body": [
-			"math.logn($0)"
-		],
+		"body": ["math.logn($0)"],
 		"description": ""
 	},
 	"math.max()": {
 		"prefix": "math.max",
-		"body": [
-			"math.max($0)"
-		],
+		"body": ["math.max($0)"],
 		"description": ""
 	},
 	"math.min()": {
 		"prefix": "math.min",
-		"body": [
-			"math.min($0)"
-		],
+		"body": ["math.min($0)"],
 		"description": ""
 	},
 	"math.minMax()": {
 		"prefix": "math.minMax",
-		"body": [
-			"math.minMax($0)"
-		],
+		"body": ["math.minMax($0)"],
 		"description": ""
 	},
 	"math.mod()": {
 		"prefix": "math.mod",
-		"body": [
-			"math.mod($0)"
-		],
+		"body": ["math.mod($0)"],
 		"description": ""
 	},
 	"math.modf()": {
 		"prefix": "math.modf",
-		"body": [
-			"math.modf($0)"
-		],
+		"body": ["math.modf($0)"],
 		"description": ""
 	},
 	"math.pow()": {
 		"prefix": "math.pow",
-		"body": [
-			"math.pow($0)"
-		],
+		"body": ["math.pow($0)"],
 		"description": ""
 	},
 	"math.rad()": {
 		"prefix": "math.rad",
-		"body": [
-			"math.rad($0)"
-		],
+		"body": ["math.rad($0)"],
 		"description": ""
 	},
 	"math.random()": {
 		"prefix": "math.random",
-		"body": [
-			"math.random($0)"
-		],
+		"body": ["math.random($0)"],
 		"description": ""
 	},
 	"math.randomseed()": {
 		"prefix": "math.randomseed",
-		"body": [
-			"math.randomseed($0)"
-		],
+		"body": ["math.randomseed($0)"],
 		"description": ""
 	},
 	"math.sin()": {
 		"prefix": "math.sin",
-		"body": [
-			"math.sin($0)"
-		],
+		"body": ["math.sin($0)"],
 		"description": ""
 	},
 	"math.sinh()": {
 		"prefix": "math.sinh",
-		"body": [
-			"math.sinh($0)"
-		],
+		"body": ["math.sinh($0)"],
 		"description": ""
 	},
 	"math.sqrt()": {
 		"prefix": "math.sqrt",
-		"body": [
-			"math.sqrt($0)"
-		],
+		"body": ["math.sqrt($0)"],
 		"description": ""
 	},
 	"math.tan()": {
 		"prefix": "math.tan",
-		"body": [
-			"math.tan($0)"
-		],
+		"body": ["math.tan($0)"],
 		"description": ""
 	},
 	"math.tanh()": {
 		"prefix": "math.tanh",
-		"body": [
-			"math.tanh($0)"
-		],
+		"body": ["math.tanh($0)"],
 		"description": ""
 	},
 	"module()": {
 		"prefix": "module",
-		"body": [
-			"module($0)"
-		],
+		"body": ["module($0)"],
 		"description": ""
 	},
 	"newproxy()": {
 		"prefix": "newproxy",
-		"body": [
-			"newproxy($0)"
-		],
+		"body": ["newproxy($0)"],
 		"description": ""
 	},
 	"next()": {
 		"prefix": "next",
-		"body": [
-			"next($0)"
-		],
+		"body": ["next($0)"],
 		"description": ""
 	},
 	"os.clock()": {
 		"prefix": "os.clock",
-		"body": [
-			"os.clock($0)"
-		],
+		"body": ["os.clock($0)"],
 		"description": ""
 	},
 	"os.date()": {
 		"prefix": "os.date",
-		"body": [
-			"os.date($0)"
-		],
+		"body": ["os.date($0)"],
 		"description": ""
 	},
 	"os.difftime()": {
 		"prefix": "os.difftime",
-		"body": [
-			"os.difftime($0)"
-		],
+		"body": ["os.difftime($0)"],
 		"description": ""
 	},
 	"os.execute()": {
 		"prefix": "os.execute",
-		"body": [
-			"os.execute($0)"
-		],
+		"body": ["os.execute($0)"],
 		"description": ""
 	},
 	"os.exit()": {
 		"prefix": "os.exit",
-		"body": [
-			"os.exit($0)"
-		],
+		"body": ["os.exit($0)"],
 		"description": ""
 	},
 	"os.getenv()": {
 		"prefix": "os.getenv",
-		"body": [
-			"os.getenv($0)"
-		],
+		"body": ["os.getenv($0)"],
 		"description": ""
 	},
 	"os.loadAPI()": {
 		"prefix": "os.loadAPI",
-		"body": [
-			"os.loadAPI($0)"
-		],
+		"body": ["os.loadAPI($0)"],
 		"description": ""
 	},
 	"os.remove()": {
 		"prefix": "os.remove",
-		"body": [
-			"os.remove($0)"
-		],
+		"body": ["os.remove($0)"],
 		"description": ""
 	},
 	"os.rename()": {
 		"prefix": "os.rename",
-		"body": [
-			"os.rename($0)"
-		],
+		"body": ["os.rename($0)"],
 		"description": ""
 	},
 	"os.run()": {
 		"prefix": "os.run",
-		"body": [
-			"os.run($0)"
-		],
+		"body": ["os.run($0)"],
 		"description": ""
 	},
 	"os.setlocale()": {
 		"prefix": "os.setlocale",
-		"body": [
-			"os.setlocale($0)"
-		],
+		"body": ["os.setlocale($0)"],
 		"description": ""
 	},
 	"os.sleep()": {
 		"prefix": "os.sleep",
-		"body": [
-			"os.sleep($0)"
-		],
+		"body": ["os.sleep($0)"],
 		"description": ""
 	},
 	"os.time()": {
 		"prefix": "os.time",
-		"body": [
-			"os.time($0)"
-		],
+		"body": ["os.time($0)"],
 		"description": ""
 	},
 	"os.tmpname()": {
 		"prefix": "os.tmpname",
-		"body": [
-			"os.tmpname($0)"
-		],
+		"body": ["os.tmpname($0)"],
 		"description": ""
 	},
 	"os.unloadAPI()": {
 		"prefix": "os.unloadAPI",
-		"body": [
-			"os.unloadAPI($0)"
-		],
+		"body": ["os.unloadAPI($0)"],
 		"description": ""
 	},
 	"package.loadlib()": {
 		"prefix": "package.loadlib",
-		"body": [
-			"package.loadlib($0)"
-		],
+		"body": ["package.loadlib($0)"],
 		"description": ""
 	},
 	"package.seeall()": {
 		"prefix": "package.seeall",
-		"body": [
-			"package.seeall($0)"
-		],
+		"body": ["package.seeall($0)"],
 		"description": ""
 	},
 	"pairs()": {
 		"prefix": "pairs",
-		"body": [
-			"pairs($0)"
-		],
+		"body": ["pairs($0)"],
 		"description": ""
 	},
 	"pcall()": {
 		"prefix": "pcall",
-		"body": [
-			"pcall($0)"
-		],
+		"body": ["pcall($0)"],
 		"description": ""
 	},
 	"print()": {
 		"prefix": "print",
-		"body": [
-			"print($0)"
-		],
+		"body": ["print($0)"],
 		"description": ""
 	},
 	"printStackTrace()": {
 		"prefix": "printStackTrace",
-		"body": [
-			"printStackTrace($0)"
-		],
+		"body": ["printStackTrace($0)"],
 		"description": ""
 	},
 	"rawequal()": {
 		"prefix": "rawequal",
-		"body": [
-			"rawequal($0)"
-		],
+		"body": ["rawequal($0)"],
 		"description": ""
 	},
 	"rawget()": {
 		"prefix": "rawget",
-		"body": [
-			"rawget($0)"
-		],
+		"body": ["rawget($0)"],
 		"description": ""
 	},
 	"rawset()": {
 		"prefix": "rawset",
-		"body": [
-			"rawset($0)"
-		],
+		"body": ["rawset($0)"],
 		"description": ""
 	},
 	"read()": {
 		"prefix": "read",
-		"body": [
-			"read($0)"
-		],
+		"body": ["read($0)"],
 		"description": ""
 	},
 	"removeHardTable()": {
 		"prefix": "removeHardTable",
-		"body": [
-			"removeHardTable($0)"
-		],
+		"body": ["removeHardTable($0)"],
 		"description": ""
 	},
 	"require()": {
 		"prefix": "require",
-		"body": [
-			"require($0)"
-		],
+		"body": ["require($0)"],
 		"description": ""
 	},
 	"runAndPrintErrLines()": {
 		"prefix": "runAndPrintErrLines",
-		"body": [
-			"runAndPrintErrLines($0)"
-		],
+		"body": ["runAndPrintErrLines($0)"],
 		"description": ""
 	},
 	"saveStackTrace()": {
 		"prefix": "saveStackTrace",
-		"body": [
-			"saveStackTrace($0)"
-		],
+		"body": ["saveStackTrace($0)"],
 		"description": ""
 	},
 	"select()": {
 		"prefix": "select",
-		"body": [
-			"select($0)"
-		],
+		"body": ["select($0)"],
 		"description": ""
 	},
 	"setfenv()": {
 		"prefix": "setfenv",
-		"body": [
-			"setfenv($0)"
-		],
+		"body": ["setfenv($0)"],
 		"description": ""
 	},
 	"setmetatable()": {
 		"prefix": "setmetatable",
-		"body": [
-			"setmetatable($0)"
-		],
+		"body": ["setmetatable($0)"],
 		"description": ""
 	},
 	"sleep()": {
 		"prefix": "sleep",
-		"body": [
-			"sleep($0)"
-		],
+		"body": ["sleep($0)"],
 		"description": ""
 	},
 	"startlocal()": {
 		"prefix": "startlocal",
-		"body": [
-			"startlocal($0)"
-		],
+		"body": ["startlocal($0)"],
 		"description": ""
 	},
 	"string.byte()": {
 		"prefix": "string.byte",
-		"body": [
-			"string.byte($0)"
-		],
+		"body": ["string.byte($0)"],
 		"description": ""
 	},
 	"string.char()": {
 		"prefix": "string.char",
-		"body": [
-			"string.char($0)"
-		],
+		"body": ["string.char($0)"],
 		"description": ""
 	},
 	"string.dump()": {
 		"prefix": "string.dump",
-		"body": [
-			"string.dump($0)"
-		],
+		"body": ["string.dump($0)"],
 		"description": ""
 	},
 	"string.find()": {
 		"prefix": "string.find",
-		"body": [
-			"string.find($0)"
-		],
+		"body": ["string.find($0)"],
 		"description": ""
 	},
 	"string.format()": {
 		"prefix": "string.format",
-		"body": [
-			"string.format($0)"
-		],
+		"body": ["string.format($0)"],
 		"description": ""
 	},
 	"string.gfind()": {
 		"prefix": "string.gfind",
-		"body": [
-			"string.gfind($0)"
-		],
+		"body": ["string.gfind($0)"],
 		"description": ""
 	},
 	"string.gmatch()": {
 		"prefix": "string.gmatch",
-		"body": [
-			"string.gmatch($0)"
-		],
+		"body": ["string.gmatch($0)"],
 		"description": ""
 	},
 	"string.gsub()": {
 		"prefix": "string.gsub",
-		"body": [
-			"string.gsub($0)"
-		],
+		"body": ["string.gsub($0)"],
 		"description": ""
 	},
 	"string.len()": {
 		"prefix": "string.len",
-		"body": [
-			"string.len($0)"
-		],
+		"body": ["string.len($0)"],
 		"description": ""
 	},
 	"string.lower()": {
 		"prefix": "string.lower",
-		"body": [
-			"string.lower($0)"
-		],
+		"body": ["string.lower($0)"],
 		"description": ""
 	},
 	"string.match()": {
 		"prefix": "string.match",
-		"body": [
-			"string.match($0)"
-		],
+		"body": ["string.match($0)"],
 		"description": ""
 	},
 	"string.rep()": {
 		"prefix": "string.rep",
-		"body": [
-			"string.rep($0)"
-		],
+		"body": ["string.rep($0)"],
 		"description": ""
 	},
 	"string.reverse()": {
 		"prefix": "string.reverse",
-		"body": [
-			"string.reverse($0)"
-		],
+		"body": ["string.reverse($0)"],
 		"description": ""
 	},
 	"string.sub()": {
 		"prefix": "string.sub",
-		"body": [
-			"string.sub($0)"
-		],
+		"body": ["string.sub($0)"],
 		"description": ""
 	},
 	"string.upper()": {
 		"prefix": "string.upper",
-		"body": [
-			"string.upper($0)"
-		],
+		"body": ["string.upper($0)"],
 		"description": ""
 	},
 	"stringutil.endlocal()": {
 		"prefix": "stringutil.endlocal",
-		"body": [
-			"stringutil.endlocal($0)"
-		],
+		"body": ["stringutil.endlocal($0)"],
 		"description": ""
 	},
 	"stringutil.endsWith()": {
 		"prefix": "stringutil.endsWith",
-		"body": [
-			"stringutil.endsWith($0)"
-		],
+		"body": ["stringutil.endsWith($0)"],
 		"description": ""
 	},
 	"stringutil.isLower()": {
 		"prefix": "stringutil.isLower",
-		"body": [
-			"stringutil.isLower($0)"
-		],
+		"body": ["stringutil.isLower($0)"],
 		"description": ""
 	},
 	"stringutil.isUpper()": {
 		"prefix": "stringutil.isUpper",
-		"body": [
-			"stringutil.isUpper($0)"
-		],
+		"body": ["stringutil.isUpper($0)"],
 		"description": ""
 	},
 	"stringutil.join()": {
 		"prefix": "stringutil.join",
-		"body": [
-			"stringutil.join($0)"
-		],
+		"body": ["stringutil.join($0)"],
 		"description": ""
 	},
 	"stringutil.lPad()": {
 		"prefix": "stringutil.lPad",
-		"body": [
-			"stringutil.lPad($0)"
-		],
+		"body": ["stringutil.lPad($0)"],
 		"description": ""
 	},
 	"stringutil.rPad()": {
 		"prefix": "stringutil.rPad",
-		"body": [
-			"stringutil.rPad($0)"
-		],
+		"body": ["stringutil.rPad($0)"],
 		"description": ""
 	},
 	"stringutil.split()": {
 		"prefix": "stringutil.split",
-		"body": [
-			"stringutil.split($0)"
-		],
+		"body": ["stringutil.split($0)"],
 		"description": ""
 	},
 	"stringutil.startsWith()": {
 		"prefix": "stringutil.startsWith",
-		"body": [
-			"stringutil.startsWith($0)"
-		],
+		"body": ["stringutil.startsWith($0)"],
 		"description": ""
 	},
 	"suppressMissingGlobalWarnings()": {
 		"prefix": "suppressMissingGlobalWarnings",
-		"body": [
-			"suppressMissingGlobalWarnings($0)"
-		],
+		"body": ["suppressMissingGlobalWarnings($0)"],
 		"description": ""
 	},
 	"table.concat()": {
 		"prefix": "table.concat",
-		"body": [
-			"table.concat($0)"
-		],
+		"body": ["table.concat($0)"],
 		"description": ""
 	},
 	"table.foreach()": {
 		"prefix": "table.foreach",
-		"body": [
-			"table.foreach($0)"
-		],
+		"body": ["table.foreach($0)"],
 		"description": ""
 	},
 	"table.foreachi()": {
 		"prefix": "table.foreachi",
-		"body": [
-			"table.foreachi($0)"
-		],
+		"body": ["table.foreachi($0)"],
 		"description": ""
 	},
 	"table.getn()": {
 		"prefix": "table.getn",
-		"body": [
-			"table.getn($0)"
-		],
+		"body": ["table.getn($0)"],
 		"description": ""
 	},
 	"table.insert()": {
 		"prefix": "table.insert",
-		"body": [
-			"table.insert($0)"
-		],
+		"body": ["table.insert($0)"],
 		"description": ""
 	},
 	"table.maxn()": {
 		"prefix": "table.maxn",
-		"body": [
-			"table.maxn($0)"
-		],
+		"body": ["table.maxn($0)"],
 		"description": ""
 	},
 	"table.pack()": {
 		"prefix": "table.pack",
-		"body": [
-			"table.pack($0)"
-		],
+		"body": ["table.pack($0)"],
 		"description": ""
 	},
 	"table.remove()": {
 		"prefix": "table.remove",
-		"body": [
-			"table.remove($0)"
-		],
+		"body": ["table.remove($0)"],
 		"description": ""
 	},
 	"table.setn()": {
 		"prefix": "table.setn",
-		"body": [
-			"table.setn($0)"
-		],
+		"body": ["table.setn($0)"],
 		"description": ""
 	},
 	"table.sort()": {
 		"prefix": "table.sort",
-		"body": [
-			"table.sort($0)"
-		],
+		"body": ["table.sort($0)"],
 		"description": ""
 	},
 	"table.unpack()": {
 		"prefix": "table.unpack",
-		"body": [
-			"table.unpack($0)"
-		],
+		"body": ["table.unpack($0)"],
 		"description": ""
 	},
 	"tableToString()": {
 		"prefix": "tableToString",
-		"body": [
-			"tableToString($0)"
-		],
+		"body": ["tableToString($0)"],
 		"description": ""
 	},
 	"textutils.serialize()": {
 		"prefix": "textutils.serialize",
-		"body": [
-			"textutils.serialize($0)"
-		],
+		"body": ["textutils.serialize($0)"],
 		"description": ""
 	},
 	"textutils.unserialize()": {
 		"prefix": "textutils.unserialize",
-		"body": [
-			"textutils.unserialize($0)"
-		],
+		"body": ["textutils.unserialize($0)"],
 		"description": ""
 	},
 	"tonumber()": {
 		"prefix": "tonumber",
-		"body": [
-			"tonumber($0)"
-		],
+		"body": ["tonumber($0)"],
 		"description": ""
 	},
 	"tostring()": {
 		"prefix": "tostring",
-		"body": [
-			"tostring($0)"
-		],
+		"body": ["tostring($0)"],
 		"description": ""
 	},
 	"turtle()": {
 		"prefix": "turtle",
-		"body": [
-			"turtle($0)"
-		],
+		"body": ["turtle($0)"],
 		"description": ""
 	},
 	"type()": {
 		"prefix": "type",
-		"body": [
-			"type($0)"
-		],
+		"body": ["type($0)"],
 		"description": ""
 	},
 	"unpack()": {
 		"prefix": "unpack",
-		"body": [
-			"unpack($0)"
-		],
+		"body": ["unpack($0)"],
 		"description": ""
 	},
 	"warning()": {
 		"prefix": "warning",
-		"body": [
-			"warning($0)"
-		],
+		"body": ["warning($0)"],
 		"description": ""
 	},
 	"xpcall()": {
 		"prefix": "xpcall",
-		"body": [
-			"xpcall($0)"
-		],
+		"body": ["xpcall($0)"],
 		"description": ""
 	}
 }

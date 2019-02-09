@@ -15,13 +15,13 @@ function Hud:start()
 	local f, b = graphics:getColours()
 	graphics:setColours(colours.blue, b)
 	for i = 1, h do
-		graphics:drawText(w - 5, i, Pixel.compile(Pixel.LEFT))
+		graphics:drawText(w - 5, i, Pixel.Compile(Pixel.LEFT))
 	end
 
-	graphics:drawText(w - 5, 5, Pixel.compile(Pixel.LEFT, Pixel.TOP))
+	graphics:drawText(w - 5, 5, Pixel.Compile(Pixel.LEFT, Pixel.TOP))
 
 	for i = 1, 5 do
-		graphics:drawText(w - i + 1, 5, Pixel.compile(Pixel.TOP))
+		graphics:drawText(w - i + 1, 5, Pixel.Compile(Pixel.TOP))
 	end
 	graphics:setColours(f, b)
 

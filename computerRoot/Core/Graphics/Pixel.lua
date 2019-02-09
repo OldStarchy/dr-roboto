@@ -12,7 +12,7 @@ Pixel = {
 	BOTTOM = 48,
 	LEFT = 21,
 	RIGHT = 42,
-	compile = function(...)
+	Compile = function(...)
 		local args = {...}
 		local pixels = 0
 
