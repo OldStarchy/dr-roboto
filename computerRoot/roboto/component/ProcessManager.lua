@@ -40,7 +40,12 @@ function ProcessManager:spawnProcess(func, name, daemon)
 	name = assertType(coalesce(name, 'anon'), 'string')
 	daemon = assertType(coalesce(daemon, false), 'boolean')
 
-	local co = coroutine.create(func)
+	local co =
+		coroutine.create(
+		function()
+			assert(runWithLogging(func))
+		end
+	)
 
 	local proc = {
 		name = name,
