@@ -287,7 +287,7 @@ end
 function MoveManager:_forward()
 	local result = {self._oldTurtle.forward()}
 	if (result[1]) then
-		local offset = Position.offsets[self._position.direction]
+		local offset = Position.Offsets[self._position.direction]
 		self._position:add(offset)
 		self:_afterPositionChanged()
 	end
@@ -298,7 +298,7 @@ end
 function MoveManager:_back()
 	local result = {self._oldTurtle.back()}
 	if (result[1]) then
-		local offset = Position.offsets[self._position.direction]
+		local offset = Position.Offsets[self._position.direction]
 		self._position:sub(offset)
 		self:_afterPositionChanged()
 	end

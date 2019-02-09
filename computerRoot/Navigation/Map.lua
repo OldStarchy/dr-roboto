@@ -272,7 +272,7 @@ function Map:_getPossibleSteps(node)
 	local forward =
 		self:_createNode( --
 		Position(node.position):add( --
-			Position.offsets[node.position.direction] --
+			Position.Offsets[node.position.direction] --
 		), --
 		node, --
 		'f'
@@ -281,7 +281,7 @@ function Map:_getPossibleSteps(node)
 	local back =
 		self:_createNode( --
 		Position(node.position):sub( --
-			Position.offsets[node.position.direction] --
+			Position.Offsets[node.position.direction] --
 		), --
 		node, --
 		'b'

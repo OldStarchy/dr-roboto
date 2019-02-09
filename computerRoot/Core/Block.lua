@@ -15,7 +15,7 @@ function Block:constructor(name, location)
 	self.name = name
 
 	self.interfaceLocation = Position(location.x, location.y, location.z, location.direction)
-	self.interfaceLocation:sub(Position.offsets[location.direction])
+	self.interfaceLocation:sub(Position.Offsets[location.direction])
 end
 
 function Block:toString()

@@ -13,7 +13,7 @@ Position.directionNames = {
 	[3] = 'SOUTH'
 }
 
-Position.offsets = {
+Position.Offsets = {
 	[Position.EAST] = {x = 1, z = 0},
 	[Position.NORTH] = {x = 0, z = -1},
 	[Position.WEST] = {x = -1, z = 0},
