@@ -20,7 +20,7 @@ Position.Offsets = {
 	[Position.SOUTH] = {x = 0, z = 1}
 }
 
-function Position.wrapDirection(direction)
+function Position.WrapDirection(direction)
 	return (((direction % 4) + 4) % 4)
 end
 
@@ -73,7 +73,7 @@ function Position:rotate(direction)
 	if (self.direction == nil) then
 		return
 	end
-	self.direction = Position.wrapDirection(self.direction + direction)
+	self.direction = Position.WrapDirection(self.direction + direction)
 
 	return self
 end
@@ -118,7 +118,7 @@ function Position:getDirectionOffset(direction)
 	if (self.direction == nil) then
 		return 0
 	end
-	return Position.wrapDirection(direction - self.direction)
+	return Position.WrapDirection(direction - self.direction)
 end
 
 function Position:toString()

@@ -215,7 +215,7 @@ function MoveManager:back(distance)
 end
 
 function MoveManager:turn(direction)
-	direction = Position.wrapDirection(direction + 2) - 2
+	direction = Position.WrapDirection(direction + 2) - 2
 
 	if (direction == 0) then
 		return true
