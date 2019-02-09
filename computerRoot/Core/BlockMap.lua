@@ -23,9 +23,9 @@ function BlockMap.Deserialize(data)
 	local map = BlockMap()
 	for blockType, _ in ipairs(data) do
 		for _, blockData in ipairs(data[key]) do
-			block = _G[blockType].convertToInstance(blockData)
-			block.location = Position.convertToInstance(block.location)
-			block.interfaceLocation = Position.convertToInstance(block.interfaceLocation)
+			block = _G[blockType].ConvertToInstance(blockData)
+			block.location = Position.ConvertToInstance(block.location)
+			block.interfaceLocation = Position.ConvertToInstance(block.interfaceLocation)
 			-- print(block.location:toString())
 
 			local blockList = map._blocks[blockType]

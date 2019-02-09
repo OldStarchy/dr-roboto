@@ -584,7 +584,7 @@ local function readClass(str, head)
 	if (type(clazzType.Deserialize) == 'function') then
 		return clazzType.Deserialize(data), head
 	else
-		return clazzType.convertToInstance(data), head
+		return clazzType.ConvertToInstance(data), head
 	end
 end
 

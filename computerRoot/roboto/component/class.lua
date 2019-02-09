@@ -126,7 +126,7 @@ function classMeta.__call(_, parent, ...)
 		__index = setmetatable(
 			{
 				isClass = true,
-				convertToInstance = function(tbl, ...)
+				ConvertToInstance = function(tbl, ...)
 					if (type(tbl) ~= 'table') then
 						error("Can't convert " .. type(tbl) .. ' to ' .. tostring(class), 2)
 					end

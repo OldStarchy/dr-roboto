@@ -38,7 +38,7 @@ MyClass.ClassName = 'MyClass'
 obj = MyClass()
 ```
 
-### `MyClass.convertToInstance(tbl: table, args...)`
+### `MyClass.ConvertToInstance(tbl: table, args...)`
 
 Attaches the class information to an existing table. Normally when creating instances, a new table is created for the object, this allows you to use an existing table. Note: this will change / set the metatable on the given table.
 
@@ -54,7 +54,7 @@ function MyClass:printName()
     print(self.name)
 end
 
-obj = MyClass.convertToInstance(turtle.getItemDetail())
+obj = MyClass.ConvertToInstance(turtle.getItemDetail())
 
 obj:printName()
 ```
@@ -106,7 +106,7 @@ end
 obj = {
     data1 = 'bork'
 }
-MyClass.convertToInstance(obj)
+MyClass.ConvertToInstance(obj)
 
 obj2 = MyClass('bark')
 

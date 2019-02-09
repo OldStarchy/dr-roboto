@@ -13,7 +13,7 @@ test(
 
 					local object = {}
 
-					A.convertToInstance(object, 'test')
+					A.ConvertToInstance(object, 'test')
 
 					t.assertEqual(object.a, 'test')
 					t.assertEqual(object:getType(), A)
@@ -24,7 +24,7 @@ test(
 
 					local object = {}
 
-					A.convertToInstance(object, 'test')
+					A.ConvertToInstance(object, 'test')
 
 					t.assertEqual(object:getType(), A)
 				end

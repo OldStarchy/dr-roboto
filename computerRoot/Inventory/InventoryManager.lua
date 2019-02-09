@@ -27,7 +27,7 @@ function InventoryManager.ItemIs(item, selector)
 	end
 
 	if (not isType(item, ItemDetail)) then
-		item = ItemStackDetail.convertToInstance(cloneTable(item, 3))
+		item = ItemStackDetail.ConvertToInstance(cloneTable(item, 3))
 	end
 
 	return item:matches(selector)
@@ -121,19 +121,19 @@ end
 function InventoryManager:inspect()
 	local exists, data = self._oldTurtle.inspect()
 
-	return exists, exists and BlockDetail.convertToInstance(data) or nil
+	return exists, exists and BlockDetail.ConvertToInstance(data) or nil
 end
 
 function InventoryManager:inspectDown()
 	local exists, data = self._oldTurtle.inspectDown()
 
-	return exists, exists and BlockDetail.convertToInstance(data) or nil
+	return exists, exists and BlockDetail.ConvertToInstance(data) or nil
 end
 
 function InventoryManager:inspectUp()
 	local exists, data = self._oldTurtle.inspectUp()
 
-	return exists, exists and BlockDetail.convertToInstance(data) or nil
+	return exists, exists and BlockDetail.ConvertToInstance(data) or nil
 end
 
 function InventoryManager:getItemDetail(selector)
@@ -144,7 +144,7 @@ function InventoryManager:getItemDetail(selector)
 		return nil
 	end
 
-	local itemDetail = ItemStackDetail.convertToInstance(data)
+	local itemDetail = ItemStackDetail.ConvertToInstance(data)
 
 	itemDetail.stackSize = self._turtle.getItemCount(slot) + self._turtle.getItemSpace(slot)
 	ItemInfo.Instance:setStackSize(itemDetail.name, itemDetail.stackSize)

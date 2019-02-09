@@ -1,5 +1,5 @@
 local function getItem(name)
-	return ItemStackDetail.convertToInstance(
+	return ItemStackDetail.ConvertToInstance(
 		({
 			dirt = {
 				count = 1,
