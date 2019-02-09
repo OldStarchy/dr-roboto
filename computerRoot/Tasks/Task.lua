@@ -12,6 +12,7 @@ end
 -- end
 
 GenericTask = Class(Task)
+GenericTask.ClassName = 'GenericTask'
 
 function GenericTask:constructor(name)
 	Task.constructor(self)

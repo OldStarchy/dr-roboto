@@ -1,4 +1,5 @@
 SetupTask = Class(Task)
+SetupTask.ClassName = 'SetupTask'
 
 function SetupTask:constructor(itemType)
 	Task.constructor(self)
