@@ -17,6 +17,24 @@ cli:addAction(
 )
 
 cli:addAction(
+	'types',
+	function()
+		local taskTypes = Task.ChildTypes
+
+		print(#taskTypes .. ' task types:')
+		for _, taskType in ipairs(taskTypes) do
+			if (stringutil.endsWith(taskType.ClassName, 'Task')) then
+				print(' ' .. taskType.ClassName:sub(1, #taskType.ClassName - 4))
+			else
+				print(' ' .. taskType.ClassName)
+			end
+		end
+	end,
+	nil,
+	'Lists types of tasks'
+)
+
+cli:addAction(
 	'add',
 	function(name, ...)
 		if (not isType(name, 'string')) then
