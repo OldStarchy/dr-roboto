@@ -1,11 +1,11 @@
 Miner = {}
 
 function Miner.needleMine()
-	Mov:push(true, true)
+	mov:push(true, true)
 
 	local depth
 
-	while (Mov:down()) do
+	while (mov:down()) do
 		depth = depth + 1
 
 		for i = 1, 4 do
@@ -13,12 +13,12 @@ function Miner.needleMine()
 				turtle.dig()
 			end
 
-			Mov.turnRight()
+			mov.turnRight()
 		end
 	end
 
 	while (depth > 0) do
-		Mov.up()
+		mov.up()
 		depth = depth - 1
 	end
 
@@ -26,19 +26,19 @@ function Miner.needleMine()
 
 	turtle.placeDown()
 
-	Mov:pop()
+	mov:pop()
 
 	return true
 end
 
 function Miner.trackedNeedleMine(tracker)
-	Mov:push(true, true)
+	mov:push(true, true)
 
 	tracker:initVar('depth', 0)
 
 	tracker:step(
 		function(t1)
-			while (Mov:down()) do
+			while (mov:down()) do
 				t1:setVar('depth', t1:getVar('depth') + 1)
 
 				t1:forITo(
@@ -49,7 +49,7 @@ function Miner.trackedNeedleMine(tracker)
 							turtle.dig()
 						end
 
-						Mov.turnRight()
+						mov.turnRight()
 					end
 				)
 			end
@@ -60,7 +60,7 @@ function Miner.trackedNeedleMine(tracker)
 		1,
 		tracker:getVar('depth'),
 		function(t1)
-			Mov.up()
+			mov.up()
 		end
 	)
 
@@ -68,7 +68,7 @@ function Miner.trackedNeedleMine(tracker)
 
 	tracker:step(turtle.placeDown)
 
-	Mov:pop()
+	mov:pop()
 
 	return true
 end

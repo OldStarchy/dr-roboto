@@ -26,7 +26,7 @@ function Hud:start()
 	graphics:setColours(f, b)
 
 	local positionChangedHdlr = function()
-		local pos = Mov:getPosition()
+		local pos = mov:getPosition()
 		local f, b = graphics:getColours()
 		graphics:setColours(colours.green, b)
 		graphics:drawText(w - 4, 1, 'x')
@@ -39,7 +39,7 @@ function Hud:start()
 		graphics:drawText(w - 4, 4, stringutil.lPad(Position.DirectionNames[pos.direction], 5))
 	end
 
-	Mov:onPositionChanged(positionChangedHdlr)
+	mov:onPositionChanged(positionChangedHdlr)
 
 	-- tterm.setCursorPos(1, 2)
 	-- tterm.write(string.rep('\140', w))
@@ -49,7 +49,7 @@ function Hud:start()
 	term.redirect(console:asTerm())
 
 	function self:stop()
-		Mov:offPositionChanged(positionChangedHdlr)
+		mov:offPositionChanged(positionChangedHdlr)
 
 		term.redirect(tterm)
 	end

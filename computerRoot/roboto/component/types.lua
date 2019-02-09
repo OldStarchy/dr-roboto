@@ -3,7 +3,7 @@
 
 	isType('hello', 'string') -- true
 	isType(Nav, Navigator) -- true
-	isType(Mov, Navigator) -- false
+	isType(mov, Navigator) -- false
 
 	obj: the object (or primative) to check
 	typ: the type it should be
@@ -49,7 +49,7 @@ end
 --[[
 	Throws an error if isType returns false
 
-	assertType(Mov, Navigator)
+	assertType(mov, Navigator)
 	-- assertType failed "Move: 011FA5B8" is not a "Class: Navigator"
 
 	obj: see isType

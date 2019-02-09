@@ -371,4 +371,4 @@ function MoveManager:offPositionChanged(func)
 	self._afterPositionChangedListeners[func] = nil
 end
 
-Mov = MoveManager(turtle)
+mov = MoveManager(turtle)

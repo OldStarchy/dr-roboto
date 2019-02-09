@@ -36,11 +36,11 @@ go:alias(
 			mode = false,
 			run = function(self, invoc)
 				if (self.mode == 'angry') then
-					Mov.autoDig = true
-					Mov.autoAttack = true
+					mov.autoDig = true
+					mov.autoAttack = true
 				elseif (self.mode == 'nice') then
-					Mov.autoDig = false
-					Mov.autoAttack = false
+					mov.autoDig = false
+					mov.autoAttack = false
 				else
 					print("m requires modifiers, either '?' to disable autodig, or '!' to enable it")
 				end

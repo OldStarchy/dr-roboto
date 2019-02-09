@@ -37,7 +37,7 @@ function NeedleMineSkill:canHandleTask(task)
 end
 
 function NeedleMineSkill:completeTask(task)
-	local planner = Class.LoadOrNew('data/needleMines.tbl', NeedleMinePlanner, Mov:getPosition())
+	local planner = Class.LoadOrNew('data/needleMines.tbl', NeedleMinePlanner, mov:getPosition())
 	fs.writeTableToFile('data/needleMines.tbl', planner:serialise())
 
 	local needleMine = include 'api/needleMine'
@@ -45,9 +45,9 @@ function NeedleMineSkill:completeTask(task)
 	while (Inv:countItem(task.item) < task.amount) do
 		local location = planner:getNextLocation()
 
-		Mov:push(true, true, true)
+		mov:push(true, true, true)
 		Nav:pathTo(location)
-		Mov:pop()
+		mov:pop()
 		needleMine()
 
 		fs.writeTableToFile('data/needleMines.tbl', planner:serialise())

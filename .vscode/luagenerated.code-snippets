@@ -1389,9 +1389,9 @@
 		"body": ["Log:warning($0)"],
 		"description": ""
 	},
-	"Mov()": {
-		"prefix": "Mov",
-		"body": ["Mov($0)"],
+	"mov()": {
+		"prefix": "mov",
+		"body": ["mov($0)"],
 		"description": ""
 	},
 	"MoveManager()": {

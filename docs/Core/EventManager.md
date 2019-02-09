@@ -27,7 +27,7 @@ The results returned by each handler are returned in a list, this way you can us
 ## Example
 
 ```LUA
-Mov.ev:on('turtle_moved', function(pos)
+mov.ev:on('turtle_moved', function(pos)
     if (turtle.getFuelLevel() < 100) then
         print('Running out of fuel')
     elseif (turtle.getFuelLevel() < 50) then

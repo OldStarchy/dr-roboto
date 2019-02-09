@@ -30,7 +30,7 @@ cli:addAction(
 		if (#args > 0) then
 			pos = Position.FromArgs(args)
 		else
-			pos = Mov:getPosition()
+			pos = mov:getPosition()
 		end
 
 		print('Tagging ' .. pos:toString() .. ' with label "' .. name .. '"')

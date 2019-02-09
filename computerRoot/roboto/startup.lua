@@ -29,7 +29,7 @@ end
 runWithLogging(
 	function()
 		log.info('Restoring location')
-		Mov:trackLocation('data/position.tbl')
+		mov:trackLocation('data/position.tbl')
 
 		log.info('Loading skills')
 		skillSet = SkillSet.GetDefaultSkillSet()
@@ -97,7 +97,7 @@ process.spawnProcess(
 					serialize(
 						{
 							inventory = Inv:count(),
-							location = Mov:getPosition():toString(),
+							location = mov:getPosition():toString(),
 							fuel = turtle.getFuelLevel()
 						}
 					)

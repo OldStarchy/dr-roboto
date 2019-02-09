@@ -53,7 +53,7 @@ local function digLayer()
 						--Check for flowing liquids that might have been released
 
 						log.info('checking for flowing liquid')
-						if (Mov:getY() < 10) then
+						if (mov:getY() < 10) then
 							log.info('waiting for lava')
 							sleep(1.5)
 						else
@@ -74,14 +74,14 @@ local function digLayer()
 			end
 		end
 
-		Mov:turnRight()
+		mov:turnRight()
 	end
 end
 
 local function descend()
 	local itemBelow, detail = turtle.inspectDown()
 	if (not itemBelow) then
-		return Mov:down()
+		return mov:down()
 	end
 
 	if (detail:matches('obsidian')) then
@@ -103,19 +103,19 @@ local function descend()
 		turtle.digDown()
 	end
 
-	return Mov:down()
+	return mov:down()
 end
 
 local function needleMine()
-	local startHeight = Mov:getY()
+	local startHeight = mov:getY()
 
 	while (descend()) do
 		digLayer()
 	end
 
-	Mov:push(true, true)
+	mov:push(true, true)
 	Nav:goToY(startHeight)
-	Mov:pop()
+	mov:pop()
 end
 
 return needleMine

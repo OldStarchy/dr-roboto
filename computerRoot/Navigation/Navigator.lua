@@ -175,4 +175,4 @@ function Navigator:pathTo(x, y, z)
 	return x == self:getX() and y == self:getY() and z == self:getZ()
 end
 
-Nav = Navigator(Mov)
+Nav = Navigator(mov)

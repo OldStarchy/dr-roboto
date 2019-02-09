@@ -39,7 +39,7 @@ Write your code in `mystartup.lua` (in `computerRoot`) (you may have to create i
 18. `roboto/startup.lua` is run
     1. If running in ComputerCraft
         1. the startup tests are run (if not cancelled by a user)
-    2. All API's that require persistent storage are loaded, this involves things like loading the current coordinates for the `Mov` API and recipes are loaded.
+    2. All API's that require persistent storage are loaded, this involves things like loading the current coordinates for the `mov` API and recipes are loaded.
     3. If running on PC
         1. `mystartup.lua` is run. This is where you can put various temporary bits of code you want to run. (`mystartup.lua` is not stored in git because it is likely random bits of code for whatever you're currently working on)
         2. `roboto/startup.lua` then returns back to `roboto/os.lua`

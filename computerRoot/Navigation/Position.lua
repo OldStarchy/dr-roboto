@@ -32,7 +32,7 @@ function Position.FromArgs(args)
 
 	if (args[1] == 'here') then
 		table.remove(args, 1)
-		return Position(Mov:getPosition())
+		return Position(mov:getPosition())
 	end
 
 	local numericArgs = {}
