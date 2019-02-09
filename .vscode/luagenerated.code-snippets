@@ -309,9 +309,9 @@
 		"body": ["ChopTreeTask:conversionConstructor($0)"],
 		"description": ""
 	},
-	"ChopTreeTask:fromArgs()": {
-		"prefix": "ChopTreeTask:fromArgs",
-		"body": ["ChopTreeTask:fromArgs($0)"],
+	"ChopTreeTask:FromArgs()": {
+		"prefix": "ChopTreeTask:FromArgs",
+		"body": ["ChopTreeTask:FromArgs($0)"],
 		"description": ""
 	},
 	"ChopTreeTask:getType()": {
@@ -694,9 +694,9 @@
 		"body": ["GatherItemTask:conversionConstructor($0)"],
 		"description": ""
 	},
-	"GatherItemTask:fromArgs()": {
-		"prefix": "GatherItemTask:fromArgs",
-		"body": ["GatherItemTask:fromArgs($0)"],
+	"GatherItemTask:FromArgs()": {
+		"prefix": "GatherItemTask:FromArgs",
+		"body": ["GatherItemTask:FromArgs($0)"],
 		"description": ""
 	},
 	"GatherItemTask:getType()": {
@@ -774,9 +774,9 @@
 		"body": ["GenericTask:conversionConstructor($0)"],
 		"description": ""
 	},
-	"GenericTask:fromArgs()": {
-		"prefix": "GenericTask:fromArgs",
-		"body": ["GenericTask:fromArgs($0)"],
+	"GenericTask:FromArgs()": {
+		"prefix": "GenericTask:FromArgs",
+		"body": ["GenericTask:FromArgs($0)"],
 		"description": ""
 	},
 	"GenericTask:getType()": {
@@ -1679,9 +1679,9 @@
 		"body": ["Position:conversionConstructor($0)"],
 		"description": ""
 	},
-	"Position:fromArgs()": {
-		"prefix": "Position:fromArgs",
-		"body": ["Position:fromArgs($0)"],
+	"Position:FromArgs()": {
+		"prefix": "Position:FromArgs",
+		"body": ["Position:FromArgs($0)"],
 		"description": ""
 	},
 	"Position:getDirectionOffset()": {

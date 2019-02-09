@@ -13,8 +13,8 @@ end
 -- ChopTreeSkill = Class(Task)
 -- ChopTreeSkill.ClassName = 'ChopTreeSkill'
 
--- function ChopTreeSkill.fromArgs(args)
--- 	return ChopTreeSkill(Position.fromArgs(args))
+-- function ChopTreeSkill.FromArgs(args)
+-- 	return ChopTreeSkill(Position.FromArgs(args))
 -- end
 
 -- function ChopTreeSkill:constructor(location)

@@ -11,7 +11,7 @@ function SetupTask:toString()
 	return 'Setup ' .. self.itemType
 end
 
-function SetupTask.fromArgs(args)
+function SetupTask.FromArgs(args)
 	local itemType = table.remove(args, 1)
 	return SetupTask(itemType)
 end

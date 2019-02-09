@@ -12,7 +12,7 @@ function GatherItemTask:toString()
 	return 'Gather ' .. self.amount .. ' ' .. self.item .. '(s)'
 end
 
-function GatherItemTask.fromArgs(args)
+function GatherItemTask.FromArgs(args)
 	local item = table.remove(args, 1)
 	local count = table.remove(args, 1)
 	return GatherItemTask(item, tonumber(count))

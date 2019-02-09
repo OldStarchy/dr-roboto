@@ -28,7 +28,7 @@ cli:addAction(
 		local args = {...}
 		local pos
 		if (#args > 0) then
-			pos = Position.fromArgs(args)
+			pos = Position.FromArgs(args)
 		else
 			pos = Mov:getPosition()
 		end

@@ -23,6 +23,6 @@ function Task:toString()
 	return 'Task{' .. self.ClassName .. '} "' .. self.name .. '"'
 end
 
-function GenericTask.fromArgs(args)
+function GenericTask.FromArgs(args)
 	return GenericTask(table.remove(args, 1))
 end

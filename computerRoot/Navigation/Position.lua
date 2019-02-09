@@ -25,7 +25,7 @@ function Position.WrapDirection(direction)
 end
 
 --CLI helper
-function Position.fromArgs(args)
+function Position.FromArgs(args)
 	if (#args == 0) then
 		error('Missing args for position')
 	end
