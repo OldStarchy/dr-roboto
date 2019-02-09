@@ -79,12 +79,12 @@ env = getfenv()
 if #localArgs > 0 then
 	if (type(env[localArgs[1]]) == 'function') then
 		local funcName = table.remove(localArgs, 1)
-		local oldDig = Nav.autoDig
-		local oldAttack = Nav.autoAttack
-		Nav.autoDig = true
-		Nav.autoAttack = true
+		local oldDig = nav.autoDig
+		local oldAttack = nav.autoAttack
+		nav.autoDig = true
+		nav.autoAttack = true
 		env[funcName](unpack(localArgs))
-		Nav.autoDig = oldDig
-		Nav.autoAttack = oldAttack
+		nav.autoDig = oldDig
+		nav.autoAttack = oldAttack
 	end
 end

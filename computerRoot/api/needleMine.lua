@@ -114,7 +114,7 @@ local function needleMine()
 	end
 
 	mov:push(true, true)
-	Nav:goToY(startHeight)
+	nav:goToY(startHeight)
 	mov:pop()
 end
 

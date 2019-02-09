@@ -7,7 +7,7 @@ Navigator.ClassName = 'Navigator'
 ]]
 --[[
 	High level movement using coordinates
-	Initialized as "Nav" at the bottom of this file.
+	Initialized as "nav" at the bottom of this file.
 ]]
 function Navigator:constructor(mov)
 	assertType(mov, MoveManager, 'mov is not of type MoveManager')
@@ -175,4 +175,4 @@ function Navigator:pathTo(x, y, z)
 	return x == self:getX() and y == self:getY() and z == self:getZ()
 end
 
-Nav = Navigator(mov)
+nav = Navigator(mov)

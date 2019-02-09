@@ -1524,9 +1524,9 @@
 		"body": ["MoveManager:up($0)"],
 		"description": ""
 	},
-	"Nav()": {
-		"prefix": "Nav",
-		"body": ["Nav($0)"],
+	"nav()": {
+		"prefix": "nav",
+		"body": ["nav($0)"],
 		"description": ""
 	},
 	"Navigator()": {

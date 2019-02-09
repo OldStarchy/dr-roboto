@@ -248,7 +248,7 @@ end
 
 function MoveManager:face(direction)
 	if (type(direction) ~= 'number') then
-		error('Invalid argument passed to Nav:face')
+		error('Invalid argument passed to nav:face')
 	end
 
 	return self:turn(self._position:getDirectionOffset(direction))

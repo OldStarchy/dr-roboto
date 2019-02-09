@@ -2,7 +2,7 @@
 	Checks if something is something. Can test for primative types, or class types.
 
 	isType('hello', 'string') -- true
-	isType(Nav, Navigator) -- true
+	isType(nav, Navigator) -- true
 	isType(mov, Navigator) -- false
 
 	obj: the object (or primative) to check

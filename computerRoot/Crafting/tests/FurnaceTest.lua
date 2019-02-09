@@ -8,9 +8,9 @@ test(
 
 				print(obj:toString())
 				obj:navigateTo()
-				t.assertEqual(Nav:getX(), 5)
-				t.assertEqual(Nav:getY(), 5)
-				t.assertEqual(Nav:getZ(), 4)
+				t.assertEqual(nav:getX(), 5)
+				t.assertEqual(nav:getY(), 5)
+				t.assertEqual(nav:getZ(), 4)
 
 				obj:gotoTop()
 			end

@@ -46,7 +46,7 @@ function NeedleMineSkill:completeTask(task)
 		local location = planner:getNextLocation()
 
 		mov:push(true, true, true)
-		Nav:pathTo(location)
+		nav:pathTo(location)
 		mov:pop()
 		needleMine()
 

@@ -7,7 +7,7 @@ function ChopTreeSkill:canHandleTask(task)
 end
 
 function ChopTreeSkill:completeTask(task)
-	Nav.goTo(task._location)
+	nav.goTo(task._location)
 end
 
 -- ChopTreeSkill = Class(Task)
