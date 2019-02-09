@@ -18,12 +18,16 @@ function classMeta.__call(_, parent, ...)
 	local interfaces = {}
 	local implementationAsserted = false
 
+	class.ChildTypes = {}
+	class.DefinitionLocation = getStackFrame(2)
 	if (parent ~= nil) then
 		if (parent.isInterface) then
 			interfaces = {parent, ...}
 			parent = nil
 		else
 			interfaces = {...}
+
+			table.insert(parent.ChildTypes, class)
 		end
 	end
 
