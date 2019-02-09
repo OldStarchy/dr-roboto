@@ -1,8 +1,9 @@
 function getStackFrame(frameIndex)
+	frameIndex = coalesce(frameIndex, 1)
 	local frameInfo
 	xpcall(
 		function()
-			error('', frameIndex + 1)
+			error('', frameIndex + 3)
 		end,
 		function(err)
 			frameInfo = err
@@ -14,7 +15,6 @@ end
 function getStackTrace(frames, startFrame, maxJump)
 	frames = ((type(frames) == 'number') and frames) or 5
 	startFrame = ((type(startFrame) == 'number') and startFrame) or 1
-	startFrame = startFrame + 3
 	maxJump = ((type(maxJump) == 'number') and maxJump) or 5
 	if (frames <= 0) then
 		return
