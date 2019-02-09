@@ -28,11 +28,11 @@ function MoveAction:run(invoc)
 	local r
 
 	while self.count == -1 or i <= self.count do
-		local autoDig = Nav.autoDig
-		local autoAttack = Nav.autoAttack
+		local autoDig = mov.autoDig
+		local autoAttack = mov.autoAttack
 
 		if (optional) then
-			Nav.autoDig = false
+			mov.autoDig = false
 		end
 		if (self.autoDigAttack) then
 			mov.autoDig = true
