@@ -42,7 +42,7 @@ function NeedleMineSkill:completeTask(task)
 
 	local needleMine = include 'api/needleMine'
 
-	while (Inv:countItem(task.item) < task.amount) do
+	while (inv:countItem(task.item) < task.amount) do
 		local location = planner:getNextLocation()
 
 		mov:push(true, true, true)

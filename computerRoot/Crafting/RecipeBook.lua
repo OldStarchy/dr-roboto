@@ -124,7 +124,7 @@ function RecipeBook:findBestCraftingRecipeBySelector(selector)
 		local itemsNeeded = 0
 
 		for item, count in pairs(recipe.items) do
-			local haveCount = Inv:countItem(item)
+			local haveCount = inv:countItem(item)
 			itemsNeeded = itemsNeeded + count - haveCount
 		end
 

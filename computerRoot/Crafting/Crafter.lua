@@ -85,7 +85,7 @@ function Crafter:_hasIngredientsToCraft(recipe, amount)
 	local err = false
 	for _item, count in pairs(items) do
 		log.info('need "' .. _item .. '" * ' .. tostring(count * amount))
-		local _count = Inv:getUnlockedCount(_item)
+		local _count = inv:getUnlockedCount(_item)
 		log.info('have ' .. tostring(_count))
 		if (_count < count * amount) then
 			err = true
@@ -98,9 +98,9 @@ end
 
 function Crafter:craft(item, amount)
 	if (turtle.craft == nil) then
-		if (Inv:pushSelection('crafting_table')) then
+		if (inv:pushSelection('crafting_table')) then
 			turtle.equipLeft()
-			Inv:popSelection()
+			inv:popSelection()
 		end
 		if (turtle.craft == nil) then
 			error('Missing crafting bench!')
@@ -132,7 +132,7 @@ function Crafter:craft(item, amount)
 
 	log.info('Trying to craft ' .. recipe.name .. ' ' .. tostring(amount) .. ' times')
 
-	if (Inv:select('chest')) then
+	if (inv:select('chest')) then
 		if (turtle.inspectDown()) then
 			log.warn('digging down')
 			turtle.digDown()
@@ -147,7 +147,7 @@ function Crafter:craft(item, amount)
 	local items = cloneTable(recipe.items)
 
 	for i = 1, 16 do
-		local itemStack = Inv:getItemDetail(i)
+		local itemStack = inv:getItemDetail(i)
 
 		local dump = true
 		for _item, _amount in pairs(items) do
@@ -175,14 +175,14 @@ function Crafter:craft(item, amount)
 
 	for i = 1, 9 do
 		if (recipe.grid[i] ~= nil) then
-			if (not Inv:lock(i + math.floor((i - 1) / 3), recipe.grid[i], amount)) then
+			if (not inv:lock(i + math.floor((i - 1) / 3), recipe.grid[i], amount)) then
 				error('failed to set up crafting recipe')
 			end
 		end
 	end
 
 	turtle.craft(amount)
-	Inv:unlockAll()
+	inv:unlockAll()
 
 	while (turtle.suckDown()) do
 	end

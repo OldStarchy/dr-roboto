@@ -69,8 +69,8 @@ for slot = 1, 9 do
 	end
 end
 
-if (not Inv:pushSelection(Inv:getFirstEmpty())) then
-	Inv:popSelection()
+if (not inv:pushSelection(inv:getFirstEmpty())) then
+	inv:popSelection()
 	error('no empty slot to craft into')
 end
 
@@ -88,4 +88,4 @@ else
 	log.info('no result')
 end
 
-Inv:popSelection()
+inv:popSelection()

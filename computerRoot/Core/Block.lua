@@ -33,6 +33,6 @@ end
 -- TODO: make smarted
 function Block:place()
 	self:navigateTo()
-	Inv:select(name)
+	inv:select(name)
 	turtle.place()
 end

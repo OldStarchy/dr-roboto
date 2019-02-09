@@ -1,16 +1,16 @@
 local function tryRefuel(direction)
-	if (Inv:pushSelection('bucket')) then
-		if (Inv:hasEmpty()) then
+	if (inv:pushSelection('bucket')) then
+		if (inv:hasEmpty()) then
 			if (turtle['place' .. direction]()) then
 				log.info('Refueled from lava source')
-				Inv:select('lava_bucket')
+				inv:select('lava_bucket')
 				turtle.refuel(1)
 			end
 		else
 			log.info('No room to pick up lava for refueling')
 		end
 	end
-	Inv:popSelection()
+	inv:popSelection()
 end
 
 local function digLayer()
@@ -32,19 +32,19 @@ local function digLayer()
 			if (itemInfront) then
 				if (detail:isLiquid()) then
 					log.info('liquid, blocking off')
-					if (Inv:pushSelection('cobblestone,dirt')) then
+					if (inv:pushSelection('cobblestone,dirt')) then
 						turtle.place()
 					else
 						log.info('nothing to block it off with')
 					end
-					Inv:popSelection()
+					inv:popSelection()
 				else
 					local dig = true
 
 					if (detail:matches('dirt') or detail:matches('grass')) then
-						dig = Inv:countItem('dirt') < 10
+						dig = inv:countItem('dirt') < 10
 					elseif (detail:matches('stone:0,cobblestone')) then
-						dig = Inv:countItem('cobblestone') < 10
+						dig = inv:countItem('cobblestone') < 10
 					end
 
 					if (dig) then
@@ -62,12 +62,12 @@ local function digLayer()
 
 						itemInfront, detail = turtle.inspect()
 						if (itemInfront and detail:isLiquid()) then
-							if (Inv:pushSelection('cobblestone,dirt')) then
+							if (inv:pushSelection('cobblestone,dirt')) then
 								turtle.place()
 							else
 								log.info('nothing to block it off with')
 							end
-							Inv:popSelection()
+							inv:popSelection()
 						end
 					end
 				end

@@ -19,7 +19,7 @@ InventoryManager.ClassName = 'InventoryManager'
 ]]
 function InventoryManager.ItemIs(item, selector)
 	if (type(item) == 'number') then
-		item = Inv:getItemDetail(item)
+		item = inv:getItemDetail(item)
 	end
 
 	if (item == nil) then
@@ -552,4 +552,4 @@ function InventoryManager:count()
 	return result
 end
 
-Inv = InventoryManager(turtle)
+inv = InventoryManager(turtle)

@@ -99,11 +99,11 @@ function Furnace:smelt(furnaceRecipe, quantity, fuel)
 	print('smelting ' .. furnaceRecipe.name)
 
 	self:gotoTop()
-	Inv:select(furnaceRecipe.ingredient)
-	Inv:dropDown(1)
+	inv:select(furnaceRecipe.ingredient)
+	inv:dropDown(1)
 	self:gotoFront()
-	Inv:select(fuel)
-	Inv:drop()
+	inv:select(fuel)
+	inv:drop()
 
 	local burnTime = furnaceRecipe.burnTime * quantity
 
@@ -124,5 +124,5 @@ function Furnace:smelt(furnaceRecipe, quantity, fuel)
 		end
 	end
 
-	Inv:suckUp()
+	inv:suckUp()
 end

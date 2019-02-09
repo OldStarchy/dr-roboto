@@ -96,7 +96,7 @@ process.spawnProcess(
 				rednet.broadcast(
 					serialize(
 						{
-							inventory = Inv:count(),
+							inventory = inv:count(),
 							location = mov:getPosition():toString(),
 							fuel = turtle.getFuelLevel()
 						}

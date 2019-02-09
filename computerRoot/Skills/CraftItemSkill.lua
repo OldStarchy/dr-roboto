@@ -26,7 +26,7 @@ function CraftItemSkill:getRequirements(task)
 	end
 
 	for item, count in pairs(recipe.items) do
-		local haveCount = Inv:countItem(item)
+		local haveCount = inv:countItem(item)
 		local itemsNeeded = count - haveCount
 
 		if (haveCount < count) then

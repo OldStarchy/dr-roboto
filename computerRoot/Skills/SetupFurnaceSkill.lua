@@ -10,7 +10,7 @@ end
 
 function SetupFurnaceSkill:getRequirements(task)
 	-- alternatively it should look for a furnace in the inventory or in a known chest
-	if (Inv:countItem(Furnace.ClassName) == 0) then
+	if (inv:countItem(Furnace.ClassName) == 0) then
 		return {GatherItemTask(Furnace.ClassName, 1)}
 	end
 	return {}

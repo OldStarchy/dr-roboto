@@ -9,7 +9,7 @@ function Miner.needleMine()
 		depth = depth + 1
 
 		for i = 1, 4 do
-			if (Inv:isNiceToHave(Inv:detect())) then
+			if (inv:isNiceToHave(inv:detect())) then
 				turtle.dig()
 			end
 
@@ -22,7 +22,7 @@ function Miner.needleMine()
 		depth = depth - 1
 	end
 
-	Inv:select(Inv.rubbishBlock)
+	inv:select(inv.rubbishBlock)
 
 	turtle.placeDown()
 
@@ -45,7 +45,7 @@ function Miner.trackedNeedleMine(tracker)
 					1,
 					4,
 					function(t2)
-						if (Inv:isNiceToHave(Inv:detect())) then
+						if (inv:isNiceToHave(inv:detect())) then
 							turtle.dig()
 						end
 
@@ -64,7 +64,7 @@ function Miner.trackedNeedleMine(tracker)
 		end
 	)
 
-	Inv:select(Inv.rubbishBlock)
+	inv:select(inv.rubbishBlock)
 
 	tracker:step(turtle.placeDown)
 

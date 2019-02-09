@@ -914,9 +914,9 @@
 		"body": ["Interface.FromObject($0)"],
 		"description": ""
 	},
-	"Inv()": {
-		"prefix": "Inv",
-		"body": ["Inv($0)"],
+	"inv()": {
+		"prefix": "inv",
+		"body": ["inv($0)"],
 		"description": ""
 	},
 	"InventoryManager()": {

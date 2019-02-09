@@ -1,5 +1,5 @@
 # InventoryManager
 
-Globally accessible as `Inv`
+Globally accessible as `inv`
 
 todo lol
