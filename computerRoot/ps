@@ -1,0 +1,56 @@
+-- global taskManager
+
+local cli = Cli('ps', 'Cli interface for the ProcessManager', 'help')
+
+cli:addAction(
+	'list',
+	function()
+		local processes = process.getProcesses()
+
+		print(#processes .. ' processes:')
+		for i, process in ipairs(processes) do
+			print(' ' .. tostring(process.id) .. ((process.daemon and ' (D)') or '') .. ': ' .. process.name)
+		end
+	end,
+	nil,
+	'Lists processes'
+)
+
+cli:addAction(
+	'kill',
+	function(name, force)
+		if (not isType(name, 'string')) then
+			print('Must specifiy name or id')
+			return
+		end
+
+		local tid = tonumber(name)
+		if (tid == nil) then
+			local processes = process.getProcesses()
+			for i, process in ipairs(processes) do
+				if (process.name == name) then
+					tid = process.id
+				end
+			end
+		end
+
+		if (tid == nil) then
+			print("Couldn't find process \"" .. tostring(name) .. '"')
+			return
+		end
+
+		if (force == 'f') then
+			print('Killing')
+			process.kill(tid)
+		elseif (force == nil) then
+			print('Requesting terminate')
+			process.sendTerminate(tid)
+		else
+			error('Invalid parameter ' .. force)
+		end
+	end,
+	{'nameOrId', '[f]'},
+	"Kills a process (specify 'f' to force kill)"
+)
+
+cli:run(...)
