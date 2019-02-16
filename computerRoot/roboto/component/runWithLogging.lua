@@ -10,7 +10,7 @@ function runWithLogging(func)
 			for _, err in ipairs(trace) do
 				local frameInfo = getStackFrameInfo(err)
 
-				if (frameInfo.file == stopFrame.file) then
+				if (frameInfo.file == stopFrame.file and frameInfo.line == stopFrame.line) then
 					break
 				end
 
