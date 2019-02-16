@@ -1,4 +1,9 @@
-while (true) do
+local run = true
+while (run) do
 	local e, id, name = os.pullEventRaw(ProcessManager.PROCESS_CRASHED)
-	log.warn('Process ' .. tostring(id) .. ' "' .. tostring(name) .. '" has crashed')
+	if (e == 'terminate') then
+		run = false
+	else
+		log.warn('Process ' .. tostring(id) .. ' "' .. tostring(name) .. '" has crashed')
+	end
 end
