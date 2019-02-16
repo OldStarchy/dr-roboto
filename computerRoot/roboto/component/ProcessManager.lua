@@ -60,12 +60,6 @@ function ProcessManager:spawnProcess(func, name, daemon)
 	os.queueEvent(ProcessManager.PROCESS_NEW, proc.id, proc.name)
 	table.insert(self._newProcesses, proc)
 
-	-- if (self._run) then
-	-- 	local _, procId = os.pullEventRaw(ProcessManager.PROCESS_NEW)
-	-- 	while (procId ~= proc.id) do
-	-- 		_, procId = os.pullEventRaw(ProcessManager.PROCESS_NEW)
-	-- 	end
-	-- end
 	return proc.id
 end
 
@@ -78,7 +72,7 @@ function ProcessManager:getProcesses()
 			{
 				name = v.name,
 				id = v.id,
-				parent = v.parent.id,
+				parent = (v.parent and v.parent.id) or nil,
 				daemon = v.daemon
 			}
 		)
@@ -107,6 +101,18 @@ function ProcessManager:sendTerminate(pid)
 	end
 
 	table.insert(proc.eventQueue, {'terminate'})
+
+	return true
+end
+
+function ProcessManager:kill(pid)
+	local proc = self:_getProcessById(pid)
+
+	if (proc == nil) then
+		return false
+	end
+
+	proc.killed = true
 
 	return true
 end
@@ -153,30 +159,31 @@ function ProcessManager:run()
 
 			table.insert(proc.eventQueue, eventData)
 
-			while (#proc.eventQueue > 0) do
-				eventData = table.remove(proc.eventQueue, 1)
+			--While There are events for this process
+			--		this process hasn't crashed or ended
+			--		this process hasn't been killed
+			while (#proc.eventQueue > 0 and coroutine.status(proc.coroutine) ~= 'dead' and not proc.killed) do
+				local currentEventData = table.remove(proc.eventQueue, 1)
 
-				if proc.filter == nil or proc.filter == eventData[1] or eventData[1] == 'terminate' then
+				if (proc.filter == nil or proc.filter == currentEventData[1] or currentEventData[1] == 'terminate') then
 					self._currentProcess = proc
-					local ok, param = coroutine.resume(proc.coroutine, table.unpack(eventData))
+					local ok, param = coroutine.resume(proc.coroutine, table.unpack(currentEventData))
 					self._currentProcess = nil
 
-					--TODO: handle crashed routine
 					if not ok then
 						os.queueEvent(ProcessManager.PROCESS_CRASHED, proc.id, proc.name)
 					else
 						proc.filter = param
 					end
-
-					if coroutine.status(proc.coroutine) == 'dead' then
-						os.queueEvent(ProcessManager.PROCESS_DIED, proc.id, proc.name)
-						table.remove(self._processes, n)
-						n = n - 1
-						break
-					end
 				end
 			end
-			n = n + 1
+
+			if (coroutine.status(proc.coroutine) == 'dead' or proc.killed) then
+				os.queueEvent(ProcessManager.PROCESS_DIED, proc.id, proc.name)
+				table.remove(self._processes, n)
+			else
+				n = n + 1
+			end
 		end
 
 		while (#self._newProcesses > 0) do
@@ -184,22 +191,6 @@ function ProcessManager:run()
 		end
 
 		eventData = {os.pullEventRaw()}
-
-		-- if
-		-- 	(eventData[1] ~= 'key_up' and --
-		-- 		eventData[1] ~= 'key' and
-		-- 		eventData[1] ~= 'char' and
-		-- 		eventData[1] ~= 'mouse_click' and
-		-- 		eventData[1] ~= 'mouse_up' and
-		-- 		eventData[1] ~= 'mouse_drag' and
-		-- 		eventData[1] ~= 'timer')
-		--  then
-		-- 	local eventString = 'EVENT:'
-		-- 	for _, v in pairs(eventData) do
-		-- 		eventString = eventString .. ' "' .. tostring(v) .. '"'
-		-- 	end
-		-- 	log.info(eventString)
-		-- end
 	end
 end
 
@@ -226,6 +217,10 @@ function ProcessManager:getAPI()
 
 	api.sendTerminate = function(...)
 		return this:sendTerminate(...)
+	end
+
+	api.kill = function(...)
+		return this:kill(...)
 	end
 
 	api.getCurrentProcess = function(...)
