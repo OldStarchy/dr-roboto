@@ -109,6 +109,8 @@ function Crafter:craft(item, amount)
 
 	local recipe = nil
 
+	amount = assertType(coalesce(amount, 1), 'int')
+
 	if (type(item) == 'string') then
 		local recipes = RecipeBook.Instance:findCraftingRecipesBySelector(item)
 
@@ -124,6 +126,8 @@ function Crafter:craft(item, amount)
 		end
 	elseif (isType(item, Recipe)) then
 		recipe = item
+	else
+		error('item must be string or Recipe', 2)
 	end
 
 	if (recipe == nil) then
@@ -132,8 +136,9 @@ function Crafter:craft(item, amount)
 
 	log.info('Trying to craft ' .. recipe.name .. ' ' .. tostring(amount) .. ' times')
 
+	local belowBlock = turtle.inspectDown()
 	if (inv:select('chest')) then
-		if (turtle.inspectDown()) then
+		if (belowBlock) then
 			log.warn('digging down')
 			turtle.digDown()
 		end
@@ -151,6 +156,7 @@ function Crafter:craft(item, amount)
 
 		local dump = true
 		for _item, _amount in pairs(items) do
+			_amount = _amount * amount
 			if (itemStack == nil) then
 				dump = false
 			elseif (itemStack:matches(_item)) then
@@ -187,6 +193,12 @@ function Crafter:craft(item, amount)
 	while (turtle.suckDown()) do
 	end
 	turtle.digDown()
+
+	if (belowBlock) then
+		if (inv:select(belowBlock:getId() .. ',dirt,cobblestone')) then
+			turtle.placeDown()
+		end
+	end
 
 	return true
 end

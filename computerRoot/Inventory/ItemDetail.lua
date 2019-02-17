@@ -42,6 +42,8 @@ function ItemDetail:toString()
 end
 
 function ItemDetail:matches(selector)
+	assertType(selector, 'string')
+
 	if (selector == '*') then
 		return true
 	end
@@ -49,6 +51,7 @@ function ItemDetail:matches(selector)
 	local name = self.name .. ':' .. self.metadata
 
 	local subSelectors = {}
+
 	for subSelector in selector:lower():gmatch('[^,]*') do
 		local colons = select(2, subSelector:gsub(':', ''))
 		if (colons == 0) then

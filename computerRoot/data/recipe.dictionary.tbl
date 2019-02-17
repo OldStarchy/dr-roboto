@@ -316,6 +316,14 @@
 			name = 'minecraft:coal',
 			produces = 9,
 		},
+		[34] = {
+			grid = {
+				[1] = 'minecraft:coal:*',
+				[4] = 'minecraft:stick:*',
+			},
+			name = 'minecraft:torch',
+			produces = 4,
+		},
 	},
 	smelting = {
 		[1] = {

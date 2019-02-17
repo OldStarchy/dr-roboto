@@ -171,6 +171,9 @@ function RecipeBook:findByGrid(recipe)
 					match = false
 					break
 				end
+			elseif (recipe[j] == nil) then
+				match = false
+				break
 			else
 				local resultDetail = ItemDetail.FromId(item)
 
