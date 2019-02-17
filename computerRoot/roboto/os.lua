@@ -66,7 +66,17 @@ if (fs.exists('logs/latest.log')) then
 		fs.move('logs/backup.log', 'logs/backup2.log')
 	end
 
-	fs.move('logs/latest.log', 'logs/backup.log')
+	if
+		(not pcall(
+			function()
+				fs.move('logs/latest.log', 'logs/backup.log')
+			end
+		))
+	 then
+		error(
+			"Couldn't copy log files\nProbably because the file is locked by another computer with the same id or the shell is running on pc"
+		)
+	end
 end
 
 if (not fs.exists('logs')) then
