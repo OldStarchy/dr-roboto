@@ -93,7 +93,21 @@ end
 while (run) do
 	printPrompt()
 
-	local input = read()
+	local input
 
-	runCommand(input)
+	--pcall handles ctrl+c (pc) and ctrl+t (cc) and exits gracefully
+	if
+		(not pcall(
+			function()
+				input = read()
+			end
+		))
+	 then
+		input = 'exit'
+		print('terminated')
+	end
+
+	if (input ~= nil) then
+		runCommand(input)
+	end
 end
