@@ -61,7 +61,7 @@ end
 
 local function runCommand(input)
 	--TODO: doesn't handle quoted strings
-	local args = stringutil.split(input, ' ')
+	local args = stringutil.split(input, ' ', true)
 
 	local cmd = table.remove(args, 1)
 	if (cmd == nil) then

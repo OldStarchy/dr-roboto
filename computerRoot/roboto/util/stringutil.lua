@@ -40,7 +40,7 @@ function stringutil.rPad(str, size, char)
 	return str
 end
 
-function stringutil.split(str, pat)
+function stringutil.split(str, pat, removeEmpty)
 	if (type(str) ~= 'string') then
 		error('str must be string', 2)
 	end
@@ -50,7 +50,7 @@ function stringutil.split(str, pat)
 	local s, e, cap = str:find(fpat, 1)
 	while s do
 		if s ~= 1 or cap ~= '' then
-			if (cap ~= '') then
+			if (cap ~= '' or not removeEmpty) then
 				table.insert(t, cap)
 			end
 		end
@@ -59,7 +59,7 @@ function stringutil.split(str, pat)
 	end
 	if last_end <= #str then
 		cap = str:sub(last_end)
-		if (cap ~= '') then
+		if (cap ~= '' or not removeEmpty) then
 			table.insert(t, cap)
 		end
 	end
