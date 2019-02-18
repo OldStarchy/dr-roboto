@@ -24,3 +24,5 @@ end
 -- 	self.hasFinished = true
 -- 	self.results = results
 -- end
+
+includeAll 'Tasks/Task'

@@ -79,3 +79,5 @@ end
 function ItemDetail:isLiquid()
 	return self:matches('lava') or self:matches('water')
 end
+
+includeAll 'Inventory/ItemDetail'

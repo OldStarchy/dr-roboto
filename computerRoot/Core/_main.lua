@@ -11,14 +11,9 @@ include 'Core/Block'
 include 'Core/BlockMap'
 
 includeAll 'Crafting'
-includeAll 'Crafting/Recipe'
-
 includeAll 'Navigation'
-
 includeAll 'Tasks'
-includeAll 'Tasks/Task'
+includeAll 'Skills'
+includeAll 'Inventory'
 
-include 'Skills/_main'
-include 'Inventory/_main'
-
-include 'UI/Hud'
+includeAll 'UI'

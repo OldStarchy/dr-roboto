@@ -18,3 +18,5 @@ end
 function Skill:getRequirements(task)
 	return {}
 end
+
+includeAll 'Skills/Skill'
