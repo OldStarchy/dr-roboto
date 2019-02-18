@@ -261,6 +261,9 @@ local function doTest(testObj, testContext)
 	env.sleep = function(time)
 		getfenv(2).print('sleeping for ', time)
 	end
+	env.read = function()
+		return ''
+	end
 	setmetatable(
 		env,
 		{
@@ -347,7 +350,6 @@ local function doTest(testObj, testContext)
 			-- Print any errors
 			for _, errMsg in ipairs(errors) do
 				cprint(cprint.red, ' ' .. errMsg .. '\n')
-				read()
 			end
 		end
 	end
