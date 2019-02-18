@@ -4,14 +4,9 @@ SkillSet.ClassName = 'SkillSet'
 function SkillSet.GetDefaultSkillSet()
 	local skillSet = SkillSet()
 
-	skillSet:addSkill(TreeFarmSkill())
-	skillSet:addSkill(ChopTreeSkill())
-	skillSet:addSkill(DanceSkill())
-	skillSet:addSkill(GatherSandSkill())
-	skillSet:addSkill(CraftItemSkill())
-	skillSet:addSkill(NeedleMineSkill())
-	skillSet:addSkill(SetupFurnaceSkill())
-	skillSet:addSkill(SmeltItemSkill())
+	for _, v in pairs(Skill.ChildTypes) do
+		skillSet:addSkill(v())
+	end
 
 	return skillSet
 end
