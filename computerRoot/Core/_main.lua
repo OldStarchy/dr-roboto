@@ -2,14 +2,10 @@ includeAll 'Core/Interfaces'
 includeAll 'Core/Data'
 
 include 'Core/EventManager'
-include 'Core/StateSaver'
 
 include 'Core/Cli'
 
-include 'Core/Graphics/ITerm'
-include 'Core/Graphics/Pixel'
-include 'Core/Graphics/Graphics'
-include 'Core/Graphics/Surface'
+includeAll 'Core/Graphics'
 
 include 'Core/Block'
 include 'Core/BlockMap'
