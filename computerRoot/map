@@ -1,5 +1,3 @@
--- global taskManager
-
 local cli = Cli('map', 'Map waypoint manager', 'list')
 
 cli:addAction(

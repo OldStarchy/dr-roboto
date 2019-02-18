@@ -1,5 +1,3 @@
--- global taskManager
-
 local cli = Cli('ps', 'Cli interface for the ProcessManager', 'help')
 
 cli:addAction(
