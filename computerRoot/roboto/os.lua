@@ -38,6 +38,7 @@ local components = {
 	'vfs',
 	'loader',
 	'class',
+	'interface',
 	'types',
 	'missingGlobals',
 	'log',
