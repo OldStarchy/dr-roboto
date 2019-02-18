@@ -1,14 +1,10 @@
-include 'Core/hardTable'
+includeAll 'Core/Interfaces'
+includeAll 'Core/Data'
+
 include 'Core/EventManager'
-include 'Core/Log'
 include 'Core/StateSaver'
 
 include 'Core/Cli'
-
-include 'Core/IBuffer'
-include 'Core/Buffer'
-include 'Core/StringBuffer'
-include 'Core/Queue'
 
 include 'Core/Graphics/ITerm'
 include 'Core/Graphics/Pixel'
