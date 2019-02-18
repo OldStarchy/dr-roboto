@@ -41,7 +41,7 @@ function includeAll(directory)
 	for _, path in ipairs(content) do
 		if (stringutil.endsWith(path, '.lua')) then
 			if (not fs.isDir(directory .. '/' .. path)) then
-				local fullPath = directory .. '/' .. path:sub(1, #path - 4)
+				local fullPath = directory .. '/' .. path
 
 				local chunk, err = loadfile(fullPath, getfenv(2))
 
