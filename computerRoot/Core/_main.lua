@@ -10,9 +10,14 @@ includeAll 'Core/Graphics'
 include 'Core/Block'
 include 'Core/BlockMap'
 
-include 'Crafting/_main'
+includeAll 'Crafting'
+includeAll 'Crafting/Recipe'
+
 includeAll 'Navigation'
-include 'Tasks/_main'
+
+includeAll 'Tasks'
+includeAll 'Tasks/Task'
+
 include 'Skills/_main'
 include 'Inventory/_main'
 

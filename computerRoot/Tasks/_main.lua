@@ -1,5 +1,0 @@
-include 'Tasks/Task'
-include 'Tasks/TaskManager'
-include 'Tasks/TaskRunner'
-include 'Tasks/GatherItemTask'
-include 'Tasks/SetupTask'

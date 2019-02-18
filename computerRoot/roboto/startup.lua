@@ -64,6 +64,8 @@ runWithLogging(
 		Map.Instance.ev:on('tag_added', saveMap)
 		Map.Instance.ev:on('tag_removed', saveMap)
 		--TODO: load tags from disc
+
+		Crafting = Crafter(turtle)
 	end
 )
 

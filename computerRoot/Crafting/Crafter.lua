@@ -210,5 +210,3 @@ function Crafter:craftFromGraph(graph)
 	--foreach leaf node in items
 	obtain(node.item, node.amount)
 end
-
-Crafting = Crafter(turtle)

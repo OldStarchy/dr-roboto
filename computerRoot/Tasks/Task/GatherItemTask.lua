@@ -1,15 +1,15 @@
 GatherItemTask = Class(Task)
 GatherItemTask.ClassName = 'GatherItemTask'
 
-function GatherItemTask:constructor(item, amount)
+function GatherItemTask:constructor(item, count)
 	Task.constructor(self)
 
 	self.item = item
-	self.amount = amount
+	self.count = count
 end
 
 function GatherItemTask:toString()
-	return 'Gather ' .. self.amount .. ' ' .. self.item .. '(s)'
+	return 'Gather ' .. self.count .. ' ' .. self.item .. '(s)'
 end
 
 function GatherItemTask.FromArgs(args)
