@@ -7,6 +7,9 @@ dofile '../_polyfills/term.lua'
 dofile '../_polyfills/colours.lua'
 dofile '../_polyfills/lua.lua'
 sleep = function(count)
+	if (count == 0) then
+		return
+	end
 	count = tonumber(count)
 	if (count == nil) then
 		error('expected number of seconds', 2)
