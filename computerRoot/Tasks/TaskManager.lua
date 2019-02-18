@@ -2,31 +2,27 @@ TaskManager = Class()
 TaskManager.ClassName = 'TaskManager'
 
 function TaskManager:constructor()
-	--TODO: maybe queue isn't necassary here
 	self._tasks = {}
+
+	self.ev = EventManager()
 end
 
-function TaskManager:save(fname)
-	local data = self._tasks
-
-	fs.writeToFile(fname, data)
+function TaskManager:serialize()
+	return cloneTable(self._tasks, 4)
 end
 
 function TaskManager:count()
 	return #self._tasks
 end
 
-function TaskManager:load(fname)
-	if (fs.exists(fname)) then
-		local data = fs.readTableFromFile(fname)
+function TaskManager.Deserialize(obj)
+	assertType(obj, 'table')
 
-		if (data) then
-			self._tasks = {}
-			for _, v in ipairs(data) do
-				table.insert(self._tasks, v)
-			end
-		end
+	local tm = TaskManager()
+	for _, v in ipairs(obj) do
+		tm:addTask(v)
 	end
+	return tm
 end
 
 function TaskManager:addTask(task, index)
@@ -37,6 +33,8 @@ function TaskManager:addTask(task, index)
 	else
 		table.insert(self._tasks, task)
 	end
+
+	self.ev:trigger('state_changed')
 end
 
 function TaskManager:getTasks()
@@ -50,4 +48,6 @@ end
 
 function TaskManager:removeTask(index)
 	table.remove(self._tasks, index)
+
+	self.ev:trigger('state_changed')
 end

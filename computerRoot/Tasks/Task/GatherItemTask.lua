@@ -4,8 +4,8 @@ GatherItemTask.ClassName = 'GatherItemTask'
 function GatherItemTask:constructor(item, count)
 	Task.constructor(self)
 
-	self.item = item
-	self.count = count
+	self.item = assertType(item, 'string')
+	self.count = assertType(count, 'int')
 end
 
 function GatherItemTask:toString()
@@ -16,4 +16,8 @@ function GatherItemTask.FromArgs(args)
 	local item = table.remove(args, 1)
 	local count = table.remove(args, 1)
 	return GatherItemTask(item, tonumber(count))
+end
+
+function GatherItemTask.Deserialize(obj)
+	return GatherItemTask(obj.item, obj.count)
 end

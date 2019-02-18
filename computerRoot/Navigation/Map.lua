@@ -72,6 +72,7 @@ function Map:clearTag(pos)
 
 	if (tag ~= nil) then
 		self.ev:trigger('tag_removed', pos, tag)
+		self.ev:trigger('state_changed')
 	end
 end
 
@@ -89,6 +90,7 @@ function Map:setTag(pos, tag)
 	self._tags[tag] = Position(pos)
 
 	self.ev:trigger('tag_added', pos, tag)
+	self.ev:trigger('state_changed')
 end
 
 function Map:getTags()

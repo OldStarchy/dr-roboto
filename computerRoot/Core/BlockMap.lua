@@ -10,13 +10,10 @@ BlockMap.ClassName = 'BlockMap'
 	where the direction provided in Position will be the approach direction
 	from the turtle to the block
 ]]
-function BlockMap:constructor(filename)
+function BlockMap:constructor()
 	self._blocks = {}
 
-	if (filename ~= nil) then
-		assertType(filename, 'string')
-		self._saveToFilename = filename
-	end
+	self.ev = EventManager()
 end
 
 function BlockMap.Deserialize(data)
@@ -41,29 +38,8 @@ function BlockMap.Deserialize(data)
 	return map
 end
 
-function BlockMap:saveToFile(filename)
-	assertType(filename, 'string')
-	print('saving to', filename)
-	fs.writeTableToFile(filename, self._blocks)
-end
-
-function BlockMap.LoadFromFile(filename, autoSave)
-	assertType(filename, 'string')
-	local map
-
-	if (fs.exists(filename)) then
-		local data = fs.readTableFromFile(filename)
-
-		map = BlockMap.Deserialize(data)
-	else
-		map = BlockMap()
-	end
-
-	if (autoSave) then
-		map._saveToFilename = filename
-	end
-
-	return map
+function BlockMap:serialize()
+	return self._blocks
 end
 
 function BlockMap:add(block)
@@ -82,9 +58,7 @@ function BlockMap:add(block)
 		table.insert(blockList, block)
 	end
 
-	if (self._saveToFilename ~= nil) then
-		self:saveToFile(self._saveToFilename)
-	end
+	self.ev:trigger('state_changed')
 
 	return true
 end
@@ -101,9 +75,7 @@ function BlockMap:remove(block)
 
 	table.remove(self._blocks[blockType], key)
 
-	if (self._saveToFilename ~= nil) then
-		self:saveToFile(self._saveToFilename)
-	end
+	self.ev:trigger('state_changed')
 
 	return true
 end

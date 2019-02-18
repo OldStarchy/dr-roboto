@@ -28,42 +28,30 @@ end
 
 runWithLogging(
 	function()
-		log.info('Restoring location')
-		mov = Class.LoadOrNew('data/mov.tbl', MoveManager, turtle)
-		StateSaver.BindToFile(mov, 'data/mov.tbl', 'turtle_moved')
+		local function loadAndBind(file, class, event, ...)
+			local obj = Class.LoadOrNew(file, class, ...)
+			StateSaver.BindToFile(obj, file, event)
+			return obj
+		end
 
+		log.info('Restoring location')
+		mov = loadAndBind('data/mov.tbl', MoveManager, 'turtle_moved', turtle)
 		nav = Navigator(mov)
 
-		log.info('Loading skills')
-		skillSet = SkillSet.GetDefaultSkillSet()
-		log.info(skillSet:getSkillCount() .. ' skills')
+		log.info(#Skill.ChildTypes .. ' skills')
 
-		log.info('Loading TaskManager')
-		taskManager = TaskManager()
-		taskManager:load('data/tasks')
+		local singletons = {
+			ItemInfo,
+			RecipeBook,
+			BlockMap,
+			Map,
+			TaskManager
+		}
 
-		log.info('Loading ItemInfo')
-		ItemInfo.Instance = ItemInfo()
-		ItemInfo.Instance:loadHardTable('data/item.dictionary')
-
-		log.info('Loading RecipeBook')
-		RecipeBook.Instance = RecipeBook.LoadFromFile('data/recipe.dictionary.tbl', true)
-
-		log.info('Loading BlockMap')
-		BlockMap.Instance = BlockMap.LoadFromFile('data/blockmap.dictionary.tbl', true)
-		-- include 'Crafting/StandardRecipes'
-
-		if (fs.exists('data/Map.tbl')) then
-			Map.Instance = Map.Deserialize(fs.readTableFromFile('data/Map.tbl'))
-		else
-			Map.Instance = Map()
+		for _, v in ipairs(singletons) do
+			log.info('Loading ' .. v.ClassName)
+			v.Instance = loadAndBind('data/' .. string.lower(v.ClassName) .. '.tbl', v)
 		end
-		local function saveMap()
-			fs.writeTableToFile('data/Map.tbl', Map.Instance:serialize())
-		end
-		Map.Instance.ev:on('tag_added', saveMap)
-		Map.Instance.ev:on('tag_removed', saveMap)
-		--TODO: load tags from disc
 
 		Crafting = Crafter(turtle)
 	end

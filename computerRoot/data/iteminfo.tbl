@@ -1,4 +1,4 @@
-{
+<ItemInfo|
 	['computercraft:CC-Peripheral'] = 64,
 	['minecraft:birch_door'] = 64,
 	['minecraft:bucket'] = 16,
@@ -46,4 +46,4 @@
 	['minecraft:wooden_button'] = 64,
 	['minecraft:wooden_door'] = 64,
 	['minecraft:wooden_pressure_plate'] = 64,
-}
+>

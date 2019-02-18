@@ -14,7 +14,11 @@ function cloneTable(tbl, depth)
 
 	for i, v in pairs(tbl) do
 		if (type(v) == 'table') then
-			new[i] = cloneTable(v, depth - 1)
+			if (isType(v, Class)) then
+				new[i] = deserialize(serialize(v))
+			else
+				new[i] = cloneTable(v, depth - 1)
+			end
 		else
 			new[i] = v
 		end

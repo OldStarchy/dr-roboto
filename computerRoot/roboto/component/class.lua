@@ -200,9 +200,11 @@ function classIndex.LoadOrNew(file, class, ...)
 	if (fs.exists(file)) then
 		local obj = fs.readTableFromFile(file)
 
-		assertType(obj, class)
+		if (obj ~= nil) then
+			assertType(obj, class)
 
-		return obj
+			return obj
+		end
 	end
 
 	return class(...)

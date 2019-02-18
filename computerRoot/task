@@ -5,7 +5,7 @@ local cli = Cli('task', 'Cli interface for the TaskManager', 'list')
 cli:addAction(
 	'list',
 	function()
-		local tasks = taskManager:getTasks()
+		local tasks = TaskManager.Instance:getTasks()
 
 		print(#tasks .. ' tasks:')
 		for i, task in ipairs(tasks) do
@@ -61,7 +61,7 @@ cli:addAction(
 			error('Unknown task type "' .. name .. '"')
 		end
 
-		taskManager:addTask(task)
+		TaskManager.Instance:addTask(task)
 	end,
 	{'name', 'taskArgs...'},
 	'Queues a task for completion'
@@ -87,7 +87,7 @@ cli:addAction(
 
 		local skillSet = SkillSet.GetDefaultSkillSet()
 
-		local runner = TaskRunner(skillSet, taskManager, true)
+		local runner = TaskRunner(skillSet, TaskManager.Instance, true)
 
 		runner:run()
 	end,

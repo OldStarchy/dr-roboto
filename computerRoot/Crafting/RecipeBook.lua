@@ -5,7 +5,7 @@ function RecipeBook:constructor()
 	self._craftingRecipes = {}
 	self._furnaceRecipes = {}
 
-	self._saveToFilename = nil
+	self.ev = EventManager()
 end
 
 function RecipeBook:serialize()
@@ -15,11 +15,11 @@ function RecipeBook:serialize()
 	}
 
 	for _, v in ipairs(self._craftingRecipes) do
-		table.insert(data.crafting, v:serialize())
+		table.insert(data.crafting, v)
 	end
 
 	for _, v in ipairs(self._furnaceRecipes) do
-		table.insert(data.smelting, v:serialize())
+		table.insert(data.smelting, v)
 	end
 
 	return data
@@ -29,39 +29,11 @@ function RecipeBook.Deserialize(data)
 	local book = RecipeBook()
 
 	for _, v in ipairs(data.crafting) do
-		table.insert(book._craftingRecipes, CraftingRecipe.Deserialize(v))
+		table.insert(book._craftingRecipes, v)
 	end
 
 	for _, v in ipairs(data.smelting) do
-		table.insert(book._furnaceRecipes, FurnaceRecipe.Deserialize(v))
-	end
-
-	return book
-end
-
-function RecipeBook:saveToFile(filename)
-	assertType(filename, 'string')
-
-	local data = self:serialize()
-
-	print('saving to', filename)
-	fs.writeTableToFile(filename, data)
-end
-
-function RecipeBook.LoadFromFile(filename, autoSave)
-	assertType(filename, 'string')
-	local book
-
-	if (fs.exists(filename)) then
-		local data = fs.readTableFromFile(filename)
-
-		book = RecipeBook.Deserialize(data)
-	else
-		book = RecipeBook()
-	end
-
-	if (autoSave) then
-		book._saveToFilename = filename
+		table.insert(book._furnaceRecipes, v)
 	end
 
 	return book
@@ -90,9 +62,7 @@ function RecipeBook:add(recipe)
 		error('unknown recipe type', 2)
 	end
 
-	if (self._saveToFilename ~= nil) then
-		self:saveToFile(self._saveToFilename)
-	end
+	self.ev:trigger('state_changed')
 
 	return true
 end

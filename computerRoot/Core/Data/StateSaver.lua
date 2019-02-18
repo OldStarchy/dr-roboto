@@ -6,7 +6,7 @@ function StateSaver.BindToFile(obj, filename, eventId)
 	assertType(obj.serialize, 'function', 'Object is not serializable')
 	assertType(obj.ev, EventManager, "Object doesn't have an event manager")
 	assertType(filename, 'string')
-	eventId = assertType(coalesce(eventId, 'changed_state'), 'string')
+	eventId = assertType(coalesce(eventId, 'state_changed'), 'string')
 
 	local saver = function()
 		fs.writeTableToFile(filename, obj)
