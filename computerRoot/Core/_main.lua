@@ -11,7 +11,7 @@ include 'Core/Block'
 include 'Core/BlockMap'
 
 include 'Crafting/_main'
-include 'Navigation/_main'
+includeAll 'Navigation'
 include 'Tasks/_main'
 include 'Skills/_main'
 include 'Inventory/_main'
