@@ -43,7 +43,7 @@ while run do
 	local percent = stringutil.lPad(tostring(math.floor(100 * head / lim)), 3)
 	term.setCursorPos(1, hh)
 
-	term.write('Navigate with arrows, q to exit')
+	term.write('Navigate with arrows, q to exit  ')
 	term.setCursorPos(hw - 5, hh)
 	term.write('[' .. tostring(percent) .. '%]')
 
