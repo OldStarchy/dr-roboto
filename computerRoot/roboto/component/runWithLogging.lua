@@ -1,9 +1,17 @@
-function runWithLogging(func)
+function runWithLogging(func, errDel)
+	assertType(func, 'function')
+	if (errDel ~= nil) then
+		assertType(errDel, 'function')
+	end
 	local stopFrame = getStackFrameInfo(1)
 
 	return xpcall(
 		func,
 		function(err)
+			if (errDel) then
+				errDel(err)
+			end
+
 			local trace = getStackTrace(20, 2)
 			trace[1] = err
 
