@@ -299,7 +299,7 @@ local function doTest(testObj, testContext)
 	end
 
 	local success, result =
-		xpcall(
+		runWithLogging(
 		testWrapper,
 		function(err)
 			table.insert(errors, err)
