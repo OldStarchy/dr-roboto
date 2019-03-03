@@ -12,5 +12,5 @@ function DanceSkill:completeTask(task)
 end
 
 function DanceSkill:canHandleTask(task)
-	return isType(task, GenericTask) and task.name == 'dance'
+	return isType(task, DanceTask)
 end
