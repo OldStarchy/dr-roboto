@@ -13,7 +13,9 @@ test(
 
 			tasks = taskManager:getTasks()
 			t.assertTableEqual(tasks, {task})
-		end,
+		end
+		--TODO: move to skillset tests
+		--[[
 		['Find correct skill for task'] = function(t)
 			RecipeBook.Instance = RecipeBook()
 
@@ -45,5 +47,6 @@ test(
 
 			runner:run()
 		end
+		]]
 	}
 )
