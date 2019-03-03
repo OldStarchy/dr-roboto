@@ -34,5 +34,9 @@ function ItemInfo:setStackSize(item, size)
 	assertType(item, 'string')
 	assertType(size, 'int')
 
+	if (size <= 0) then
+		error('Invalid stack size "' .. tostring(size) .. '"', 2)
+	end
+
 	self._data[item] = size
 end
