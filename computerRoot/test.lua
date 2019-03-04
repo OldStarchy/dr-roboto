@@ -277,7 +277,30 @@ local function doTest(testObj, testContext)
 					error("can't access process api in tests", 2)
 				end
 
-				return _G[k]
+				local v = _G[k]
+
+				if (type(v) == 'function') then
+					return function(...)
+						local e = getfenv(v)
+
+						--If able, wrap the function in get/setfenv calls to make sure it runs inside the test environment
+						if
+							(not pcall(
+								function()
+									setfenv(v, getfenv(2))
+								end
+							))
+						 then
+							return v(...)
+						end
+						local result = {v(...)}
+						setfenv(v, e)
+
+						return unpack(result)
+					end
+				end
+
+				return v
 			end
 		}
 	)
