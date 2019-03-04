@@ -10,6 +10,10 @@ function cloneTable(tbl, depth)
 		return tbl
 	end
 
+	if (isType(tbl, Class)) then
+		return deserialize(serialize(tbl))
+	end
+
 	local new = {}
 
 	for i, v in pairs(tbl) do
@@ -198,8 +202,12 @@ function serialize(obj, compact, indent, parents)
 		local isClass = isType(obj, Class)
 		local data = obj
 
-		if (isClass and type(obj.serialize) == 'function') then
-			data = obj:serialize()
+		if (isClass) then
+			if (type(obj.serialize) == 'function') then
+				data = obj:serialize()
+			else
+				error('Can not serialize type "' .. tostring(obj:getType()) .. '"')
+			end
 		elseif (isHardTable(obj)) then
 			data = hardTableExport(obj)
 		end
