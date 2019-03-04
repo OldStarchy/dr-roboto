@@ -49,6 +49,16 @@ function log.addWriter(writer)
 end
 
 function log.removeWriter(writer)
+	if (type(writer) == 'number') then
+		if (writer <= #writers) then
+			if (writer > 0) then
+				writers[writers[writer]] = nil
+				table.remove(writers, writer)
+				return
+			end
+		end
+		error('invalid writer id to remove', 2)
+	end
 	if (writers[writer] == nil) then
 		return
 	end
