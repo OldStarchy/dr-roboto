@@ -267,6 +267,9 @@ local function doTest(testObj, testContext)
 	setmetatable(
 		env,
 		{
+			--Called whenever a global variable is accessed from within a test.
+			--Tries to return the value set in the test envirnoment (t) if it exists,
+			-- or falls back to the global environment (see get/setfenv note about functions)
 			__index = function(t, k)
 				local val = rawget(t, k)
 				if (val ~= nil) then
