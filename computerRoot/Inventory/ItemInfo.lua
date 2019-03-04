@@ -25,18 +25,28 @@ function ItemInfo.Deserialize(obj)
 end
 
 function ItemInfo:getStackSize(item)
-	assertType(item, 'string')
+	if (type(item) == 'string') then
+		item = ItemDetail.FromId(item)
+	end
 
-	return self._data[item] or 64
+	assertType(item, ItemDetail, 'Must be string or ItemDetail', 2)
+
+	for name, size in pairs(self._data) do
+		if (item:matches(name)) then
+			return self._data[name]
+		end
+	end
+
+	return 64
 end
 
-function ItemInfo:setStackSize(item, size)
-	assertType(item, 'string')
+function ItemInfo:setStackSize(itemSelector, size)
+	assertType(itemSelector, 'string')
 	assertType(size, 'int')
 
 	if (size <= 0) then
 		error('Invalid stack size "' .. tostring(size) .. '"', 2)
 	end
 
-	self._data[item] = size
+	self._data[itemSelector] = size
 end
