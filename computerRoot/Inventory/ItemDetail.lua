@@ -2,8 +2,21 @@ ItemDetail = Class()
 ItemDetail.ClassName = 'ItemDetail'
 
 function ItemDetail:constructor(name, metadata)
+	assertType(name, 'string')
+	assertType(metadata, 'int')
 	self.name = name:lower()
 	self.metadata = metadata
+end
+
+function ItemDetail:serialize()
+	return {
+		name = self.name,
+		metadata = self.metadata
+	}
+end
+
+function ItemDetail.Deserialize(tbl)
+	return ItemDetail(tbl.name, tbl.metadata)
 end
 
 function ItemDetail:conversionConstructor()
