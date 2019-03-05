@@ -27,7 +27,9 @@ print('Loading utils...')
 local utils = fs.list('roboto/util')
 for _, util in ipairs(utils) do
 	if (util ~= '.' and util ~= '..') then
-		loadfile('roboto/util/' .. util, _G)()
+		if (not fs.isDir('roboto/util/' .. util)) then
+			loadfile('roboto/util/' .. util, _G)()
+		end
 	end
 end
 print('OK')
