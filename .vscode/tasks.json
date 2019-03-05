@@ -6,10 +6,7 @@
 		{
 			"label": "test",
 			"type": "shell",
-			"command": "lua startup",
-			"options": {
-				"cwd": "computerRoot"
-			},
+			"command": "lua computerRoot\\startup",
 			"group": "test",
 			"presentation": {
 				"echo": true,
@@ -19,7 +16,7 @@
 				"showReuseMessage": false
 			},
 			"osx": {
-				"command": "/usr/local/opt/lua@5.1/bin/lua5.1 startup"
+				"command": "/usr/local/opt/lua@5.1/bin/lua5.1 computerRoot/startup"
 			}
 		},
 		{

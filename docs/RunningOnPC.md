@@ -1,5 +1,9 @@
 # Testing without ComputerCraft
 
+## Overview
+
+Dr. Roboto is designed for the latest official release of ComputerCraft, as such, it runs on LUA 5.1.
+
 ## Windows Lua Install Instructions
 
 Use the installers available online to install lua 5.1, and luarocks, then install lfs with
@@ -20,67 +24,41 @@ Depending on your set up you may need to configure tasks.json with the correct l
 
 ## Running Code
 
-Lua 5.1 is needed as this is what Lua version ComputerCraft will run within Minecraft.
+The `startup` file found in the `computerRoot` directory can be run directly from your computer `lua computerRoot/startup`. Its important to note that the working directory should be the root of this project so that the polyfills are located correctly. There is a VSCode task setup already to do this.
 
-A few of the ComputerCraft specific apis have polyfills to provide compatibility with running on a native lua installation. The VSCode test task can be used to run the Dr. Roboto's startup tests. Additionally, you can achieve a similar environment with the following
+A few of the ComputerCraft specific APIs have polyfills to provide compatibility with running on a native lua installation.
 
-```lua
-dofile 'bootstrap.lua'
-include 'Core/_main'
-```
+To see what ComputerCraft API's are available, look in the [\_polyfills](../_polyfills) directory.
 
-After that you can run commands as you would through the Turtle's lua prompt.
+If you'd like an interactive prompt similar to what you'd find in-game, there is a shell program located at [`programs/Shell.lua`](../computerRoot/programs/Shell.lua), so including the following line in your `mystartup.lua` will get you what you seek.
 
 ```lua
-go = include 'Go/_main'
-go:execute('udlr', true)
+if (os.isPc()) then
+    loadfile('programs/Shell.lua')()
+
+    -- log.removeWriter(1) --optional
+    -- loadfile('test.lua')()
+end
 ```
 
-The mock `turtle` API just prints out function calls and stack traces, so the above outputs the following:
+After that you can run commands as you would through the Turtle's prompt.
 
+```text
+Dr. Roboto Shell
+
+>lua
+Interactive Lua prompt.
+Call exit() to exit.
+lua>go = include 'Go/_main'
+lua>go:execute('udlr', true)
 ```
-called turtle.getFuelLevel(     nil     )
-.\Navigation/Navigator.lua:73:
--
-Go/MoveAction.lua:6:
-Go/FunctionAction.lua:35:
-Go/MoveAction.lua:40:
-Go/Sequence.lua:26:
-called turtle.up(       nil     )
-.\Navigation/Navigator.lua:399:
--
-.\Navigation/Navigator.lua:97:
--
-Go/MoveAction.lua:6:
-Go/FunctionAction.lua:35:
-Go/MoveAction.lua:40:
-called turtle.getFuelLevel(     nil     )
-.\Navigation/Navigator.lua:73:
--
-Go/MoveAction.lua:6:
-Go/FunctionAction.lua:35:
-Go/MoveAction.lua:40:
-Go/Sequence.lua:26:
-called turtle.down(     nil     )
-.\Navigation/Navigator.lua:409:
--
-.\Navigation/Navigator.lua:97:
--
-Go/MoveAction.lua:6:
-Go/FunctionAction.lua:35:
-Go/MoveAction.lua:40:
-called turtle.turnLeft( nil     )
-.\Navigation/Navigator.lua:427:
-.\Navigation/Navigator.lua:165:
--
-Go/FunctionAction.lua:7:
-Go/FunctionAction.lua:35:
-Go/FunctionAction.lua:45:
-called turtle.turnRight(        nil     )
-.\Navigation/Navigator.lua:419:
-.\Navigation/Navigator.lua:175:
--
-Go/FunctionAction.lua:7:
-Go/FunctionAction.lua:35:
-Go/FunctionAction.lua:45:
-```
+
+## Debugging
+
+To run the code on your computer, you need to install `lfs`.
+
+To use line-by-line debugging, install the Lua Debugger (recommended by this repo) and install `dkjson` and `luasocket`. `luasocket` may already be installed on your system.
+
+I highly recommend using `luarocks` to install these dependencies.
+
+Once this is all setup, hitting F5 (or whatever shortcut you've got setup) will launch LUA running [debug.lua](../debug.lua) and start debugging. The debugger will run the same as using the test task mentioned below, but will be somewhat slower due to the debugging hooks.

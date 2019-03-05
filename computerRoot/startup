@@ -32,9 +32,10 @@ end
 
 if (isPc) then
 	print('Running on PC - loading polyfills')
-	dofile '../_polyfills/_main.lua'
+	dofile '_polyfills/_main.lua'
 
 	lfs.chdir('computerRoot')
+
 	dofile 'roboto/os.lua'
 	return
 end

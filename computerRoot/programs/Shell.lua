@@ -132,6 +132,9 @@ if (isDefined('interactiveLua')) then
 	internalCommands.lua = interactiveLua
 end
 
+print('Dr. Roboto Shell')
+print()
+
 while (run) do
 	printPrompt()
 
