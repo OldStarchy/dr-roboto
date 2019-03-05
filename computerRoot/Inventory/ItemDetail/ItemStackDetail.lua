@@ -8,16 +8,22 @@ ItemStackDetail.ClassName = 'ItemStackDetail'
 	count
 ]]
 function ItemStackDetail:constructor(name, metadata, count)
-	self.name = assertType(name, 'string')
-	self.metadata = assertType(coalesce(metadata, 0), 'int')
+	ItemDetail.constructor(self, name, metadata)
 	self.damage = self.metadata
 	self.count = assertType(coalesce(count, 1), 'int')
 end
 
 function ItemStackDetail:conversionConstructor()
-	assertType(self.name, 'string')
-	assertType(self.damage, 'int')
-	assertType(self.count, 'int')
+	ItemStackDetail.constructor(self, self.name, self.damage, self.count)
+end
 
-	self.metadata = self.damage
+function ItemStackDetail:serialize()
+	local tbl = ItemDetail.serialize(self)
+	tbl.count = self.count
+
+	return tbl
+end
+
+function ItemStackDetail.Deserialize(tbl)
+	return ItemStackDetail(tbl.name, tbl.metadata, tbl.count)
 end

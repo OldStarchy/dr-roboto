@@ -3,7 +3,12 @@ ItemDetail.ClassName = 'ItemDetail'
 
 function ItemDetail:constructor(name, metadata)
 	assertType(name, 'string')
-	assertType(metadata, 'int')
+	metadata = assertType(coalesce(metadata, 0), 'int')
+
+	local colons = select(2, name:gsub(':', ''))
+	if (colons == 0) then
+		name = 'minecraft:' .. name
+	end
 	self.name = name:lower()
 	self.metadata = metadata
 end
@@ -54,6 +59,21 @@ function ItemDetail:toString()
 	return serialize(self)
 end
 
+function ItemDetail.NormalizeId(id)
+	local parts = stringutil.split(id, ':')
+	if (#parts == 1) then
+		id = '*:' .. id .. ':*'
+	elseif (#parts == 2) then
+		if (tonumber(parts[2]) == nil and parts[2] ~= '*') then
+			id = id .. ':*'
+		else
+			id = '*:' .. id
+		end
+	end
+
+	return id
+end
+
 function ItemDetail:matches(selector)
 	assertType(selector, 'string')
 
@@ -61,22 +81,19 @@ function ItemDetail:matches(selector)
 		return true
 	end
 
-	local name = self.name .. ':' .. self.metadata
-
 	local subSelectors = {}
 
 	for subSelector in selector:lower():gmatch('[^,]*') do
-		local colons = select(2, subSelector:gsub(':', ''))
-		if (colons == 0) then
-			subSelector = '*:' .. subSelector .. ':*'
-		elseif (colons == 1) then
-			subSelector = '*:' .. subSelector
+		if (subSelector ~= '') then
+			subSelector = ItemDetail.NormalizeId(subSelector)
+
+			subSelector = string.gsub(subSelector, '([%(%)%.%%%+%-%?%[%^%$%]])', '%%%1')
+			subSelector = string.gsub(subSelector, '%*', '[^:]*')
+			table.insert(subSelectors, subSelector)
 		end
-		subSelector = string.gsub(subSelector, '([%(%)%.%%%+%-%?%[%^%$%]])', '%%%1')
-		subSelector = string.gsub(subSelector, '%*', '[^:]*')
-		table.insert(subSelectors, subSelector)
 	end
 
+	local name = self:getId()
 	for _, subSelector in pairs(subSelectors) do
 		if (name:match(subSelector)) then
 			return true
@@ -86,7 +103,7 @@ function ItemDetail:matches(selector)
 end
 
 function ItemDetail:getId()
-	return self.name .. ':' .. self.metadata
+	return ItemDetail.NormalizeId(self.name .. ':' .. self.metadata)
 end
 
 function ItemDetail:isLiquid()

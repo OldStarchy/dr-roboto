@@ -2,6 +2,8 @@ ItemInfo = Class()
 ItemInfo.ClassName = 'ItemInfo'
 ItemInfo.Instance = nil
 
+ItemInfo._default = 64
+
 function ItemInfo:constructor()
 	self._data = {}
 
@@ -29,7 +31,9 @@ function ItemInfo:getStackSize(item)
 		item = ItemDetail.FromId(item)
 	end
 
-	assertType(item, ItemDetail, 'Must be string or ItemDetail', 2)
+	if (item == nil) then
+		return self._default
+	end
 
 	for name, size in pairs(self._data) do
 		if (item:matches(name)) then
@@ -37,7 +41,7 @@ function ItemInfo:getStackSize(item)
 		end
 	end
 
-	return 64
+	return self._default
 end
 
 function ItemInfo:setStackSize(itemSelector, size)
@@ -47,6 +51,8 @@ function ItemInfo:setStackSize(itemSelector, size)
 	if (size <= 0) then
 		error('Invalid stack size "' .. tostring(size) .. '"', 2)
 	end
+
+	itemSelector = ItemDetail.NormalizeId(itemSelector)
 
 	self._data[itemSelector] = size
 end

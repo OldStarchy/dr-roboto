@@ -15,6 +15,23 @@ function ItemStore:constructor(size)
 	self._stateStack = {}
 end
 
+function ItemStore:serialize()
+	return {
+		size = self._size,
+		items = self._items
+	}
+end
+
+function ItemStore.Deserialize(tbl)
+	local obj = ItemStore(tbl.size)
+
+	for _, v in ipairs(tbl.items) do
+		obj:add(v)
+	end
+
+	return obj
+end
+
 function ItemStore:pushState()
 	table.insert(self._stateStack, cloneTable(self._items, 2))
 end
@@ -29,64 +46,6 @@ end
 
 function ItemStore:size()
 	return self._size
-end
-
-function ItemStore:add(item, count)
-	assertType(item, 'table')
-
-	--TODO: maybe create itemStack class? discussion required
-	table.insert(
-		self._items,
-		{
-			name = item.name,
-			damage = item.damage,
-			count = count or item.count
-		}
-	)
-end
-
-function ItemStore:remove(itemSelector, count)
-	assertType(itemSelector, 'string')
-	self:pushState()
-	local removed = {}
-
-	local i = 1
-
-	while (i < #self._items) do
-		local item = self._items[i]
-		if (InventoryManager.ItemIs(item, itemSelector)) then
-			if (item.count <= count) then
-				table.insert(removed, item)
-				count = count - item.count
-				table.remove(self._items, i)
-			else
-				table.insert(
-					removed,
-					{
-						name = item.name,
-						damage = item.damage,
-						count = count
-					}
-				)
-				item.count = item.count - count
-				count = 0
-			end
-		end
-
-		if (count == 0) then
-			self._items = self:popState()
-			return removed
-		end
-
-		i = i + 1
-	end
-
-	if (count > 0) then
-		self:popState()
-		return false
-	end
-
-	return removed
 end
 
 function ItemStore:isEmpty()
@@ -104,12 +63,19 @@ function ItemStore:isEmpty()
 end
 
 function ItemStore:getFirst(delegate)
+	assertType(delegate, 'function')
+
 	return self:getNext(delegate, 0)
 end
 
-function ItemStore:getNext(delegate, last)
-	last = last or 0
-	for i = last + 1, self:size() do
+--[[
+	Find the next slot matching the delegate, start searching from "start"
+]]
+function ItemStore:getNext(delegate, start)
+	assertType(delegate, 'function')
+	start = assertType(coalesce(start, 0), 'int')
+
+	for i = start + 1, self:size() do
 		if delegate(self, i) then
 			return i
 		end
@@ -117,7 +83,9 @@ function ItemStore:getNext(delegate, last)
 	return nil
 end
 
-function ItemStore:getLast(delegate) --GOOD
+function ItemStore:getLast(delegate)
+	assertType(delegate, 'function')
+
 	for i = self:size(), 1, -1 do
 		if delegate(self, i) then
 			return i
@@ -126,9 +94,14 @@ function ItemStore:getLast(delegate) --GOOD
 	return nil
 end
 
-function ItemStore:getPrevious(delegate, last) --GOOD
-	last = last or self:size() + 1
-	for i = last - 1, 1, -1 do
+--[[
+	Find the previous slot matching the delegate (searching backwards), start searching from "start"
+]]
+function ItemStore:getPrevious(delegate, start) --GOOD
+	assertType(delegate, 'function')
+	start = assertType(coalesce(start, self:size() + 1), 'int')
+
+	for i = start - 1, 1, -1 do
 		if delegate(self, i) then
 			return i
 		end
@@ -137,18 +110,27 @@ function ItemStore:getPrevious(delegate, last) --GOOD
 end
 
 function ItemStore:getItemAt(slot)
+	assertType(slot, 'int')
+
 	if self._items[slot] == nil then
 		return nil
 	else
-		return self._items[slot].name
+		return cloneTable(self._items[slot])
 	end
 end
 
 function ItemStore:getItemCount(slot)
+	assertType(slot, 'int')
+
 	return ((self._items[slot] and self._items[slot].count) or 0)
 end
 
 function ItemStore:getItemSpace(slot, item)
+	assertType(slot, 'int')
+	if (item ~= nil) then
+		assertType(item, ItemDetail)
+	end
+
 	local _item = self:getItemAt(slot) or item
 	local stackSize = ItemInfo.Instance:getStackSize(_item)
 	local items = self:getItemCount(slot)
@@ -158,20 +140,24 @@ end
 
 --[[
 	return the first avaiable index of a free slot for the provided item
-	]]
+]]
 function ItemStore:firstAvailable(item)
+	assertType(item, ItemDetail)
+
 	return self:nextAvailable(item, 0)
 end
 
 --[[
 	return the next avaiable index of a free slot for the provided item and starting index
-	]]
+]]
 function ItemStore:nextAvailable(item, from)
-	from = from or 0
+	assertType(item, ItemDetail)
+	from = assertType(coalesce(from, 0), 'int')
+
 	for i = from + 1, self:size() do
 		if self._items[i] == nil then
 			return i, ItemInfo.Instance:getStackSize(item)
-		elseif self._items[i].name == item then
+		elseif self._items[i]:getId() == item:getId() then
 			if (ItemInfo.Instance:getStackSize(item) - self._items[i].count > 0) then
 				return i, ItemInfo.Instance:getStackSize(item) - self._items[i].count
 			end
@@ -184,13 +170,25 @@ end
 	returns the total avaiable space in the chest for this item
 ]]
 function ItemStore:getTotalSpaceFor(item)
+	if (type(item) == 'string') then
+		item = ItemDetail.FromId(item)
+	end
+
+	assertType(item, ItemDetail)
+
 	local count = 0
 	local i = self:firstAvailable(item)
+	if (i == nil) then
+		return 0
+	end
 	local spare = self:getItemSpace(i, item)
 
 	while i ~= nil do
 		count = count + spare
 		i = self:nextAvailable(item, i)
+		if (i == nil) then
+			break
+		end
 		spare = self:getItemSpace(i, item)
 	end
 
@@ -220,48 +218,53 @@ end
 	pushes an item into the chest at the next space available.
 	will return false, 'error desc' if failed.
 ]]
-function ItemStore:push(item, count)
-	assert(item ~= nil, 'cannot check for nil item')
-	assertType(count, 'int', 'count is required and a number')
+function ItemStore:push(stack)
+	assertType(stack, ItemStackDetail)
 
-	if (count == 0) then
+	if (stack.count == 0) then
 		return true
 	end
 
-	if (self:getTotalSpaceFor(item) < count) then
-		return false, 'Not enough space for items'
+	if (self:getTotalSpaceFor(stack) < stack.count) then
+		error('Not enough space for items', 2)
 	end
-	local i = self:firstAvailable(item)
-	spare = self:getItemSpace(i, item)
+
+	local i = self:firstAvailable(stack)
+	local spare = self:getItemSpace(i, stack)
 	local moved = 0
-	while (i ~= nil and moved < count) do
-		if spare > (count - moved) then
-			spare = (count - moved)
+
+	while (i ~= nil and moved < stack.count) do
+		if (spare > (stack.count - moved)) then
+			spare = (stack.count - moved)
 		end
 		if (self._items[i] == nil) then
-			--TODO metadata/damage needs to be stored
-			self._items[i] = ItemStackDetail(item, 0, spare)
+			self._items[i] = ItemStackDetail(stack.name, stack.metadata, spare)
 		else
 			self._items[i].count = self._items[i].count + spare
 		end
 		moved = moved + spare
 
-		i = self:nextAvailable(item, i)
-		spare = self:getItemSpace(i, item)
+		i = self:nextAvailable(stack, i)
+		if (i == nil) then
+			break
+		end
+		spare = self:getItemSpace(i, stack)
 	end
-	if (moved < count) then
+	if (moved < stack.count) then
 		return false, 'Not enough space for items (some moved)'
 	end
 	return true
 end
 
 --[[
-	returns true if the chest contains item by exact name
+	returns true if the chest contains item by selector
 ]]
-function ItemStore:has(item)
+function ItemStore:has(itemSelector)
+	assertType(itemSelector, 'string')
+
 	for i = 1, self:size() do
-		if self._items[i] then
-			if self._items[i].name == item then
+		if (self._items[i]) then
+			if (self._items[i]:matches(itemSelector)) then
 				return true
 			end
 		end
@@ -275,8 +278,8 @@ end
 ]]
 function ItemStore:peek()
 	for i = 1, self:size() do
-		if self._items[i] then
-			return self._items[i].name, self._items[i].count
+		if (self._items[i]) then
+			return ItemStackDetail(self._items[i].name, self._items[i].metadata, self._items[i].count)
 		end
 	end
 end
@@ -294,7 +297,7 @@ function ItemStore:pop()
 			break
 		end
 	end
-	return r.name, r.count
+	return ItemStackDetail(r.name, r.metadata, r.count)
 end
 
 --[[
@@ -305,7 +308,8 @@ function ItemStore:clear()
 end
 
 function ItemStore:print(start)
-	start = start or 1
+	start = assertType(coalesce(start, 1), 'int')
+
 	local lim = self:size()
 	if lim > start + 10 then
 		lim = start + 10
