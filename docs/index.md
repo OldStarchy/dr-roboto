@@ -21,6 +21,7 @@ For running on PC (or Mac) see [how to test without ComputerCraft](RunningOnPC.m
 -   [How to use the Class framework](RobotoOS/Class.md)
 -   [Helper functions for dealing with classes](RobotoOS/helpers.md)
 -   [Interfaces](RobotoOS/Interface.md)
+-   [Serialization](RobotoOS/Serialization.md)
 
 ### Misc
 
