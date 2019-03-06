@@ -93,12 +93,24 @@ log.addWriter(loadfile('roboto/component/logFileWriter.lua', _G)('logs/latest.lo
 
 log.info('Log initialized at ' .. tostring(os.time()))
 
+os.ev = EventManager()
+
 runWithLogging(loadfile('roboto/startup.lua', _G))
 
 --[[ Business logic starts here ]]
 if (isPc) then
 	return
 end
+
+process.spawnProcess(
+	function()
+		while (true) do
+			os.ev:trigger(os.pullEventRaw())
+		end
+	end,
+	'os.ev trigger daemon',
+	true
+)
 
 process.spawnProcess(
 	function()
