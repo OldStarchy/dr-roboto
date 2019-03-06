@@ -1,8 +1,6 @@
 includeAll 'Core/Interfaces'
 includeAll 'Core/Data'
 
-include 'Core/EventManager'
-
 include 'Core/Cli'
 
 includeAll 'Core/Graphics'
