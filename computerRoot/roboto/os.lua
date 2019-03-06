@@ -23,7 +23,7 @@ end
 
 --Setup OS environment
 
-print('Loading utils...')
+term.write('Loading utils...')
 local utils = fs.list('roboto/util')
 for _, util in ipairs(utils) do
 	if (util ~= '.' and util ~= '..') then
@@ -53,6 +53,8 @@ for _, component in ipairs(components) do
 	loadfile('roboto/component/' .. component .. '.lua', _G)()
 	print('OK')
 end
+
+print()
 
 local procMan = ProcessManager()
 _G.process = procMan:getAPI()
