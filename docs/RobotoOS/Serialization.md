@@ -18,13 +18,9 @@ Does almost exactly the same as the ComputerCraft's `textutils.serialize`, but i
 
 Do I really need to write a description for this?
 
-## Classes
-
-### `StateSaver`
+### `StateSaver.BindToFile(obj: serializable & monitorable, filename: string, eventId: string = 'state_changed'): {stop: () => void}`
 
 `StateSaver` is a helper class designed to assist in persistence over reboots.
-
-#### `StateSaver.BindToFile(obj: serializable & monitorable, filename: string, eventId: string = 'state_changed'): {stop: () => void}`
 
 This function takes an object that matches the criteria above, as well as having matching `{ev: EventManager}`, a filename, and optionally the name of an event.
 
@@ -36,12 +32,23 @@ It will do 2 things:
 
 The return value is a table containing a `stop` function that, when called, will unsubscribe the serializer effectively 'unbinding' the object from the file.
 
-You can see this class in action [here](../../computerRoot/roboto/startup.lua#L33)
+You can see this class in action [here](../../computerRoot/roboto/startup.lua#L33).
+
+### `Class.LoadOrNew(file: string, class: Class, ...ctorArgs[]): class`
+
+The counterpart to `StateSaver.BindToFile` is `Class.LoadOrNew`.
+
+If the given file does not exist, a new instance of the given class is created using the given arguments.
+
+If the file does exist it is read and deserialized. If the result is an instance of the requested class, it is returned, otherwise an error is thrown.
 
 ## Example
 
-```lua
+This is a fair mixed bag but you should be able to get what you need from here.
 
+### `MyObj.lua`
+
+```lua
 MyObj = Class()
 MyObj.ClassName = 'MyObj'
 
@@ -74,9 +81,12 @@ function MyObj:setValue(value)
 
     self.ev:trigger('state_changed')
 end
+```
 
+### `example.lua`
 
-local obj = MyObj(4)
+```lua
+local obj = Class.LoadOrNew('myObj.tbl', MyObj, 4)
 local tbl = obj:serialize()
 local tblStr = serialize(tbl)
 local objStr = serialize(obj)
@@ -112,7 +122,15 @@ obj:setValue(6)
 -- Overwrites 'myObj.tbl' file
 ```
 
-Result:
+### `myObj.tbl`
+
+```lua
+<MyObj|
+    value = 6,
+>
+```
+
+### Output
 
 ```lua
 -- obj
