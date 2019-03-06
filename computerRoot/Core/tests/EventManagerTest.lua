@@ -46,6 +46,21 @@ test(
 			ev:on('something_else', hdlr)
 
 			ev:trigger('test')
+		end,
+		['Supression'] = function(t)
+			local ev = EventManager()
+
+			local hdlr = t.assertNotCalled()
+			ev:on('test', hdlr)
+
+			ev:suppress(true)
+			ev:trigger('test')
+
+			local hdlr2 = t.assertCalled()
+			ev:on('test2', hdlr2)
+
+			ev:suppress(false)
+			ev:trigger('test2')
 		end
 	}
 )

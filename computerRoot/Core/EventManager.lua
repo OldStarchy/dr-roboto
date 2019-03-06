@@ -3,6 +3,7 @@ EventManager.ClassName = 'EventManager'
 
 function EventManager:constructor()
 	self._handlers = {}
+	self._suppress = false
 end
 
 function EventManager:on(event, handler)
@@ -47,7 +48,15 @@ function EventManager:off(event, handler)
 	handlers[handler] = nil
 end
 
+function EventManager:suppress(suppress)
+	self._suppress = assertType(suppress, 'boolean')
+end
+
 function EventManager:trigger(event, ...)
+	if (self._suppress) then
+		return
+	end
+
 	if (self._handlers[event] == nil) then
 		return
 	end
