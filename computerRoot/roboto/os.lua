@@ -112,6 +112,25 @@ process.spawnProcess(
 	true
 )
 
+function os.sleepAsync(time, callback)
+	local timerId = os.startTimer(time)
+
+	local handler = function(id)
+		if (id == timerId) then
+			os.ev:off(handler)
+			callback()
+		end
+	end
+
+	os.ev:on('timer', handler)
+
+	return {
+		cancel = function()
+			os.ev:off(handler)
+		end
+	}
+end
+
 process.spawnProcess(
 	function()
 		hud = Hud()
