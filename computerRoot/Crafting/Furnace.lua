@@ -10,27 +10,168 @@ Furnace.ClassName = 'Furnace'
 ]]
 function Furnace:constructor(name, location)
 	Block.constructor(self, name, location)
-	self._book = RecipeBook()
 
-	self._top = nil
-	self._output = nil
-	self._bottom = nil
+	self._top = ItemStore(1)
+	self._side = ItemStore(1)
+	self._bottom = ItemStore(1)
 
-	self._pos = 'front'
+	self._currentFuel = nil
+
+	self._burnStartTime = nil
+	self._burnTimer = nil
+
+	self._smeltStartTime = nil
+	self._smeltTimer = nil
+
+	self.ev = EventManager()
+
+	self.ev:on(
+		'block_destroyed',
+		function()
+			if (self._burnTimer ~= nil) then
+				self._burnTimer.cancel()
+				self._burnTimer = nil
+			end
+
+			if (self._smeltTimer ~= nil) then
+				self._smeltTimer.cancel()
+				self._smeltTimer = nil
+			end
+		end
+	)
 end
 
-function Furnace:setRecipeBook(recipeBook)
-	if (recipeBook == nil) then
-		self._book = RecipeBook()
+--Doesn't trigger events, functions that call this method should do so
+function Furnace:_checkSmelt()
+	local top = self._top:peek()
+	local bottom = self._bottom:peek()
+
+	if (top == nil) then
+		self._smeltStartTime = nil
+		return
 	end
 
-	if (recipeBook.getType() ~= RecipeBook) then
-		error('Setting a non-book as the crafting recipe book')
+	local recipe = RecipeBook.Instance:findByIngredient(top)
+
+	if (recipe == nil) then
+		self._smeltStartTime = nil
+		return
 	end
 
-	self._book = recipeBook
+	if (self._currentFuel == nil) then
+		if (bottom ~= nil) then
+			self:_consumeFuel()
+			self._smeltStartTime = os.time()
+
+			self._smeltTimer =
+				os.sleepAsync(
+				12,
+				function()
+					self._smeltStartTime = nil
+					self._smeltTimer = nil
+					self:_checkSmelt()
+				end
+			)
+		else
+			if (self._smeltTimer ~= nil) then
+				self._smeltStartTime = nil
+				self._smeltTimer.cancel()
+				self._smeltTimer = nil
+			end
+			return
+		end
+	end
 end
 
+--Doesn't trigger events, functions that call this method should do so
+function Furnace:_consumeFuel()
+	local bottom = self._bottom:pop()
+
+	if (bottom == nil) then
+		error('Cant consume fuel when there is none', 4)
+	end
+
+	local burnTime = ItemInfo.Instance:getBurnTime(bottom)
+
+	if (burnTime == nil) then
+		error(bottom:getId() ' is not a valid fuel', 4)
+	end
+
+	self._currentFuel = bottom:getId()
+	self._burnStartTime = os.time()
+
+	self._burnTimer =
+		os.sleepAsync(
+		burnTime,
+		function()
+			self._currentFuel = nil
+			self._burnStartTime = nil
+			self:_checkSmelt()
+		end
+	)
+
+	if (bottom:matches('lava_bucket')) then
+		self._bottom:push(ItemStackDetail('bucket'))
+	else
+		bottom.count = bottom.count - 1
+
+		if (bottom.count == 0) then
+			self._bottom:push(bottom)
+		end
+	end
+end
+
+function Furnace:pushTop(itemStack)
+	self._top:push(itemStack)
+
+	self:_checkSmelt()
+
+	self.ev:trigger('change_state')
+end
+
+function Furnace:popTop()
+	local stack = self._top:pop()
+
+	if (stack ~= nil) then
+		self:_checkSmelt()
+		self.ev:trigger('change_state')
+	end
+
+	return stack
+end
+
+function Furnace:pushBottom(itemStack)
+	self._bottom:push(itemStack)
+
+	self:_checkSmelt()
+
+	self.ev:trigger('change_state')
+end
+
+function Furnace:popBottom()
+	local stack = self._bottom:pop()
+
+	if (stack ~= nil) then
+		self:_checkSmelt()
+		self.ev:trigger('change_state')
+	end
+
+	return stack
+end
+
+function Furnace:popSide()
+	local stack = self._side:pop()
+
+	if (stack ~= nil) then
+		self:_checkSmelt()
+		self.ev:trigger('change_state')
+	end
+
+	return stack
+end
+
+--move to nav
+--[[
 function Furnace:gotoBottom()
 	if (self._pos == 'bottom') then
 		return true
@@ -88,7 +229,7 @@ function Furnace:gotoFront()
 	end
 	return false
 end
-
+]]
 --TODO: Face the furnace.
 --Puts one item in the top, and one in the bottom of a furnace
 --then waits 12 seconds for it to cook, and takes the item out
