@@ -120,10 +120,14 @@ function RecipeBook:findFurnaceRecipeBySelector(selector)
 end
 
 function RecipeBook:findByIngredient(ingredient)
-	for i = 1, #self._furnaceRecipes do
-		local resultDetail = ItemDetail.FromId(self._furnaceRecipes[i].ingredient)
+	if (isType(ingredient, 'string')) then
+		ingredient = ItemDetail.FromId(ingredient)
+	end
 
-		if (resultDetail:matches(ingredient)) then
+	assertType(ingredient, ItemDetail)
+
+	for i = 1, #self._furnaceRecipes do
+		if (ingredient:matches(resultDetail)) then
 			return self._furnaceRecipes[i]
 		end
 	end
