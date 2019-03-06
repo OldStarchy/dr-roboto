@@ -24,6 +24,18 @@ function EventManager:on(event, handler)
 	handlers[handler] = #handlers
 end
 
+function EventManager:one(event, handler)
+	assertType(event, 'string')
+	assertType(handler, 'function')
+
+	local wrapper = function(...)
+		self:off(wrapper)
+		handler(...)
+	end
+
+	self:on(event, wrapper)
+end
+
 function EventManager:off(event, handler)
 	assertType(event, 'string')
 

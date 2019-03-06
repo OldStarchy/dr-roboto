@@ -61,6 +61,27 @@ test(
 
 			ev:suppress(false)
 			ev:trigger('test2')
+		end,
+		['One'] = function(t)
+			local ev = EventManager()
+
+			local funcs = {
+				t.assertCalled(),
+				t.assertNotCalled(),
+				t.assertNotCalled()
+			}
+
+			local count = 0
+			local hdlr = function()
+				count = count + 1
+				funcs[count]()
+			end
+
+			ev:one('test', hdlr)
+
+			ev:trigger('test')
+			ev:trigger('test')
+			ev:trigger('test')
 		end
 	}
 )

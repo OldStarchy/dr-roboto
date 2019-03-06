@@ -45,7 +45,8 @@ local components = {
 	'missingGlobals',
 	'log',
 	'runWithLogging',
-	'ProcessManager'
+	'ProcessManager',
+	'EventManager'
 }
 
 for _, component in ipairs(components) do
