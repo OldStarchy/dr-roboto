@@ -282,6 +282,8 @@ function ItemStore:peek()
 			return ItemStackDetail(self._items[i].name, self._items[i].metadata, self._items[i].count)
 		end
 	end
+
+	return nil
 end
 
 --[[
@@ -297,7 +299,12 @@ function ItemStore:pop()
 			break
 		end
 	end
-	return ItemStackDetail(r.name, r.metadata, r.count)
+
+	if (r ~= nil) then
+		return ItemStackDetail(r.name, r.metadata, r.count)
+	end
+
+	return nil
 end
 
 --[[
