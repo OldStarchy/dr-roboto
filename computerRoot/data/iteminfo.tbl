@@ -1,49 +1,144 @@
 <ItemInfo|
-	['computercraft:CC-Peripheral:*'] = 64,
-	['minecraft:birch_door:*'] = 64,
-	['minecraft:bucket:*'] = 16,
-	['minecraft:chest:*'] = 64,
-	['minecraft:coal:*'] = 64,
-	['minecraft:coal_block:*'] = 64,
-	['minecraft:cobblestone:*'] = 64,
-	['minecraft:cobblestone_wall:*'] = 64,
-	['minecraft:crafting_table:*'] = 64,
-	['minecraft:diamond_pickaxe:*'] = 1,
-	['minecraft:dirt:*'] = 64,
-	['minecraft:dye:*'] = 64,
-	['minecraft:flint:*'] = 64,
-	['minecraft:furnace:*'] = 64,
-	['minecraft:glass:*'] = 64,
-	['minecraft:glass_pane:*'] = 64,
-	['minecraft:gold_ore:*'] = 64,
-	['minecraft:gravel:*'] = 64,
-	['minecraft:iron_block:*'] = 64,
-	['minecraft:iron_ingot:*'] = 64,
-	['minecraft:iron_ore:*'] = 64,
-	['minecraft:jungle_door:*'] = 64,
-	['minecraft:lava_bucket:*'] = 1,
-	['minecraft:log:*'] = 64,
-	['minecraft:mossy_cobblestone:*'] = 64,
-	['minecraft:oak_stairs:*'] = 64,
-	['minecraft:planks:*'] = 64,
-	['minecraft:redstone:*'] = 64,
-	['minecraft:rotten_flesh:*'] = 64,
-	['minecraft:sand:*'] = 64,
-	['minecraft:sapling:*'] = 64,
-	['minecraft:spruce_door:*'] = 64,
-	['minecraft:spruce_stairs:*'] = 64,
-	['minecraft:stick:*'] = 64,
-	['minecraft:stone:*'] = 64,
-	['minecraft:stone_axe:*'] = 1,
-	['minecraft:stone_button:*'] = 64,
-	['minecraft:stone_hoe:*'] = 1,
-	['minecraft:stone_pickaxe:*'] = 1,
-	['minecraft:stone_shovel:*'] = 1,
-	['minecraft:stone_slab:*'] = 64,
-	['minecraft:stone_stairs:*'] = 64,
-	['minecraft:torch:*'] = 64,
-	['minecraft:water_bucket:*'] = 1,
-	['minecraft:wooden_button:*'] = 64,
-	['minecraft:wooden_door:*'] = 64,
-	['minecraft:wooden_pressure_plate:*'] = 64,
+	['computercraft:CC-Peripheral:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:birch_door:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:bucket:*'] = {
+		stackSize = 16,
+	},
+	['minecraft:chest:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:coal:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:coal_block:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:cobblestone:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:cobblestone_wall:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:crafting_table:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:diamond_pickaxe:*'] = {
+		stackSize = 1,
+	},
+	['minecraft:dirt:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:dye:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:flint:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:furnace:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:glass:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:glass_pane:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:gold_ore:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:gravel:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:iron_block:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:iron_ingot:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:iron_ore:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:jungle_door:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:lava_bucket:*'] = {
+		stackSize = 1,
+	},
+	['minecraft:log:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:mossy_cobblestone:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:oak_stairs:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:planks:*'] = {
+		burnTime = 15,
+		stackSize = 64,
+	},
+	['minecraft:redstone:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:rotten_flesh:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:sand:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:sapling:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:spruce_door:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:spruce_stairs:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:stick:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:stone:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:stone_axe:*'] = {
+		stackSize = 1,
+	},
+	['minecraft:stone_button:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:stone_hoe:*'] = {
+		stackSize = 1,
+	},
+	['minecraft:stone_pickaxe:*'] = {
+		stackSize = 1,
+	},
+	['minecraft:stone_shovel:*'] = {
+		stackSize = 1,
+	},
+	['minecraft:stone_slab:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:stone_stairs:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:torch:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:water_bucket:*'] = {
+		stackSize = 1,
+	},
+	['minecraft:wooden_button:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:wooden_door:*'] = {
+		stackSize = 64,
+	},
+	['minecraft:wooden_pressure_plate:*'] = {
+		stackSize = 64,
+	},
 >
