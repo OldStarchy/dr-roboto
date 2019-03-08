@@ -4,13 +4,12 @@ includeAll 'Core/Graphics'
 
 includeAll 'Crafting'
 includeAll 'Navigation'
+includeAll 'Construction'
+includeAll 'Inventory'
+includeAll 'Cartography'
 includeAll 'Tasks'
 includeAll 'Skills'
-includeAll 'Inventory'
 
-include 'Core/Block'
-
-includeAll 'Cartography'
 includeAll 'UI'
 
 include 'Core/Cli'

@@ -33,3 +33,5 @@ end
 -- 	inv:select(name)
 -- 	turtle.place()
 -- end
+
+includeAll 'Construction/Block'
