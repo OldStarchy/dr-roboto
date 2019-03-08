@@ -7,7 +7,10 @@
 			"label": "test",
 			"type": "shell",
 			"command": "lua computerRoot\\startup",
-			"group": "test",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
 			"presentation": {
 				"echo": true,
 				"reveal": "always",
