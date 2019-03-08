@@ -1,4 +1,3 @@
-require 'lfs'
 _G.fs = {
 	list = function(directory)
 		local dirs = {}

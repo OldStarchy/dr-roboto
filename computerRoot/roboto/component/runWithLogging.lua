@@ -8,6 +8,8 @@ function runWithLogging(func, errDel)
 	return xpcall(
 		func,
 		function(err)
+			debug_break()
+
 			if (errDel) then
 				errDel(err)
 			end

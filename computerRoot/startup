@@ -11,13 +11,15 @@ if (settings ~= nil) then
 	end
 end
 
+if (debug_break == nil) then
+	debug_break = function()
+	end
+end
+
 local isPc = false
 local basePath
 if (os.version == nil) then
 	isPc = true
-	basePath = 'computerRoot/'
-else
-	basePath = ''
 end
 
 -- Redefine loadfile to include an env paramter
@@ -28,9 +30,9 @@ _G.loadfile = function(_sFile, _tEnv)
 
 	local file = fs.open(_sFile, 'r')
 	if file then
-		local func, err = loadstring(file.readAll(), basePath .. _sFile)
+		local func, err = loadstring(file.readAll(), _sFile)
 		file.close()
-		if (type(_tEnv) == 'table') then
+		if (func ~= nil and type(_tEnv) == 'table') then
 			setfenv(func, _tEnv)
 		end
 		return func, err
@@ -40,9 +42,9 @@ end
 
 if (isPc) then
 	print('Running on PC - loading polyfills')
-	dofile '_polyfills/_main.lua'
-
+	require 'lfs'
 	lfs.chdir('computerRoot')
+	dofile '../_polyfills/_main.lua'
 
 	dofile 'roboto/os.lua'
 	return
