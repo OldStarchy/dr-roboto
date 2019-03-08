@@ -8,8 +8,8 @@ Furnace.ClassName = 'Furnace'
 	where the direction provided in Position will be the approach direction
 	from the turtle to the block
 ]]
-function Furnace:constructor(name, location)
-	Block.constructor(self, name, location)
+function Furnace:constructor(location)
+	Block.constructor(self, location)
 
 	self._top = ItemStore(1)
 	self._side = ItemStore(1)
