@@ -1,7 +1,7 @@
 -- Store and maintain the current important _blocks
 
-BlockMap = Class()
-BlockMap.ClassName = 'BlockMap'
+BlockManager = Class()
+BlockManager.ClassName = 'BlockManager'
 
 --[[
 	name: name of the item, 'chest', 'furnace', or block query that is used to select the item from inventory
@@ -10,14 +10,15 @@ BlockMap.ClassName = 'BlockMap'
 	where the direction provided in Position will be the approach direction
 	from the turtle to the block
 ]]
-function BlockMap:constructor()
+function BlockManager:constructor(map)
+	self._map = assertParameter(map, 'map', Map)
 	self._blocks = {}
 
 	self.ev = EventManager()
 end
 
-function BlockMap.Deserialize(data)
-	local map = BlockMap()
+function BlockManager.Deserialize(data)
+	local map = BlockManager()
 	for blockType, _ in ipairs(data) do
 		for _, blockData in ipairs(data[key]) do
 			block = _G[blockType].ConvertToInstance(blockData)
@@ -38,11 +39,11 @@ function BlockMap.Deserialize(data)
 	return map
 end
 
-function BlockMap:serialize()
+function BlockManager:serialize()
 	return self._blocks
 end
 
-function BlockMap:add(block)
+function BlockManager:add(block)
 	assertType(block, Block, 'Attempt to add a non block to a block map', 2)
 
 	local blockType = block.ClassName
@@ -63,7 +64,7 @@ function BlockMap:add(block)
 	return true
 end
 
-function BlockMap:remove(block)
+function BlockManager:remove(block)
 	assertType(block, Block, 'Attempt to remove a non block to a block map', 2)
 
 	local blockType = block.ClassName
@@ -80,7 +81,7 @@ function BlockMap:remove(block)
 	return true
 end
 
-function BlockMap:findBlockByLocation(blockType, atPosition)
+function BlockManager:findBlockByLocation(blockType, atPosition)
 	assertType(atPosition, Position, 'Attempted to find a block by a location that wasnt a position object', 2)
 	assertType(blockType, 'string', 'Attempted to find a block by a block type that wasnt a string object', 2)
 
@@ -101,7 +102,7 @@ end
 
 -- returns the closest block of that type to the provided location
 -- block type should be the class name of the block
-function BlockMap:findNearest(blockType, toLocation)
+function BlockManager:findNearest(blockType, toLocation)
 	assertType(toLocation, Position, 'Attempted to find a block by a location that wasnt a position object', 2)
 	assertType(blockType, 'string', 'Attempted to find a block by a block type that wasnt a string object', 2)
 

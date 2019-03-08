@@ -21,7 +21,7 @@ function SmeltItemSkill:getRequirements(task)
 	-- if there is a furnace within x blocks then use that otherwise, return a SetupTask for a furnace
 
 	local currentLocation = mov:getPosition()
-	local neareastFurnace = BlockMap.Instance:findNearest(Furnace.ClassName, currentLocation)
+	local neareastFurnace = BlockManager.Instance:findNearest(Furnace.ClassName, currentLocation)
 
 	if (neareastFurnace == nil) then
 		return {SetupTask(Furnace.ClassName)}

@@ -43,7 +43,7 @@ runWithLogging(
 		local singletons = {
 			ItemInfo,
 			RecipeBook,
-			BlockMap,
+			BlockManager,
 			Map,
 			TaskManager
 		}

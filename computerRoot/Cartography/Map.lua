@@ -144,3 +144,5 @@ function Map.Deserialize(points)
 
 	return map
 end
+
+includeAll 'Cartography/PoiManagers'
