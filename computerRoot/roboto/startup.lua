@@ -38,14 +38,17 @@ runWithLogging(
 		mov = loadAndBind('data/mov.tbl', MoveManager, 'turtle_moved', turtle)
 		nav = Navigator(mov)
 
+		Map.Instance = Map()
+
+		TagManager.Instance = loadAndBind('data/tagmanager.tbl', TagManager, nil, Map.Instance)
+		BlockManager.Instance = loadAndBind('data/blockmanager.tbl', BlockManager, nil, Map.Instance)
+
 		log.info(#Skill.ChildTypes .. ' skills')
 
 		local singletons = {
 			ItemInfo,
 			RecipeBook,
-			TaskManager,
-			TagManager,
-			BlockManager
+			TaskManager
 		}
 
 		for _, v in ipairs(singletons) do
