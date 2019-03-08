@@ -28,8 +28,10 @@ function EventManager:one(event, handler)
 	assertType(event, 'string')
 	assertType(handler, 'function')
 
-	local wrapper = function(...)
-		self:off(wrapper)
+	local wrapper
+
+	wrapper = function(...)
+		self:off(event, wrapper)
 		handler(...)
 	end
 
