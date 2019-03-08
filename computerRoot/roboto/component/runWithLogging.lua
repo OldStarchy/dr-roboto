@@ -7,39 +7,50 @@ function runWithLogging(func, errDel)
 
 	return xpcall(
 		func,
-		function(err)
-			debug_break()
+		function(originalErr)
+			debug_break(2)
 
 			if (errDel) then
-				errDel(err)
+				errDel(originalErr)
 			end
 
 			local trace = getStackTrace(20, 2)
-			trace[1] = err
+			trace[1] = originalErr
 
+			local start = false
+			local startFrame = getStackFrameInfo(originalErr)
 			for _, err in ipairs(trace) do
 				local frameInfo = getStackFrameInfo(err)
 
-				if (frameInfo.file == stopFrame.file and frameInfo.line == stopFrame.line) then
-					break
+				if (_ > 1 and not start) then
+					if (frameInfo.file == startFrame.file and frameInfo.line == startFrame.line) then
+						start = true
+						frameInfo = startFrame
+					end
 				end
 
-				local errLine =
-					stringutil.join(
-					{
-						frameInfo.file,
-						frameInfo.line,
-						frameInfo.message
-					},
-					':'
-				) .. ':'
+				if (start) then
+					if (frameInfo.file == stopFrame.file and frameInfo.line == stopFrame.line) then
+						break
+					end
 
-				log.error(errLine)
+					local errLine =
+						stringutil.join(
+						{
+							frameInfo.file,
+							frameInfo.line,
+							frameInfo.message
+						},
+						':'
+					) .. ':'
 
-				if (frameInfo.file and frameInfo.line) then
-					errLine = getFileLines(frameInfo.file, frameInfo.line, 3)
-					if (errLine ~= nil) then
-						log.error('\n\t' .. string.gsub(errLine, '\n', '\n\t') .. '\n\n')
+					log.error(errLine)
+
+					if (frameInfo.file and frameInfo.line) then
+						errLine = getFileLines(frameInfo.file, frameInfo.line, 3)
+						if (errLine ~= nil) then
+							log.error('\n\t' .. string.gsub(errLine, '\n', '\n\t') .. '\n\n')
+						end
 					end
 				end
 			end
