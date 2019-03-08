@@ -12,6 +12,7 @@ setmetatable(
 				return nil
 			end
 			log.warn('Attempt to access missing global "' .. tostring(v) .. '"')
+			debug_break()
 			local trace = getStackTrace(2, 2)
 
 			for i, v in pairs(trace) do
