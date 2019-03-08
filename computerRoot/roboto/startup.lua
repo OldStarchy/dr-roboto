@@ -43,9 +43,9 @@ runWithLogging(
 		local singletons = {
 			ItemInfo,
 			RecipeBook,
-			BlockManager,
-			Map,
-			TaskManager
+			TaskManager,
+			TagManager,
+			BlockManager
 		}
 
 		for _, v in ipairs(singletons) do
