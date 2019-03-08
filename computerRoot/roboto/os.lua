@@ -51,8 +51,15 @@ local components = {
 
 for _, component in ipairs(components) do
 	term.write('Loading ' .. component .. '...')
-	loadfile('roboto/component/' .. component .. '.lua', _G)()
-	print('OK')
+	local chunk, err = loadfile('roboto/component/' .. component .. '.lua', _G)
+
+	if (chunk ~= nil) then
+		chunk()
+		print('OK')
+	else
+		print('ERROR!')
+		print(err)
+	end
 end
 
 print()
