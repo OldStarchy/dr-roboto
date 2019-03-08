@@ -15,7 +15,7 @@ test(
 			local recipe = CraftingRecipe('something', {}, 1)
 
 			book:add(recipe)
-			t.assertTableEqual(book:findCraftingRecipesBySelector(recipe.name), {recipe})
+			t.assertTableEqual(book:findCraftingRecipesBySelector(recipe.output), {recipe})
 		end,
 		['crafting duplicate recipe'] = function(t)
 			local book = RecipeBook()
@@ -54,7 +54,7 @@ test(
 			local recipe = FurnaceRecipe('iron bars', 'iron ore', 4, 16)
 
 			book:add(recipe)
-			t.assertTableEqual(book:findFurnaceRecipeBySelector(recipe.name), recipe)
+			t.assertTableEqual(book:findFurnaceRecipeBySelector(recipe.output), recipe)
 		end,
 		['smelting duplicate recipe'] = function(t)
 			local book = RecipeBook()

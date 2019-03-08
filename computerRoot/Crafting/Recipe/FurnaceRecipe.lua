@@ -7,27 +7,20 @@ FurnaceRecipe.ClassName = 'FurnaceRecipe'
 	burnTime: a number of seconds it would take to furnace one of these.
 	produces: the number of items the recipe will produce.
 ]]
-function FurnaceRecipe:constructor(name, ingredient, produces, burnTime)
-	assertType(name, 'string', 'Name must be of type string', 3)
-	assertType(ingredient, 'string', 'Ingredient must be of type string', 3)
-	assertType(produces, 'int', 'Produces must be of type number', 3)
-	burnTime = assertType(coalesce(burnTime, 12), 'int', 'Burn Time must be of type number', 3)
+function FurnaceRecipe:constructor(output, ingredient, outputCount, burnTime)
+	Recipe.constructor(self, output, outputCount)
 
-	self.burnTime = burnTime
-	self.name = name
-	self.ingredient = ingredient
-	self.produces = produces
+	self.ingredient = ItemDetail.NormalizeId(assertParameter(ingredient, 'ingredient', 'string'))
+	self.burnTime = assertParameter(coalesce(burnTime, 12), 'burnTime', 'int')
 end
 
 function FurnaceRecipe:serialize()
-	return {
-		burnTime = self.burnTime,
-		name = self.name,
-		ingredient = self.ingredient,
-		produces = self.produces
-	}
+	local tbl = Recipe.serialize(self)
+	tbl.ingredient = self.ingredient
+	tbl.burnTime = self.burnTime
+	return tbl
 end
 
 function FurnaceRecipe.Deserialize(tbl)
-	return FurnaceRecipe(tbl.name, tbl.ingredient, tbl.produces, tbl.burnTime)
+	return FurnaceRecipe(tbl.output, tbl.ingredient, tbl.outputCount, tbl.burnTime)
 end

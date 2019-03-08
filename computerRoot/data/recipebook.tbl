@@ -4,8 +4,8 @@
 			grid = {
 				[1] = 'minecraft:log:3',
 			},
-			name = 'minecraft:planks:3',
-			produces = 4,
+			output = 'minecraft:planks:3',
+			outputCount = 4,
 		>,
 		[2] = <CraftingRecipe|
 			grid = {
@@ -14,8 +14,8 @@
 				[4] = 'minecraft:planks:*',
 				[5] = 'minecraft:planks:*',
 			},
-			name = 'minecraft:crafting_table',
-			produces = 1,
+			output = 'minecraft:crafting_table:0',
+			outputCount = 1,
 		>,
 		[3] = <CraftingRecipe|
 			grid = {
@@ -26,22 +26,22 @@
 				[7] = 'minecraft:planks:1',
 				[8] = 'minecraft:planks:1',
 			},
-			name = 'minecraft:spruce_door:0',
-			produces = 3,
+			output = 'minecraft:spruce_door:0',
+			outputCount = 3,
 		>,
 		[4] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:planks:*',
 			},
-			name = 'minecraft:wooden_button',
-			produces = 1,
+			output = 'minecraft:wooden_button:*',
+			outputCount = 1,
 		>,
 		[5] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:log:2',
 			},
-			name = 'minecraft:planks:2',
-			produces = 4,
+			output = 'minecraft:planks:2',
+			outputCount = 4,
 		>,
 		[6] = <CraftingRecipe|
 			grid = {
@@ -52,22 +52,22 @@
 				[7] = 'minecraft:planks:2',
 				[8] = 'minecraft:planks:2',
 			},
-			name = 'minecraft:birch_door:0',
-			produces = 3,
+			output = 'minecraft:birch_door:0',
+			outputCount = 3,
 		>,
 		[7] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:log:1',
 			},
-			name = 'minecraft:planks:1',
-			produces = 4,
+			output = 'minecraft:planks:1',
+			outputCount = 4,
 		>,
 		[8] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:log:0',
 			},
-			name = 'minecraft:planks:0',
-			produces = 4,
+			output = 'minecraft:planks:0',
+			outputCount = 4,
 		>,
 		[9] = <CraftingRecipe|
 			grid = {
@@ -78,8 +78,8 @@
 				[7] = 'minecraft:planks:0',
 				[8] = 'minecraft:planks:0',
 			},
-			name = 'minecraft:wooden_door:0',
-			produces = 3,
+			output = 'minecraft:wooden_door:0',
+			outputCount = 3,
 		>,
 		[10] = <CraftingRecipe|
 			grid = {
@@ -90,8 +90,8 @@
 				[7] = 'minecraft:planks:3',
 				[8] = 'minecraft:planks:3',
 			},
-			name = 'minecraft:jungle_door:0',
-			produces = 3,
+			output = 'minecraft:jungle_door:0',
+			outputCount = 3,
 		>,
 		[11] = <CraftingRecipe|
 			grid = {
@@ -102,16 +102,16 @@
 				[7] = 'minecraft:planks:*',
 				[8] = 'minecraft:planks:*',
 			},
-			name = 'minecraft:wooden_door:0',
-			produces = 3,
+			output = 'minecraft:wooden_door:0',
+			outputCount = 3,
 		>,
 		[12] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:planks:*',
 				[2] = 'minecraft:planks:*',
 			},
-			name = 'minecraft:wooden_pressure_plate',
-			produces = 1,
+			output = 'minecraft:wooden_pressure_plate:0',
+			outputCount = 1,
 		>,
 		[13] = <CraftingRecipe|
 			grid = {
@@ -121,8 +121,8 @@
 				[7] = 'minecraft:cobblestone:*',
 				[8] = 'minecraft:cobblestone:*',
 			},
-			name = 'minecraft:furnace',
-			produces = 1,
+			output = 'minecraft:furnace:*',
+			outputCount = 1,
 		>,
 		[14] = <CraftingRecipe|
 			grid = {
@@ -132,8 +132,8 @@
 				[7] = 'minecraft:cobblestone:*',
 				[8] = 'minecraft:cobblestone:*',
 			},
-			name = 'minecraft:stone_stairs',
-			produces = 4,
+			output = 'minecraft:stone_stairs:0',
+			outputCount = 4,
 		>,
 		[15] = <CraftingRecipe|
 			grid = {
@@ -142,16 +142,16 @@
 				[4] = 'minecraft:cobblestone:*',
 				[5] = 'minecraft:cobblestone:*',
 			},
-			name = 'minecraft:cobblestone_wall',
-			produces = 6,
+			output = 'minecraft:cobblestone_wall:0',
+			outputCount = 6,
 		>,
 		[16] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:planks:*',
 				[4] = 'minecraft:planks:*',
 			},
-			name = 'minecraft:stick',
-			produces = 4,
+			output = 'minecraft:stick:0',
+			outputCount = 4,
 		>,
 		[17] = <CraftingRecipe|
 			grid = {
@@ -159,8 +159,8 @@
 				[4] = 'minecraft:stick:*',
 				[7] = 'minecraft:stick:*',
 			},
-			name = 'minecraft:stone_shovel',
-			produces = 1,
+			output = 'minecraft:stone_shovel:0',
+			outputCount = 1,
 		>,
 		[18] = <CraftingRecipe|
 			grid = {
@@ -169,8 +169,8 @@
 				[5] = 'minecraft:stick:*',
 				[8] = 'minecraft:stick:*',
 			},
-			name = 'minecraft:stone_pickaxe',
-			produces = 1,
+			output = 'minecraft:stone_pickaxe:0',
+			outputCount = 1,
 		>,
 		[19] = <CraftingRecipe|
 			grid = {
@@ -180,15 +180,15 @@
 				[5] = 'minecraft:stick:*',
 				[8] = 'minecraft:stick:*',
 			},
-			name = 'minecraft:stone_axe',
-			produces = 1,
+			output = 'minecraft:stone_axe:0',
+			outputCount = 1,
 		>,
 		[20] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:log:*',
 			},
-			name = 'minecraft:planks',
-			produces = 4,
+			output = 'minecraft:planks:0',
+			outputCount = 4,
 		>,
 		[21] = <CraftingRecipe|
 			grid = {
@@ -198,15 +198,15 @@
 				[7] = 'minecraft:planks:*',
 				[8] = 'minecraft:planks:*',
 			},
-			name = 'minecraft:chest',
-			produces = 1,
+			output = 'minecraft:chest:0',
+			outputCount = 1,
 		>,
 		[22] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:iron_block:*',
 			},
-			name = 'minecraft:iron_ingot',
-			produces = 9,
+			output = 'minecraft:iron_ingot:0',
+			outputCount = 9,
 		>,
 		[23] = <CraftingRecipe|
 			grid = {
@@ -217,8 +217,8 @@
 				[7] = 'minecraft:iron_ingot:*',
 				[8] = 'minecraft:iron_ingot:*',
 			},
-			name = 'minecraft:iron_block',
-			produces = 1,
+			output = 'minecraft:iron_block:0',
+			outputCount = 1,
 		>,
 		[24] = <CraftingRecipe|
 			grid = {
@@ -227,8 +227,8 @@
 				[4] = 'minecraft:glass:*',
 				[5] = 'minecraft:glass:*',
 			},
-			name = 'minecraft:glass_pane',
-			produces = 16,
+			output = 'minecraft:glass_pane:0',
+			outputCount = 16,
 		>,
 		[25] = <CraftingRecipe|
 			grid = {
@@ -237,8 +237,8 @@
 				[4] = 'minecraft:stone:3',
 				[5] = 'minecraft:stone:3',
 			},
-			name = 'minecraft:stone:4',
-			produces = 4,
+			output = 'minecraft:stone:4',
+			outputCount = 4,
 		>,
 		[26] = <CraftingRecipe|
 			grid = {
@@ -247,8 +247,8 @@
 				[4] = 'minecraft:stone:5',
 				[5] = 'minecraft:stone:5',
 			},
-			name = 'minecraft:stone:6',
-			produces = 4,
+			output = 'minecraft:stone:6',
+			outputCount = 4,
 		>,
 		[27] = <CraftingRecipe|
 			grid = {
@@ -257,8 +257,8 @@
 				[4] = 'minecraft:stone:1',
 				[5] = 'minecraft:stone:1',
 			},
-			name = 'minecraft:stone:2',
-			produces = 4,
+			output = 'minecraft:stone:2',
+			outputCount = 4,
 		>,
 		[28] = <CraftingRecipe|
 			grid = {
@@ -268,8 +268,8 @@
 				[7] = 'minecraft:planks:1',
 				[8] = 'minecraft:planks:1',
 			},
-			name = 'minecraft:spruce_stairs:0',
-			produces = 4,
+			output = 'minecraft:spruce_stairs:0',
+			outputCount = 4,
 		>,
 		[29] = <CraftingRecipe|
 			grid = {
@@ -279,23 +279,23 @@
 				[7] = 'minecraft:planks:0',
 				[8] = 'minecraft:planks:0',
 			},
-			name = 'minecraft:oak_stairs:0',
-			produces = 4,
+			output = 'minecraft:oak_stairs:0',
+			outputCount = 4,
 		>,
 		[30] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:stone:*',
 			},
-			name = 'minecraft:stone_button',
-			produces = 1,
+			output = 'minecraft:stone_button:0',
+			outputCount = 1,
 		>,
 		[31] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:stone:0',
 				[2] = 'minecraft:stone:0',
 			},
-			name = 'minecraft:stone_slab:0',
-			produces = 6,
+			output = 'minecraft:stone_slab:0',
+			outputCount = 6,
 		>,
 		[32] = <CraftingRecipe|
 			grid = {
@@ -306,37 +306,37 @@
 				[7] = 'minecraft:coal:*',
 				[8] = 'minecraft:coal:*',
 			},
-			name = 'minecraft:coal_block',
-			produces = 1,
+			output = 'minecraft:coal_block:0',
+			outputCount = 1,
 		>,
 		[33] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:coal_block:*',
 			},
-			name = 'minecraft:coal',
-			produces = 9,
+			output = 'minecraft:coal:0',
+			outputCount = 9,
 		>,
 		[34] = <CraftingRecipe|
 			grid = {
 				[1] = 'minecraft:coal:*',
 				[4] = 'minecraft:stick:*',
 			},
-			name = 'minecraft:torch',
-			produces = 4,
+			output = 'minecraft:torch:0',
+			outputCount = 4,
 		>,
 	},
 	smelting = {
 		[1] = <FurnaceRecipe|
 			burnTime = 12,
-			ingredient = 'sand',
-			name = 'glass',
-			produces = 1,
+			ingredient = '*:sand:*',
+			output = 'minecraft:glass:0',
+			outputCount = 1,
 		>,
 		[2] = <FurnaceRecipe|
 			burnTime = 12,
-			ingredient = 'cobblestone',
-			name = 'stone',
-			produces = 1,
+			ingredient = '*:cobblestone:*',
+			output = 'minecraft:stone:0',
+			outputCount = 1,
 		>,
 	},
 >
