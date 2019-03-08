@@ -28,6 +28,10 @@
 		"description": "class definition",
 		"scope": "lua"
 	},
+	"assertParameter": {
+		"prefix": "ap",
+		"body": "assertParameter(${1:parameter}, '$1', ${2:types...})$0"
+	},
 	"constructor": {
 		"prefix": "constructor",
 		"body": ["function ${1:MyClass}:constructor($2)", "\t$0", "end"]
