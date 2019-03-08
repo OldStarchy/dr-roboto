@@ -3,7 +3,7 @@ function runWithLogging(func, errDel)
 	if (errDel ~= nil) then
 		assertType(errDel, 'function')
 	end
-	local stopFrame = getStackFrameInfo(1)
+	local stopFrame = getStackFrameInfo(2)
 
 	return xpcall(
 		func,
