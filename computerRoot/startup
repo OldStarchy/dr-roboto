@@ -11,11 +11,24 @@ if (settings ~= nil) then
 	end
 end
 
+local isPc = false
+local basePath
+if (os.version == nil) then
+	isPc = true
+	basePath = 'computerRoot/'
+else
+	basePath = ''
+end
+
 -- Redefine loadfile to include an env paramter
 _G.loadfile = function(_sFile, _tEnv)
+	if (_sFile:sub(1, 2) == './') then
+		_sFile = _sFile:sub(3)
+	end
+
 	local file = fs.open(_sFile, 'r')
 	if file then
-		local func, err = loadstring(file.readAll(), _sFile)
+		local func, err = loadstring(file.readAll(), basePath .. _sFile)
 		file.close()
 		if (type(_tEnv) == 'table') then
 			setfenv(func, _tEnv)
@@ -23,11 +36,6 @@ _G.loadfile = function(_sFile, _tEnv)
 		return func, err
 	end
 	return nil, 'File not found'
-end
-
-local isPc = false
-if (os.version == nil) then
-	isPc = true
 end
 
 if (isPc) then
