@@ -8,6 +8,25 @@ function TagManager:constructor(map)
 		Dictionary<string, Array<Position>>
 	]]
 	self._tags = {}
+
+	self.ev = EventManager()
+end
+
+function TagManager.Deserialize(tbl)
+	--TODO: injecting map instance is probably not great
+	local obj = TagManager(Map.Instance)
+
+	for tag, positions in pairs(tbl) do
+		for _, pos in ipairs(positions) do
+			obj:addTag(pos, tag)
+		end
+	end
+
+	return obj
+end
+
+function TagManager:serialize()
+	return cloneTable(self._tags, 2)
 end
 
 function TagManager:getPosition(tag)
