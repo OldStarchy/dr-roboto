@@ -136,7 +136,7 @@ function Crafter:craft(item, amount)
 
 	log.info('Trying to craft ' .. recipe.output .. ' ' .. tostring(amount) .. ' times')
 
-	local belowBlock = turtle.inspectDown()
+	local _, belowBlock = turtle.inspectDown()
 	if (inv:select('chest')) then
 		if (belowBlock) then
 			log.warn('digging down')
@@ -202,7 +202,8 @@ function Crafter:craft(item, amount)
 	turtle.digDown()
 
 	if (belowBlock) then
-		if (inv:select(belowBlock:getId() .. ',dirt,cobblestone')) then
+		--Try to put the exact same block back down, but fallback to just the name for blocks whos id changes depending on their direction
+		if (inv:select(belowBlock:getId()) or inv:select(belowBlock.name) or inv:select('dirt,cobblestone')) then
 			turtle.placeDown()
 		end
 	end
