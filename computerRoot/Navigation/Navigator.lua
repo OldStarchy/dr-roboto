@@ -132,10 +132,20 @@ function Navigator:goTo(x, y, z)
 		error('invalid coordinates', 2)
 	end
 
-	self:goToY(y)
-	self:goToX(x)
-	self:goToZ(z)
-	return x == self:getX() and y == self:getY() and z == self:getZ()
+	local r
+	r = {self:goToX(x)}
+	if (not r[1]) then
+		return unpack(r)
+	end
+	r = {self:goToZ(z)}
+	if (not r[1]) then
+		return unpack(r)
+	end
+	r = {self:goToY(y)}
+	if (not r[1]) then
+		return unpack(r)
+	end
+	return true
 end
 
 function Navigator:pathTo(x, y, z)
