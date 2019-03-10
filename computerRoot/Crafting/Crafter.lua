@@ -134,7 +134,7 @@ function Crafter:craft(item, amount)
 		error('not enough resources to craft ' .. item)
 	end
 
-	log.info('Trying to craft ' .. recipe.name .. ' ' .. tostring(amount) .. ' times')
+	log.info('Trying to craft ' .. recipe.output .. ' ' .. tostring(amount) .. ' times')
 
 	local belowBlock = turtle.inspectDown()
 	if (inv:select('chest')) then
@@ -151,12 +151,19 @@ function Crafter:craft(item, amount)
 
 	local items = cloneTable(recipe.items)
 
+	for i, v in pairs(items) do
+		local stackSize = ItemInfo.Instance:getStackSize(i)
+		if (stackSize < amount * v) then
+			error('cant craft that many at once')
+		end
+		items[i] = amount * v
+	end
+
 	for i = 1, 16 do
 		local itemStack = inv:getItemDetail(i)
 
 		local dump = true
 		for _item, _amount in pairs(items) do
-			_amount = _amount * amount
 			if (itemStack == nil) then
 				dump = false
 			elseif (itemStack:matches(_item)) then
