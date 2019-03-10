@@ -127,7 +127,7 @@ function MoveManager:getDirection()
 end
 
 function MoveManager:getPosition()
-	return self._position
+	return cloneTable(self._position)
 end
 
 --[[
