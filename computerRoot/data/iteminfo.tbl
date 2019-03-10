@@ -132,6 +132,9 @@
 	['minecraft:water_bucket:*'] = {
 		stackSize = 1,
 	},
+	['minecraft:wheat_seeds:*'] = {
+		stackSize = 64,
+	},
 	['minecraft:wooden_button:*'] = {
 		stackSize = 64,
 	},
