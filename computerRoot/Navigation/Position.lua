@@ -63,10 +63,10 @@ function Position:constructor(x, y, z, direction)
 		Position.constructor(self, x.x, x.y, x.z, x.direction)
 		return
 	end
-	self.x = ((type(x) == 'number') and x) or 0
-	self.y = ((type(y) == 'number') and y) or 0
-	self.z = ((type(z) == 'number') and z) or 0
-	self.direction = ((type(direction) == 'number') and direction) or 0
+	self.x = assertParameter(x, 'x', 'nil', 'number') or 0
+	self.y = assertParameter(y, 'y', 'nil', 'number') or 0
+	self.z = assertParameter(z, 'z', 'nil', 'number') or 0
+	self.direction = assertParameter(direction, 'direction', 'nil', 'number') or 0
 end
 
 function Position:rotate(direction)
@@ -127,19 +127,19 @@ function Position:toString()
 end
 
 function Position:posEquals(other)
-	assertType(other, Position, 'other must be of type Position', 2)
+	assertParameter(other, 'other', Position)
 
 	return self.x == other.x and self.y == other.y and self.z == other.z
 end
 
 function Position:isEqual(other)
-	assertType(other, 'table')
+	assertParameter(other, 'other', 'table')
 
 	return self.x == other.x and self.y == other.y and self.z == other.z and self.direction == other.direction
 end
 
 function Position:distanceTo(other)
-	assertType(other, Position, 'other must be of type Position', 2)
+	assertParameter(other, 'other', Position)
 
 	return math.abs(self.x - other.x) + math.abs(self.y - other.y) + math.abs(self.z - other.z)
 end
