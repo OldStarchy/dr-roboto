@@ -117,9 +117,12 @@
 			grid = {
 				[1] = 'minecraft:cobblestone:*',
 				[2] = 'minecraft:cobblestone:*',
+				[3] = 'minecraft:cobblestone:*',
 				[4] = 'minecraft:cobblestone:*',
+				[6] = 'minecraft:cobblestone:*',
 				[7] = 'minecraft:cobblestone:*',
 				[8] = 'minecraft:cobblestone:*',
+				[9] = 'minecraft:cobblestone:*',
 			},
 			output = 'minecraft:furnace:*',
 			outputCount = 1,
