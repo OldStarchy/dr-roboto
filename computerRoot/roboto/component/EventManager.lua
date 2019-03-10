@@ -68,16 +68,12 @@ end
 
 function EventManager:trigger(event, ...)
 	if (self._suppress) then
-		return
-	end
-
-	if (self._handlers[event] == nil) then
-		return
+		return {}
 	end
 
 	local handlers = self._handlers[event]
 	if (handlers == nil) then
-		return
+		return {}
 	end
 
 	local result = {}
