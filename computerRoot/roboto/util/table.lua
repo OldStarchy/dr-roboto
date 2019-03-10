@@ -72,6 +72,38 @@ function tableToString(tbl, ind, printed)
 	return r
 end
 
+function mergeTables(out, ...)
+	local tbls = {...}
+
+	for _, tbl in ipairs(tbls) do
+		for k, v in pairs(tbl) do
+			if (out[k] == nil) then
+				out[k] = v
+			end
+		end
+	end
+
+	return out
+end
+
+function mergeTablesRecursive(out, ...)
+	local tbls = {...}
+
+	for _, tbl in ipairs(tbls) do
+		for k, v in pairs(tbl) do
+			if (out[k] ~= nil) then
+				if (type(out[k]) == 'table' and type(v) == 'table') then
+					mergeTablesRecursive(out[k], v)
+				else
+					out[k] = v
+				end
+			end
+		end
+	end
+
+	return out
+end
+
 --[[
 	Counts the number of properties in a table
 ]]
