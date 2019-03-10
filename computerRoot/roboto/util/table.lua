@@ -416,14 +416,14 @@ local function readIndexer(str, head)
 end
 
 local function readNumber(str, head)
-	local st, ed = str:find('^%d+%.%d*', head)
+	local st, ed = str:find('^%-?%d+%.%d*', head)
 
 	if (st == nil) then
-		st, ed = str:find('^%d+', head)
+		st, ed = str:find('^%-?%d+', head)
 	end
 
 	if (st == nil) then
-		st, ed = str:find('^%.%d+', head)
+		st, ed = str:find('^%-?%.%d+', head)
 	end
 
 	if (st ~= nil) then
@@ -628,8 +628,8 @@ readNext = function(str, head)
 		{pattern = '^{', typ = 'table'},
 		{pattern = '^<', typ = 'class'},
 		{pattern = '^%[', typ = 'indexer'},
-		{pattern = '^%d', typ = 'number'},
-		{pattern = '^%.%d', typ = 'number'},
+		{pattern = '^%-?%d', typ = 'number'},
+		{pattern = '^%-?%.%d', typ = 'number'},
 		{pattern = '^true%W', typ = 'boolean'},
 		{pattern = '^false%W', typ = 'boolean'},
 		{pattern = '^[%a_][%w_]*', typ = 'identifier'},
@@ -662,7 +662,7 @@ readNext = function(str, head)
 		return typ, readers[typ](str, head)
 	end
 
-	return nil
+	return nil, nil, head
 end
 
 function deserialize(str)
