@@ -1,0 +1,5 @@
+local undergroundMine = include 'api/undergroundMine'
+
+local mine = undergroundMine()
+
+mine.start()
