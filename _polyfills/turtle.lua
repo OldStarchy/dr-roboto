@@ -6,6 +6,9 @@ turtle =
 	{},
 	{
 		__index = function(t, v)
+			if (rawget(t, v)) then
+				return rawget(t, v)
+			end
 			return function(...)
 				if (v == 'down') then
 					if (depth <= 0) then
@@ -27,5 +30,15 @@ turtle =
 		end
 	}
 )
+
+turtle.inspect = function()
+	return true, {
+		name = 'minecraft:stone',
+		metadata = 0
+	}
+end
+
+turtle.inspectUp = turtle.inspect
+turtle.inspectDown = turtle.inspect
 
 return turtle
