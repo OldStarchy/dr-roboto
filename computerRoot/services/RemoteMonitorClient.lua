@@ -3,22 +3,33 @@
 
 -- local surfTerm = surf:asTerm()
 
-local side = peripheral.find('modem')
-if (side == nil) then
-	return
-end
-rednet.open(side)
+rednet.open('right')
 
 while (true) do
 	local ev = {os.pullEventRaw()}
 
 	if (ev[1] == 'turtle_inventory' or ev[1] == 'turtle_moved') then
+		local d = {}
+
+		runWithLogging(
+			function()
+				if (isDefined('broadcastData')) then
+					for i, v in pairs(broadcastData) do
+						if (type(v) ~= 'function') then
+							d[i] = v
+						end
+					end
+				end
+			end
+		)
+
 		rednet.broadcast(
 			serialize(
 				{
 					inventory = inv:count(),
 					location = mov:getPosition():toString(),
-					fuel = turtle.getFuelLevel()
+					fuel = turtle.getFuelLevel(),
+					data = d
 				}
 			)
 		)
