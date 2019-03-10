@@ -1,8 +1,8 @@
 require 'lfs'
 lfs.chdir('computerRoot')
 
-dofile 'bootstrap.lua'
-include 'Core/_main'
+suppressStartup = true
+dofile 'startup'
 suppressMissingGlobalWarnings(true)
 
 lfs.chdir('..')

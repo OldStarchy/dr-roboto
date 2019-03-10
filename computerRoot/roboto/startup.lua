@@ -64,8 +64,10 @@ if (os.isPc()) then
 	log.info('Running on pc')
 
 	-- runWithLogging(loadfile('test.lua', _G))
-	if (fs.exists('mystartup.lua')) then
-		runWithLogging(loadfile('mystartup.lua', _G))
+	if (not isDefined('suppressStartup')) then
+		if (fs.exists('mystartup.lua')) then
+			runWithLogging(loadfile('mystartup.lua', _G))
+		end
 	end
 
 	return
