@@ -11,8 +11,8 @@ if (settings ~= nil) then
 	end
 end
 
-if (debug_break == nil) then
-	debug_break = function()
+if (_G.debug_break == nil) then
+	_G.debug_break = function()
 	end
 end
 
