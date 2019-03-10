@@ -25,7 +25,3 @@ end
 function Chest:inventory()
 	return self._inventory
 end
-
-function Chest:toString()
-	return self.name
-end

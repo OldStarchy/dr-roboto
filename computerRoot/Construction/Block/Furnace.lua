@@ -237,7 +237,7 @@ function Furnace:smelt(furnaceRecipe, quantity, fuel)
 	if furnaceRecipe.getType() ~= FurnaceRecipe then
 		return error('Can not smelt object that is not a furnace recipe')
 	end
-	print('smelting ' .. furnaceRecipe.name)
+	print('smelting ' .. furnaceRecipe.output)
 
 	self:gotoTop()
 	inv:select(furnaceRecipe.ingredient)
