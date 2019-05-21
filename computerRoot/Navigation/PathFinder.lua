@@ -105,50 +105,42 @@ end
 function PathFinder:_getPossibleSteps(node)
 	local forward =
 		self:_createNode( --
-		Position(node.position):add( --
-			Position.Offsets[node.position.direction] --
-		), --
+		node.position:forward(), --
 		node, --
 		'f'
 	)
 
 	local back =
 		self:_createNode( --
-		Position(node.position):sub( --
-			Position.Offsets[node.position.direction] --
-		), --
+		node.position:back(), --
 		node, --
 		'b'
 	)
 
 	local up =
 		self:_createNode( --
-		Position(node.position):add( --
-			{y = 1} --
-		), --
+		node.position:up(), --
 		node, --
 		'u'
 	)
 
 	local down =
 		self:_createNode( --
-		Position(node.position):add( --
-			{y = -1} --
-		), --
+		node.position:down(), --
 		node, --
 		'd'
 	)
 
 	local left =
 		self:_createNode( --
-		Position(node.position):rotate(1), --
+		node.position:left(), --
 		node, --
 		'l'
 	)
 
 	local right =
 		self:_createNode( --
-		Position(node.position):rotate(-1), --
+		node.position:right(), --
 		node, --
 		'r'
 	)

@@ -121,6 +121,36 @@ function Position:getDirectionOffset(direction)
 	return Position.WrapDirection(direction - self.direction)
 end
 
+function Position:forward(count)
+	count = assertType(coalesce(count, 1), 'int')
+	local offset = Position.Offsets[self.direction]
+	return Position(self.x + (offset.x * count), self.y, self.z + (offset.z * count), self.direction)
+end
+
+function Position:back(count)
+	return self:forward(-count)
+end
+
+function Position:up(count)
+	count = assertType(coalesce(count, 1), 'int')
+
+	return Position(self.x, self.y + count, self.z, self.direction)
+end
+
+function Position:down(count)
+	return self:up(-count)
+end
+
+function Position:left(count)
+	count = assertType(coalesce(count, 1), 'int')
+	return Position(self):rotate(count)
+end
+
+function Position:right(count)
+	count = assertType(coalesce(count, 1), 'int')
+	return Position(self):rotate(-count)
+end
+
 function Position:toString()
 	return 'x: ' ..
 		self.x .. ', y: ' .. self.y .. ', z: ' .. self.z .. ', f: ' .. Position.DirectionNames[self.direction]:sub(1, 1)
