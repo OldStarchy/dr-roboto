@@ -1,24 +1,30 @@
-local Lumberjack = {}
-local log = Log('lumberjack')
+local Lumberjack = Class()
+Lumberjack.ClassName = 'Lumberjack'
 
-local function collectLeaves()
+function Lumberjack:constructor()
+	self.ev = EventManager()
+end
+
+function Lumberjack:_collectLeaves()
 	for i = 1, 4 do
 		turtle.dig()
 		turtle.turnRight()
 	end
 end
 
-function Lumberjack.harvestTree()
-	log:info('Harvesting Tree')
+function Lumberjack:harvestTree()
 	turtle.dig()
+
+	self.ev:trigger('before_move', 'forward')
 	turtle.forward()
 	local height = 0
 
 	while (turtle.digUp()) do
+		self.ev:trigger('before_move', 'up')
 		turtle.up()
 		height = height + 1
 
-		collectLeaves()
+		self:_collectLeaves()
 	end
 
 	while (height > 0) do
@@ -26,10 +32,12 @@ function Lumberjack.harvestTree()
 		height = height - 1
 	end
 
+	self.ev:trigger('before_move', 'back')
 	turtle.back()
 end
 
-function Lumberjack.plantTree()
+function Lumberjack:plantTree()
+	error('Lumberjack:plantTree not implemented')
 	--TODO: select sapling
 	return turtle.place()
 end
