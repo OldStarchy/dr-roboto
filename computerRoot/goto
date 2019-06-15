@@ -4,7 +4,7 @@ if (#args == 0) then
 	print('goto x y z')
 	print('goto x z')
 	print('goto y')
-	print('goto namedLocation')
+	--print('goto namedLocation')
 	return
 end
 
