@@ -1,0 +1,68 @@
+--lua
+
+print('running replication program')
+
+local startLocation = nil
+
+local function firstTree()
+	startLocation = mov:getPosition()
+
+	turtle.dig()
+	local detail = inv:getItemDetail()
+	assert(detail:matches('log'))
+
+	inv:select(2)
+	turtle.craft()
+	turtle.refuel(4)
+
+	mov:forward()
+
+	local y = mov:getY()
+
+	turtle.digUp()
+	turtle.up()
+	turtle.digUp()
+
+	detail = inv:getItemDetail()
+	assert(detail:matches('log'))
+	assert(detail.count == 2)
+
+	turtle.select(1)
+	turtle.craft(2)
+	turtle.transferTo(2, 1)
+	turtle.transferTo(3, 1)
+	turtle.transferTo(5, 1)
+	turtle.transferTo(7, 1)
+	turtle.transferTo(9, 1)
+	turtle.transferTo(10, 1)
+	turtle.transferTo(11, 1)
+
+	turtle.craft(1)
+
+	detail = inv:getItemDetail()
+	assert(detail:matches('chest'))
+
+	while (turtle.detectUp()) do
+		turtle.digUp()
+		mov:up()
+	end
+
+	nav:goToY(y)
+end
+
+local function init()
+	local goal = 'crafty_mining_turtle'
+
+	firstTree()
+
+	TaskManager.Instance:addTask(GatherItemTask(goal, 1))
+
+	local tr = TaskRunner(SkillSet.Instance, TaskManager.Instance, false)
+	tr:run()
+
+	mov:goTo(startLocation:back(1))
+	inv:select(goal)
+	turtle.place()
+end
+
+init()
