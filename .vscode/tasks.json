@@ -31,6 +31,20 @@
 				"command": "/usr/local/opt/lua@5.1/bin/lua5.1 generateSnippets.lua"
 			},
 			"problemMatcher": []
+		},
+		{
+			"label": "Build Transpile Script",
+			"type": "shell",
+			"command": "tsc --sourceMap true --lib es2015,dom --target ES2015 --moduleResolution node --module commonjs ${workspaceRoot}/transpile.ts",
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Transpile Script --watch",
+			"type": "shell",
+			"command": "tsc -w --sourceMap true --lib es2015,dom --target ES2015 --moduleResolution node --module commonjs ${workspaceRoot}/transpile.ts",
+			"group": "build",
+			"problemMatcher": []
 		}
 	]
 }

@@ -7,3 +7,7 @@ stacktrace.txt
 computerRoot/logs
 !computerRoot/data/recipebook.tbl
 !computerRoot/data/iteminfo.tbl
+/node_modules
+/dist
+transpile.js
+transpile.js.map
