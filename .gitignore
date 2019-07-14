@@ -9,5 +9,4 @@ computerRoot/logs
 !computerRoot/data/iteminfo.tbl
 /node_modules
 /dist
-transpile.js
-transpile.js.map
+/transpiler-dist

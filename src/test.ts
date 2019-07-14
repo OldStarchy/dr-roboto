@@ -1,117 +1,94 @@
-declare class Recipe {
-	[index: number]: Item;
+/** @noSelfInFile */
+const LOG_NONE = -1;
+const LOG_SOME = 0;
+const LOG_ALL = 1;
 
-	public getItemsCount(): { item: Item; count: number }[];
-}
+let logLevel = 1;
 
-declare class Item {
-	public getRecipe(): Recipe;
-}
+function findTests(rootDir: string): string[] {
+	const results: string[] = [];
 
-abstract class Task {
-	// public parentTask: Task | null = null;
-	public readonly subTasks: Task[] = [];
+	const dirsToCheck = [rootDir];
 
-	public initialize(state: TurtleState): void {}
+	while (dirsToCheck.length > 0) {
+		const currentDirectory = table.remove(dirsToCheck);
 
-	public addSubTask(task: Task): void {
-		this.subTasks.push(task);
-		// task.parentTask = this;
-	}
+		if (fs.isDir(currentDirectory)) {
+			const files = fs.list(currentDirectory);
 
-	public flatten() {
-		return [...this.subTasks, this];
-	}
-
-	public abstract combine(otherTask: this);
-}
-
-function equalType<T, V extends T>(a: T, b: V): a is V {
-	return a instanceof b.constructor;
-}
-
-abstract class ItemTask extends Task {
-	public constructor(public readonly item: Item) {
-		super();
-	}
-}
-
-class GatherItemTask extends Task {
-	public constructor(
-		public readonly item: Item,
-		public readonly count: number
-	) {
-		super();
-	}
-
-	public combine(otherTask: this) {
-		otherTask;
-	}
-}
-
-declare class Inventory {
-	getItemCount(item: Item): number;
-	take(item: Item, count: number): void;
-}
-
-declare class TurtleState {
-	public inventory: Inventory;
-}
-
-class BuildTask extends Task {
-	public constructor(public item: Item) {
-		super();
-	}
-
-	public initialize(state: TurtleState) {
-		const recipe = this.item.getRecipe();
-		const ingredients = recipe.getItemsCount();
-
-		for (const ingredient of ingredients) {
-			const availableOfItem = state.inventory.getItemCount(
-				ingredient.item
-			);
-			if (availableOfItem >= ingredient.count) {
-				state.inventory.take(ingredient.item, ingredient.count);
-			} else {
-				state.inventory.take(ingredient.item, availableOfItem);
-				this.addSubTask(
-					new GatherItemTask(
-						ingredient.item,
-						ingredient.count - availableOfItem
-					)
-				);
+			for (const file of files) {
+				if (fs.isDir(currentDirectory + '/' + file)) {
+					if (file != '.' && file != '..') {
+						table.insert(
+							dirsToCheck,
+							currentDirectory + '/' + file
+						);
+					}
+				} else if (string.sub(file, -'Test.lua'.length) == 'Test.lua') {
+					table.insert(results, currentDirectory + '/' + file);
+				}
 			}
 		}
 	}
+
+	return results;
 }
 
-class Planner {
-	public compile(tasks: Task[]) {
-		const executableTasks: Task[] = [];
+function loadAllTests() {
+	const tests = [];
+	const env = setmetatable(
+		{
+			test: function(...args: any[]) {
+				const testObjs = createTests(...args);
 
-		for (const task of tasks) {
-			executableTasks.push(...task.flatten());
-		}
-
-		// Combine adjacent tasks;
-		// [get 1 log, get 1 log, craft chest, get 1 log, get 1 log, craft chest]
-		// becomes
-		// [get 2 log, craft chest, get 2 log, craft chest]
-		const reducedTasks: Task[] = executableTasks.reduce<Task[]>(
-			(result, currentTask) => {
-				if (!result[result.length - 1].combine(currentTask)) {
-					result.push(currentTask);
+				for (const i in testObjs) {
+					table.insert(tests, testObjs[i]);
 				}
-				return result;
-			},
-			[executableTasks.shift()]
-		);
+			}
+		},
+		{
+			__index: getfenv()
+		}
+	);
 
-		return new Plan(reducedTasks);
+	const files = findTests('.');
+	for (const file of files) {
+		pcall(() => {
+			const [chunk, err] = loadfile(file, env);
+			if (chunk == null) {
+				throw `Could not load test file: ${file}: ${err}`;
+			}
+			chunk();
+		});
+	}
+
+	return tests;
+}
+
+const args = arguments;
+
+if (args.length > 0) {
+	if (args[1] != null) {
+		logLevel = tonumber(args[1]);
+		table.remove(args, 1);
 	}
 }
 
-class Plan {
-	public constructor(public tasks: Task[]) {}
+if (args.length == 0) {
+	console.log('Running startup tests...');
+	console.log();
+	let allTests = loadAllTests();
+	const totalCount = allTests.length;
+	allTests = filterTests(allTests, 'Crafter.*', true);
+	const runCount = allTests.length;
+
+	runTests(allTests, logLevel);
+
+	if (runCount < totalCount) {
+		console.log('(skipped ' + (totalCount - runCount) + ')');
+	}
+} else {
+	let allTests = loadAllTests();
+	allTests = filterTests(allTests, args);
+	runTests(allTests, logLevel);
 }

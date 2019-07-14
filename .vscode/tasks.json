@@ -35,14 +35,14 @@
 		{
 			"label": "Build Transpile Script",
 			"type": "shell",
-			"command": "tsc --sourceMap true --lib es2015,dom --target ES2015 --moduleResolution node --module commonjs ${workspaceRoot}/transpile.ts",
+			"command": "tsc --sourceMap true --lib es2015,dom --target ES2015 --moduleResolution node --module commonjs ${workspaceRoot}/transpiler-src/transpile.ts --outDir ${workspaceRoot}/transpiler-dist/",
 			"group": "build",
 			"problemMatcher": []
 		},
 		{
 			"label": "Build Transpile Script --watch",
 			"type": "shell",
-			"command": "tsc -w --sourceMap true --lib es2015,dom --target ES2015 --moduleResolution node --module commonjs ${workspaceRoot}/transpile.ts",
+			"command": "tsc -w --sourceMap true --lib es2015,dom --target ES2015 --moduleResolution node --module commonjs ${workspaceRoot}/transpiler-src/transpile.ts --outDir ${workspaceRoot}/transpiler-dist/",
 			"group": "build",
 			"problemMatcher": []
 		}

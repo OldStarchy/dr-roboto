@@ -8,7 +8,7 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Launch Program",
-			"program": "${workspaceFolder}/transpile.js"
+			"program": "${workspaceFolder}/transpiler-dist/transpile.js"
 		},
 		{
 			"name": "launch-lua",

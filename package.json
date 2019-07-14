@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "^12.6.2",
+    "debounce": "^1.2.0",
     "gulp": "^4.0.2",
     "typescript": "^3.5.3"
   }
