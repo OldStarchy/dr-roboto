@@ -9,7 +9,6 @@
 	},
 	"files.insertFinalNewline": true,
 	"files.trimFinalNewlines": true,
-	"todo-tree.regex": "((//|#|<!--|;|/\\*|--|^)\\s*($TAGS)|^\\s*- \\[ \\])",
 	"cSpell.words": [
 		"Roboto",
 		"dofile",
@@ -17,5 +16,6 @@
 		"metatable's",
 		"metatables",
 		"newindex"
-	]
+	],
+	"todo-tree.regex.regex": "((//|#|<!--|;|/\\*|--|^)\\s*($TAGS)|^\\s*- \\[ \\])"
 }
