@@ -39,7 +39,14 @@ setmetatable(
 					end
 
 					for i, v in pairs(interface) do
-						assert(type(obj[i]) == v, 'obj[' .. tostring(i) .. '] is ' .. type(obj[i]) .. ' not ' .. v, frame)
+						assertType(
+							obj[i],
+							v,
+							'obj[' ..
+								tostring(i) ..
+									'] is ' .. type(obj[i]) .. ' not ' .. tostring(v) .. (err and (' (caused by ' .. err .. ')') or ''),
+							frame
+						)
 					end
 
 					return obj

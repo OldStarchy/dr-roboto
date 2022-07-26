@@ -19,7 +19,7 @@ function classMeta.__call(_, parent, ...)
 	local implementationAsserted = false
 
 	class.ChildTypes = {}
-	class.DefinitionLocation = getStackFrame(2)
+	class.DefinitionLocation = debug.getinfo(2, 'S').source
 	if (parent ~= nil) then
 		if (parent.isInterface) then
 			interfaces = {parent, ...}

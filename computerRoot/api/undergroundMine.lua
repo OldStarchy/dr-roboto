@@ -3,12 +3,12 @@ local function tryRefuel(direction)
 	if (inv:pushSelection('bucket')) then
 		if (inv:hasEmpty()) then
 			if (turtle['place' .. direction]()) then
-				log.info('Refueled from lava source')
+				log:info('Refueled from lava source')
 				inv:select('lava_bucket')
 				turtle.refuel(1)
 			end
 		else
-			log.info('No room to pick up lava for refueling')
+			log:info('No room to pick up lava for refueling')
 		end
 	end
 	inv:popSelection()
@@ -30,7 +30,7 @@ local function check(state, direction)
 	local item, detail = turtle['inspect' .. direction]()
 
 	if (item) then
-		log.info('found ' .. detail:getId())
+		log:info('found ' .. detail:getId())
 
 		if (detail:matches('lava')) then
 			if (detail.metadata == 0) then
@@ -40,11 +40,11 @@ local function check(state, direction)
 		end
 
 		if (detail:isLiquid()) then
-			log.info('liquid, blocking off')
+			log:info('liquid, blocking off')
 			if (inv:pushSelection('cobblestone,dirt')) then
 				turtle['place' .. direction]()
 			else
-				log.info('nothing to block it off with')
+				log:info('nothing to block it off with')
 			end
 			inv:popSelection()
 		else

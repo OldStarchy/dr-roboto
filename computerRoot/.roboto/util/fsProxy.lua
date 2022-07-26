@@ -1,4 +1,9 @@
+if (type(fs.redirect) == 'function') then
+	error(2, 'fs proxy already loaded')
+end
+
 local native = fs
+
 fs = {}
 fs.native = native
 

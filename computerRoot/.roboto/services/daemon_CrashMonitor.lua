@@ -4,6 +4,6 @@ while (run) do
 	if (e == 'terminate') then
 		run = false
 	else
-		log.warn('Process ' .. tostring(id) .. ' "' .. tostring(name) .. '" has crashed')
+		log:warn('Process ' .. tostring(id) .. ' "' .. tostring(name) .. '" has crashed')
 	end
 end

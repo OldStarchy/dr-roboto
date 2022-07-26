@@ -1,10 +1,12 @@
-local nativefs = fs
+-- Last tested against a very old version of CC
+
+local combine = fs.combine
 local fsType = {
 	directory = 0,
 	textFile = 1,
 	binaryFile = 2
 }
-local function VirtualFileSystem(name, maxSize)
+function VirtualFileSystem(name, maxSize)
 	assertType(name, 'string')
 	maxSize = assertType(coalesce(maxSize, 999000), 'int')
 
@@ -495,9 +497,7 @@ local function VirtualFileSystem(name, maxSize)
 
 	-- Combines two path components, returning a path consisting of the local path nested inside the base path.
 	-- return: string path
-	function o.combine(basePath, localPath)
-		return nativefs.combine(basePath, localPath)
-	end
+	o.combine = combine
 
 	-- Opens a file so it can be read or written.
 	-- return: table handle
@@ -618,5 +618,3 @@ local function VirtualFileSystem(name, maxSize)
 
 	return o
 end
-
-vfs = VirtualFileSystem

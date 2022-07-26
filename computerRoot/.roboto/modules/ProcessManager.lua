@@ -199,7 +199,7 @@ function ProcessManager:getCurrentProcess()
 end
 
 --TODO: write api for kernal
-function ProcessManager:getAPI()
+function ProcessManager:createAPI()
 	local this = self
 	local api = {}
 

@@ -1,4 +1,4 @@
-local Planner = Class()
+Planner = Class()
 
 function Planner:planSchedule(tasks, skillSet)
 	local skills = skillSet:getSkills()

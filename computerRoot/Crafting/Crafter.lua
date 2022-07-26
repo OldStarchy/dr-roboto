@@ -84,24 +84,31 @@ function Crafter:_hasIngredientsToCraft(recipe, amount)
 
 	local err = false
 	for _item, count in pairs(items) do
-		log.info('need "' .. _item .. '" * ' .. tostring(count * amount))
+		log:info('need "' .. _item .. '" * ' .. tostring(count * amount))
 		local _count = inv:getUnlockedCount(_item)
-		log.info('have ' .. tostring(_count))
+		log:info('have ' .. tostring(_count))
 		if (_count < count * amount) then
 			err = true
-			log.info('missing ' .. tostring((count * amount) - _count) .. ' ' .. _item)
+			log:info('missing ' .. tostring((count * amount) - _count) .. ' ' .. _item)
 		end
 	end
 
 	return not err
 end
 
+function Crafter:equipCraftingBench()
+	if (inv:pushSelection('crafting_table')) then
+		turtle.equipLeft()
+		inv:popSelection()
+		return true
+	end
+
+	return false
+end
+
 function Crafter:craft(item, amount)
 	if (turtle.craft == nil) then
-		if (inv:pushSelection('crafting_table')) then
-			turtle.equipLeft()
-			inv:popSelection()
-		end
+		self:equipCraftingBench()
 		if (turtle.craft == nil) then
 			error('Missing crafting bench!')
 		end
@@ -134,12 +141,12 @@ function Crafter:craft(item, amount)
 		error('not enough resources to craft ' .. item)
 	end
 
-	log.info('Trying to craft ' .. recipe.output .. ' ' .. tostring(amount) .. ' times')
+	log:info('Trying to craft ' .. recipe.output .. ' ' .. tostring(amount) .. ' times')
 
 	local _, belowBlock = turtle.inspectDown()
 	if (inv:select('chest')) then
 		if (belowBlock) then
-			log.warn('digging down')
+			log:warn('digging down')
 			turtle.digDown()
 		end
 		if (not turtle.placeDown()) then

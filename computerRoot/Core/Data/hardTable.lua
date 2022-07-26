@@ -98,10 +98,13 @@ function hardTableExport(ht)
 end
 
 function removeHardTable(filename)
+	assertType(filename, 'string', 'Argument #1 to removeHardTable must be a string', 2)
 	fs.delete(filename)
 end
 
 function hardTable(filename)
+	assertType(filename, 'string', 'Argument #1 to hardTable must be a string', 2)
+
 	if (stringutil.endsWith(filename, '.lua')) then
 		error('Creating a hardTable with a .lua extension is probably an error', 2)
 	end
