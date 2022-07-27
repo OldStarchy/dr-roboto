@@ -244,14 +244,14 @@ local function doTest(testObj, testContext)
 
 	local testWrapper = function()
 		include 'Core/_main'
-		fs.redirect(vfs(testObj.name))
+		fs.redirect(VirtualFileSystem(testObj.name))
 
 		testObj.tester(testParams)
 		testParams.finalize()
 
 		local dirList = fs.list('')
 		if (#dirList > 0) then
-			print(dirList, 'files left over')
+			print(tableToString(dirList), 'files left over')
 		end
 	end
 
@@ -339,8 +339,6 @@ local function doTest(testObj, testContext)
 
 	-- Long running programs must yield regularly or risk getting killed
 	sleep(0)
-
-	--TODO: potentially check for changes to env to detect side-effects?
 
 	if (testContext.logLevel > LOG_SOME) then
 		if (testContext.logLevel <= LOG_ALL and not success) then
@@ -584,7 +582,7 @@ if (#args == 0) then
 	print()
 	local allTests = loadAllTests()
 	local totalCount = #allTests
-	allTests = filterTests(allTests, 'Crafter.*', true)
+	-- allTests = filterTests(allTests, 'Crafter.*', true)
 	local runCount = #allTests
 	runTests(allTests, loglevel)
 
