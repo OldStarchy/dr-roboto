@@ -16,11 +16,11 @@ if (not drRobotoIsLoaded) then
 	return
 end
 
---TODO: file not found
--- os.run(_ENV, 'UserFunctions/_main')
-
 include 'Core/_main'
-include 'UserFunctions/_main'
+
+if (turtle) then
+	include 'UserFunctions/_main'
+end
 
 local function loadAndBind(file, class, event, ...)
 	local obj = Class.LoadOrNew(file, class, ...)
@@ -28,9 +28,14 @@ local function loadAndBind(file, class, event, ...)
 	return obj
 end
 
-log:info('Restoring location')
-_G.mov = loadAndBind('data/mov.tbl', MoveManager, 'turtle_moved', turtle)
-_G.nav = Navigator(mov)
+if (turtle) then
+	log:info('Restoring location')
+	mov = loadAndBind('data/mov.tbl', MoveManager, 'turtle_moved', turtle)
+	nav = Navigator(mov)
+
+	Crafting = Crafter(turtle)
+end
+
 Map.Instance = Map()
 
 TagManager.Instance = loadAndBind('data/tagmanager.tbl', TagManager, nil, Map.Instance)
@@ -40,15 +45,15 @@ log:info(#Skill.ChildTypes .. ' skills')
 
 local singletons = {
 	ItemInfo,
-	RecipeBook,
 	TaskManager
 }
+if (turtle) then
+	table.insert(singletons, RecipeBook)
+end
 
 for _, v in ipairs(singletons) do
 	log:info('Loading ' .. v.ClassName)
 	v.Instance = loadAndBind('data/' .. string.lower(v.ClassName) .. '.tbl', v)
 end
-
-Crafting = Crafter(turtle)
 
 fs.delete('.roboto-crashed')
