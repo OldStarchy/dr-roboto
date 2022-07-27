@@ -7,7 +7,7 @@ function Cli:constructor(name, description, default)
 
 	self._actions = {}
 
-	if (type(default == 'string')) then
+	if (type(default) == 'string') then
 		default = {default}
 	end
 	self._default = assertType(coalesce(default, {'help'}), 'table')
