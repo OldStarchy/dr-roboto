@@ -2,6 +2,9 @@
 -- surf:startMirroring(term.native(), 1, 1)
 
 -- local surfTerm = surf:asTerm()
+if (true) then
+	return
+end
 
 rednet.open('right')
 
