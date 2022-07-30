@@ -3,6 +3,7 @@ FileWriter.ClassName = 'FileWriter'
 
 function FileWriter:constructor(fileName)
 	assertType(fileName, 'string')
+	self.maximumLogCount = 10
 	self._fileName = fileName
 
 	local path = fs.getDir(fileName)
@@ -23,6 +24,11 @@ function FileWriter:shuffleBackups()
 	function backup(n)
 		local oldName = self:_compileName(name, n, extension)
 		local newName = self:_compileName(name, n + 1, extension)
+
+		if (n >= self.maximumLogCount) then
+			fs.delete(oldName)
+			return
+		end
 
 		if (fs.exists(newName)) then
 			backup(n + 1)
