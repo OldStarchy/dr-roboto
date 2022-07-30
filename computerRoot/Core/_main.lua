@@ -12,6 +12,6 @@ includeAll 'Cartography'
 includeAll 'Tasks'
 includeAll 'Skills'
 
--- includeAll 'UI'
+includeAll 'UI'
 
 include 'Core/Cli'
