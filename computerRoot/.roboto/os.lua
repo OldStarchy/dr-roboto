@@ -129,7 +129,6 @@ for _, service in ipairs(services) do
 			local chunk, err = loadfile(join(servicePath, service))
 
 			if (chunk) then
-				write(' ' .. service .. ' ...')
 				log:info('Loading service ' .. service)
 
 				local daemon = stringutil.startsWith(service, 'daemon_')
@@ -141,7 +140,6 @@ for _, service in ipairs(services) do
 					service,
 					daemon
 				)
-				writeLn('OK')
 			else
 				log:error('Failed to load service ' .. service .. ': ' .. err)
 			end
@@ -176,9 +174,7 @@ process.spawnProcess(
 local ok, err =
 	runWithLogging(
 	function()
-		print('Roboto OS started')
 		procMan:run()
-		print('Roboto OS stopped')
 	end
 )
 
@@ -195,7 +191,7 @@ if not ok then
 		end
 	)
 else
+	-- print('Goodbye')
+	-- sleep(1)
 	log:info('Shutdown safely')
-	print('Goodbye')
-	sleep(1)
 end
