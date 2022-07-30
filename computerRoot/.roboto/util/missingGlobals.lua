@@ -1,4 +1,4 @@
-local ignoreMissingGlobal = false
+local ignoreMissingGlobal = true
 local ignoreMissingGlobals = {
 	_PROMPT = true,
 	_PROMPT2 = true,
