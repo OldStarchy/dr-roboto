@@ -1,3 +1,4 @@
+---@class Action
 Action = Class()
 Action.ClassName = 'Action'
 
@@ -30,6 +31,7 @@ function Action:singleInvoke()
 	return self.innerFunction(table.unpack(self.arguments)) or true
 end
 
+---@param invoc ActionInvocation
 function Action:invoke(invoc)
 end
 

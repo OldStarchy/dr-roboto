@@ -215,6 +215,8 @@ function Go:saveCommandToHistory(input)
 end
 
 function Go:execute(input, silentMode)
+	local oldCurrent = Go.current
+	Go.current = self
 	self:saveCommandToHistory(input)
 	self.inp = input
 	self.inputClean = input:gsub('%%', ' ')
@@ -266,4 +268,6 @@ function Go:execute(input, silentMode)
 			print()
 		end
 	end
+
+	Go.current = oldCurrent
 end

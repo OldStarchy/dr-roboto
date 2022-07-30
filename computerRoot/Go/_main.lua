@@ -17,6 +17,7 @@ include 'Go/MoveAction'
 include 'Go/FindAction'
 include 'Go/ItemAction'
 include 'Go/AttachmentAction'
+include 'Go/RedstoneAction'
 
 --[[ Go ]]
 include 'Go/Go'

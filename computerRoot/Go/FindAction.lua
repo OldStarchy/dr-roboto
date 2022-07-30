@@ -1,3 +1,4 @@
+---@class FindAction : Action
 FindAction = Class(Action)
 FindAction.ClassName = 'FindAction'
 function FindAction.GetFactory(func)
@@ -5,6 +6,7 @@ function FindAction.GetFactory(func)
 		return FindAction(func)
 	end
 end
+
 function FindAction:constructor(findFunc)
 	Action.constructor(self)
 	self.findFunc = findFunc
@@ -17,7 +19,10 @@ function FindAction:call(invoc)
 	success, result = self.findFunc()
 
 	if not success then
-		return ActionResult(self, false)
+		result = {
+			name = 'air',
+			metadata = 0
+		}
 	end
 
 	if not self.findstr then
@@ -32,12 +37,13 @@ function FindAction:call(invoc)
 		return ActionResult(self, true, result.name)
 	end
 
-	if result.metadata == self.metadata then
-		return ActionResult(self, true)
+	if result.state and (result.state.age == self.metadata) then
+		return ActionResult(self, true, result.name)
 	end
 
 	return ActionResult(self, false, result.metadata)
 end
+
 function FindAction:mod(mod)
 	if type(mod) == 'number' then
 		self.metadata = mod

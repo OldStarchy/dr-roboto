@@ -1,3 +1,4 @@
+---@class ActionInvocation
 ActionInvocation = Class()
 ActionInvocation.ClassName = 'ActionInvocation'
 

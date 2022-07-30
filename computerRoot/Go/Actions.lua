@@ -29,6 +29,13 @@ go:alias({'S', 'drop'}, ItemAction.GetFactory(turtle.drop))
 go:alias({'S^', 'dropUp'}, ItemAction.GetFactory(turtle.dropUp))
 go:alias({'Sv', 'dropDown'}, ItemAction.GetFactory(turtle.dropDown))
 
+go:alias({'Rf', 'redstoneFront'}, RedstoneAction.GetFactory('front'))
+go:alias({'Rb', 'redstoneBack'}, RedstoneAction.GetFactory('back'))
+go:alias({'Rl', 'redstoneLeft'}, RedstoneAction.GetFactory('left'))
+go:alias({'Rr', 'redstoneRight'}, RedstoneAction.GetFactory('right'))
+go:alias({'Ru', 'redstoneUp'}, RedstoneAction.GetFactory('up'))
+go:alias({'Rd', 'redstoneDown'}, RedstoneAction.GetFactory('down'))
+
 go:alias(
 	{'m', 'mood'},
 	function()
@@ -80,6 +87,7 @@ go:alias(
 					return ActionResult(self, false)
 				end
 
+				term.clearLine()
 				print(str)
 
 				return ActionResult(self, true, str)
@@ -128,6 +136,39 @@ go:alias(
 	function()
 		local action = {
 			run = function(self, invoc)
+				if (self.findStr ~= nil) then
+					local found = false
+
+					while (not found) do
+						for i = 1, 16 do
+							if (turtle.getItemCount(i) > 0) then
+								local name = turtle.getItemDetail(i).name
+								local match = false
+
+								if self.exact then
+									match = name == self.findStr
+								else
+									match = string.find(name, self.findStr, 1, true)
+								end
+								if (match) then
+									turtle.select(i)
+									found = true
+									break
+								end
+							end
+						end
+
+						if (self.optional) then
+							break
+						end
+						if (not found) then
+							term.clearLine()
+							print('waiting for ' .. self.findStr)
+							os.pullEvent('turtle_inventory')
+						end
+					end
+					return ActionResult(self, found)
+				end
 				local s = self.index
 
 				if self.incremental then
@@ -146,6 +187,9 @@ go:alias(
 			index = 1,
 			incremental = false,
 			decremental = false,
+			findStr = nil,
+			exact = false,
+			optional = false,
 			mod = function(self, m)
 				if type(m) == 'number' then
 					self.index = m
@@ -168,6 +212,21 @@ go:alias(
 						self.decremental = true
 						return true
 					end
+
+					if m == '~' then
+						self.exact = true
+						return true
+					end
+
+					if m == '?' then
+						self.optional = true
+						return true
+					end
+				end
+
+				if type(m) == 'table' then
+					self.findStr = m.str
+					return true
 				end
 
 				return false
