@@ -5,24 +5,76 @@ local headers = {
 	['x-tap'] = version
 }
 
-local function get(file)
+local function downloadMd5()
+	local url = 'https://raw.githubusercontent.com/kikito/md5.lua/4b5ce0cc277a5972aa3f5161d950f809c2c62bab/md5.lua'
+
+	shell.run('wget', url, '.tap/md5.lua')
+end
+
+local function loadMd5()
+	if (_G.md5) then
+		return _G.md5
+	end
+
+	if (not fs.exists('.tap/md5.lua')) then
+		downloadMd5()
+	end
+
+	_G.md5 = dofile('.tap/md5.lua')
+
+	return _G.md5
+end
+
+local function getFileMd5(file)
+	local md5 = loadMd5()
+
+	local fileHandle = fs.open(file, 'r')
+	local fileData = fileHandle.readAll()
+	fileHandle.close()
+
+	return md5.sumhexa(fileData)
+end
+
+local function get(file, localMd5)
 	local url = protocol .. '://' .. fs.combine(domain, file)
+
+	local _headers = {}
+	for k, v in pairs(headers) do
+		_headers[k] = v
+	end
+
+	if (localMd5) then
+		_headers['If-None-Match'] = localMd5
+	end
 
 	local response, errorMessage, badResponse = http.get(url, headers)
 
 	if response then
+		if (response.getResponseCode() == 304) then
+			return 304, nil
+		end
 		local data = response.readAll()
 
-		return true, data
+		return response.getResponseCode(), data
 	else
-		return false, errorMessage, badResponse.readAll()
+		return badResponse.getResponseCode(), errorMessage, badResponse.readAll()
 	end
 end
 
 local function download(file, context, flagForce, flagNoBackup, flagSync)
-	local success, data = get(file)
+	local localMd5 = nil
 
-	if (success) then
+	if (not fs.isDir(file) and fs.exists(file) and not flagForce) then
+		localMd5 = getFileMd5(file)
+	end
+
+	local code, data = get(file, localMd5)
+
+	if (code == 304) then
+		print('unchanged: ' .. file)
+		context.unchanged = (context.unchanged or 0) + 1
+		return
+	elseif (code == 200) then
 		local info = textutils.unserializeJSON(data)
 
 		if (info.type == 'directory') then
@@ -124,6 +176,7 @@ local flagPrint = false
 local flagForce = false
 local flagNoBackup = true
 local flagSync = false
+local flagMd5 = false
 
 print('tap version: ' .. version)
 print()
@@ -139,6 +192,8 @@ while (#args > 0) do
 		flagNoBackup = false
 	elseif (arg == '-s') then
 		flagSync = false
+	elseif (arg == '-h') then
+		flagMd5 = true
 	elseif (arg:sub(1, 1) == '-') then
 		print('Unknown option: ' .. arg)
 		return
@@ -152,7 +207,9 @@ while (#args > 0) do
 end
 
 if file ~= nil then
-	if (flagPrint) then
+	if (flagMd5) then
+		print('MD5: ' .. getFileMd5(file))
+	elseif (flagPrint) then
 		printFile(file)
 	else
 		local context = {}
