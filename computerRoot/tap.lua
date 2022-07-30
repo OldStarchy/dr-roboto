@@ -1,7 +1,9 @@
 local version = '0.1.1'
 local protocol = 'http'
 local domain = 'sorokin.id.au'
-local headers = {}
+local headers = {
+	['x-tap'] = version
+}
 
 local function get(file)
 	local url = protocol .. '://' .. fs.combine(domain, file)
