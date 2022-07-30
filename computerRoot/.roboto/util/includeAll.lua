@@ -1,4 +1,19 @@
 function includeAll(directory)
+	if (stringutil.startsWith(directory, '.')) then
+		local callerIndex = 2
+		if (debug.getinfo(callerIndex, 'f').func == includeOnce) then
+			callerIndex = callerIndex + 1
+		end
+
+		local info = debug.getinfo(callerIndex, 'S')
+		local callerSource = info.source
+		if (not fs.exists(callerSource)) then
+			error('Could not determine relative path"' .. directory .. '"', 2)
+		end
+		local callerPath = fs.getDir(callerSource)
+		directory = fs.combine(callerPath, directory)
+	end
+
 	if (not fs.exists(directory)) then
 		error('Path ' .. directory .. ' does not exist', 2)
 	end

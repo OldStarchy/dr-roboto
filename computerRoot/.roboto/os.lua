@@ -10,7 +10,7 @@ _G.os =
 os.native = native
 
 function os.version()
-	return 'Dr. Roboto 2.0'
+	return 'Dr. Roboto 3.0.0-alpha'
 end
 
 function os.isPc()

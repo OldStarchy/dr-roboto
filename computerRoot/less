@@ -1,3 +1,5 @@
+includeOnce 'lib/Graphics/Surface'
+
 --[[
 	Runs a command to an offscreen buffer, then shows the output in a scrollable pane.
 
@@ -15,7 +17,9 @@ local surface = Surface(hw, 10000)
 
 term.redirect(surface:asTerm())
 local oldread = read
-_G.read = function() return '' end
+_G.read = function()
+	return ''
+end
 
 if (isDefined('shell')) then
 	shell.run(...)
@@ -30,6 +34,11 @@ term.redirect(current)
 
 local lastLine = surface:getLastLine()
 local lim = lastLine - hh + 2
+
+if (lastLine < hh) then
+	surface:mirrorTo(term)
+	return
+end
 
 if (lim <= 0) then
 	lim = 1

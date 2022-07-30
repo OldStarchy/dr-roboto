@@ -16,11 +16,7 @@ if (not drRobotoIsLoaded) then
 	return
 end
 
-include 'Core/_main'
-
-if (turtle) then
-	include 'UserFunctions/_main'
-end
+includeOnce 'lib/Data/StateSaver'
 
 local function loadAndBind(file, class, event, ...)
 	local obj = Class.LoadOrNew(file, class, ...)
@@ -29,24 +25,26 @@ local function loadAndBind(file, class, event, ...)
 end
 
 if (turtle) then
-	log:info('Restoring location')
+	includeOnce 'lib/Turtle/MoveManager'
+	includeOnce 'lib/Turtle/Navigator'
+	includeOnce 'lib/Turtle/Crafter'
+
 	mov = loadAndBind('data/mov.tbl', MoveManager, 'turtle_moved', turtle)
 	nav = Navigator(mov)
-
 	Crafting = Crafter(turtle)
 end
 
-Map.Instance = Map()
+-- Map.Instance = Map()
 
-TagManager.Instance = loadAndBind('data/tagmanager.tbl', TagManager, nil, Map.Instance)
-BlockManager.Instance = loadAndBind('data/blockmanager.tbl', BlockManager, nil, Map.Instance)
+-- TagManager.Instance = loadAndBind('data/tagmanager.tbl', TagManager, nil, Map.Instance)
+-- BlockManager.Instance = loadAndBind('data/blockmanager.tbl', BlockManager, nil, Map.Instance)
 
-log:info(#Skill.ChildTypes .. ' skills')
+-- log:info(#Skill.ChildTypes .. ' skills')
 
-local singletons = {
-	ItemInfo,
-	TaskManager
-}
+local singletons = {}
+-- ItemInfo,
+-- TaskManager
+
 if (turtle) then
 	table.insert(singletons, RecipeBook)
 end
