@@ -36,12 +36,8 @@ local function findConnectedChests(requiredType)
 	local chests = {}
 	requiredType = requiredType or 'inventory'
 	for _, chest in pairs(peripheral.getNames()) do
-		local types = {peripheral.getType(chest)}
-
-		for _, type in ipairs(types) do
-			if (type == requiredType) then
-				table.insert(chests, chest)
-			end
+		if (peripheral.hasType(hest, requiredType)) then
+			table.insert(chests, chest)
 		end
 	end
 
@@ -302,7 +298,7 @@ cli:addAction(
 
 cli:addAction(
 	'show',
-	function(type)
+	function(typeFilter)
 		local chests = findConnectedChests()
 
 		table.sort(chests)
@@ -310,23 +306,19 @@ cli:addAction(
 		for _, chest in ipairs(chests) do
 			local types = {peripheral.getType(chest)}
 
-			local isType = false
-			if (type) then
-				for _, _type in ipairs(types) do
-					if (_type == type) then
-						isType = true
-						break
-					end
-				end
+			local isType = true
+			if (typeFilter) then
+				isType = peripheral.hasType(chest, typeFilter)
 			end
 
 			if (isType) then
 				local label = getLabel(chest)
 				local items = getItemsInChest(chest)
 				local types = table.concat(types, ', ')
+				local isEmpty = #items == 0
 
 				print(chest .. (label and ' (' .. label .. ')' or '') .. ':')
-				print(' Items:' .. #items)
+				print(' Items: ' .. (isEmpty and 'empty' or #items))
 				print(' Types: ' .. types)
 			end
 		end
