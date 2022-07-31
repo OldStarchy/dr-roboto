@@ -93,6 +93,19 @@ function ProcessManager:getProcesses()
 	return list
 end
 
+function ProcessManager:getProcessById(pid)
+	local proc, i = self:_getProcessById(pid)
+
+	if (proc) then
+		return {
+			name = proc.name,
+			id = proc.id,
+			parent = (proc.parent and proc.parent.id) or nil,
+			daemon = proc.daemon
+		}
+	end
+end
+
 function ProcessManager:sendTerminate(pid)
 	local proc = self:_getProcessById(pid)
 
@@ -209,6 +222,10 @@ function ProcessManager:createAPI()
 
 	api.getProcesses = function(...)
 		return this:getProcesses(...)
+	end
+
+	api.getProcessById = function(...)
+		return this:getProcessById(...)
 	end
 
 	api.wait = function(...)
