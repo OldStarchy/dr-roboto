@@ -1,4 +1,16 @@
+includeOnce 'lib/Cli'
+includeOnce 'lib/Graphics/Canvas'
+
 local version = '0.0.2'
+
+local function findModem()
+	for _, modem in pairs(peripheral.getNames()) do
+		if (peripheral.hasType(modem, 'modem')) then
+			return modem
+		end
+	end
+	return nil
+end
 
 local function startClient(name, sleepTime)
 	if (_G._maps) then
@@ -36,7 +48,8 @@ local function startClient(name, sleepTime)
 
 	sleepTime = coalesce(sleepTime, 1)
 
-	rednet.open('back')
+	local modemSide = findModem()
+	rednet.open(modemSide)
 
 	process.spawnProcess(
 		function()
@@ -46,7 +59,7 @@ local function startClient(name, sleepTime)
 				broadcastLocation()
 			end
 
-			rednet.close('back')
+			rednet.close(modemSide)
 			if (_G._maps == context) then
 				_G._maps = nil
 			end
@@ -141,6 +154,8 @@ local function watchLocations()
 	local reportedLocations = {}
 
 	local function handlePacket(packet)
+		print(tableToString(packet))
+		read()
 		if (packet.type == 'reportLocations') then
 			reportedLocations = packet.locations
 		end

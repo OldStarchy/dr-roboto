@@ -1,5 +1,6 @@
 includeOnce './ITerm'
 includeOnce '../Math/Matrix'
+includeOnce './Pixel'
 
 Canvas = Class()
 Canvas.ClassName = 'Canvas'
