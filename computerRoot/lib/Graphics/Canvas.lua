@@ -37,6 +37,18 @@ function Canvas:resetTransform()
 	self.transform = Matrix()
 end
 
+function Canvas:translate(x, y)
+	self.transform = self.transform:translate(x, y)
+end
+
+function Canvas:scale(x, y)
+	self.transform = self.transform:scale(x, y)
+end
+
+function Canvas:rotate(angle)
+	self.transform = self.transform:rotate(angle)
+end
+
 function Canvas:_applyTransform(x, y)
 	return self.transform:transformPoint(x, y)
 end
@@ -56,7 +68,7 @@ function Canvas:set(x, y, filled)
 	end
 
 	--TODO: remove this check it should be impossible to fail here but it has done
-	if (self.subpixelBuffery[y]) then
+	if (self.subpixelBuffer[y]) then
 		self.subpixelBuffer[y][x] = filled and 1 or 0
 	end
 
@@ -74,6 +86,10 @@ function Canvas:fill(filled)
 
 	self.ev:trigger('pixel_change')
 	self.ev:trigger('change')
+end
+
+function Canvas:clear()
+	self:fill(false)
 end
 
 function Canvas:line(x1, y1, x2, y2, filled)
