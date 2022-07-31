@@ -35,7 +35,14 @@ local function getFileMd5(file)
 	return md5.sumhexa(fileData)
 end
 
-local function get(file, localMd5)
+local function getFileHash(file)
+	return {
+		type = 'md5',
+		hash = getFileMd5(file)
+	}
+end
+
+local function get(file, hash)
 	local url = protocol .. '://' .. fs.combine(domain, file)
 
 	local _headers = {}
@@ -43,11 +50,11 @@ local function get(file, localMd5)
 		_headers[k] = v
 	end
 
-	if (localMd5) then
-		_headers['If-None-Match'] = localMd5
+	if (hash) then
+		_headers['If-None-Match'] = hash.type .. ' ' .. hash.hash
 	end
 
-	local response, errorMessage, badResponse = http.get(url, headers)
+	local response, errorMessage, badResponse = http.get(url, _headers)
 
 	if response then
 		if (response.getResponseCode() == 304) then
@@ -62,13 +69,18 @@ local function get(file, localMd5)
 end
 
 local function download(file, context, flagForce, flagNoBackup, flagSync)
-	local localMd5 = nil
+	local hash = nil
 
-	if (not fs.isDir(file) and fs.exists(file) and not flagForce) then
-		localMd5 = getFileMd5(file)
-	end
+	-- hashing is disabled for now until
+	--  1. i can find something that runs faster than it would take to download the file
+	--  2. i can make the text encoding consistent so the same text input will
+	--     always hash to the same output in both lua and nodejs
 
-	local code, data = get(file, localMd5)
+	-- if (not fs.isDir(file) and fs.exists(file) and not flagForce) then
+	-- 	hash = getFileHash(file)
+	-- end
+
+	local code, data = get(file, hash)
 
 	if (code == 304) then
 		print('unchanged: ' .. file)
@@ -192,6 +204,7 @@ while (#args > 0) do
 		flagNoBackup = false
 	elseif (arg == '-s') then
 		flagSync = false
+		flagForce = true
 	elseif (arg == '-h') then
 		flagMd5 = true
 	elseif (arg:sub(1, 1) == '-') then
