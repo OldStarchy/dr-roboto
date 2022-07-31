@@ -17,6 +17,10 @@ function os.isPc()
 	return isPc
 end
 
+function os.getTempDir()
+	return '/.tmp'
+end
+
 function os.sleepAsync(time, callback)
 	local timerId = os.startTimer(time)
 
