@@ -115,6 +115,7 @@ function Position:sub(deltas)
 end
 
 function Position:getDirectionOffset(direction)
+	direction = assertParameter(direction, 'direction', 'int')
 	if (self.direction == nil) then
 		return 0
 	end
@@ -122,32 +123,33 @@ function Position:getDirectionOffset(direction)
 end
 
 function Position:forward(count)
-	count = assertType(coalesce(count, 1), 'int')
+	count = assertParameter(coalesce(count, 1), 'count', 'int')
 	local offset = Position.Offsets[self.direction]
 	return Position(self.x + (offset.x * count), self.y, self.z + (offset.z * count), self.direction)
 end
 
 function Position:back(count)
+	count = assertParameter(coalesce(count, 1), 'count', 'int')
 	return self:forward(-count)
 end
 
 function Position:up(count)
-	count = assertType(coalesce(count, 1), 'int')
-
+	count = assertParameter(coalesce(count, 1), 'count', 'int')
 	return Position(self.x, self.y + count, self.z, self.direction)
 end
 
 function Position:down(count)
+	count = assertParameter(coalesce(count, 1), 'count', 'int')
 	return self:up(-count)
 end
 
 function Position:left(count)
-	count = assertType(coalesce(count, 1), 'int')
+	count = assertParameter(coalesce(count, 1), 'count', 'int')
 	return Position(self):rotate(count)
 end
 
 function Position:right(count)
-	count = assertType(coalesce(count, 1), 'int')
+	count = assertParameter(coalesce(count, 1), 'count', 'int')
 	return Position(self):rotate(-count)
 end
 

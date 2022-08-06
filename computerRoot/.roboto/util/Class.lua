@@ -197,6 +197,9 @@ function classMeta.__call(_, parent, ...)
 end
 
 function classIndex.LoadOrNew(file, class, ...)
+	assertParameter(file, 'file', 'string')
+	assertParameter(class, 'class', 'table')
+
 	if (fs.exists(file)) then
 		local obj = fs.readTableFromFile(file)
 

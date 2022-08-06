@@ -9,6 +9,10 @@ function OrderedList:insert(item)
 	table.insert(self._data, item)
 end
 
+function OrderedList:getItems()
+	return self._data
+end
+
 function OrderedList:pop()
 	local minScore = 100000000
 	local minId = 1
