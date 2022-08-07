@@ -17,5 +17,7 @@
 		"metatables",
 		"newindex"
 	],
-	"todo-tree.regex.regex": "((//|#|<!--|;|/\\*|--|^)\\s*($TAGS)|^\\s*- \\[ \\])"
+	"todo-tree.regex.regex": "((//|#|<!--|;|/\\*|--|^)\\s*($TAGS)|^\\s*- \\[ \\])",
+	"Lua.runtime.version": "Lua 5.1",
+	"typescript.tsdk": "node_modules\\typescript\\lib"
 }

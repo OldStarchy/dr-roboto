@@ -7,3 +7,8 @@ stacktrace.txt
 computerRoot/logs
 !computerRoot/data/recipebook.tbl
 !computerRoot/data/iteminfo.tbl
+
+/node_modules
+/server/certs
+/computerRoot/.well-known
+.env
