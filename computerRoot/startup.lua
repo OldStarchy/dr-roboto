@@ -1,18 +1,7 @@
-shell.setPath('/tap/bin:' .. shell.path())
-local drRobotoIsLoaded = os.version and os.version():sub(1, 10) == 'Dr. Roboto'
+loadfile('roboto.lua', _ENV)()
 
-print('Roboto is ' .. (drRobotoIsLoaded and 'loaded' or 'not loaded'))
-
-if (not drRobotoIsLoaded) then
-	if (fs.exists('.roboto-crashed')) then
-		print('Roboto has crashed. Delete the .roboto-crashed file to clear this message.')
-		return
-	end
-	fs.open('.roboto-crashed', 'w').close()
-
-	_G.shell = shell
-
-	loadfile('roboto.lua', _ENV)()
+local robotoIsLoaded = os.version and os.version():sub(1, 10) == 'Dr. Roboto'
+if (not robotoIsLoaded) then
 	return
 end
 
@@ -53,5 +42,3 @@ for _, v in ipairs(singletons) do
 	log:info('Loading ' .. v.ClassName)
 	v.Instance = loadAndBind('data/' .. string.lower(v.ClassName) .. '.tbl', v)
 end
-
-fs.delete('.roboto-crashed')

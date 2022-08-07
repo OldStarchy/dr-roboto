@@ -34,6 +34,9 @@ end
 
 local basePath = '/.roboto'
 
+term.clear()
+term.setCursorPos(1, 1)
+
 local isPc = os.version == nil
 if (isPc) then
 	print('Running on PC - loading polyfills')

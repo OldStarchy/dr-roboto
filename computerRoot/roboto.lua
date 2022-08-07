@@ -1,3 +1,6 @@
+local robotoIsInstalled = fs.exists('.roboto')
+local robotoIsLoaded = os.version and os.version():sub(1, 10) == 'Dr. Roboto'
+
 local function installRoboto()
 	if (not fs.exists('/tap.lua')) then
 		shell.run('wget http://sorokin.id.au/tap.lua tap.lua')
@@ -57,9 +60,88 @@ local function updateRoboto()
 	return
 end
 
+local function askToInstallRoboto()
+	local cursorBlink = term.getCursorBlink()
+
+	print('Roboto not installed')
+	print('Do you want to install it [yN]?')
+	term.setCursorBlink(true)
+
+	repeat
+		local event, char = os.pullEvent('char')
+		if (char == 'y') then
+			term.setCursorBlink(false)
+			installRoboto()
+			return
+		end
+	until (char == 'n')
+
+	print('ok.')
+	term.setCursorBlink(cursorBlink)
+	return
+end
+
+local function startRoboto()
+	if (not robotoIsLoaded) then
+		if (fs.exists('.roboto-crashed')) then
+			print('Roboto has crashed. Delete the .roboto-crashed file to clear this message.')
+			return
+		end
+		fs.open('.roboto-crashed', 'w').close()
+
+		_G.shell = shell
+
+		local sd = os.shutdown
+		os.shutdown = function()
+			if (fs.exists('.roboto-crashed')) then
+				read()
+				os.reboot()
+			else
+				sd()
+			end
+		end
+
+		xpcall(
+			function()
+				-- Load Roboto OS
+				os.run(_ENV, '.roboto/bootstrap.lua')
+			end,
+			function(error)
+				print(error)
+				read()
+			end
+		)
+		return
+	end
+end
+
 local args = {...}
 
-if (#args > 0) then
+if (#args == 0) then
+	-- running from wget run
+	if (not robotoIsInstalled) then
+		askToInstallRoboto()
+		return
+	end
+
+	-- running from initial startup
+	if (not robotoIsLoaded) then
+		startRoboto()
+		return
+	end
+
+	-- running from roboto startup
+	if (fs.exists('.roboto-crashed')) then
+		fs.delete('.roboto-crashed')
+		return
+	end
+
+	-- running from cli
+	print('Usage: roboto update')
+	return
+end
+
+if (#args == 1) then
 	if (args[1] == 'update') then
 		updateRoboto()
 		return
@@ -68,43 +150,3 @@ if (#args > 0) then
 	print('Unknown argument: ' .. args[1])
 	return
 end
-
-if (not fs.exists('/.roboto')) then
-	print('Roboto not installed')
-	print('Do you want to install it [yN]?')
-
-	repeat
-		local event, char = os.pullEvent('char')
-		if (char == 'y') then
-			installRoboto()
-			return
-		end
-	until (char == 'n')
-
-	print('ok.')
-	return
-end
-
-local drRobotoIsLoaded = os.version and os.version():sub(1, 10) == 'Dr. Roboto'
-
-if (drRobotoIsLoaded) then
-	print('Roboto already loaded')
-	return
-end
-
-local sd = os.shutdown
-os.shutdown = function()
-	read()
-	os.reboot()
-end
-
-xpcall(
-	function()
-		-- Load Roboto OS
-		os.run(_ENV, '.roboto/bootstrap.lua')
-	end,
-	function(error)
-		print(error)
-		read()
-	end
-)

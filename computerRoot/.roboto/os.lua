@@ -126,7 +126,7 @@ os.ev = EventManager()
 local services = fs.list(servicePath)
 table.sort(services)
 
-writeLn('Loading services...')
+write('Loading services...')
 for _, service in ipairs(services) do
 	if (service ~= '.' and service ~= '..') then
 		if (not fs.isDir(join(servicePath, service))) then
@@ -167,9 +167,7 @@ process.spawnProcess(
 		writeLn('OK')
 		pause()
 
-		writeLn('Starting shell...')
 		os.run(_ENV, '/rom/programs/shell.lua')
-		writeLn('Shell exited')
 	end,
 	'shell',
 	false
