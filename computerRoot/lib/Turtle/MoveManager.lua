@@ -292,6 +292,26 @@ function MoveManager:trackLocation(filename)
 	end
 end
 
+function MoveManager:locate()
+	local position1 = Position(gps.locate())
+	local move = {self:forward()}
+
+	if (not move[1]) then
+		return unpack(move)
+	end
+
+	local position2 = Position(gps.locate())
+
+	local offset = position2:sub(position1)
+	local direction = offset:getCardinalDirection()
+
+	self:setPosition(
+		Position(position2.x, position2.y, position2.z, direction)
+	)
+
+	return true
+end
+
 -- PRIVATE
 
 function MoveManager:_attach()

@@ -1,3 +1,8 @@
+--[[
+	A Position represents both a point in 3D and a direction.
+
+	The methods
+]]
 Position = Class()
 Position.ClassName = 'Position'
 
@@ -174,6 +179,18 @@ function Position:distanceTo(other)
 	assertParameter(other, 'other', Position)
 
 	return math.abs(self.x - other.x) + math.abs(self.y - other.y) + math.abs(self.z - other.z)
+end
+
+function Position:getCardinalDirection()
+	if (self.z < 0) then
+		return Position.NORTH
+	elseif (self.z > 0) then
+		return Position.SOUTH
+	elseif (self.x < 0) then
+		return Position.WEST
+	elseif (self.x > 0) then
+		return Position.EAST
+	end
 end
 
 function Position:posHash()
