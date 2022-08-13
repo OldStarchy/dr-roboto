@@ -1,9 +1,50 @@
-local version = '0.1.2'
+local version = '0.2.0'
 local protocol = 'http'
 local domain = 'sorokin.id.au'
 local headers = {
 	['x-tap'] = version
 }
+local metaDataFile = '.tap/metaData.tbl'
+
+local function tableToFile(tbl, file)
+	local str = textutils.serialize(tbl)
+	local f = fs.open(file, 'w')
+	f.write(str)
+	f.close()
+end
+
+local function fileToTable(file)
+	local f = fs.open(file, 'r')
+	local str = f.readAll()
+	f.close()
+	return str and textutils.unserialize(str) or {}
+end
+
+local function setMetaData(path, value)
+	if (fs.exists(metaDataFile)) then
+		local metaData = fileToTable(metaDataFile) or {}
+		metaData[path] = value
+		tableToFile(metaData, metaDataFile)
+	else
+		local metaData = {}
+		metaData[path] = value
+		tableToFile(metaData, metaDataFile)
+	end
+end
+
+local function getMetaData(path)
+	if (fs.exists(metaDataFile)) then
+		local metaData = fileToTable(metaDataFile)
+		if (fs.exists(path)) then
+			return metaData[path]
+		else
+			setMetaData(path, nil)
+			return nil
+		end
+	end
+
+	return nil
+end
 
 local function downloadMd5()
 	local url = 'https://raw.githubusercontent.com/kikito/md5.lua/4b5ce0cc277a5972aa3f5161d950f809c2c62bab/md5.lua'
@@ -68,7 +109,7 @@ local function get(file, hash)
 	end
 end
 
-local function download(file, context, flagForce, flagNoBackup, flagSync)
+local function download(file, context, flagForce, flagNoBackup, flagSync, flagQuiet)
 	local hash = nil
 
 	-- hashing is disabled for now until
@@ -83,7 +124,9 @@ local function download(file, context, flagForce, flagNoBackup, flagSync)
 	local code, data = get(file, hash)
 
 	if (code == 304) then
-		print('unchanged: ' .. file)
+		if (not flagQuiet) then
+			print('unchanged: ' .. file)
+		end
 		context.unchanged = (context.unchanged or 0) + 1
 		return
 	elseif (code == 200) then
@@ -112,30 +155,49 @@ local function download(file, context, flagForce, flagNoBackup, flagSync)
 				existingTable[name] = 'delete'
 			end
 
-			for index, subfile in pairs(info.entries) do
-				--TODO: compare mtime or hash
-				existingTable[subfile] = 'download'
+			for index, subfileInfo in pairs(info.entries) do
+				if (subfileInfo.type == 'file') then
+					local subfilePath = fs.combine(file, subfileInfo.name)
+					local md = getMetaData(subfilePath)
+
+					if (md == nil or md.mtime ~= subfileInfo.mtime) then
+						existingTable[subfileInfo.name] = 'download'
+					else
+						existingTable[subfileInfo.name] = 'unchanged'
+					end
+				else
+					existingTable[subfileInfo.name] = 'download'
+				end
 			end
 
 			for subfile, action in pairs(existingTable) do
 				local subfilePath = fs.combine(file, subfile)
 
 				if (action == 'delete') then
-					if (not flagNoBackup) then
-						local backup = subfilePath .. '.bak'
-						if (fs.exists(backup)) then
-							fs.delete(backup)
+					if (flagSync) then
+						if (not flagNoBackup) then
+							local backup = subfilePath .. '.bak'
+							if (fs.exists(backup)) then
+								fs.delete(backup)
+							end
+							fs.move(subfilePath, backup)
+							if (not flagQuiet) then
+								print('  backup: ' .. backup)
+							end
+							context.backups = (context.backups or 0) + 1
+						else
+							fs.delete(subfilePath)
+							if (not flagQuiet) then
+								print('  delete: ' .. subfilePath)
+							end
+
+							context.deleted = (context.deleted or 0) + 1
 						end
-						fs.move(subfilePath, backup)
-						print('  backup: ' .. backup)
-						context.backups = (context.backups or 0) + 1
-					else
-						fs.delete(subfilePath)
-						print('  delete: ' .. subfilePath)
-						context.deleted = (context.deleted or 0) + 1
 					end
+				elseif (action == 'unchanged') then
+					context.unchanged = (context.unchanged or 0) + 1
 				elseif (action == 'download') then
-					download(subfilePath, context, flagForce, flagNoBackup, flagSync)
+					download(subfilePath, context, flagForce, flagNoBackup, flagSync, flagQuiet)
 				end
 			end
 		elseif (info.type == 'file') then
@@ -152,19 +214,31 @@ local function download(file, context, flagForce, flagNoBackup, flagSync)
 						fs.delete(file .. '.bak')
 					end
 					fs.move(file, file .. '.bak')
-					print('  backup: ' .. file .. '.bak')
+					if (not flagQuiet) then
+						print('  backup: ' .. file .. '.bak')
+					end
 					context.backups = (context.backups or 0) + 1
 				end
 				context.replacedFiles = (context.replacedFiles or 0) + 1
-				print(' replace: ' .. file)
+				if (not flagQuiet) then
+					print(' replace: ' .. file)
+				end
 			else
 				context.createdFiles = (context.createdFiles or 0) + 1
-				print('download: ' .. file)
+				if (not flagQuiet) then
+					print('download: ' .. file)
+				end
 			end
 
 			local f = fs.open(file, 'w')
 			f.write(info.content)
 			f.close()
+			setMetaData(
+				file,
+				{
+					mtime = info.mtime
+				}
+			)
 		end
 	else
 		print('Error: ' .. data)
@@ -181,54 +255,77 @@ local function printFile(file)
 	end
 end
 
-local args = {...}
+if (shell) then
+	local args = {...}
 
-local file = nil
-local flagPrint = false
-local flagForce = false
-local flagNoBackup = true
-local flagSync = false
-local flagMd5 = false
+	local file = nil
+	local flagPrint = false
+	local flagForce = false
+	local flagNoBackup = true
+	local flagSync = false
+	local flagMd5 = false
+	local flagQuiet = false
 
-print('tap version: ' .. version)
-print()
+	while (#args > 0) do
+		local arg = table.remove(args, 1)
 
-while (#args > 0) do
-	local arg = table.remove(args, 1)
-
-	if (arg == '-p') then
-		flagPrint = true
-	elseif (arg == '-f') then
-		flagForce = true
-	elseif (arg == '-b') then
-		flagNoBackup = false
-	elseif (arg == '-s') then
-		flagSync = false
-		flagForce = true
-	elseif (arg == '-h') then
-		flagMd5 = true
-	elseif (arg:sub(1, 1) == '-') then
-		print('Unknown option: ' .. arg)
-		return
-	else
-		if (file ~= nil) then
-			print('Only one file can be specified')
+		if (arg == '-p') then
+			flagPrint = true
+		elseif (arg == '-f') then
+			flagForce = true
+		elseif (arg == '-b') then
+			flagNoBackup = false
+		elseif (arg == '-s') then
+			flagSync = false
+			flagForce = true
+		elseif (arg == '-h') then
+			flagMd5 = true
+		elseif (arg == '-q') then
+			flagQuiet = true
+		elseif (arg:sub(1, 1) == '-') then
+			print('Unknown option: ' .. arg)
 			return
+		else
+			if (file ~= nil) then
+				print('Only one file can be specified')
+				return
+			end
+			file = arg
 		end
-		file = arg
 	end
-end
 
-if file ~= nil then
-	if (flagMd5) then
-		print('MD5: ' .. getFileMd5(file))
-	elseif (flagPrint) then
-		printFile(file)
-	else
-		local context = {}
-		download(file, context, flagForce, flagNoBackup, flagSync)
-		for stat, count in pairs(context) do
-			print(stat .. ': ' .. count)
+	if (not flagQuiet) then
+		print('tap version: ' .. version)
+		print()
+	end
+
+	if file ~= nil then
+		if (flagMd5) then
+			print('MD5: ' .. getFileMd5(file))
+		elseif (flagPrint) then
+			printFile(file)
+		else
+			local context = {}
+			download(file, context, flagForce, flagNoBackup, flagSync, flagQuiet)
+			if (not flagQuiet) then
+				for stat, count in pairs(context) do
+					print(stat .. ': ' .. count)
+				end
+			end
 		end
 	end
+else
+	return {
+		version = version,
+		download = function(file, options)
+			local context = options.context or {}
+			local flagForce = options.force or options.sync or false
+			local flagNoBackup = options.noBackup or true
+			local flagSync = options.sync or false
+			local flagMd5 = options.md5 or false
+			local flagQuiet = options.quiet or false
+
+			download(file, context, flagForce, flagNoBackup, flagSync, flagQuiet)
+		end
+	}
 end

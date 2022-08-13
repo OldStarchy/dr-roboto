@@ -5,14 +5,17 @@ import Koa, {Middleware} from 'koa';
 import KoaJson from 'koa-json';
 import KoaStatic from 'koa-static';
 import path from 'path';
-import {SemVer} from 'semver';
+import {satisfies, SemVer} from 'semver';
 
 // stop the path import from eslinting way
 path.join('a', 'b');
 
 dotenv.config();
 
-const app = new Koa();
+interface AppContext extends Koa.DefaultContext {
+	tapVersion?: SemVer;
+}
+const app = new Koa<Koa.DefaultState, AppContext>();
 
 app.use(KoaJson());
 
@@ -33,13 +36,15 @@ app.use(async (ctx, next) => {
 	if (typeof tapVersion === 'string') {
 		const tapSemver = new SemVer(tapVersion);
 
-		if (tapSemver.major === 0 && tapSemver.minor === 1) {
+		ctx.tapVersion = tapSemver;
+		if (satisfies(tapSemver, '>=0.1.0')) {
 			return tapHandler(ctx, next);
 		} else {
 			ctx.body = 'Invalid tap version';
 			ctx.status = 400;
 			return;
 		}
+
 	} else {
 		return koaStatic(ctx, next);
 	}
@@ -59,7 +64,7 @@ const koaStatic = KoaStatic(root, {
 
 function compareHash(
 	filepath: string,
-	type: 'md5' | string,
+	type: 'md5' | 'crc32' | string,
 	givenHash: string
 ) {
 	const fileHash = crypto
@@ -71,8 +76,9 @@ function compareHash(
 	return fileHash === givenHash;
 }
 
-const tapHandler: Middleware = (ctx, next) => {
+const tapHandler: Middleware<Koa.DefaultState, AppContext> = (ctx, next) => {
 	const requestPath = ctx.request.path;
+	const tapVersion = ctx.tapVersion!;
 
 	if (/\.\./.test(requestPath)) {
 		ctx.status = 403;
@@ -98,16 +104,39 @@ const tapHandler: Middleware = (ctx, next) => {
 				return file !== '.' && file !== '..';
 			});
 
-			ctx.body = JSON.stringify({
-				type: 'directory',
-				entries,
-			});
+			if (satisfies(tapVersion, '^0.2.0')) {
+				ctx.body = JSON.stringify({
+					type: 'directory',
+					entries: entries.map((file) => {
+						const stat = fs.statSync(path.join(fullPath, file));
+
+						if (stat.isDirectory()) {
+							return {
+								type: 'directory',
+								name: file,
+							};
+						} else {
+							return {
+								name: file,
+								type: 'file',
+								mtime: fs.statSync(path.join(fullPath, file)).mtime.getTime(),
+							};
+						}
+					}),
+				});
+			} else {
+				ctx.body = JSON.stringify({
+					type: 'directory',
+					entries,
+				});
+			}
 		} else {
 			ctx.lastModified = fs.statSync(fullPath).mtime;
 
 			ctx.body = JSON.stringify({
 				type: 'file',
 				content: fs.readFileSync(fullPath, 'utf8'),
+				mtime: fs.statSync(fullPath).mtime.getTime(),
 			});
 		}
 	} else {
