@@ -1,6 +1,5 @@
 local robotoIsInstalled = fs.exists('.roboto')
 local robotoIsLoaded = os.version and os.version():sub(1, 10) == 'Dr. Roboto'
-local checkForUpdatesOnBoot = true
 
 local function installRoboto()
 	if (not fs.exists('/tap.lua')) then
@@ -90,10 +89,6 @@ local function startRoboto()
 		end
 		fs.open('.roboto-crashed', 'w').close()
 
-		if (checkForUpdatesOnBoot) then
-			shell.run('tap -s roboto.lua')
-		end
-
 		_G.shell = shell
 
 		local sd = os.shutdown
@@ -126,32 +121,24 @@ if (#args == 0) then
 	-- running from wget run
 	if (not robotoIsInstalled) then
 		askToInstallRoboto()
-		return
+		return false
 	end
 
 	-- running from initial startup
 	if (not robotoIsLoaded) then
 		startRoboto()
-		return
+		return false
 	end
 
-	-- running from roboto startup
-	if (fs.exists('.roboto-crashed')) then
-		fs.delete('.roboto-crashed')
-		return
-	end
-
-	-- running from cli
-	print('Usage: roboto update')
-	return
+	return robotoIsLoaded
 end
 
 if (#args == 1) then
 	if (args[1] == 'update') then
 		updateRoboto()
-		return
+		return false
 	end
 
 	print('Unknown argument: ' .. args[1])
-	return
+	return false
 end

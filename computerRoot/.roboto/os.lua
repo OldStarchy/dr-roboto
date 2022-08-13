@@ -88,6 +88,76 @@ _G.loadfile = function(filename, mode, env)
 	return func, err
 end
 
+if (fs.exists('tap.lua')) then
+	write('Loading updates...')
+	local she = _G.shell
+	_G.shell = nil
+	local tap, err = loadfile('tap.lua')()
+	_G.shell = she
+	if (err) then
+		print(err)
+		writeLn('ERR')
+		writeLn(err)
+		read()
+		os.reboot()
+	else
+		local context = {}
+
+		tap.download(
+			'tap.lua',
+			{
+				quiet = true,
+				force = true
+			}
+		)
+		tap.download(
+			'roboto.lua',
+			{
+				quiet = true,
+				force = true
+			}
+		)
+
+		tap.download(
+			'.roboto',
+			{
+				context = context,
+				quiet = true,
+				sync = true
+			}
+		)
+		tap.download(
+			'lib',
+			{
+				context = context,
+				quiet = true,
+				sync = true
+			}
+		)
+
+		writeLn('OK')
+		pause()
+
+		local anyChanges =
+			(context.createdFiles or 0) > 0 or --
+			(context.replacedFiles or 0) > 0 or --
+			(context.deletedFiles or 0) > 0 or --
+			(context.deleted or 0) > 0
+		if anyChanges then
+			for i, v in pairs(context) do
+				print(i .. ': ' .. tostring(v))
+			end
+			writeLn('Updates downloaded, rebooting')
+			sleep(1)
+			pause()
+			if (fs.exists('.roboto-crashed')) then
+				fs.delete('.roboto-crashed')
+			end
+			os.reboot()
+		end
+	end
+end
+
 write('Loading utils...')
 local utils = fs.list(utilPath)
 for _, util in ipairs(utils) do
@@ -157,10 +227,24 @@ process.spawnProcess(
 	function()
 		write('Running startup script...')
 		pause()
+		runWithLogging(
+			function()
+				loadfile(join(basePath, 'startup.lua'), _G)()
+			end,
+			function(err)
+				print(err)
+				read()
+				os.reboot()
+			end
+		)
 		if (fs.exists('/startup.lua')) then
 			runWithLogging(
 				function()
 					loadfile('/startup.lua', _G)()
+				end,
+				function(err)
+					print(err)
+					read()
 				end
 			)
 		end
