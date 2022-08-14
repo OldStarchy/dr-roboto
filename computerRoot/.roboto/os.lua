@@ -21,6 +21,12 @@ function os.getTempDir()
 	return '/.tmp'
 end
 
+function os.debugEvents()
+	while (true) do
+		print(os.pullEvent())
+	end
+end
+
 function os.sleepAsync(time, callback)
 	local timerId = os.startTimer(time)
 
