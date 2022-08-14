@@ -36,7 +36,7 @@ local function findConnectedChests(requiredType)
 	local chests = {}
 	requiredType = requiredType or 'inventory'
 	for _, chest in pairs(peripheral.getNames()) do
-		if (peripheral.hasType(hest, requiredType)) then
+		if (peripheral.hasType(chest, requiredType)) then
 			table.insert(chests, chest)
 		end
 	end
