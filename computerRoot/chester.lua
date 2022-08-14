@@ -1,4 +1,5 @@
 includeOnce 'lib/Cli'
+includeOnce 'lib/Data/CompletionTree'
 
 local version = '0.0.1'
 
@@ -230,6 +231,8 @@ cli:addAction(
 		print('looking in ' .. #chests .. ' chests')
 		local items = getItemsInChests(chests)
 
+		data.itemCache = items
+
 		local itemNames = {}
 		for itemName, itemCount in pairs(items) do
 			table.insert(itemNames, itemName)
@@ -279,7 +282,7 @@ cli:addAction(
 	'Deposits all items from a chest into the storage chest'
 )
 
-cli:addAction(
+cli:defineAction(
 	'withdraw',
 	function(itemName, toChest)
 		toChest = toChest or 'default'
@@ -292,8 +295,30 @@ cli:addAction(
 			print('failed to withdraw items')
 		end
 	end,
-	{'itemName', '[toChest]'},
-	'Withdraws all items of a given name from the storage into a chest'
+	{
+		args = {'itemName', '[toChest]'},
+		description = 'Withdraws all items of a given name from the storage into a chest',
+		autocomplete = function(shell, index, text, previous)
+			if (index ~= 1) then
+				return nil
+			end
+
+			if (data.itemCache == nil) then
+				return {'?'}
+			end
+
+			local items = hardTableExport(data.itemCache)
+			local completionTree = CompletionTree()
+
+			for itemName, _ in pairs(items) do
+				if (stringutil.startsWith(itemName, text)) then
+					completionTree:addWord(itemName:sub(#text + 1))
+				end
+			end
+
+			return completionTree:getCompletions()
+		end
+	}
 )
 
 cli:addAction(
@@ -327,4 +352,19 @@ cli:addAction(
 	'Shows all chests of a given type'
 )
 
-cli:run(...)
+if (shell) then
+	cli:run(...)
+else
+	return {
+		version = version,
+		cli = cli,
+		setLabel = setLabel,
+		getLabel = getLabel,
+		resolveLabel = resolveLabel,
+		findConnectedChests = findConnectedChests,
+		getItemsInChest = getItemsInChest,
+		getItemsInChests = getItemsInChests,
+		moveItemsFromChestIntoStorage = moveItemsFromChestIntoStorage,
+		findAndMoveAllItemToChest = findAndMoveAllItemToChest
+	}
+end
