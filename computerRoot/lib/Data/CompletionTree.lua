@@ -63,16 +63,12 @@ function CompletionTree:_getCompletions(tree, prefix)
 
 	local completions = {}
 
-	for char, subtree in pairs(tree.subwords) do
-		if (subtree.isWord) then
-			table.insert(completions, prefix .. char)
-		end
-
-		concatTables(completions, self:_getCompletions(subtree, prefix .. char))
-	end
-
 	if (tree.isWord or (countKeys(tree.subwords) > 1 and prefix ~= '')) then
 		table.insert(completions, prefix)
+	end
+
+	for char, subtree in pairs(tree.subwords) do
+		concatTables(completions, self:_getCompletions(subtree, prefix .. char))
 	end
 
 	return completions
