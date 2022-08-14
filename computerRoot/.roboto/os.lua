@@ -88,72 +88,63 @@ _G.loadfile = function(filename, mode, env)
 	return func, err
 end
 
-if (fs.exists('tap.lua')) then
-	write('Loading updates...')
-	local she = _G.shell
-	_G.shell = nil
-	local tap, err = loadfile('tap.lua')()
-	_G.shell = she
-	if (err) then
-		print(err)
-		writeLn('ERR')
-		writeLn(err)
-		read()
-		os.reboot()
-	else
-		local context = {}
+function os.update()
+	if (fs.exists('tap.lua')) then
+		write('Loading updates...')
+		local she = _G.shell
+		_G.shell = nil
+		local tap, err = loadfile('tap.lua')()
+		_G.shell = she
 
-		tap.download(
-			'tap.lua',
-			{
-				quiet = true,
-				force = true
-			}
-		)
-		tap.download(
-			'roboto.lua',
-			{
-				quiet = true,
-				force = true
-			}
-		)
+		if (err) then
+			print(err)
+			writeLn('ERR')
+			writeLn(err)
+		else
+			local context = {}
 
-		tap.download(
-			'.roboto',
-			{
-				context = context,
-				quiet = true,
-				sync = true
-			}
-		)
-		tap.download(
-			'lib',
-			{
-				context = context,
-				quiet = true,
-				sync = true
-			}
-		)
+			tap.download(
+				'tap.lua',
+				{
+					quiet = true,
+					force = true
+				}
+			)
+			tap.download(
+				'roboto.lua',
+				{
+					quiet = true,
+					force = true
+				}
+			)
 
-		writeLn('OK')
-		pause()
+			tap.download(
+				'.roboto',
+				{
+					context = context,
+					quiet = true,
+					sync = true
+				}
+			)
+			tap.download(
+				'lib',
+				{
+					context = context,
+					quiet = true,
+					sync = true
+				}
+			)
 
-		local anyChanges =
-			(context.createdFiles or 0) > 0 or --
-			(context.replacedFiles or 0) > 0 or --
-			(context.deletedFiles or 0) > 0 or --
-			(context.deleted or 0) > 0
-		if anyChanges then
-			for i, v in pairs(context) do
-				print(i .. ': ' .. tostring(v))
-			end
-			writeLn('Updates downloaded, rebooting')
-			sleep(1)
+			writeLn('OK')
 			pause()
-			if (fs.exists('.roboto-crashed')) then
-				fs.delete('.roboto-crashed')
-			end
-			os.reboot()
+
+			local anyChanges =
+				(context.createdFiles or 0) > 0 or --
+				(context.replacedFiles or 0) > 0 or --
+				(context.deletedFiles or 0) > 0 or --
+				(context.deleted or 0) > 0
+
+			return anyChanges, context
 		end
 	end
 end

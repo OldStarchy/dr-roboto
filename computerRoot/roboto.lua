@@ -36,28 +36,21 @@ local function installRoboto()
 end
 
 local function updateRoboto()
-	if (not fs.exists('/tap.lua')) then
-		shell.run('wget http://sorokin.id.au/tap.lua tap.lua')
-		if (not fs.exists('/tap.lua')) then
-			print('Failed to download tap.lua')
-			return
+	local anyChanges, context = os.update()
+
+	if anyChanges then
+		for i, v in pairs(context) do
+			print(i .. ': ' .. tostring(v))
 		end
+		print('Updates downloaded, rebooting')
+		sleep(1)
+		if (fs.exists('.roboto-crashed')) then
+			fs.delete('.roboto-crashed')
+		end
+		os.reboot()
+	else
+		print('No updates found')
 	end
-
-	shell.run('tap.lua -f -s .roboto')
-	shell.run('tap.lua -f -s lib')
-	shell.run('tap.lua -f roboto.lua')
-	shell.run('tap.lua -f startup.lua')
-
-	if (fs.exists('.roboto-crashed')) then
-		fs.delete('.roboto-crashed')
-	end
-
-	print('Roboto updated')
-	print('Press enter to reboot')
-	read()
-	os.reboot()
-	return
 end
 
 local function askToInstallRoboto()
