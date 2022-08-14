@@ -119,6 +119,8 @@ end
 	Counts the number of properties in a table
 ]]
 function countKeys(tbl)
+	assertParameter(tbl, 'tbl', 'table')
+
 	local count = 0
 	for _ in pairs(tbl) do
 		count = count + 1

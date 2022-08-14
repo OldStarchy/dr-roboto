@@ -1,4 +1,7 @@
 function assertParameter(obj, name, ...)
+	if (type(name) ~= 'string') then
+		error('assertParameter "name" must be a string', 2)
+	end
 	local typs = {...}
 
 	for _, typ in ipairs(typs) do

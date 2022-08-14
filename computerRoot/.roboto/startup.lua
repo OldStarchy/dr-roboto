@@ -25,6 +25,8 @@ end
 
 -- log:info(#Skill.ChildTypes .. ' skills')
 
+includeOnce 'lib/Inventory/ItemInfo'
+includeOnce 'lib/Tasks/TaskManager'
 local singletons = {
 	ItemInfo,
 	TaskManager
