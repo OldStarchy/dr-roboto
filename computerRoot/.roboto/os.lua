@@ -97,10 +97,7 @@ end
 function os.update()
 	if (fs.exists('tap.lua')) then
 		write('Loading updates...')
-		local she = _G.shell
-		_G.shell = nil
-		local tap, err = loadfile('tap.lua')()
-		_G.shell = she
+		local tap, err = loadfile('tap.lua', _G)()
 
 		if (err) then
 			print(err)
@@ -234,21 +231,10 @@ process.spawnProcess(
 				os.reboot()
 			end
 		)
-		if (fs.exists('/startup.lua')) then
-			runWithLogging(
-				function()
-					loadfile('/startup.lua', _G)()
-				end,
-				function(err)
-					print(err)
-					read()
-				end
-			)
-		end
 		writeLn('OK')
 		pause()
 
-		os.run(_ENV, '/rom/programs/shell.lua')
+		os.run({}, '/rom/programs/shell.lua')
 	end,
 	'shell',
 	false

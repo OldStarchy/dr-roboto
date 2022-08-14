@@ -82,8 +82,6 @@ local function startRoboto()
 		end
 		fs.open('.roboto-crashed', 'w').close()
 
-		_G.shell = shell
-
 		local sd = os.shutdown
 		os.shutdown = function()
 			if (fs.exists('.roboto-crashed')) then
@@ -123,7 +121,7 @@ if (#args == 0) then
 		return false
 	end
 
-	return robotoIsLoaded
+	return true
 end
 
 if (#args == 1) then
