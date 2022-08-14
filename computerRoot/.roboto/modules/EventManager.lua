@@ -6,40 +6,10 @@ function EventManager:constructor()
 	self._suppress = false
 end
 
-EventManager.AbortSignal = Class()
-EventManager.AbortSignal.ClassName = 'EventManager.AbortSignal'
-
-function EventManager.AbortSignal:constructor()
-	self._aborted = false
-	self._abortHandlers = {}
-end
-
-function EventManager.AbortSignal:abort()
-	if (not self._aborted) then
-		self._aborted = true
-		for _, handler in ipairs(self._abortHandlers) do
-			pcall(handler)
-		end
-
-		self._abortHandlers = nil
-	end
-end
-
-function EventManager.AbortSignal:onAbort(handler)
-	if (self._aborted) then
-		pcall(handler)
-	else
-		table.insert(self._abortHandlers, handler)
-	end
-end
-
-function EventManager.AbortSignal:wasAborted()
-	return self._aborted
-end
-
 function EventManager:on(event, handler, abort)
-	assertType(event, 'string')
-	assertType(handler, 'function')
+	assertParameter(event, 'event', 'string')
+	assertParameter(handler, 'handler', 'function')
+	assertParameter(abort, 'abort', AbortSignal, 'nil')
 
 	if (self._handlers[event] == nil) then
 		self._handlers[event] = {}
@@ -65,8 +35,9 @@ function EventManager:on(event, handler, abort)
 end
 
 function EventManager:one(event, handler, abort)
-	assertType(event, 'string')
-	assertType(handler, 'function')
+	assertParameter(event, 'event', 'string')
+	assertParameter(handler, 'handler', 'function')
+	assertParameter(abort, 'abort', AbortSignal, 'nil')
 
 	local wrapper
 
@@ -79,13 +50,12 @@ function EventManager:one(event, handler, abort)
 end
 
 function EventManager:off(event, handler)
-	assertType(event, 'string')
+	assertParameter(event, 'event', 'string')
+	assertParameter(handler, 'handler', 'function', 'nil')
 
 	if (handler == nil) then
 		self._handlers[event] = nil
 	end
-
-	assertType(handler, 'function')
 
 	local handlers = self._handlers[event]
 	if (handlers == nil) then
@@ -103,10 +73,12 @@ function EventManager:off(event, handler)
 end
 
 function EventManager:suppress(suppress)
-	self._suppress = assertType(suppress, 'boolean')
+	self._suppress = assertParameter(suppress, 'suppress', 'boolean')
 end
 
 function EventManager:trigger(event, ...)
+	assertParameter(event, 'event', 'string')
+
 	if (self._suppress) then
 		return {}
 	end
