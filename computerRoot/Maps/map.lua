@@ -62,6 +62,8 @@ local viewZoom = 0
 local trailsEnabled = false
 local maxTrail = nil
 local trail = {}
+local showEdgeMarkers = false
+local showSelf = true
 
 local surfaceRenderer =
 	process.spawnProcess(
@@ -76,7 +78,47 @@ local surfaceRenderer =
 			canvas:clear()
 			canvas:save()
 
+			if (showEdgeMarkers) then
+				local left = 0
+				local right = canvas.width - 0
+				local top = 0
+				local bottom = canvas.height - 0
+
+				-- canvas:line(left, top, right, top, true)
+				-- canvas:line(left, bottom, right, bottom, true)
+				-- canvas:line(left, top, left, bottom, true)
+				-- canvas:line(right, top, right, bottom, true)
+
+				-- Half way markers
+				local centerX = canvas.width / 2
+				local centerY = canvas.height / 2
+
+				canvas:line(left, centerY, left + 3, centerY, true)
+				canvas:line(right, centerY, right - 2, centerY, true)
+				canvas:line(centerX, top, centerX, top + 3, true)
+				canvas:line(centerX, bottom, centerX, bottom - 2, true)
+
+				-- Quater markers
+				local quaterX = canvas.width / 4
+				local quaterY = canvas.height / 4
+
+				canvas:line(left, quaterY, left + 2, quaterY, true)
+				canvas:line(right, quaterY, right - 1, quaterY, true)
+				canvas:line(left, quaterY * 3, left + 2, quaterY * 3, true)
+				canvas:line(right, quaterY * 3, right - 1, quaterY * 3, true)
+
+				canvas:line(quaterX, top, quaterX, top + 2, true)
+				canvas:line(quaterX, bottom, quaterX, bottom - 1, true)
+				canvas:line(quaterX * 3, top, quaterX * 3, top + 2, true)
+				canvas:line(quaterX * 3, bottom, quaterX * 3, bottom - 1, true)
+			end
+
 			canvas:translate(canvas.width / 2, canvas.height / 2)
+
+			if (showSelf) then
+				canvas:set(0, 0, true)
+			end
+
 			canvas:scale(scale, scale)
 			canvas:translate(-viewCenter.x, -viewCenter.z)
 
@@ -170,6 +212,10 @@ local uiProcess =
 				if (key == keys.q) then
 					run = false
 					break
+				elseif (key == keys.m) then
+					showSelf = not showSelf
+				elseif (key == keys.b) then
+					showEdgeMarkers = not showEdgeMarkers
 				elseif (key == keys.numPadAdd) then
 					viewZoom = viewZoom + 1
 				elseif (key == keys.numPadSubtract) then
@@ -206,6 +252,7 @@ local deleteOldLocationsProcess =
 )
 
 process.wait(uiProcess)
+run = false
 process.kill(captureLocationsProcess)
 process.kill(updateMapLocationProcess)
 process.kill(surfaceRenderer)
