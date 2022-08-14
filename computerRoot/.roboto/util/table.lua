@@ -103,6 +103,18 @@ function mergeTablesRecursive(out, ...)
 	return out
 end
 
+function concatTables(out, ...)
+	local tbls = {...}
+
+	for _, tbl in ipairs(tbls) do
+		for _, v in ipairs(tbl) do
+			table.insert(out, v)
+		end
+	end
+
+	return out
+end
+
 --[[
 	Counts the number of properties in a table
 ]]
