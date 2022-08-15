@@ -56,18 +56,23 @@ function PathFinder:findPath(start, ed, limitSteps, reverse)
 		mapDebug:saveToVoxelsVox('pathfinder_debug.vox')
 	end
 
-
 	local iterationsPerYield = 100
 	local iterationsSinceYield = 0
 	local fullPath = true
 	local _, lineY = term.getCursorPos()
+
 	while (goal == nil and open:count() > 0) do
 		iterationsSinceYield = iterationsSinceYield + 1
 
 		if (iterationsSinceYield >= iterationsPerYield) then
 			iterationsSinceYield = 0
-			term.setCursorPos(1, lineY)
-			term.write('Open: ' .. open:count() .. '  Closed: ' .. countEntries(closed) .. '           ')
+			-- local closest = open:peek()
+			-- term.setCursorPos(1, lineY - 2)
+			-- term.clearLine()
+			-- term.write('Open: ' .. open:count() .. '  Closed: ' .. countEntries(closed))
+			-- term.setCursorPos(1, lineY - 1)
+			-- term.clearLine()
+			-- term.write(tostring(closest.position) .. ' ' .. tostring(closest.position:clone():distanceTo(ed)))
 			os.startTimer(0)
 			os.pullEvent()
 		end
@@ -78,7 +83,7 @@ function PathFinder:findPath(start, ed, limitSteps, reverse)
 			if (curr.travel > limitSteps) then
 				goal = curr
 				fullPath = false
-				break;
+				break
 			end
 		end
 		local steps = self:_getPossibleSteps(curr)
@@ -126,9 +131,9 @@ function PathFinder:findPath(start, ed, limitSteps, reverse)
 	while (curr.parent ~= nil) do
 		curr = curr.parent
 		if (reverse) then
-		table.insert(path, curr.position)
+			table.insert(path, curr.position)
 		else
-		table.insert(path, 1, curr.position)
+			table.insert(path, 1, curr.position)
 		end
 	end
 
@@ -154,7 +159,7 @@ function PathFinder:_getPossibleSteps(node)
 		self:_createNode(Position(node.position):add({x = 0, y = 0, z = 1}), node, 0),
 		self:_createNode(Position(node.position):add({x = 0, y = 0, z = -1}), node, 0),
 		self:_createNode(Position(node.position):add({x = 0, y = 1, z = 0}), node, 0),
-		self:_createNode(Position(node.position):add({x = 0, y = -1, z = 0}), node, 1), -- penalize moving down as probably ground is ther
+		self:_createNode(Position(node.position):add({x = 0, y = -1, z = 0}), node, 1) -- penalize moving down as probably ground is ther
 	}
 
 	return steps
@@ -164,7 +169,7 @@ function PathFinder:_updateScore(node, target)
 	local dx = node.position.x - target.x
 	local dy = node.position.y - target.y
 	local dz = node.position.z - target.z
-	local dd = node.position:getDirectionOffset(target.direction)
+	local dd = 0 --node.position:getDirectionOffset(target.direction)
 
 	if (dx < 0) then
 		dx = -dx
@@ -179,6 +184,6 @@ function PathFinder:_updateScore(node, target)
 		dd = -dd
 	end
 
-	node.score = node.travel + dx + dy + dz + (dd / 4) + node.intrinsic
+	node.score = node.travel + (dx + dy + dz) * 1.1 + (dd / 4) + node.intrinsic
 	return node
 end

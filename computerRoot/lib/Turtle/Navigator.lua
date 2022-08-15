@@ -1,4 +1,7 @@
 includeOnce '../Data/Position'
+includeOnce '../Data/StateSaver'
+includeOnce '../Cartography/Map'
+includeOnce '../Navigation/PathFinder'
 includeOnce './MoveManager'
 
 Navigator = Class()
@@ -135,55 +138,138 @@ function Navigator:goTo(x, y, z)
 		error('invalid coordinates', 2)
 	end
 
+	local dir = self:getDirection()
 	local r
-	r = {self:goToX(x)}
-	if (not r[1]) then
-		return unpack(r)
+
+	if (dir == Position.NORTH or dir == Position.SOUTH) then
+		r = {self:goToZ(z)}
+		if (not r[1]) then
+			return unpack(r)
+		end
+
+		r = {self:goToX(x)}
+		if (not r[1]) then
+			return unpack(r)
+		end
 	end
-	r = {self:goToZ(z)}
-	if (not r[1]) then
-		return unpack(r)
+
+	if (dir == Position.EAST or dir == Position.WEST) then
+		r = {self:goToX(x)}
+		if (not r[1]) then
+			return unpack(r)
+		end
+
+		r = {self:goToZ(z)}
+		if (not r[1]) then
+			return unpack(r)
+		end
 	end
+
 	r = {self:goToY(y)}
 	if (not r[1]) then
 		return unpack(r)
 	end
+
 	return true
 end
 
-function Navigator:pathTo(x, y, z)
-	if (type(z) == 'nil') then
-		if (type(y) == 'nil') then
-			if (type(x) == 'nil') then
-				return false
-			else
-				if (type(x) == 'table') then
-					x, y, z = x.x or x[1], x.y or x[2], x.z or x[3]
-				else
-					return self:goToY(x)
+function Navigator:pathTo(target, verbose)
+	assertParameter(target, 'target', Position)
+	verbose = coalesce(assertParameter(verbose, 'verbose', 'boolean', 'nil'), false)
+
+	local distance = target:distanceTo(self:getPosition())
+
+	if (distance == 0) then
+		return true
+	end
+
+	if (distance == 1) then
+		return self:goTo(target)
+	end
+
+	local map = Class.LoadOrNew('data/map.tbl', Map)
+	StateSaver.BindToFile(map, 'data/map.tbl')
+	local pathFinder = PathFinder(map)
+
+	local nav = self
+
+	local function updateMap()
+		local currPos = nav:getPosition()
+
+		local blockAbove = turtle.inspectUp()
+		local posAbove = currPos:up()
+
+		local blockBelow = turtle.inspectDown()
+		local posBelow = currPos:down()
+
+		local block = turtle.inspect()
+		local pos = currPos:forward()
+
+		if (blockAbove ~= false) then
+			if (verbose) then
+				print('marked block at ' .. tostring(posAbove) .. ' (above) as protected')
+			end
+			map:setProtected(posAbove, true)
+		end
+
+		if (blockBelow ~= false) then
+			if (verbose) then
+				print('marked block at ' .. tostring(posBelow) .. ' (below) as protected')
+			end
+			map:setProtected(posBelow, true)
+		end
+
+		if (block ~= false) then
+			if (verbose) then
+				print('marked block at ' .. tostring(pos) .. ' as protected')
+			end
+			map:setProtected(pos, true)
+		end
+
+		map:setProtected(currPos, false)
+	end
+
+	local function move()
+		local retry = true
+
+		while (retry) do
+			retry = false
+			local position = nav:getPosition()
+
+			local positions, fullPath = pathFinder:findPath(position, target, nil, true)
+
+			if (positions == nil) then
+				if (verbose) then
+					print('No path found')
+				end
+				return
+			end
+
+			if (not fullPath) then
+				retry = true
+			end
+
+			for _, p in ipairs(positions) do
+				local moved, err, message = nav:goTo(p)
+
+				updateMap()
+				if (not moved) then
+					if (err == MoveManager.HIT_BLOCK) then
+						retry = true
+					else
+						if (verbose) then
+							print(message)
+						end
+
+						return false, message
+					end
+					break
 				end
 			end
-		else
-			--x and y but not z, so assume they meen x, z
-			z = y
-			y = self:getY()
 		end
+
+		return true
 	end
 
-	if (x == nil or y == nil or z == nil) then
-		error('invalid coordinates', 2)
-	end
-	print(self:getPosition())
-	print(Position(x, y, z))
-	local path = Map.Instance:findPath(self:getPosition(), Position(x, y, z))
-	if (not path) then
-		return false
-	end
-	for _, v in ipairs(path) do
-		if (not self:goTo(v)) then
-			return false
-		end
-	end
-
-	return x == self:getX() and y == self:getY() and z == self:getZ()
+	return move()
 end

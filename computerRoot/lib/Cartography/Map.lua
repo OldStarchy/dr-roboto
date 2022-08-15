@@ -1,6 +1,6 @@
 Map = Class()
 Map.ClassName = 'Map'
-Map.version = '1';
+Map.version = '1'
 
 function Map:constructor()
 	self.ev = EventManager()
@@ -11,7 +11,7 @@ end
 function Map:serialize()
 	return {
 		version = Map.version,
-		points = self._points,
+		points = self._points
 	}
 end
 
@@ -45,7 +45,7 @@ function Map:saveToVoxelsVox(filename)
 				name = name,
 				visible = true,
 				locked = false,
-				voxels = {},
+				voxels = {}
 			}
 			layersByName[name] = layer
 			table.insert(layers, layer)
@@ -53,7 +53,6 @@ function Map:saveToVoxelsVox(filename)
 
 		return layersByName[name]
 	end
-
 
 	for x, yzs in pairs(self._points) do
 		for y, zs in pairs(yzs) do
@@ -68,10 +67,7 @@ function Map:saveToVoxelsVox(filename)
 					end
 					local colorIndex = colors[color]
 
-					table.insert(
-						layer.voxels,
-						{x, y, z, colorIndex}
-					)
+					table.insert(layer.voxels, {x, y, z, colorIndex})
 				end
 			end
 		end
@@ -84,7 +80,7 @@ function Map:saveToVoxelsVox(filename)
 			showOutline = false,
 			showWireframe = true,
 			enableLighting = true,
-			showBoundingBox = false,
+			showBoundingBox = false
 		},
 		layers = layers,
 		palette = palette
@@ -92,7 +88,6 @@ function Map:saveToVoxelsVox(filename)
 
 	file.write(textutils.serializeJSON(json))
 	file.close()
-	print('Saved map to ' .. filename)
 end
 
 function Map:saveToVoxelsTxt(filename)
@@ -106,21 +101,14 @@ function Map:saveToVoxelsTxt(filename)
 		for y, zs in pairs(yzs) do
 			for z, data in pairs(zs) do
 				if (data.protected) then
-					file.write(
-						tostring(x) .. ', ' ..
-						tostring(y) .. ', ' ..
-						tostring(z) .. ', ' ..
-						'128, 128, 128\n'
-					)
+					file.write(tostring(x) .. ', ' .. tostring(y) .. ', ' .. tostring(z) .. ', ' .. '128, 128, 128\n')
 				end
 			end
 		end
 	end
 
 	file.close()
-	print('Saved map to ' .. filename)
 end
-
 
 function Map:saveToVoxelsJson(filename)
 	local xmin, xmax = 0, 0
@@ -149,15 +137,18 @@ function Map:saveToVoxelsJson(filename)
 			zmax = z
 		end
 
-		table.insert(voxels, {
-			id = 'voxel_' .. tostring(#voxels),
-			x = x,
-			y = y,
-			z = z,
-			red = 128,
-			green = 128,
-			blue = 128,
-		})
+		table.insert(
+			voxels,
+			{
+				id = 'voxel_' .. tostring(#voxels),
+				x = x,
+				y = y,
+				z = z,
+				red = 128,
+				green = 128,
+				blue = 128
+			}
+		)
 	end
 
 	for x, yzs in pairs(self._points) do
@@ -178,17 +169,15 @@ function Map:saveToVoxelsJson(filename)
 		dimension = {
 			width = width,
 			height = height,
-			depth = depth,
+			depth = depth
 		},
-		voxels = voxels,
+		voxels = voxels
 	}
 
 	local file = fs.open(filename, 'w')
 	file.write(textutils.serializeJSON(json))
 	file.close()
-	print('Saved map to ' .. filename)
 end
-
 
 function Map:_getData(pos)
 	local x = pos.x
