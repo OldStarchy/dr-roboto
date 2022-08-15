@@ -27,6 +27,12 @@ function OrderedList:pop()
 	return table.remove(self._data, minId)
 end
 
+function OrderedList:peek()
+	local item = self:pop()
+	self:insert(item)
+	return item
+end
+
 function OrderedList:count()
 	return #self._data
 end
