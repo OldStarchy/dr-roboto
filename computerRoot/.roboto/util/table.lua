@@ -129,6 +129,17 @@ function countKeys(tbl)
 end
 
 --[[
+	Returns a list of all values in a table.
+]]
+function tableValues(tbl)
+	local result = {}
+	for _, value in pairs(tbl) do
+		table.insert(result, value)
+	end
+	return result
+end
+
+--[[
 	Returns a list of all keys in a table.
 ]]
 function tableKeys(tbl)
