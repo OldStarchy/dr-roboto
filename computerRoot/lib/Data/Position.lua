@@ -74,6 +74,10 @@ function Position:constructor(x, y, z, direction)
 	self.direction = assertParameter(direction, 'direction', 'nil', 'number') or 0
 end
 
+function Position:clone()
+	return Position(self)
+end
+
 function Position:rotate(direction)
 	if (self.direction == nil) then
 		return
