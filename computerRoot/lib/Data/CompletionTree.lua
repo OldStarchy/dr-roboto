@@ -83,3 +83,26 @@ function CompletionTree:getCompletions()
 
 	return completions
 end
+
+function CompletionTree:getTruncatedCompletions(prompt)
+	assertParameter(prompt, 'prompt', 'string')
+	local root = self._root
+
+	for i = 1, #prompt do
+		local char = prompt:sub(i, i)
+
+		if (root.subwords == nil or root.subwords[char] == nil) then
+			return {}
+		end
+
+		root = root.subwords[char]
+	end
+
+	local reduced = self:_reduce(root)
+
+	local completions = self:_getCompletions(reduced, '')
+
+	table.sort(completions)
+
+	return completions
+end
