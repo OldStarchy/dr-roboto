@@ -4,7 +4,7 @@ import Authenticator from '../Authenticator';
 export function createAuthMiddleware(...providers: Authenticator[]) {
 	return function authMiddleware(
 		ctx: Koa.Context,
-		next: Koa.Next
+		next: Koa.Next,
 	): Promise<void> | void {
 		const messages = [];
 		for (const provider of providers) {

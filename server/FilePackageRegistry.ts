@@ -26,7 +26,7 @@ export default class FilePackageRegistry implements PackageRegistry {
 						const tapFilePath = path.join(fullPath, 'tap.json');
 
 						const [tapFile, errors] = await readPackage(
-							tapFilePath
+							tapFilePath,
 						);
 
 						if (errors) {
@@ -37,7 +37,7 @@ export default class FilePackageRegistry implements PackageRegistry {
 					}
 
 					return null;
-				})
+				}),
 			)
 		).filter((pkg): pkg is TapFile => pkg !== null);
 	}

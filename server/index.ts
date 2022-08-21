@@ -1,11 +1,11 @@
 import crypto from 'crypto';
 import dotenv from 'dotenv';
 import fs from 'fs';
-import Koa, {Middleware} from 'koa';
+import Koa, { Middleware } from 'koa';
 import KoaJson from 'koa-json';
 import KoaStatic from 'koa-static';
 import path from 'path';
-import {satisfies, SemVer} from 'semver';
+import { satisfies, SemVer } from 'semver';
 
 // stop the path import from eslinting way
 path.join('a', 'b');
@@ -44,7 +44,6 @@ app.use(async (ctx, next) => {
 			ctx.status = 400;
 			return;
 		}
-
 	} else {
 		return koaStatic(ctx, next);
 	}
@@ -65,7 +64,7 @@ const koaStatic = KoaStatic(root, {
 function compareHash(
 	filepath: string,
 	type: 'md5' | 'crc32' | string,
-	givenHash: string
+	givenHash: string,
 ) {
 	const fileHash = crypto
 		.createHash(type)
@@ -119,7 +118,9 @@ const tapHandler: Middleware<Koa.DefaultState, AppContext> = (ctx, next) => {
 							return {
 								name: file,
 								type: 'file',
-								mtime: fs.statSync(path.join(fullPath, file)).mtime.getTime(),
+								mtime: fs
+									.statSync(path.join(fullPath, file))
+									.mtime.getTime(),
 							};
 						}
 					}),
@@ -163,7 +164,7 @@ const server = useTls
 				key: fs.readFileSync('./certs/privkey.pem', 'utf8'),
 				cert: fs.readFileSync('./certs/fullchain.pem', 'utf8'),
 			},
-			app.callback()
+			app.callback(),
 	  )
 	: require('http').createServer(app.callback());
 
@@ -174,7 +175,7 @@ server.on('listening', () => {
 	if (address) {
 		if (typeof address === 'object') {
 			console.log(
-				`Listening on ${address.family} ${address.address}:${address.port}`
+				`Listening on ${address.family} ${address.address}:${address.port}`,
 			);
 		} else {
 			console.log(`Listening on ${address}`);

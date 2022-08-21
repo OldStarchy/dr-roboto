@@ -2,7 +2,7 @@ import Koa from 'koa';
 
 export default class BasicAuthHelper {
 	public static getBasicAuthCredentials(
-		context: Koa.Context
+		context: Koa.Context,
 	): [string, string] | null {
 		const authHeader = context.request.header.authorization;
 
