@@ -135,7 +135,7 @@ const tapHandler: Middleware<Koa.DefaultState, AppContext> = (ctx, next) => {
 				return file !== '.' && file !== '..';
 			});
 
-			if (satisfies(tapVersion, '^0.2.0')) {
+			if (satisfies(tapVersion, '^0.2.0 || ^0.3.0')) {
 				ctx.body = JSON.stringify({
 					type: 'directory',
 					entries: entries.map((file) => {
