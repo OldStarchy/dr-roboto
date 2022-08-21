@@ -266,7 +266,7 @@ local function getFromRepository(repository, file, hash)
 	end
 end
 
-local function get(file, hash)
+local function get(file, hash, flagQuiet)
 	local sortedRepositories = getSortedRepositories()
 	if (currentRepository) then
 		table.insert(sortedRepositories, 1, currentRepository)
@@ -287,7 +287,9 @@ local function get(file, hash)
 
 		if (responseCode == 200 or responseCode == 304) then
 			if (not currentRepository) then
-				print('Using repository "' .. repository.name .. '"')
+				if (not flagQuiet) then
+					print('Using repository "' .. repository.name .. '"')
+				end
 				currentRepository = repository
 			end
 			break
@@ -309,7 +311,7 @@ local function download(file, context, flagForce, flagNoBackup, flagSync, flagQu
 	-- 	hash = getFileHash(file)
 	-- end
 
-	local code, data = get(file, hash)
+	local code, data = get(file, hash, flagQuiet)
 
 	if (code == 304) then
 		if (not flagQuiet) then
