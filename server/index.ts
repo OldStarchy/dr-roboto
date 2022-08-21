@@ -6,21 +6,43 @@ import KoaJson from 'koa-json';
 import KoaStatic from 'koa-static';
 import path from 'path';
 import { satisfies, SemVer } from 'semver';
+import AppContext from './AppContext';
+import FileTransformer from './FileTransformer';
+import TapFileTransformer from './TapFileTransformer';
 
 // stop the path import from eslinting way
 path.join('a', 'b');
 
 dotenv.config();
 
-interface AppContext extends Koa.DefaultContext {
-	tapVersion?: SemVer;
-}
 const app = new Koa<Koa.DefaultState, AppContext>();
 
 app.use(KoaJson());
 
+const allowedProxyIp = process.env.ALLOWED_PROXY_IP?.split(',') ?? [];
+
+const fileTransformers: FileTransformer[] = [new TapFileTransformer()];
+function transformFile(ctx: AppContext, filename: string, content: string) {
+	return fileTransformers.reduce((content, transformer) => {
+		return transformer.transform(ctx, filename, content);
+	}, content);
+}
+
 app.use(async (ctx, next) => {
 	const userAgent = ctx.request.header['user-agent'];
+
+	const requestIp = ctx.request.ip;
+
+	if (allowedProxyIp.includes(requestIp)) {
+		const forwardedProto = ctx.request.header['x-forwarded-proto'];
+		const forwardedHost = ctx.request.header['x-forwarded-host'];
+
+		ctx.publicProto = forwardedProto as string;
+		ctx.publicDomain = forwardedHost as string;
+	} else {
+		ctx.publicProto = ctx.request.protocol;
+		ctx.publicDomain = ctx.request.host;
+	}
 
 	//allow http-01 challenge
 	if (userAgent && userAgent.includes('HTTP-01-Proxy')) {
@@ -45,6 +67,16 @@ app.use(async (ctx, next) => {
 			return;
 		}
 	} else {
+		if (ctx.path.includes('..')) {
+			ctx.status = 403;
+			return;
+		}
+
+		if (ctx.path === '/tap.lua') {
+			const tapLua = fs.readFileSync(path.join(root, 'tap.lua'), 'utf8');
+			ctx.body = transformFile(ctx, ctx.path, tapLua);
+			return;
+		}
 		return koaStatic(ctx, next);
 	}
 });
@@ -134,9 +166,12 @@ const tapHandler: Middleware<Koa.DefaultState, AppContext> = (ctx, next) => {
 		} else {
 			ctx.lastModified = fs.statSync(fullPath).mtime;
 
+			let content = fs.readFileSync(fullPath, 'utf8');
+			content = transformFile(ctx, fullPath, content);
+
 			ctx.body = JSON.stringify({
 				type: 'file',
-				content: fs.readFileSync(fullPath, 'utf8'),
+				content,
 				mtime: fs.statSync(fullPath).mtime.getTime(),
 			});
 		}

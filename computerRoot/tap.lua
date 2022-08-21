@@ -1,10 +1,16 @@
-local version = '0.2.0'
-local protocol = 'http'
-local domain = 'sorokin.id.au'
+local version = '0.3.0'
 local headers = {
 	['x-tap'] = version
 }
+
+-- these get set by the server
+local defaultProto = '%%PUBLIC_PROTO%%'
+local defaultDomain = '%%PUBLIC_DOMAIN%%'
+
 local metaDataFile = '.tap/metaData.tbl'
+local repositoriesFile = '.tap/repositories.tbl'
+
+local currentRepository = nil
 
 local function tableToFile(tbl, file)
 	local str = textutils.serialize(tbl)
@@ -46,6 +52,157 @@ local function getMetaData(path)
 	return nil
 end
 
+local function loadRepositories()
+	if (fs.exists(repositoriesFile)) then
+		return fileToTable(repositoriesFile)
+	else
+		return {}
+	end
+end
+
+local function saveRepositories(repositories)
+	tableToFile(repositories, repositoriesFile)
+end
+
+local function addRepository(name, protocol, domain, priority)
+	local repositories = loadRepositories()
+	repositories[name] = {
+		protocol = protocol,
+		domain = domain,
+		priority = priority
+	}
+	saveRepositories(repositories)
+end
+
+local function addDefaultRepo()
+	local repos = loadRepositories()
+	local repoCount = countKeys(repos)
+
+	if (repoCount == 0) then
+		if (stringutil.startsWith(defaultProto, '%%PUBLIC')) then
+			error('No default repository set, use "tap --addRepository" to add one')
+		end
+		addRepository('default', defaultProto, defaultDomain, 0)
+	end
+end
+
+addDefaultRepo()
+
+local function removeRepository(name)
+	local repositories = loadRepositories()
+	repositories[name] = nil
+	saveRepositories(repositories)
+end
+
+local function getRepositoryPathForFile(repository, file)
+	return repository.protocol .. '://' .. fs.combine(repository.domain, file)
+end
+
+local function getSortedRepositories()
+	local repositories = loadRepositories()
+	local sortedRepositories = {}
+	for name, repository in pairs(repositories) do
+		table.insert(
+			sortedRepositories,
+			{
+				name = name,
+				protocol = repository.protocol,
+				domain = repository.domain,
+				priority = repository.priority
+			}
+		)
+	end
+	table.sort(
+		sortedRepositories,
+		function(a, b)
+			return a.priority < b.priority
+		end
+	)
+	return sortedRepositories
+end
+
+local function ask(question)
+	print(question)
+	return read()
+end
+
+local function askWithDefault(question, def)
+	print(question .. ' [' .. def .. ']')
+	local answer = read()
+	if (answer == '') then
+		return def
+	else
+		return answer
+	end
+end
+
+local function promptToCreateRepository()
+	local correct = false
+
+	local name, protocol, domain, priority
+
+	while (not correct) do
+		name = askWithDefault('Name', 'default')
+		protocol = askWithDefault('Protocol', 'https')
+		domain = ask('Domain')
+		priority = tonumber(askWithDefault('Priority (asc)', '1'))
+		if (priority == nil) then
+			print 'Priority must be a number'
+			priority = tonumber(askWithDefault('Priority', '1'))
+			if (priority == nil) then
+				print('you fail start again')
+				error('incompetence')
+			end
+		end
+
+		print('Adding repository...')
+		print('Name: ' .. name)
+		print('Url: ' .. protocol .. '://' .. domain)
+		print('Priority: ' .. priority)
+		print('Is this correct? [Y/n]')
+		local answer = read()
+		if (answer == '' or answer == 'y' or answer == 'Y') then
+			correct = true
+		end
+	end
+
+	addRepository(name, protocol, domain, priority)
+	return true
+end
+
+local function promptToRemoveRepository()
+	local repositories = loadRepositories()
+	if (next(repositories) == nil) then
+		print('No repositories found.')
+		return
+	end
+
+	print('Repositories:')
+	for name, repository in pairs(repositories) do
+		print('  ' .. name .. ' - ' .. repository.protocol .. '://' .. repository.domain)
+	end
+
+	print('Which repository would you like to remove?')
+	local name = read()
+	if (name == '') then
+		return
+	end
+
+	removeRepository(name)
+end
+
+local function listRepositories()
+	local repositories = getSortedRepositories()
+	if (next(repositories) == nil) then
+		print('No repositories found.')
+		return
+	end
+
+	for _, repository in pairs(repositories) do
+		print(string.format('%s (%d): %s', repository.name, repository.priority, getRepositoryPathForFile(repository, '')))
+	end
+end
+
 local function downloadMd5()
 	local url = 'https://raw.githubusercontent.com/kikito/md5.lua/4b5ce0cc277a5972aa3f5161d950f809c2c62bab/md5.lua'
 
@@ -83,8 +240,8 @@ local function getFileHash(file)
 	}
 end
 
-local function get(file, hash)
-	local url = protocol .. '://' .. fs.combine(domain, file)
+local function getFromRepository(repository, file, hash)
+	local url = getRepositoryPathForFile(repository, file)
 
 	local _headers = {}
 	for k, v in pairs(headers) do
@@ -107,6 +264,37 @@ local function get(file, hash)
 	else
 		return badResponse.getResponseCode(), errorMessage, badResponse.readAll()
 	end
+end
+
+local function get(file, hash)
+	local sortedRepositories = getSortedRepositories()
+	if (currentRepository) then
+		table.insert(sortedRepositories, 1, currentRepository)
+	end
+
+	if (#sortedRepositories == 0) then
+		print('No repositories found, you must create one now')
+		if (promptToCreateRepository()) then
+			sortedRepositories = getSortedRepositories()
+		else
+			error('No repositories to download file')
+		end
+	end
+
+	local responseCode, data, errorMessage, badResponse
+	for _, repository in ipairs(sortedRepositories) do
+		responseCode, data, errorMessage, badResponse = getFromRepository(repository, file, hash)
+
+		if (responseCode == 200 or responseCode == 304) then
+			if (not currentRepository) then
+				print('Using repository "' .. repository.name .. '"')
+				currentRepository = repository
+			end
+			break
+		end
+	end
+
+	return responseCode, data, errorMessage, badResponse
 end
 
 local function download(file, context, flagForce, flagNoBackup, flagSync, flagQuiet)
@@ -269,7 +457,16 @@ if (shell) then
 	while (#args > 0) do
 		local arg = table.remove(args, 1)
 
-		if (arg == '-p') then
+		if (arg == '--addRepository') then
+			promptToCreateRepository()
+			return
+		elseif (arg == '--removeRepository') then
+			promptToRemoveRepository()
+			return
+		elseif (arg == '--listRepositories') then
+			listRepositories()
+			return
+		elseif (arg == '-p') then
 			flagPrint = true
 		elseif (arg == '-f') then
 			flagForce = true
@@ -326,6 +523,11 @@ else
 			local flagQuiet = options.quiet or false
 
 			download(file, context, flagForce, flagNoBackup, flagSync, flagQuiet)
+		end,
+		addRepository = addRepository,
+		removeRepository = removeRepository,
+		getRepositories = function()
+			return loadRepositories()
 		end
 	}
 end
