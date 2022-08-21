@@ -302,12 +302,10 @@ function MoveManager:locate()
 
 	local position2 = Position(gps.locate())
 
-	local offset = position2:sub(position1)
+	local offset = position2:clone():sub(position1)
 	local direction = offset:getCardinalDirection()
 
-	self:setPosition(
-		Position(position2.x, position2.y, position2.z, direction)
-	)
+	self:setPosition(Position(position2.x, position2.y, position2.z, direction))
 
 	return true
 end
