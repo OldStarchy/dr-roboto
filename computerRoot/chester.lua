@@ -127,10 +127,6 @@ local function moveItemsFromChestIntoChests(fromChest, toChests)
 				local moved = peripheral.call(fromChest, 'pushItems', toChest, slot)
 				remaining = remaining - moved
 
-				if (moved > 0) then
-					print('Moved ' .. moved .. ' ' .. stack.name .. ' from ' .. fromChest .. ' to ' .. toChest)
-				end
-
 				if (remaining == 0) then
 					break
 				end
@@ -159,18 +155,21 @@ local function moveItemsFromChestIntoStorage(chestName)
 	return result
 end
 
-local function findAndMoveAllItemToChest(itemName, toChest)
+local function findAndMoveAllItemToChest(itemName, toChest, maxCount, toSlot)
 	local toChest = resolveLabel(toChest)
 	local allChests = findConnectedChests()
+	local maxCount = assertParameter(maxCount, 'itemCount', 'number', 'nil')
 	local fromChests = {}
 
 	for _, chest in pairs(allChests) do
-		if (chest ~= toChest) then
-			table.insert(fromChests, chest)
+		if (not peripheral.hasType(chest, 'minecraft:shulker_box')) then
+			if (chest ~= toChest) then
+				table.insert(fromChests, chest)
+			end
 		end
 	end
 
-	local movedAny = false
+	local movedCount = 0
 
 	for _, fromChest in ipairs(fromChests) do
 		local chestItems = getItemsInChest(fromChest)
@@ -182,20 +181,23 @@ local function findAndMoveAllItemToChest(itemName, toChest)
 			for slot = 1, size do
 				local stack = peripheral.call(fromChest, 'getItemDetail', slot)
 				if (stack ~= nil and stack.name == itemName) then
-					local moved = peripheral.call(fromChest, 'pushItems', toChest, slot)
+					local moved = peripheral.call(fromChest, 'pushItems', toChest, slot, itemCount, toSlot)
 
+					movedCount = movedCount + moved
 					if (moved == 0) then
-						return movedAny
+						return movedCount
 					else
-						print('Moved ' .. moved .. ' ' .. itemName .. ' from ' .. fromChest .. ' to ' .. toChest)
-						movedAny = true
+						maxCount = maxCount - moved
+						if (maxCount <= 0) then
+							return movedCount
+						end
 					end
 				end
 			end
 		end
 	end
 
-	return movedAny
+	return movedCount
 end
 
 local cli = Cli('chester', 'A large storage chest management tool', 'help')
@@ -289,7 +291,7 @@ cli:defineAction(
 
 		local result = findAndMoveAllItemToChest(itemName, toChest)
 
-		if (result) then
+		if (result > 0) then
 			print('withdrew items')
 		else
 			print('failed to withdraw items')
@@ -350,6 +352,41 @@ cli:addAction(
 	end,
 	{'[type]'},
 	'Shows all chests of a given type'
+)
+
+cli:defineAction(
+	'fill',
+	function()
+		local shulkers = findConnectedChests('minecraft:shulker_box')
+
+		for _, shulker in ipairs(shulkers) do
+			local size = peripheral.call(shulker, 'size')
+			print('Filling ' .. shulker)
+
+			for slot = 1, size do
+				local stack = peripheral.call(shulker, 'getItemDetail', slot)
+
+				if (stack ~= nil) then
+					local max = stack.maxCount
+					local count = stack.count
+
+					local space = max - count
+
+					if (space > 0) then
+						--move `space` `stack.name` from any storage chest to `shulker`
+						term.write(string.format('%2s %s...  ?/%2s', slot, stack.name, space))
+						local result = findAndMoveAllItemToChest(stack.name, shulker, space, slot)
+						local x, y = term.getCursorPos()
+						term.setCursorPos(x - 5, y)
+						print(string.format('%2s/%2s', result, space))
+					end
+				end
+			end
+		end
+	end,
+	{
+		description = 'Tries to top up any shulkers connected to chester'
+	}
 )
 
 if (shell) then
