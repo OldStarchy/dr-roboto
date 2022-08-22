@@ -187,9 +187,11 @@ local function findAndMoveAllItemToChest(itemName, toChest, maxCount, toSlot)
 					if (moved == 0) then
 						return movedCount
 					else
-						maxCount = maxCount - moved
-						if (maxCount <= 0) then
-							return movedCount
+						if (maxCount ~= nil) then
+							maxCount = maxCount - moved
+							if (maxCount <= 0) then
+								return movedCount
+							end
 						end
 					end
 				end
