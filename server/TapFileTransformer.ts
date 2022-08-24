@@ -11,7 +11,8 @@ export default class TapFileTransformer implements FileTransformer {
 		if (basename(filename) === 'tap.lua') {
 			return fileContent
 				.replace('%%PUBLIC_PROTO%%', context.publicProto)
-				.replace('%%PUBLIC_DOMAIN%%', context.publicDomain);
+				.replace('%%PUBLIC_DOMAIN%%', context.publicDomain)
+				.replace('%%PUBLIC_PATH%%', '');
 		}
 
 		return fileContent;

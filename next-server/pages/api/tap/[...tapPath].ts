@@ -23,21 +23,27 @@ export default async function handler(
 		new ValueInjectorFileTransformer({
 			PUBLIC_PROTO: publicProto,
 			PUBLIC_DOMAIN: publicHost,
+			PUBLIC_PATH: '/api/tap',
 		}),
 	);
 
 	const tapPath = (req.query.tapPath as string[]).join('/');
-	const result = await tap.readPath(tapPath);
 
-	if (result === null) {
+	try {
+		const result = await tap.readPath(tapPath);
+
+		if (result === null) {
+			res.status(404).end();
+		}
+
+		if (typeof result === 'string') {
+			res.setHeader('Content-Type', 'text/plain');
+		} else {
+			res.setHeader('Content-Type', 'application/json');
+		}
+
+		res.status(200).send(result);
+	} catch (e) {
 		res.status(404).end();
 	}
-
-	if (typeof result === 'string') {
-		res.setHeader('Content-Type', 'text/plain');
-	} else {
-		res.setHeader('Content-Type', 'application/json');
-	}
-
-	res.status(200).send(result);
 }

@@ -6,6 +6,7 @@ local headers = {
 -- these get set by the server
 local defaultProto = '%%PUBLIC_PROTO%%'
 local defaultDomain = '%%PUBLIC_DOMAIN%%'
+local defaultPath = '%%PUBLIC_PATH%%'
 
 local metaDataFile = '.tap/metaData.tbl'
 local repositoriesFile = '.tap/repositories.tbl'
@@ -64,11 +65,12 @@ local function saveRepositories(repositories)
 	tableToFile(repositories, repositoriesFile)
 end
 
-local function addRepository(name, protocol, domain, priority)
+local function addRepository(name, protocol, domain, path, priority)
 	local repositories = loadRepositories()
 	repositories[name] = {
 		protocol = protocol,
 		domain = domain,
+		path = path,
 		priority = priority
 	}
 	saveRepositories(repositories)
@@ -82,7 +84,7 @@ local function addDefaultRepo()
 		if (stringutil.startsWith(defaultProto, '%%PUBLIC')) then
 			error('No default repository set, use "tap --addRepository" to add one')
 		end
-		addRepository('default', defaultProto, defaultDomain, 0)
+		addRepository('default', defaultProto, defaultDomain, defaultPath, 0)
 	end
 end
 
@@ -95,7 +97,9 @@ local function removeRepository(name)
 end
 
 local function getRepositoryPathForFile(repository, file)
-	return repository.protocol .. '://' .. fs.combine(repository.domain, file)
+	local path = repository.path and fs.combine(repository.path, file) or file
+
+	return repository.protocol .. '://' .. fs.combine(repository.domain, path)
 end
 
 local function getSortedRepositories()
@@ -108,6 +112,7 @@ local function getSortedRepositories()
 				name = name,
 				protocol = repository.protocol,
 				domain = repository.domain,
+				path = repository.path,
 				priority = repository.priority
 			}
 		)
@@ -139,12 +144,13 @@ end
 local function promptToCreateRepository()
 	local correct = false
 
-	local name, protocol, domain, priority
+	local name, protocol, domain, path, priority
 
 	while (not correct) do
 		name = askWithDefault('Name', 'default')
 		protocol = askWithDefault('Protocol', 'https')
 		domain = ask('Domain')
+		path = askWithDefault('Path', '')
 		priority = tonumber(askWithDefault('Priority (asc)', '1'))
 		if (priority == nil) then
 			print 'Priority must be a number'
@@ -157,7 +163,7 @@ local function promptToCreateRepository()
 
 		print('Adding repository...')
 		print('Name: ' .. name)
-		print('Url: ' .. protocol .. '://' .. domain)
+		print('Url: ' .. protocol .. '://' .. fs.combine(domain, path))
 		print('Priority: ' .. priority)
 		print('Is this correct? [Y/n]')
 		local answer = read()
@@ -166,7 +172,7 @@ local function promptToCreateRepository()
 		end
 	end
 
-	addRepository(name, protocol, domain, priority)
+	addRepository(name, protocol, domain, path, priority)
 	return true
 end
 
