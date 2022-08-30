@@ -47,12 +47,10 @@ function os.sleepAsync(time, callback)
 	}
 end
 
-local join = fs.combine
-
 local basePath = '/.roboto'
-local utilPath = '/' .. join(basePath, 'util')
-local servicePath = '/' .. join(basePath, 'services')
-local modulesPath = '/' .. join(basePath, 'modules')
+local utilPath = '/' .. fs.combine(basePath, 'util')
+local servicePath = '/' .. fs.combine(basePath, 'services')
+local modulesPath = '/' .. fs.combine(basePath, 'modules')
 local logPath = '/logs'
 
 local write = term.write
@@ -157,8 +155,8 @@ write('Loading utils...')
 local utils = fs.list(utilPath)
 for _, util in ipairs(utils) do
 	if (util ~= '.' and util ~= '..') then
-		if (not fs.isDir(join(utilPath, util))) then
-			loadfile(join(utilPath, util), _G)()
+		if (not fs.isDir(fs.combine(utilPath, util))) then
+			loadfile(fs.combine(utilPath, util), _G)()
 		end
 	end
 end
@@ -169,8 +167,8 @@ write('Loading modules...')
 local modules = fs.list(modulesPath)
 for _, module in ipairs(modules) do
 	if (module ~= '.' and module ~= '..') then
-		if (not fs.isDir(join(modulesPath, module))) then
-			loadfile(join(modulesPath, module), _G)()
+		if (not fs.isDir(fs.combine(modulesPath, module))) then
+			loadfile(fs.combine(modulesPath, module), _G)()
 		end
 	end
 end
@@ -180,10 +178,9 @@ pause()
 local procMan = ProcessManager()
 _G.process = procMan:createAPI()
 
-local logger = Logger()
-logger:addWriter(FileWriter(join(logPath, 'log')))
-_G.log = logger
+_G.log = Logger()
 
+log:addWriter(FileWriter(fs.combine(logPath, 'log')))
 log:info('Log initialized at ' .. tostring(os.time()))
 
 os.ev = EventManager()
@@ -194,8 +191,8 @@ table.sort(services)
 write('Loading services...')
 for _, service in ipairs(services) do
 	if (service ~= '.' and service ~= '..') then
-		if (not fs.isDir(join(servicePath, service))) then
-			local chunk, err = loadfile(join(servicePath, service))
+		if (not fs.isDir(fs.combine(servicePath, service))) then
+			local chunk, err = loadfile(fs.combine(servicePath, service))
 
 			if (chunk) then
 				log:info('Loading service ' .. service)
@@ -224,7 +221,7 @@ process.spawnProcess(
 		pause()
 		runWithLogging(
 			function()
-				loadfile(join(basePath, 'startup.lua'), _G)()
+				loadfile(fs.combine(basePath, 'startup.lua'), _G)()
 			end,
 			function(err)
 				print(err)
