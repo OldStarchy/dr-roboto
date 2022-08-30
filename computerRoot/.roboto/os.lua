@@ -13,6 +13,7 @@ function os.version()
 	return 'Dr. Roboto 3.0.0-alpha'
 end
 
+local isPc = native.version == nil
 function os.isPc()
 	return isPc
 end
@@ -47,7 +48,6 @@ function os.sleepAsync(time, callback)
 end
 
 local join = fs.combine
-local isPc = native.version == nil
 
 local basePath = '/.roboto'
 local utilPath = '/' .. join(basePath, 'util')
@@ -70,6 +70,7 @@ local function expect(value, ...)
 		end
 	end
 
+	local expected = table.concat({...}, ' or ')
 	error('Expected ' .. expected .. ', got ' .. actual)
 end
 
