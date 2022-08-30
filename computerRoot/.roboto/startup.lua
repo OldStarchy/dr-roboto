@@ -1,3 +1,6 @@
+-- Creates the global `mov`, `nav`, `inv`, and `Crafting` objects
+-- Creates the singletons for `ItemInfo.Instance` and `TaskManager.Instance`
+
 includeOnce 'lib/Data/StateSaver'
 
 local function loadAndBind(file, class, event, ...)

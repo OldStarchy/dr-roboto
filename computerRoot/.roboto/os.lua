@@ -1,3 +1,14 @@
+--Effects:
+
+-- Redefine global `os` table
+-- Redefine global `loadfile` function
+-- Run all the util files in the global scope
+-- Load all the core modules into the global scope
+-- Create the root process manager and expose a global api `process`
+-- Create the global logger instance `log` and make it write to files in the `/logs` directory
+-- Spawn all service daemons
+-- Spawn a process that runs the `startup.lua` file in global scope, then runs the built in shell program
+
 local native = os
 
 _G.os =
