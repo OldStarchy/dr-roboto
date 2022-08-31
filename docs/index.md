@@ -2,6 +2,10 @@
 
 These documentation files are sparsely populated, so I suggest you browse the folder to see what is available.
 
+Also its probably mostly out of date, except the parts about Class and Interface.
+
+Documentation tends to get out of date and I never finished writing it. Best way to learn is to read the code, and maybe you'll find some doc comments there. Oh also the tests (though not currently working) might be helpful.
+
 ## Getting Started
 
 For running the code in Minecraft see how to [symlink the computerRoot folder](Symlinking.md).
