@@ -23,14 +23,14 @@ _G.term = {
 	getBackgroundColour = function()
 		return colours.black
 	end,
-	setTextColor = function()
+	setTextColor = function(col)
 	end,
-	setTextColour = function()
+	setTextColour = function(col)
 	end,
-	setBackgroundColor = function()
+	setBackgroundColor = function(col)
 	end,
-	setBackgroundColour = function()
+	setBackgroundColour = function(col)
 	end,
-	setCursorBlink = function()
+	setCursorBlink = function(blink)
 	end
 }
